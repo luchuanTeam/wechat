@@ -1,0 +1,8 @@
+<view class='video-container'>
+  
+  <text class='text'>视频页面</text>
+  
+  <view class='video-wrapper'>
+    <video src='../../resources/video/testvideo.mp4'></video>
+  </view>
+</view>
