@@ -15,9 +15,9 @@ Page({
       url: '../video/video'
     })
   },
-  gotoUser: function() {
+  gotoContent: function() {
     wx.navigateTo({
-      url: '../user/user'
+      url: '../content/content'
     })
   },
   onLoad: function () {
