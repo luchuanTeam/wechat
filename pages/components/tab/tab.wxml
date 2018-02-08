@@ -1,5 +1,5 @@
 <view class='tab'>
   <text class="text" wx:for='{{menus}}' wx:key='{{index}}' bindtap='menuTap' data-index='{{index}}'>
-    <text style='color: {{index===activeTab? "#4a93a7" : ""}}'>{{item}}</text>
+    <text class="{{ index == activeTab ? 'active' : '' }}">{{item}}</text>
   </text>
 </view>

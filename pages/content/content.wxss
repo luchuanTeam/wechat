@@ -9,3 +9,10 @@
   right: 0;
   bottom: 0;
 }
+.content .title {
+  text-align: center;
+  margin-top: 200rpx; 
+}
+.content .active {
+  color: #4a93a7;
+}

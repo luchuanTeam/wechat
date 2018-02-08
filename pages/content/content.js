@@ -10,11 +10,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    activeTab: REGISTER
+    activeTab: REGISTER,
+    title: "主页"
   },
 
   activeTabChange(e) {
-    this.data.activeTab = e.detail.index;
+    this.setData({
+      activeTab: e.detail.index,
+      title: "主页君，你好"
+    });
     console.log(this.data.activeTab);
   },
 
