@@ -1,11 +1,16 @@
-// pages/content/content.js
+
+const REGISTER = 0,
+      LOGIN = 1,
+      SCAN = 2,
+      VIP = 3,
+      RECOMMEND = 4;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    activeTab: REGISTER
   },
 
   /**

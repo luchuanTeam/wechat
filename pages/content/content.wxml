@@ -1,2 +1,6 @@
 <!--pages/content/content.wxml-->
-<text>pages/content/content.wxml</text>
+<view class='content'>
+  <view class='tab-wrapper'>
+    <tab active-tab='{{activeTab}}'></tab>
+  </view>
+</view>

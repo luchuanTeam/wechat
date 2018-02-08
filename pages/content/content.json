@@ -1,1 +1,5 @@
-{}
+{
+  "usingComponents": {
+    "tab": "../components/tab/tab"
+  }
+}
