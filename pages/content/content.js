@@ -13,6 +13,11 @@ Page({
     activeTab: REGISTER
   },
 
+  activeTabChange(e) {
+    this.data.activeTab = e.detail.index;
+    console.log(this.data.activeTab);
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

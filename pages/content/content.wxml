@@ -1,6 +1,6 @@
 <!--pages/content/content.wxml-->
-<view class='content'>
+<view class='content'> 
   <view class='tab-wrapper'>
-    <tab active-tab='{{activeTab}}'></tab>
+    <tab active-tab='{{activeTab}}' bindtabchange='activeTabChange'></tab>
   </view>
 </view>
