@@ -1,0 +1,4 @@
+<view class='search-container'>
+  <input class='search' bindinput='bindKeyInput'></input>
+  <text class='right-block'></text>
+</view>

@@ -3,6 +3,10 @@
   width: 100%;
   height: 100%;
 }
+.content .search-wrapper {
+  padding: 10rpx 20rpx;
+}
+
 .content .tab-wrapper {
   position: fixed;
   left: 0;
@@ -10,8 +14,8 @@
   bottom: 0;
 }
 .content .title {
-  text-align: center;
-  margin-top: 200rpx; 
+  margin-top: 200rpx;
+  text-align: center; 
 }
 .content .active {
   color: #4a93a7;
