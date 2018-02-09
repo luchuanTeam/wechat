@@ -5,6 +5,7 @@
   padding: 6rpx 110rpx 6rpx 30rpx;
   border: 1px solid #6a6a6a;
   border-radius: 50rpx;
+  height: 60rpx;
 }
 
 .search-container .right-block {

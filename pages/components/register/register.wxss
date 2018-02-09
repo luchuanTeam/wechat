@@ -1,0 +1,21 @@
+.register-container {
+  width: 100%;
+}
+
+.register-container .menu-wrapper {
+  display: flex;  
+}
+
+.register-container .menu-wrapper .register-menu {
+  flex: 1;
+}
+
+.register-container .menu-wrapper .navigation {
+  flex: 0 0 120rpx;
+}
+
+.register-container .menu-wrapper .register-menu .text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

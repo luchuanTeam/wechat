@@ -1,0 +1,11 @@
+<view class='register-container'>
+  <view class='menu-wrapper'>
+    <view class='register-menu'>
+      <text wx:for='{{menuList}}' wx:key='{{index}}' class='text'>
+        <text>{{item}}</text>
+      </text>
+    </view>
+    <view class='navigation'>导航</view>
+  </view>
+  
+</view>

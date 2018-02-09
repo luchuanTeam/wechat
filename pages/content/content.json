@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "tab": "../components/tab/tab",
-    "search": "../components/search/search"
+    "search": "../components/search/search",
+    "register": "../components/register/register"
   }
 }
