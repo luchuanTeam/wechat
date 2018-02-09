@@ -9,15 +9,18 @@
 }
 
 .register-container .menu-wrapper .register-menu {
-  flex: 1;
+  display:flex;
+  flex-flow:row wrap;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .register-container .menu-wrapper .navigation {
   flex: 0 0 120rpx;
 }
 
-.register-container .menu-wrapper .register-menu .text {
-  display: inline-block;
+.register-container .menu-wrapper .register-menu .active {
+  color: #006633;
 }
 
 

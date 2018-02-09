@@ -4,9 +4,4 @@
   <view class='search-wrapper'>
     <search></search>
   </view>
-  <register></register>
-  <view class='tab-wrapper'>
-    <tab active-tab='{{activeTab}}' bindtabchange='activeTabChange'></tab>
-  </view>
-
 </view>

@@ -16,7 +16,7 @@
     "color": "",
     "selectedColor": "#1AAD16",
     "borderStyle": "",
-    "backgroundColor": "",
+    "backgroundColor": "#fff",
     "list": [
       {
         "pagePath": "pages/content/content",

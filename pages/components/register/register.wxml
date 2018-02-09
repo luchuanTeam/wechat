@@ -1,11 +1,10 @@
 <view class='register-container'>
   <view class='menu-wrapper'>
     <view class='register-menu'>
-      <text wx:for='{{menuList}}' wx:key='{{index}}' class='text'>
+      <view wx:for='{{menuList}}' wx:key='{{index}}' class='{{ index == activeTab ? "active" : "" }}
+      bindtap='menuTap' data-index='{{index}}'>
         {{item}}
-      </text>
+      </view>
     </view>
-    <view class='navigation'>导航</view>
   </view>
-  
 </view>

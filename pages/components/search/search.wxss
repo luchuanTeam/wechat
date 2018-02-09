@@ -18,3 +18,9 @@
   border-top-right-radius: 50rpx;
   border-bottom-right-radius: 50rpx;
 }
+
+.right-block icon {
+  position: relative;
+  top: 10rpx;
+  left: 10rpx;
+}
