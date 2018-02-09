@@ -6,7 +6,7 @@ Component({
     }
   },
   data: {
-    menus: ['注册', '登陆', '扫一扫', '升级VIP', '推荐']
+    menus: ['注册', '登录', '扫一扫', '升级VIP', '推荐']
   },
   methods: {
     menuTap(e) {
