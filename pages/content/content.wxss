@@ -22,9 +22,13 @@
   color: #4a93a7;
 }
 .banner {
-  margin-top: 20rpx;
+  margin: 20rpx;
+  height: 180px;
+}
+.banner swiper-item {
+  border-radius: 5px;
+}
+.banner .slide-image {
+  width: 100%;
 }
 
-.banner image  {
-  margin: 0 20rpx;
-}
