@@ -1,25 +1,25 @@
-.register-container {
+.head-tab-container {
   margin-top: 10rpx;
   width: 100%;
 }
 
-.register-container .menu-wrapper {
+.head-tab-container .menu-wrapper {
   display: flex;  
   padding: 0 20rpx;
 }
 
-.register-container .menu-wrapper .register-menu {
+.head-tab-container .menu-wrapper .head-tab-menu {
   display:flex;
   flex-flow:row wrap;
   justify-content: space-around;
   width: 100%;
 }
 
-.register-menu .active {
+.head-tab-menu .active {
   color: #006633;
 }
 
-.register-menu .text {
+.head-tab-menu .text {
   font-weight: 600;
 }
 
