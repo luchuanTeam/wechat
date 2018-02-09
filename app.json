@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/content/content",
     "pages/index/index",
     "pages/logs/logs",
     "pages/user/user",
-    "pages/video/video",
-    "pages/content/content"
+    "pages/video/video"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -12,9 +12,35 @@
     "navigationBarTitleText": "视频小程序",
     "navigationBarTextStyle": "black"
   },
+  "tabBar": {
+    "color": "",
+    "selectedColor": "#1AAD16",
+    "borderStyle": "",
+    "backgroundColor": "",
+    "list": [
+      {
+        "pagePath": "pages/content/content",
+        "text": "首页",
+        "iconPath": "resources/images/home.png",
+        "selectedIconPath": "resources/images/selectHome.png"
+      },
+      {
+        "pagePath": "pages/video/video",
+        "text": "分类",
+        "iconPath": "resources/images/fenlei.png",
+        "selectedIconPath": "resources/images/selectFenlei.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "resources/images/people.png",
+        "selectedIconPath": "resources/images/selectPeople.png"
+      }
+    ]
+  },
   "networkTimeout": {
     "request": 10000,
     "downloadFile": 10000
   },
-  "debug": true
+  "debug": false
 }
