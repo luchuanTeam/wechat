@@ -12,11 +12,7 @@ Page({
   data: {
     activeTab: REGISTER,
     title: "主页",
-    imgUrls: [
-      "http://www.yanda123.com/images/banner1.jpg",
-      "http://www.yanda123.com/images/banner2.jpg",
-      "http://www.yanda123.com/images/banner3.jpg"
-    ]
+    imgUrls: []
   },
 
   activeTabChange(e) {
@@ -31,7 +27,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this;
+    wx.request({
+      url: "http://www.yanda123.com/yanda/listBanners",
+      data: {},
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: function (res) {
+        if (res.data.status == 200) {
+          var data = res.data.data;
+          var urlArr = [];
+          for (var i = 0; i < data.length; i++) {
+            urlArr.push(data[i].imgUrl);
+          }
+          that.setData({
+            imgUrls: urlArr
+          });
+        }
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+
+    })
   },
 
   /**
@@ -45,7 +64,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+   
   },
 
   /**
