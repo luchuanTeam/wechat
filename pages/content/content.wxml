@@ -1,6 +1,6 @@
 <!--pages/content/content.wxml-->
 <view class='content'> 
-<<<<<<< HEAD
+
   <view class='search-wrapper'>
     <search></search>
   </view>
@@ -8,7 +8,5 @@
   <view class='tab-wrapper'>
     <tab active-tab='{{activeTab}}' bindtabchange='activeTabChange'></tab>
   </view>
-=======
-  <view class='title'>{{ title }}</view>
->>>>>>> origin/master
+
 </view>

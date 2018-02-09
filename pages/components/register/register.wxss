@@ -1,9 +1,11 @@
 .register-container {
+  margin-top: 10rpx;
   width: 100%;
 }
 
 .register-container .menu-wrapper {
   display: flex;  
+  padding: 0 20rpx;
 }
 
 .register-container .menu-wrapper .register-menu {
@@ -15,7 +17,7 @@
 }
 
 .register-container .menu-wrapper .register-menu .text {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
 }
+
+

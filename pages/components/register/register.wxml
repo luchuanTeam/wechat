@@ -2,7 +2,7 @@
   <view class='menu-wrapper'>
     <view class='register-menu'>
       <text wx:for='{{menuList}}' wx:key='{{index}}' class='text'>
-        <text>{{item}}</text>
+        {{item}}
       </text>
     </view>
     <view class='navigation'>导航</view>
