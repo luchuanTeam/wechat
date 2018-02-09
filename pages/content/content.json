@@ -2,6 +2,6 @@
   "usingComponents": {
     "tab": "../components/tab/tab",
     "search": "../components/search/search",
-    "register": "../components/register/register"
+    "head-tab": "../components/headTab/headTab"
   }
 }

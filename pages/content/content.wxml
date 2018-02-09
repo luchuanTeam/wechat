@@ -4,5 +4,5 @@
   <view class='search-wrapper'>
     <search></search>
   </view>
-  <register active-tab='{{activeTab}}' bind:tabchange="activeTabChange"></register>
+  <head-tab active-tab='{{activeTab}}' bind:tabchange="activeTabChange"></head-tab>
 </view>
