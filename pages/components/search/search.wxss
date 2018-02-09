@@ -21,6 +21,6 @@
 
 .right-block icon {
   position: relative;
-  top: 10rpx;
-  left: 10rpx;
+  top: 16rpx;
+  left: 22rpx;
 }
