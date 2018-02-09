@@ -1,6 +1,11 @@
 .search-container {
   position: relative;
 }
+.search-container icon {
+  position: fixed;
+  top: 24rpx;
+  left: 40rpx;
+}
 .search-container .search {
   padding: 6rpx 110rpx 6rpx 30rpx;
   border: 1px solid #6a6a6a;
@@ -23,4 +28,8 @@
   position: relative;
   top: 16rpx;
   left: 22rpx;
+}
+.placeholder {
+  margin-left: 50rpx; 
+
 }

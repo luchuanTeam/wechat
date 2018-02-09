@@ -1,14 +1,14 @@
 <!--pages/content/content.wxml-->
 <view class='content'>
-  <view class='search-wrapper'>
+<view class='search-wrapper'>
     <search></search>
-  </view>
-  <head-tab active-tab='{{activeTab}}' bind:tabchange="activeTabChange"></head-tab>
-  <swiper class="banner" indicator-dots="true" autoplay="autoplay" interval="5000" duration="500" circular="true" previous-margin="20rpx" next-margin="40rpx" indicator-color="rgba(0, 0, 0, .8)" indicator-active-color="rgba(255, 255, 255, .3)">
+</view>
+<swiper class="banner" indicator-dots="true" autoplay="autoplay" interval="5000" duration="500" circular="true" indicator-color="rgba(0, 0, 0, .8)" indicator-active-color="rgba(255, 255, 255, .3)">
     <block wx:for="{{imgUrls}}">
       <swiper-item>
-        <image src="{{item}}" class="slide-image" model="bottom" />
+        <image src="{{item}}" class="slide-image" />
       </swiper-item>
     </block>
   </swiper>
+  <head-tab active-tab='{{activeTab}}' bind:tabchange="activeTabChange"></head-tab>
 </view>

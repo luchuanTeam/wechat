@@ -1,6 +1,4 @@
 <view class='search-container'>
-  <input class='search' bindinput='bindKeyInput'></input>
-  <view class='right-block'>
-    <icon type="search" size="23"/>
-  </view>
+   <icon type="search" size="23"/>
+   <input class='search' bindinput='bindKeyInput' placeholder='搜索喜欢的视频' placeholder-class="placeholder"></input>
 </view>
