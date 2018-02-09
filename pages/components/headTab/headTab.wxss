@@ -15,12 +15,12 @@
   width: 100%;
 }
 
-.register-container .menu-wrapper .navigation {
-  flex: 0 0 120rpx;
+.register-menu .active {
+  color: #006633;
 }
 
-.register-container .menu-wrapper .register-menu .active {
-  color: #006633;
+.register-menu .text {
+  font-weight: 600;
 }
 
 

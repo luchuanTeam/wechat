@@ -13,9 +13,9 @@ Page({
     activeTab: REGISTER,
     title: "主页",
     imgUrls: [
-      "/resources/images/banner1.jpg",
-      "/resources/images/banner2.jpg",
-      "/resources/images/banner3.jpg"
+      "http://www.yanda123.com/images/banner1.jpg",
+      "http://www.yanda123.com/images/banner2.jpg",
+      "http://www.yanda123.com/images/banner3.jpg"
     ]
   },
 
