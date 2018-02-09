@@ -11,7 +11,12 @@ Page({
    */
   data: {
     activeTab: REGISTER,
-    title: "主页"
+    title: "主页",
+    imgUrls: [
+      "/resources/images/banner1.jpg",
+      "/resources/images/banner2.jpg",
+      "/resources/images/banner3.jpg"
+    ]
   },
 
   activeTabChange(e) {

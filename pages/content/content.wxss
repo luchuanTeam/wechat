@@ -21,3 +21,10 @@
 .content .active {
   color: #4a93a7;
 }
+.banner {
+  margin-top: 20rpx;
+}
+
+.banner image  {
+  margin: 0 20rpx;
+}
