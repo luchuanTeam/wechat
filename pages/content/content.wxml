@@ -6,7 +6,9 @@
 <swiper class="banner" indicator-dots="true" autoplay="autoplay" interval="5000" duration="500" circular="true" indicator-color="rgba(0, 0, 0, .8)" indicator-active-color="rgba(255, 255, 255, .3)">
     <block wx:for="{{imgUrls}}">
       <swiper-item>
-        <image src="{{item}}" class="slide-image" />
+        <view class="slide-image">
+					<view class="zoomImage" style='background-image:url({{item}})'></view>
+				</view>
       </swiper-item>
     </block>
   </swiper>
