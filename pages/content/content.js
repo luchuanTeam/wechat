@@ -4,6 +4,7 @@ const REGISTER = 0,
       SCAN = 2,
       VIP = 3,
       RECOMMEND = 4;
+
 Page({
 
   /**
@@ -12,7 +13,10 @@ Page({
   data: {
     activeTab: REGISTER,
     title: "主页",
-    imgUrls: []
+    imgUrls: [
+      "http://www.yanda123.com/images/banner1.jpg",
+      "http://www.yanda123.com/images/banner2.jpg"
+    ]
   },
 
   activeTabChange(e) {
@@ -29,8 +33,8 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: "http://www.yanda123.com/yanda/listBanners",
-      data: {},
+      url: "http://www.yanda123.com/yanda/banner/list",
+      data: {pageNum: 1, pageSize: 4},
       header: {
         "Content-Type": "application/json"
       },
@@ -49,7 +53,6 @@ Page({
       fail: function (err) {
         console.log(err)
       }
-
     })
   },
 
