@@ -1,9 +1,9 @@
 
-const REGISTER = 0,
-      LOGIN = 1,
-      SCAN = 2,
-      VIP = 3,
-      RECOMMEND = 4;
+const POEM = 0,   //唐诗
+      MANNER = 1, //日常礼仪
+      CHILDRENL = 2,  // 幼儿语文 
+      PRIMARYL = 3,   // 小学语文
+      MIDDLEL = 4;    // 中学语文
 
 Page({
 
@@ -11,12 +11,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    activeTab: REGISTER,
+    activeTab: POEM,
     title: "主页",
-    imgUrls: [
-      "http://www.yanda123.com/images/banner1.jpg",
-      "http://www.yanda123.com/images/banner2.jpg"
-    ]
+    imgUrls: []
   },
 
   activeTabChange(e) {
