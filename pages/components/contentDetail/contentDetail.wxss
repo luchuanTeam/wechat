@@ -1,0 +1,69 @@
+.content-detail {
+  margin-top: 20rpx;
+}
+.content-detail .title-wrapper {
+  display: flex;
+  padding: 0 250rpx;
+  height: 50rpx;
+}
+.content-detail .title-wrapper .line {
+  position: relative;
+  top: 24rpx;
+  flex: 1;
+  border-top: 2px solid #005e82;
+}
+.content-detail .title-wrapper .title {
+  margin: 0 10rpx;
+  flex: 0 0 180rpx;
+  text-align: center;
+  color: #005e82
+}
+
+.content-detail .data-wrapper {
+  margin-top: 20rpx;
+  padding: 0 25rpx;
+  width: 100%;
+}
+
+.content-detail .data-wrapper .data {
+  display: flex;
+  margin: 15rpx 0;
+  padding: 10rpx;
+  border: 1px solid #aaa;
+  height: 300rpx;
+  width: 90%;
+}
+.content-detail .data-wrapper .data .video-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.content-detail .data-wrapper .data .video-wrapper .video {
+  width: 90%;
+  height: 90%;
+}
+.content-detail .data-wrapper .data .text {
+  flex: 1;
+  font-size: 24rpx;
+}
+
+.content-detail .data-wrapper .data .text .title {
+  margin: 20rpx 0;
+  height: 40rpx;
+  border-bottom: 1px solid #aaa;
+}
+
+.content-detail .data-wrapper .data .text .introduce {
+  display: -webkit-box;
+  width: 100%;
+  height: 65%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;      /* 设置第6行后为省略号 */
+}
+
+
+
