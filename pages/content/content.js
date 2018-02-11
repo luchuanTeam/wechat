@@ -97,7 +97,7 @@ Page({
       },
       success: function (res) {
         if (res.data.status == 200) {
-          var data = res.data.data;
+          var data = res.data.data.list;
           var urlArr = [];
           for (var i = 0; i < data.length; i++) {
             urlArr.push(data[i].imgUrl);
