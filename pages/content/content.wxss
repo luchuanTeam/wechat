@@ -46,3 +46,7 @@
 	    background-size:cover;
 	}
 
+  .content .detail-wrapper {
+    margin-top: 10rpx;
+  }
+

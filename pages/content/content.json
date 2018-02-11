@@ -1,7 +1,7 @@
 {
   "usingComponents": {
-    "tab": "../components/tab/tab",
     "search": "../components/search/search",
-    "head-tab": "../components/headTab/headTab"
+    "head-tab": "../components/headTab/headTab",
+    "content-detail": "../components/contentDetail/contentDetail"
   }
 }

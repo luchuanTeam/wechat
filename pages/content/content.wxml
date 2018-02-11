@@ -1,16 +1,19 @@
 <!--pages/content/content.wxml-->
 <view class='content'>
-<view class='search-wrapper'>
-    <search></search>
-</view>
-<swiper class="banner" indicator-dots="true" autoplay="autoplay" interval="5000" duration="500" circular="true" indicator-color="rgba(0, 0, 0, .8)" indicator-active-color="rgba(255, 255, 255, .3)">
+  <view class='search-wrapper'>
+      <search></search>
+  </view>
+  <swiper class="banner" indicator-dots="true" autoplay="autoplay" interval="5000" duration="500" circular="true" indicator-color="rgba(0, 0, 0, .8)" indicator-active-color="rgba(255, 255, 255, .3)">
     <block wx:for="{{imgUrls}}">
       <swiper-item>
         <view class="slide-image">
-					<view class="zoomImage" style='background-image:url({{item}})'></view>
+					<view class="zoomImage" style='background-image:url({{item}})       '></view>
 				</view>
       </swiper-item>
     </block>
   </swiper>
   <head-tab active-tab='{{activeTab}}' bind:tabchange="activeTabChange"></head-tab>
+  <view class='detail-wrapper'>
+    <content-detail details='{{details}}'></content-detail>
+  </view>
 </view>
