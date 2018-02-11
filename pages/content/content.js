@@ -24,7 +24,6 @@ Page({
       activeTab: e.detail.index,
       title: "主页君，你好"
     });
-    console.log(this.data.activeTab);
   },
 
   /**
