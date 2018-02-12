@@ -20,10 +20,14 @@
 }
 
 .content-detail .data-wrapper {
+  display: flex;
   margin-top: 20rpx;
   padding: 0 25rpx;
+  box-sizing: border-box;
   width: 100%;
-  height: 450rpx;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .content-detail .data-wrapper .data {
@@ -46,20 +50,23 @@
   height: 90%;
 }
 .content-detail .data-wrapper .data .text {
+  display: flex;
   flex: 1;
+  flex-direction: column;
   font-size: 24rpx;
 }
 
 .content-detail .data-wrapper .data .text .title {
   margin: 20rpx 0;
-  height: 40rpx;
+  padding-bottom: 10rpx; 
+  flex: 0 0 20rpx;
   border-bottom: 1px solid #aaa;
 }
 
 .content-detail .data-wrapper .data .text .introduce {
   display: -webkit-box;
   width: 100%;
-  height: 65%;
+  flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
