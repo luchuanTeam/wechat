@@ -34,14 +34,14 @@
   height: 300rpx;
   width: 90%;
 }
-.content-detail .data-wrapper .data .video-wrapper {
+.content-detail .data-wrapper .data .img-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 1;
 }
 
-.content-detail .data-wrapper .data .video-wrapper .video {
+.content-detail .data-wrapper .data .img-wrapper .img {
   width: 90%;
   height: 90%;
 }

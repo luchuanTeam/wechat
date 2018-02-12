@@ -6,8 +6,8 @@
   </view>
   <scroll-view class='data-wrapper' scroll-y>
     <view wx:for='{{details.data}}' wx:key='{{index}}' class='data'>
-      <view class='video-wrapper'>
-        <video class='video' src='{{item.videoUrl}}'></video>
+      <view class='img-wrapper'>
+        <image class='img' src='{{item.imgUrl}}'></image>
       </view>
       <view class='text'>
         <view class='title'>{{item.title}}</view>
