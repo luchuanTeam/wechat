@@ -34,7 +34,7 @@ let obj = {
   title: '我是陈大牛',
   introduce: '我是陈立，人称陈大牛，月薪12K，我就想问一句妈的还有谁?'  
 };
-let counter = 1;
+
 
 Page({
 
@@ -55,7 +55,8 @@ Page({
         }
       ]   
     },
-    loadingShow: '1'
+    loadingShow: '1',
+    getNewData: 0
   },
 
   activeTabChange(e) {
@@ -164,14 +165,14 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function (e) {
-    if(counter < 5) {
+    if(this.data.getNewData < 5) {
       _details.data.push(obj);
       setTimeout(() => {
+        this.data.getNewData++;
         this.setData({
           details: _details
         });
-        counter++;
-        if(counter === 5){
+        if (this.data.getNewData >= 5){
           this.setData({
             loadingShow: '0'
           })
