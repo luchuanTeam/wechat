@@ -4,7 +4,7 @@
     <view class='title'>{{details.title}}</view>
     <view class='line'></view>
   </view>
-  <view class='data-wrapper' style='height: 450rpx'>
+  <scroll-view class='data-wrapper' scroll-y>
     <view wx:for='{{details.data}}' wx:key='{{index}}' class='data'>
       <view class='video-wrapper'>
         <video class='video' src='{{item.videoUrl}}'></video>
@@ -14,6 +14,6 @@
         <view class='introduce'>{{item.introduce}}</view> 
       </view>
     </view>
-  </view>
+  </scroll-view>
 
 </view>

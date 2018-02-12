@@ -23,6 +23,7 @@
   margin-top: 20rpx;
   padding: 0 25rpx;
   width: 100%;
+  height: 450rpx;
 }
 
 .content-detail .data-wrapper .data {
