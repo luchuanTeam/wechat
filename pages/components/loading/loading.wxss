@@ -1,0 +1,102 @@
+@keyframes loadingFadeDelay {
+  0%, 39%, 100% {
+    opacity: 0
+  }
+  40% {
+    opacity: 1
+  }
+}
+.loading-container {
+  position: relative;
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.loading:before {
+  display: block;
+  content: ' ';
+  margin: 0 auto;
+  width: 5%;
+  height: 30%;
+  background: #aaa;
+  animation: loadingFadeDelay 1.2s infinite ease-in-out both; 
+}
+
+.loading-animation1 {
+  transform: rotate(0deg);
+}
+
+.loading-animation2 {
+  transform: rotate(30deg);
+}
+
+.loading-animation3 {
+  transform: rotate(60deg);
+}
+
+.loading-animation4 {
+  transform: rotate(90deg);
+}
+
+.loading-animation5 {
+  transform: rotate(120deg);
+}
+
+.loading-animation6 {
+  transform: rotate(150deg);
+}
+
+.loading-animation7 {
+  transform: rotate(180deg);
+}
+
+.loading-animation8 {
+  transform: rotate(210deg);
+}
+
+.loading-animation9 {
+  transform: rotate(240deg);
+}
+
+.loading-animation10 {
+  transform: rotate(270deg);
+}
+
+.loading-animation11 {
+  transform: rotate(300deg);
+}
+
+.loading-animation12 {
+  transform: rotate(330deg);
+}
+
+.loading-animation2 { transform: rotate(30deg);}
+.loading-animation3 { transform: rotate(60deg); }
+.loading-animation4 { transform: rotate(90deg);}
+.loading-animation5 { transform: rotate(120deg);}
+.loading-animation6 { transform: rotate(150deg);}
+.loading-animation7 { transform: rotate(180deg);}
+.loading-animation8 { transform: rotate(210deg);}
+.loading-animation9 { transform: rotate(240deg);}
+.loading-animation10 { transform: rotate(270deg); }
+.loading-animation11 { transform: rotate(300deg); }
+.loading-animation12 { transform: rotate(330deg); }
+.loading-animation2:before {animation-delay: -1.1s;}
+.loading-animation3:before {animation-delay: -1s;}
+.loading-animation4:before {animation-delay: -0.9s;}
+.loading-animation5:before {animation-delay: -0.8s;}
+.loading-animation6:before {animation-delay: -0.7s;}
+.loading-animation7:before {animation-delay: -0.6s;}
+.loading-animation8:before {animation-delay: -0.5s;}
+.loading-animation9:before {animation-delay: -0.4s;}
+.loading-animation10:before {animation-delay: -0.3s;}
+.loading-animation11:before {animation-delay: -0.2s;}
+.loading-animation12:before {animation-delay: -0.1s;}

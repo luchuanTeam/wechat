@@ -1,0 +1,14 @@
+<view class='loading-container'>
+  <view class='loading loading-animation1'></view>
+  <view class='loading loading-animation2'></view>
+  <view class='loading loading-animation3'></view>
+  <view class='loading loading-animation4'></view>
+  <view class='loading loading-animation5'></view>
+  <view class='loading loading-animation6'></view>
+  <view class='loading loading-animation7'></view>
+  <view class='loading loading-animation8'></view>
+  <view class='loading loading-animation9'></view>
+  <view class='loading loading-animation10'></view>
+  <view class='loading loading-animation11'></view>
+  <view class='loading loading-animation12'></view>
+</view>
