@@ -49,7 +49,7 @@ Page({
       title: '',    // 标题
       data: [    // 具体数据
         {
-          videoUrl: '',   //视频地址
+          imgUrl: '',   //图片地址
           title: '',   //标题
           introduce: ''   //介绍
         }
