@@ -2,6 +2,9 @@
   "usingComponents": {
     "search": "../components/search/search",
     "head-tab": "../components/headTab/headTab",
-    "content-detail": "../components/contentDetail/contentDetail"
-  }
+    "content-detail": "../components/contentDetail/contentDetail",
+    "loading": "../components/loading/loading"
+  },
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50
 }

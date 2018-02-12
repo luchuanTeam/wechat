@@ -49,4 +49,13 @@
   .content .detail-wrapper {
     margin-top: 10rpx;
   }
+  .content .loading-wrapper {
+    display: flex;
+    margin-bottom: 10rpx;
+    align-items: center;
+    justify-content: center;
+  }
+  .content .loading-wrapper.hide {
+    display: none;
+  }
 

@@ -29,6 +29,12 @@ let _details = {
     }
   ]
 };      
+let obj = {
+  imgUrl: 'http://www.yanda123.com/images/1518273153583.jpg',
+  title: '我是陈大牛',
+  introduce: '我是陈立，人称陈大牛，月薪12K，我就想问一句妈的还有谁?'  
+};
+let counter = 1;
 
 Page({
 
@@ -48,7 +54,8 @@ Page({
           introduce: ''   //介绍
         }
       ]   
-    }
+    },
+    loadingShow: '1'
   },
 
   activeTabChange(e) {
@@ -98,7 +105,6 @@ Page({
       success: function (res) {
         if (res.data.status == 200) {
           var data = res.data.data.list;
-          console.log(data);
           var urlArr = [];
           for (var i = 0; i < data.length; i++) {
             urlArr.push(data[i].imgUrl);
@@ -150,15 +156,31 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-  
+  onPullDownRefresh: function (e) {
+    console.dir(e); 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-  
+  onReachBottom: function (e) {
+    if(counter < 5) {
+      _details.data.push(obj);
+      setTimeout(() => {
+        this.setData({
+          details: _details
+        });
+        counter++;
+        if(counter === 5){
+          this.setData({
+            loadingShow: '0'
+          })
+        }
+      }, 1000);
+      
+    } 
+    
+    
   },
 
   /**

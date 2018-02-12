@@ -16,4 +16,7 @@
   <view class='detail-wrapper'>
     <content-detail details='{{details}}'></content-detail>
   </view>
+  <view class="loading-wrapper {{loadingShow==='0'?'hide' : ''}}">
+    <loading></loading> 
+  </view>
 </view>
