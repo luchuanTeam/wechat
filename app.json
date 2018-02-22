@@ -4,7 +4,8 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/user/user",
-    "pages/video/video"
+    "pages/video/video",
+    "pages/zone/zone"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -25,7 +26,7 @@
         "selectedIconPath": "resources/images/selectHome.png"
       },
       {
-        "pagePath": "pages/video/video",
+        "pagePath": "pages/zone/zone",
         "text": "分类",
         "iconPath": "resources/images/fenlei.png",
         "selectedIconPath": "resources/images/selectFenlei.png"
