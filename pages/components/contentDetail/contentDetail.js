@@ -8,6 +8,10 @@ Component({
 
   },
   methods: {
-
+    showVideoPage() {
+      wx.navigateTo({
+        url: '../video/video',
+      })
+    }
   }
 })

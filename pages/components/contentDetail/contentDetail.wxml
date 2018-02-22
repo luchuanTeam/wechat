@@ -5,7 +5,7 @@
     <view class='line'></view>
   </view>
   <view class='data-wrapper'>
-    <view wx:for='{{details.data}}' wx:key='{{index}}' class='data'>
+    <view wx:for='{{details.data}}' wx:key='{{index}}' class='data' bindtap='showVideoPage'>
       <view class='img-wrapper'>
         <image class='img' src='{{item.imgUrl}}'></image>
       </view>
