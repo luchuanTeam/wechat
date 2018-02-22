@@ -10,29 +10,29 @@ let _details = {
     {
       imgUrl: 'http://www.yanda123.com/images/1518273153583.jpg',
       title: '我是陈大牛',
-      introduce: '我是陈立，人称陈大牛，月薪12K，我就想问一句妈的还有谁?哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈'
+      introduce: '我是陈立，哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈'
     },
     {
       imgUrl: 'http://www.yanda123.com/images/1518273153583.jpg',
       title: '我是陈大牛',
-      introduce: '我是陈立，人称陈大牛，月薪12K，我就想问一句妈的还有谁?'
+      introduce: '我是陈立，还有谁?'
     },
     {
       imgUrl: 'http://www.yanda123.com/images/1518273153583.jpg',
       title: '我是陈大牛',
-      introduce: '我是陈立，人称陈大牛，月薪12K，我就想问一句妈的还有谁?'
+      introduce: '我是陈立，、还有谁?'
     },
     {
       imgUrl: 'http://www.yanda123.com/images/1518273153583.jpg',
       title: '我是陈大牛',
-      introduce: '我是陈立，人称陈大牛，月薪12K，我就想问一句妈的还有谁?'
+      introduce: '我是陈立，人的还有谁?'
     }
   ]
 };      
 let obj = {
   imgUrl: 'http://www.yanda123.com/images/1518273153583.jpg',
   title: '我是陈大牛',
-  introduce: '我是陈立，人称陈大牛，月薪12K，我就想问一句妈的还有谁?'  
+  introduce: '我是陈立，、还有谁?'  
 };
 
 

@@ -1,10 +1,10 @@
 <view class='head-tab-container'>
   <view class='menu-wrapper'>
-    <scroll-view scroll-x class='head-tab-menu'>
+    <view scroll-x class='head-tab-menu'>
       <view wx:for='{{menuList}}' wx:key='{{index}}' class='text {{ index == activeTab ? "active" : "" }}
       bindtap='menuTap' data-index='{{index}}'>
         {{item}}
       </view>
-    </scroll-view>
+    </view>
   </view>
 </view>
