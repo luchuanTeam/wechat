@@ -34,28 +34,26 @@
 }
 
 .zoomImage{
-	    width:100%;
-	    height:0;
-	    padding-bottom: 50%;
-	    overflow:hidden;
-      border-radius: 5px;
-	    background-position: center center;
-	    background-repeat: no-repeat;
-	    -webkit-background-size:cover;
-	    -moz-background-size:cover;
-	    background-size:cover;
-	}
+  width:100%;
+  height:0;
+  padding-bottom: 50%;
+  overflow:hidden;
+  border-radius: 5px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  background-size:cover;
+}
 
-  .content .detail-wrapper {
-    margin-top: 10rpx;
-  }
-  .content .loading-wrapper {
-    display: flex;
-    margin-bottom: 10rpx;
-    align-items: center;
-    justify-content: center;
-  }
-  .content .loading-wrapper.hide {
-    display: none;
-  }
+.content .detail-wrapper {
+  margin-top: 10rpx;
+}
+.content .loading-wrapper {
+  display: flex;
+  margin-bottom: 10rpx;
+  align-items: center;
+  justify-content: center;
+}
+
 
