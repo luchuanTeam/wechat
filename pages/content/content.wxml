@@ -12,11 +12,6 @@
       </swiper-item>
     </block>
   </swiper>
-  <head-tab active-tab='{{activeTab}}' bind:tabchange="activeTabChange"></head-tab>
-  <view class='detail-wrapper'>
-    <content-detail details='{{details}}'></content-detail>
-  </view>
-  <view class="loading-wrapper {{loadingShow==='0'?'hide' : ''}}">
-    <loading></loading> 
-  </view>
+  <view class='banner-wrapper'></view>
+  
 </view>

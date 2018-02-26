@@ -1,3 +1,4 @@
+var utils = require('../../../utils/util.js');
 // pages/components/search.js
 Component({
   /**
@@ -23,5 +24,22 @@ Component({
         inputValue: e.detail.value
       })
     },
+    search() {
+      let data = utils.trim(this.data.inputValue);
+      if(data !== '') {
+
+      } else {
+        wx.showToast({
+          title: '请输入搜索内容',
+          icon: 'none',
+          mask: true,
+          complete: ()=> {
+            setTimeout(function () {
+              wx.hideToast();
+            }, 1000)
+          }
+        });
+      }
+    }
   }
 })
