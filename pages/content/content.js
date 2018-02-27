@@ -8,29 +8,29 @@ let _details = {
   title: '唐诗',
   data: [
     {
-      imgUrl: 'http://www.yanda123.com/images/1518273153583.jpg',
+      imgUrl: 'http://www.yanda123.com/images/5196412215817311/1519641219518_200.jpg',
       title: '我是陈大牛',
       introduce: '我是陈立，哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈'
     },
     {
-      imgUrl: 'http://www.yanda123.com/images/1518273153583.jpg',
+      imgUrl: 'http://www.yanda123.com/images/5196412215817311/1519641219518_200.jpg',
       title: '我是陈大牛',
       introduce: '我是陈立，还有谁?'
     },
     {
-      imgUrl: 'http://www.yanda123.com/images/1518273153583.jpg',
+      imgUrl: 'http://www.yanda123.com/images/5196412215817311/1519641219518_200.jpg',
       title: '我是陈大牛',
       introduce: '我是陈立，、还有谁?'
     },
     {
-      imgUrl: 'http://www.yanda123.com/images/1518273153583.jpg',
+      imgUrl: 'http://www.yanda123.com/images/5196412215817311/1519641219518_200.jpg',
       title: '我是陈大牛',
       introduce: '我是陈立，人的还有谁?'
     }
   ]
 };      
 let obj = {
-  imgUrl: 'http://www.yanda123.com/images/1518273153583.jpg',
+  imgUrl: 'http://www.yanda123.com/images/5196412215817311/1519641219518_200.jpg',
   title: '我是陈大牛',
   introduce: '我是陈立，、还有谁?'  
 };
@@ -108,7 +108,9 @@ Page({
           var data = res.data.data.list;
           var urlArr = [];
           for (var i = 0; i < data.length; i++) {
-            urlArr.push(data[i].imgUrl);
+            let url = data[i].imgUrl;
+            url = url.substr(0, url.lastIndexOf("\.")) + "_500" + url.substr(url.lastIndexOf("\."));
+            urlArr.push(url);
           }
           that.setData({
             imgUrls: urlArr
