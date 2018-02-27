@@ -1,0 +1,19 @@
+.station {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.station .img-wrapper {
+  width: 100%;
+  height: 100rpx;
+  text-align: center;
+}
+
+.station .img-wrapper image {
+  margin: 0 auto;
+  width: 60%;
+}
+
+.station .text {
+  font-size: 24rpx;
+}

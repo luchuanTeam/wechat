@@ -1,0 +1,8 @@
+<view class='station'>
+  <view class='img-wrapper'>
+    <image src='{{station.imgUrl}}'></image>
+  </view>
+  <view class='text'>
+    {{station.desc}}
+  </view>
+</view>
