@@ -3,7 +3,7 @@
   
   <view class='header'>
     <view class='logo'>
-      <image src='../../resources/images/logo.png'></image>
+      <image src='../../resources/images/logo.png' mode='scaleToFill'></image>
     </view>  
     <view class='history'>
       <image src='../../resources/images/history.png'></image>
@@ -25,6 +25,12 @@
       </swiper-item>
     </block>
   </swiper>
-  <view class='banner-wrapper'></view>
+  <view class='station-container'>
+    <view class='line' wx:for='{{stations}}' wx:key='{{index}}'>
+      <view class='station-wrapper' wx:for='{{item}}' wx:key='{{index}}'>
+        <station station='{{item}}'></station>
+      </view>
+    </view>
+  </view>
   
 </view>

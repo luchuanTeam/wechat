@@ -3,7 +3,7 @@
     "search": "../components/search/search",
     "head-tab": "../components/headTab/headTab",
     "content-detail": "../components/contentDetail/contentDetail",
-    "loading": "../components/loading/loading"
+    "station": "../components/station/station"
   },
   "enablePullDownRefresh": true,
   "onReachBottomDistance": 50
