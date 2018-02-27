@@ -1,20 +1,15 @@
 const stations = [
-  [
     { imgUrl: 'http://www.yanda123.com/app/taijiao.png', desc: '胎教' },
     { imgUrl: 'http://www.yanda123.com/app/zaojiao.png', desc: '早教（1-3岁）' },
     { imgUrl: 'http://www.yanda123.com/app/youjiao.png', desc: '幼教（4-6岁）' },
-    { imgUrl: 'http://www.yanda123.com/app/xiaoxue.png', desc: '小学课程' }
-  ],
-  [
+    { imgUrl: 'http://www.yanda123.com/app/xiaoxue.png', desc: '小学课程' },
     { imgUrl: 'http://www.yanda123.com/app/chuzhong.png', desc: '初中课程' },
     { imgUrl: 'http://www.yanda123.com/app/gaozhong.png', desc: '高中课程' },
     { imgUrl: 'http://www.yanda123.com/app/guoxue.png', desc: '国学' },
     { imgUrl: 'http://www.yanda123.com/app/shougong.png', desc: '手工教程' }
-  ]
 ]
 
 const videoStations = [
-  [
     {
       imgUrl: 'http://www.yanda123.com/app/poem.png', desc: ' 送綦母潜落第还乡_王维 （唐代）',
       kind: '国学/古诗词系列', isVideoImg: '1'
@@ -22,9 +17,7 @@ const videoStations = [
     {
       imgUrl: 'http://www.yanda123.com/app/youjiao-demo.png', desc: '妈妈生病了还能继续哺乳吗?',
       kind: '幼教/宝宝养育与教育系列', isVideoImg: '1'
-    }
-  ],
-  [
+    },
     {
       imgUrl: 'http://www.yanda123.com/app/youjiao-demo.png', desc: '妈妈生病了还能继续哺乳吗?',
       kind: '幼教/宝宝养育与教育系列', isVideoImg: '1'
@@ -33,7 +26,6 @@ const videoStations = [
       imgUrl: 'http://www.yanda123.com/app/poem.png', desc: ' 送綦母潜落第还乡_王维 （唐代）',
       kind: '国学/古诗词系列', isVideoImg: '1'
     }
-  ]
 ]
 
 Page({

@@ -122,3 +122,13 @@
   font-size: 24rpx;
   color: #3d3d3d;
 }
+
+.station-wrapper-four {
+  display: inline-block;
+  width: 25%;
+}
+
+.station-wrapper-two {
+  display: inline-block;
+  width: 50%;
+}

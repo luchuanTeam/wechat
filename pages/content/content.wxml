@@ -6,10 +6,10 @@
       <image src='http://www.yanda123.com/app/logo.png' mode='scaleToFill'></image>
     </view>  
     <view class='history'>
-      <image src='../../resources/images/history.png'></image>
+      <image src='http://www.yanda123.com/app/history.png'></image>
     </view>
     <view class='msg'>
-      <image src='../../resources/images/msg.png'></image>
+      <image src='http://www.yanda123.com/app/msg.png'></image>
     </view>
   </view>
   
@@ -27,26 +27,22 @@
   </view>
   
   <view class='station-container'>
-    <view class='line' wx:for='{{stations}}' wx:key='{{index}}'>
-      <view class='station-wrapper' wx:for='{{item}}' wx:key='{{index}}'>
+      <view class='station-wrapper-four' wx:for='{{stations}}' wx:key='{{index}}'>
         <station station='{{item}}'></station>
       </view>
-    </view>
   </view>
   
   <view class='info-wrapper'>
     <view class='video-img-wrapper'>
-      <image src='../../resources/images/video-recommend.png'></image>
+      <image src='http://www.yanda123.com/app/video-recommend.png'></image>
     </view>
     <view class='text'>视频推荐</view>
   </view>
   
   <view class='station-container'>
-    <view class='line' wx:for='{{videoStations}}' wx:key='{{index}}'>
-      <view class='station-wrapper' wx:for='{{item}}' wx:key='{{index}}'>
+      <view class='station-wrapper-two' wx:for='{{videoStations}}' wx:key='{{index}}'>
         <station station='{{item}}'></station>
       </view>  
-    </view>
   </view>
 
 </view>
