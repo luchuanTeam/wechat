@@ -94,3 +94,31 @@
 .content .station-container .line .station-wrapper {
   flex: 1;
 }
+
+.content .info-wrapper {
+  display: flex;
+  margin-top: 10rpx;
+  padding: 0 20rpx;
+  height: 80rpx;
+  background-color: #f8f8f8;
+}
+
+.content .info-wrapper .video-img-wrapper {
+  display: flex;
+  flex: 0 0 50rpx;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.content .info-wrapper .video-img-wrapper image {
+  height: 62.5%;
+}
+
+.content .info-wrapper .text {
+  margin-left: 20rpx;
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 24rpx;
+  color: #3d3d3d;
+}

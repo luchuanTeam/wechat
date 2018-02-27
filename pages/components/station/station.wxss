@@ -28,13 +28,13 @@
 }
 
 .station .video-text {
-  padding-left: 20rpx; 
+  padding-left: 10rpx; 
   font-size: 24rpx;
   text-align: left;
 }
 
 .station .kind {
-  padding-left: 20rpx;
+  padding-left: 10rpx;
   font-size: 24rpx;
   text-align: left;
   color: #999999;

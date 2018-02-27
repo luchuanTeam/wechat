@@ -34,4 +34,19 @@
     </view>
   </view>
   
+  <view class='info-wrapper'>
+    <view class='video-img-wrapper'>
+      <image src='../../resources/images/video-recommend.png'></image>
+    </view>
+    <view class='text'>视频推荐</view>
+  </view>
+  
+  <view class='station-container'>
+    <view class='line' wx:for='{{videoStations}}' wx:key='{{index}}'>
+      <view class='station-wrapper' wx:for='{{item}}' wx:key='{{index}}'>
+        <station station='{{item}}'></station>
+      </view>  
+    </view>
+  </view>
+
 </view>
