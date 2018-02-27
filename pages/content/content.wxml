@@ -3,7 +3,7 @@
   
   <view class='header'>
     <view class='logo'>
-      <image src='../../resources/images/logo.png' mode='scaleToFill'></image>
+      <image src='http://www.yanda123.com/app/logo.png' mode='scaleToFill'></image>
     </view>  
     <view class='history'>
       <image src='../../resources/images/history.png'></image>
@@ -15,11 +15,11 @@
   
   <view class='search-wrapper'>
     <search class="search"></search>
-    <swiper class="banner" indicator-dots="true" autoplay="autoplay" interval="5000" duration="500" circular="true" indicator-color="rgba(0, 0, 0, .8)" indicator-active-color="rgba(255, 255, 255, .3)">
+    <swiper class="banner" autoplay="autoplay" interval="5000" duration="500">
     <block wx:for="{{imgUrls}}">
       <swiper-item>
         <view class="slide-image">
-					<view class="zoomImage" style='background-image:url({{item}})       '></view>
+					<view class="zoomImage" style='background-image:url({{item}})'></view>
 				</view>
       </swiper-item>
     </block>
