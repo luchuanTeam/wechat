@@ -8,7 +8,9 @@ Component({
       type: Object,
       value: {
         imgUrl: '',
-        desc: ''
+        desc: '',
+        kind: '',
+        isVideoImg: '0'
       }
     }
   },

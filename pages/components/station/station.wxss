@@ -1,3 +1,4 @@
+
 .station {
   display: block;
   width: 100%;
@@ -9,11 +10,32 @@
   text-align: center;
 }
 
+.station .img-wrapper.video-img {
+  height: 250rpx;
+}
+
 .station .img-wrapper image {
   margin: 0 auto;
   width: 60%;
 }
 
+.station .img-wrapper.video-img image {
+  width: 95%;
+}
+
 .station .text {
   font-size: 24rpx;
+}
+
+.station .video-text {
+  padding-left: 20rpx; 
+  font-size: 24rpx;
+  text-align: left;
+}
+
+.station .kind {
+  padding-left: 20rpx;
+  font-size: 24rpx;
+  text-align: left;
+  color: #999999;
 }

@@ -13,6 +13,28 @@ const stations = [
   ]
 ]
 
+const videoStations = [
+  [
+    {
+      imgUrl: '../../../resources/images/poem.png', desc: '妈妈生病了还能继续哺乳吗?', 
+    kind: '幼教/宝宝养育与教育系列', isVideoImg: '1'
+    },
+    {
+      imgUrl: '../../../resources/images/poem.png', desc: '妈妈生病了还能继续哺乳吗?',
+      kind: '幼教/宝宝养育与教育系列', isVideoImg: '1'
+    }
+  ],
+  [
+    {
+      imgUrl: '../../../resources/images/poem.png', desc: '妈妈生病了还能继续哺乳吗?',
+      kind: '幼教/宝宝养育与教育系列', isVideoImg: '1'
+    },
+    {
+      imgUrl: '../../../resources/images/poem.png', desc: '妈妈生病了还能继续哺乳吗?',
+      kind: '幼教/宝宝养育与教育系列', isVideoImg: '1'
+    }
+  ]
+]
 
 Page({
 
@@ -20,7 +42,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    stations: stations
+    stations: stations,
+    videoStations: videoStations
   },
 
   /**

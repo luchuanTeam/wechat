@@ -1,8 +1,11 @@
 <view class='station'>
-  <view class='img-wrapper'>
+  <view class='img-wrapper {{station.isVideoImg==="1"? "video-img":""}}'>
     <image src='{{station.imgUrl}}'></image>
   </view>
-  <view class='text'>
+  <view class='{{station.isVideoImg==="1"?"video-text":"text"}}'>
     {{station.desc}}
+  </view>
+  <view class='kind {{station.kind? "":"hide"}}'>
+    {{station.kind}}  
   </view>
 </view>
