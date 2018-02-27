@@ -14,9 +14,8 @@
   </view>
   
   <view class='search-wrapper'>
-    <search></search>
-  </view>
-  <swiper class="banner" indicator-dots="true" autoplay="autoplay" interval="5000" duration="500" circular="true" indicator-color="rgba(0, 0, 0, .8)" indicator-active-color="rgba(255, 255, 255, .3)">
+    <search class="search"></search>
+    <swiper class="banner" indicator-dots="true" autoplay="autoplay" interval="5000" duration="500" circular="true" indicator-color="rgba(0, 0, 0, .8)" indicator-active-color="rgba(255, 255, 255, .3)">
     <block wx:for="{{imgUrls}}">
       <swiper-item>
         <view class="slide-image">
@@ -25,6 +24,8 @@
       </swiper-item>
     </block>
   </swiper>
+  </view>
+  
   <view class='station-container'>
     <view class='line' wx:for='{{stations}}' wx:key='{{index}}'>
       <view class='station-wrapper' wx:for='{{item}}' wx:key='{{index}}'>

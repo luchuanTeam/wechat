@@ -39,7 +39,9 @@ Page({
           var data = res.data.data.list;
           var urlArr = [];
           for (var i = 0; i < data.length; i++) {
-            urlArr.push(data[i].imgUrl);
+            var url = data[i].imgUrl;
+            url = url.substr(0, url.lastIndexOf("\.")) + "_500" + url.substr(url.lastIndexOf("\."));
+            urlArr.push(url);
           }
           that.setData({
             imgUrls: urlArr
