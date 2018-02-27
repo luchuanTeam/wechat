@@ -4,8 +4,41 @@
   width: 100%;
   height: 100%;
 }
+
+.content .header {
+  display: flex;
+  margin-bottom: 10rpx;
+  height: 100rpx;
+}
+
+.content .header image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.content .header .logo {
+  flex: 1;
+  margin-left: 20rpx; 
+  height: 100%;
+}
+
+.content .header .logo image {
+  width: 350rpx;
+  height: 100%;
+}
+
+.content .header .history, .content .header .msg{
+  display: flex;
+  margin-right: 10rpx;
+  flex: 0 0 100rpx;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 .content .search-wrapper {
-  padding: 10rpx 20rpx;
+  padding: 20rpx 20rpx;
+  background-color: #f8f8f8;
 }
 
 .content .tab-wrapper {

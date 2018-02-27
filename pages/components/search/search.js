@@ -27,7 +27,9 @@ Component({
     search() {
       let data = utils.trim(this.data.inputValue);
       if(data !== '') {
-
+        wx.navigateTo({
+          url: '../video/video',
+        });
       } else {
         wx.showToast({
           title: '请输入搜索内容',

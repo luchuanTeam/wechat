@@ -8,6 +8,7 @@
   border: 1px solid #a1bd7e;
   border-radius: 10rpx;
   height: 60rpx;
+  color: #222222;
 }
 
 .search-container .text {
