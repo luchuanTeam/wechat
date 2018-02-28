@@ -15,7 +15,7 @@
   },
   "tabBar": {
     "color": "#8a8a8a",
-    "selectedColor": "#1AAD16",
+    "selectedColor": "#fc9c14",
     "borderStyle": "",
     "backgroundColor": "#fff",
     "list": [
@@ -23,19 +23,25 @@
         "pagePath": "pages/content/content",
         "text": "首页",
         "iconPath": "resources/images/home.png",
-        "selectedIconPath": "resources/images/selectHome.png"
+        "selectedIconPath": "resources/images/home_select.png"
       },
       {
         "pagePath": "pages/zone/zone",
         "text": "分类",
         "iconPath": "resources/images/fenlei.png",
-        "selectedIconPath": "resources/images/selectFenlei.png"
+        "selectedIconPath": "resources/images/fenlei_select.png"
+      },
+      {
+        "pagePath": "pages/zone/zone",
+        "text": "推广",
+        "iconPath": "resources/images/tg.png",
+        "selectedIconPath": "resources/images/tg_select.png"
       },
       {
         "pagePath": "pages/user/user",
         "text": "我的",
-        "iconPath": "resources/images/people.png",
-        "selectedIconPath": "resources/images/selectPeople.png"
+        "iconPath": "resources/images/my.png",
+        "selectedIconPath": "resources/images/my_select.png"
       }
     ]
   },

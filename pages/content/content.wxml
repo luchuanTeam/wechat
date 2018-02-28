@@ -5,11 +5,11 @@
     <view class='logo'>
       <image src='http://www.yanda123.com/app/logo.png' mode='scaleToFill'></image>
     </view>  
-    <view class='history'>
-      <image src='http://www.yanda123.com/app/history.png'></image>
-    </view>
     <view class='msg'>
       <image src='http://www.yanda123.com/app/msg.png'></image>
+    </view>
+    <view class='history'>
+      <image src='http://www.yanda123.com/app/history.png'></image>
     </view>
   </view>
   

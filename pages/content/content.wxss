@@ -8,7 +8,7 @@
 .content .header {
   display: flex;
   margin-bottom: 10rpx;
-  height: 80rpx;
+  height: 70rpx;
 }
 
 .content .header image {
@@ -23,10 +23,8 @@
 }
 
 .content .header .logo image {
-  width:300rpx;
-  height:90rpx;
-  bottom:4rpx;
-  position:relative;
+  width:250rpx;
+  height:80rpx;
 }
 
 .content .header .history, .content .header .msg{
@@ -40,7 +38,7 @@
 
 .content .search-wrapper {
   background-color: #f8f8f8;
-  padding-bottom:10rpx;
+  padding:4rpx 0 10rpx;
   margin-bottom: 10rpx;
 }
 
