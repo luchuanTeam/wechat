@@ -80,18 +80,7 @@
   background-size:cover;
 }
 
-.content .station-container .line {
-  display: flex;
-  margin-bottom: 10rpx;
-}
 
-.content .station-container .line:last-child {
-  margin-bottom: 0;
-}
-
-.content .station-container .line .station-wrapper {
-  flex: 1;
-}
 
 .content .info-wrapper {
   display: flex;
