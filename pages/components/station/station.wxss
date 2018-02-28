@@ -11,6 +11,7 @@
 }
 
 .station .img-wrapper.video-img {
+  position: relative;
   height: 250rpx;
 }
 
@@ -38,4 +39,15 @@
   font-size: 24rpx;
   text-align: left;
   color: #999999;
+}
+
+.img-play {
+  position:absolute;
+  width:72rpx!important;
+  height:72rpx;
+  display:inline-block;
+  top:50%;
+  left:50%;
+  margin-left: -36rpx!important;
+  margin-top: -36rpx!important;
 }
