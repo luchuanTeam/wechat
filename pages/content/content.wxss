@@ -5,35 +5,8 @@
   height: 100%;
 }
 
-.content .header {
-  display: flex;
+.content .header-wrapper {
   margin-bottom: 10rpx;
-  height: 70rpx;
-}
-
-.content .header image {
-  width: 40rpx;
-  height: 40rpx;
-}
-
-.content .header .logo {
-  flex: 1;
-  margin-left: 20rpx; 
-  height: 100%;
-}
-
-.content .header .logo image {
-  width:250rpx;
-  height:80rpx;
-}
-
-.content .header .history, .content .header .msg{
-  display: flex;
-  margin-right: 10rpx;
-  flex: 0 0 100rpx;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
 }
 
 .content .search-wrapper {
@@ -119,3 +92,10 @@
   display: inline-block;
   width: 50%;
 }
+
+.content .loading-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

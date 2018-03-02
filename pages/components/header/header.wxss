@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  height: 70rpx;
+}
+
+.header image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.header .logo {
+  flex: 1;
+  margin-left: 20rpx; 
+  height: 100%;
+}
+
+.header .logo image {
+  width:250rpx;
+  height:80rpx;
+}
+
+.header .history, .header .msg{
+  display: flex;
+  margin-right: 10rpx;
+  flex: 0 0 100rpx;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}

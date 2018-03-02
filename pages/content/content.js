@@ -28,6 +28,11 @@ const videoStations = [
     }
 ]
 
+const obj = {
+  imgUrl: 'http://www.yanda123.com/app/poem.png', desc: ' 送綦母潜落第还乡_王维 （唐代）',
+  kind: '国学/古诗词系列', isVideoImg: '1'
+};
+
 Page({
 
   /**
@@ -35,7 +40,8 @@ Page({
    */
   data: {
     stations: stations,
-    videoStations: videoStations
+    videoStations: videoStations,
+    loadMore: 0
   },
 
   /**
@@ -102,7 +108,27 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function (e) {
-    console.dir(e);
+
+  },
+
+  /**
+  * 页面上拉触底事件
+  */
+  onReachBottom() {
+    if(true) {        // 此处应该增加一个标记，表面可以后台还可以加载更多，不用每次触底都调后台
+      this.setData({
+        loadMore: 1   //可加载的时候应该显示loading状态
+      });
+      let arrs = this.data.videoStations;
+      arrs.push(obj);
+      arrs.push(obj);
+      setTimeout(()=>{
+        this.setData({
+          videoStations: arrs,
+          loadMore: 0
+        });
+      }, 1000);
+    }
   },
 
   /**

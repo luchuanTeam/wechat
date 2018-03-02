@@ -1,18 +1,9 @@
 <!--pages/content/content.wxml-->
 <view class='content'>
   
-  <view class='header'>
-    <view class='logo'>
-      <image src='http://www.yanda123.com/app/logo.png' mode='scaleToFill'></image>
-    </view>  
-    <view class='msg'>
-      <image src='http://www.yanda123.com/app/msg.png'></image>
-    </view>
-    <view class='history'>
-      <image src='http://www.yanda123.com/app/history.png'></image>
-    </view>
+  <view class='header-wrapper'>
+    <header></header>
   </view>
-  
   <view class='search-wrapper'>
     <search class="search"></search>
     <swiper class="banner" autoplay="autoplay" interval="5000" duration="500">
@@ -44,5 +35,8 @@
         <station station='{{item}}'></station>
       </view>  
   </view>
-
+  <view class='loading-wrapper {{loadMore===1?"":"hide"}}'>
+    <loading></loading>
+  </view>
+  
 </view>

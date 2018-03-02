@@ -8,8 +8,8 @@
 }
 .loading-container {
   position: relative;
-  width: 100rpx;
-  height: 100rpx;
+  width: 50rpx;
+  height: 50rpx;
 }
 
 .loading {
@@ -24,7 +24,7 @@
   display: block;
   content: ' ';
   margin: 0 auto;
-  width: 5%;
+  width: 10%;
   height: 30%;
   background: #aaa;
   animation: loadingFadeDelay 1.2s infinite ease-in-out both; 

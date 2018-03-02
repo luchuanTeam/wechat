@@ -1,9 +1,9 @@
 {
   "usingComponents": {
     "search": "../components/search/search",
-    "head-tab": "../components/headTab/headTab",
-    "content-detail": "../components/contentDetail/contentDetail",
-    "station": "../components/station/station"
+    "header": "../components/header/header",
+    "station": "../components/station/station",
+    "loading": "../components/loading/loading"
   },
   "enablePullDownRefresh": true,
   "onReachBottomDistance": 50
