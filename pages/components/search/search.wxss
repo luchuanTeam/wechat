@@ -1,6 +1,5 @@
 .search-container {
   display: flex;
-  margin: 10rpx 20rpx;
 }
 
 .search-container .search {

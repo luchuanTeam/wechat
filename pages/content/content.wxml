@@ -6,7 +6,8 @@
   </view>
   <view class='search-wrapper'>
     <search class="search"></search>
-    <swiper class="banner" autoplay="autoplay" interval="5000" duration="500">
+  </view>
+  <swiper class="banner" autoplay="autoplay" interval="5000" duration="500">
     <block wx:for="{{imgUrls}}">
       <swiper-item>
         <view class="slide-image">
@@ -15,7 +16,7 @@
       </swiper-item>
     </block>
   </swiper>
-  </view>
+  
   
   <view class='station-container'>
       <view class='station-wrapper-four' wx:for='{{stations}}' wx:key='{{index}}'>

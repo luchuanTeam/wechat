@@ -5,31 +5,8 @@
   height: 100%;
 }
 
-.content .header-wrapper {
-  margin-bottom: 10rpx;
-}
-
-.content .search-wrapper {
-  background-color: #f8f8f8;
-  padding:4rpx 0 10rpx;
-  margin-bottom: 10rpx;
-}
-
-.content .tab-wrapper {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-.content .title {
-  margin-top: 200rpx;
-  text-align: center; 
-}
-.content .active {
-  color: #4a93a7;
-}
 .banner {
-  margin: 10rpx 0;
+  margin-bottom: 10rpx;
   height: 160px;
 }
 .banner swiper-item {

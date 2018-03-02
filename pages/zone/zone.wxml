@@ -1,2 +1,8 @@
-<!--pages/zone/zone.wxml-->
-<text>pages/zone/zone.wxml</text>
+<view class='zone'>
+  <view class='header-wrapper'>
+    <header></header>
+  </view>
+  <view class='search-wrapper'>
+    <search></search>
+  </view>
+</view>
