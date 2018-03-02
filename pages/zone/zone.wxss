@@ -1,1 +1,83 @@
-/* pages/zone/zone.wxss */
+.category-wrapper {
+  display: flex;
+  border-top: 2rpx solid #d0d0d0;
+  border-bottom: 2rpx solid #d0d0d0;
+}
+
+.category-wrapper .top-category {
+  display: flex;
+  flex: 0 0 250rpx;
+  flex-direction: column;
+  border-right: 2rpx solid #d0d0d0;
+  
+}
+
+.category-wrapper .top-category .text {
+  position: relative;
+  padding: 30rpx;
+  flex: 1;
+  text-align: center;
+  font-size: 32rpx;
+}
+
+.selected {
+  color: #7aa247;
+}
+
+.selected text {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 10rpx;
+  height: 60rpx;
+  transform: translate3d(0, -50%, 0);
+  background: #7aa247;
+  border-top-right-radius: 4rpx;
+  border-bottom-right-radius: 4rpx;
+}
+
+.category-wrapper .secondary-category {
+  flex: 1;
+  padding: 40rpx 20rpx;
+}
+
+.category-wrapper .secondary-category view {
+  display: inline-block;
+  margin-right: 10rpx;
+  margin-bottom: 20rpx;
+  padding: 20rpx 10rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  
+}
+
+.baby-blue {    /* 浅蓝色 */
+  border: 2rpx solid #8cdade;
+  color: #8cdade;
+  background-color: #e8f6f6;
+}
+
+.pink {      /* 粉红色 */
+  border: 2rpx solid #e3af96;
+  color: #e3af96;
+  background-color: #fae8e8;
+}
+
+.olive-green {  /* 橄榄绿 */
+  border: 2rpx solid #9bc48e;
+  color: #9bc48e;
+  background-color: #e4f5e2;
+}
+
+.orange {
+  border: 2rpx solid #fac389;
+  color: #fac389;
+  background-color: #f8f2ec;
+}
+
+.light-cyan {   /*浅青色*/
+  border: 2rpx solid #8baade;
+  color: #8baade;
+  background-color: #e8edf6;
+}

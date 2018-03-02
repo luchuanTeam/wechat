@@ -5,4 +5,17 @@
   <view class='search-wrapper'>
     <search></search>
   </view>
+  <view class='category-wrapper'>
+    <view class='top-category'>
+      <view class="text {{selected===index? 'selected':''}}" wx:for='{{topCategory}}' wx:key='{{index}}' data-index='{{index}}' bindtap='changeSelected'>
+        <text></text>
+        {{item}}
+      </view>
+    </view>
+    <view class='secondary-category'>
+      <view wx:for='{{secondCategory}}' wx:key='{{index}}' class='{{styleArr[index % styleArr.length]}}'>
+        {{item}}
+      </view>
+    </view>
+  </view>
 </view>
