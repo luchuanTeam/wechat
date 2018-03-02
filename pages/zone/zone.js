@@ -10,10 +10,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    topCategory: TOP_CATEGORY,
-    selected: 0,
-    styleArr: STYLE_ARR,
-    secondCategory: TESTARR1
+    topCategory: TOP_CATEGORY,      // 一级目录
+    selected: 0,                    // 被选择的一级目录
+    styleArr: STYLE_ARR,            // 二级目录样式数组
+    secondCategory: TESTARR1        // 选择一级目录对应的二级目录内容
   },
 
   /**
