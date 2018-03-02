@@ -18,3 +18,12 @@ image {
   width: 100%;
   height: 100%;
 }
+
+.header-wrapper {
+  margin-bottom: 10rpx;
+}
+
+.search-wrapper {
+  padding: 10rpx 20rpx;
+  background-color: #f8f8f8;
+}
