@@ -1,9 +1,144 @@
-/* pages/viedo/video.wxss */
-.text {
-  display: block;
-  margin: 20rpx 0;
-  text-align: center;
+.video-page-container {
+  width: 100%;
 }
 .video-wrapper {
-  text-align: center
+  position: relative;
+  width: 100%;
 }
+
+.video-wrapper video {
+  display: block;
+  width: 100%;
+}
+
+.tab-wrapper {
+  display: flex;
+  position: relative;
+  height: 100rpx;
+  border-bottom: 2rpx solid #e8e8e8;
+}
+
+.tab-wrapper .text {
+  flex: 1;
+  text-align: center;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 32rpx;
+  color: #222222;
+}
+
+.tab-wrapper .text.selected {
+  position: relative;
+  color: #7aa247;
+}
+
+.tab-wrapper .selected text {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  width: 60rpx;
+  height: 10rpx;
+  background: #7aa247;
+}
+
+.video-content-wrapper {
+  width: 100%;
+}
+
+.video-content-wrapper .text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.video-content-wrapper .title {
+  font-weight: 700;
+  color: #222;  
+  font-size: 32rpx;
+}
+
+.vip-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100rpx;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2rpx solid #e8e8e8;
+}
+
+.vip-wrapper .vip {
+  width: 85%;
+  height: 70rpx;
+  line-height: 70rpx;
+  color: #fff;
+  background-color: #edb214;
+  text-align: center;
+  border-radius: 10rpx;
+  font-size: 36rpx;
+}
+
+.video-intro-wrapper {
+  padding: 20rpx;
+  word-wrap: break-word;
+  border-bottom: 2rpx solid #e8e8e8;
+}
+
+.episode-wrapper {
+  padding: 20rpx;
+  border-bottom: 2rpx solid #e8e8e8;
+}
+
+.episode-wrapper .series-wrapper {
+  display: flex;
+}
+
+.episode-wrapper .series-wrapper .title {
+  flex: 1;
+  text-align: left;
+}
+
+.episode-wrapper .series-wrapper .text {
+  flex: 1;
+  text-align: right;
+}
+
+.episode-wrapper .scroll {
+  margin-top: 20rpx;
+  white-space: nowrap;
+}
+
+.episode-wrapper .scroll .episode {
+  position: relative;
+  display: inline-block;
+  padding: 20rpx;
+  width: 50rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  background: #f8f8f8;
+  margin-right: 10rpx;
+}
+
+.episode .text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.arrow-right {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  width: 0;
+  height: 0;
+  border-top:15rpx solid transparent;
+  border-bottom: 15rpx solid transparent;
+  border-left: 30rpx solid #97c28a;
+}
+
+
+
+

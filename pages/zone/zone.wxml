@@ -13,7 +13,7 @@
       </view>
     </view>
     <view class='secondary-category'>
-      <view wx:for='{{secondCategory}}' wx:key='{{index}}' class='{{styleArr[index % styleArr.length]}}'>
+      <view wx:for='{{secondCategory}}' wx:key='{{index}}' class='{{styleArr[index % styleArr.length]}}' bindtap='toVideoList'>
         {{item}}
       </view>
     </view>

@@ -5,7 +5,8 @@
     "pages/logs/logs",
     "pages/user/user",
     "pages/video/video",
-    "pages/zone/zone"
+    "pages/zone/zone",
+    "pages/videoList/videoList"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -32,7 +33,7 @@
         "selectedIconPath": "resources/images/fenlei_select.png"
       },
       {
-        "pagePath": "pages/zone/zone",
+        "pagePath": "pages/video/video",
         "text": "推广",
         "iconPath": "resources/images/tg.png",
         "selectedIconPath": "resources/images/tg_select.png"

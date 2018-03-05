@@ -32,7 +32,15 @@ Page({
       selected: e.target.dataset.index,
       secondCategory: data
     })
-    
+  },
+
+  /**
+   * 跳转到视频列表页面
+   */
+  toVideoList(e) {
+    wx.navigateTo({
+      url: '../videoList/videoList',
+    });
   },
 
   /**
