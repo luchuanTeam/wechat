@@ -2,7 +2,7 @@
 .category-wrapper {
   display: flex;
   position: absolute;
-  top: 158rpx;
+  top: 166rpx;
   right: 0;
   bottom: 0;
   left: 0;  
