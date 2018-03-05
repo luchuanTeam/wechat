@@ -1,6 +1,7 @@
 <view class='video-page-container'> 
   <view class='video-wrapper'>
-    <video src='http://www.yanda123.com/video/testvideo.mp4' objectFit='fill'></video>
+    <video src='http://www.yanda123.com/video/testvideo.mp4' objectFit='contain'>
+    </video>
   </view>
   <view class='tab-wrapper'>
     <view class="text {{selected === '1'? 'selected':''}}" data-index='1' bindtap='changeSelected'>视频 <text></text></view>
