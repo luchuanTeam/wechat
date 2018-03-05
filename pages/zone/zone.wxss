@@ -1,7 +1,12 @@
+
 .category-wrapper {
   display: flex;
+  position: absolute;
+  top: 158rpx;
+  right: 0;
+  bottom: 0;
+  left: 0;  
   border-top: 2rpx solid #d0d0d0;
-  border-bottom: 2rpx solid #d0d0d0;
 }
 
 .category-wrapper .top-category {
