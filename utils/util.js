@@ -16,6 +16,7 @@ const formatNumber = n => {
 
 /**
  * 去除参数的前后空格
+ * @param str: 要求传入的参数为字符串，否则直接返回
  */
 const trim = (str)=> {
   if(str !== null && str !== undefined) {
@@ -28,9 +29,27 @@ const trim = (str)=> {
   } else {
     return '';
   }
+};
+
+/**
+ * 将换行符替换为逗号
+ * @param str: 要求传入的参数为字符串，否则直接返回
+ */
+const formatLine = (str)=> {
+  if (str !== null && str !== undefined) {
+    if (typeof str === 'string') {   //接收的参数必须是字符格式
+      str = str.replace(/[\n\r]/g, ',');
+      return str;
+    } else {
+      return str;
+    }
+  } else {
+    return '';
+  }
 }
 
 module.exports = {
   formatTime: formatTime,
-  trim: trim
+  trim: trim,
+  formatLine: formatLine
 }

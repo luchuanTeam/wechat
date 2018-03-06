@@ -1,4 +1,4 @@
-
+var utils = require('../../utils/util.js');
 Page({
 
   /**
@@ -23,7 +23,8 @@ Page({
       showHideEpisode: '0'      // 控制全部集数的组件的显示状态, '1'代表显示
     },
     commentData: {
-      selected: '1'           // 评论的展示类型 1所有 2最新 3精华
+      selected: '1',           // 评论的展示类型 1所有 2最新 3精华
+      commentContent: ''        // 评论内容
     }
   },
 
@@ -72,6 +73,24 @@ Page({
     this.setData({
       [data]: e.currentTarget.dataset.index
     });
+  },
+
+  /**
+   * 获取用户输入的评论内容
+   */
+  commentInput(e) {
+    this.setData({
+      [data]: e.detail.value
+    });
+  },
+
+  /**
+   * 提交评论，此处将换行符统一替换为逗号再提交
+   */
+  enterComment() {
+    let data = this.data.commentData.commentContent;
+    data = utils.formatLine(data);
+    console.log(data);
   },
 
   /**
