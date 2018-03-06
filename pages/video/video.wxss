@@ -1,19 +1,14 @@
 .video-page-container {
   width: 100%;
 }
-.video-wrapper {
-  position: relative;
-  width: 100%;
-}
 
-.video-wrapper video {
+.video {
   display: block;
   width: 100%;
 }
 
 .tab-wrapper {
   display: flex;
-  position: relative;
   height: 100rpx;
   border-bottom: 2rpx solid #e8e8e8;
 }
@@ -43,16 +38,20 @@
   background: #7aa247;
 }
 
-.video-content-wrapper {
+.video-content-wrapper, .comment-wrapper {
+  position: absolute;
+  top: 550rpx;
+  bottom: 0;
+  overflow: auto;
   width: 100%;
 }
 
-.video-content-wrapper .text {
+.text {
   font-size: 28rpx;
   color: #666;
 }
 
-.video-content-wrapper .title {
+.title {
   font-weight: 700;
   color: #222;  
   font-size: 32rpx;
@@ -89,16 +88,16 @@
   border-bottom: 2rpx solid #e8e8e8;
 }
 
-.episode-wrapper .series-wrapper {
+.series-wrapper {
   display: flex;
 }
 
-.episode-wrapper .series-wrapper .title {
+.series-wrapper .title {
   flex: 1;
   text-align: left;
 }
 
-.episode-wrapper .series-wrapper .text {
+.series-wrapper .text {
   flex: 1;
   text-align: right;
 }
@@ -108,17 +107,18 @@
   white-space: nowrap;
 }
 
-.episode-wrapper .scroll .episode {
-  position: relative;
+.episode {
   display: inline-block;
+  position: relative;
+  margin-right: 20rpx;
   padding: 20rpx;
   width: 50rpx;
   height: 50rpx;
   line-height: 50rpx;
   text-align: center;
   background: #f8f8f8;
-  margin-right: 10rpx;
 }
+
 
 .episode .text {
   position: absolute;
@@ -139,6 +139,50 @@
   border-left: 30rpx solid #97c28a;
 }
 
+.hide-episode-wrapper {
+  position: fixed;
+  top: 550rpx;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 20rpx 40rpx;
+  border-top: 2rpx solid #e8e8e8;
+  background: #fff;
+  z-index: 100;
+  transform: translate3d(0, 100%, 0);
+  transition: all 0.2s linear;
+}
 
+.hide-episode-wrapper.show {
+  transform: translate3d(0,0,0);
+}
 
+.hide-episode-wrapper .series-wrapper {
+  margin-bottom: 20rpx;
+}
+
+.filter-wrapper {
+  display: flex;
+  padding: 20rpx 0;
+}
+
+.filter-wrapper .filter {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.filter-wrapper .filter .text {
+  display: block;
+  padding: 10rpx 30rpx;
+  background-color: #f1f0f0;
+  border-radius: 10rpx;
+}
+
+.filter-wrapper .filter .selected {
+  color: #7aa247;
+}
+ 
 

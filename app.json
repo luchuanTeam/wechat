@@ -33,7 +33,7 @@
         "selectedIconPath": "resources/images/fenlei_select.png"
       },
       {
-        "pagePath": "pages/video/video",
+        "pagePath": "pages/zone/zone",
         "text": "推广",
         "iconPath": "resources/images/tg.png",
         "selectedIconPath": "resources/images/tg_select.png"
