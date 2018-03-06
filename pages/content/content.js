@@ -11,20 +11,11 @@ const stations = [
 
 const videoStations = [
     {
-      imgUrl: 'http://www.yanda123.com/app/poem.png', desc: ' 送綦母潜落第还乡_王维 （唐代）',
-      kind: '国学/古诗词系列', isVideoImg: '1'
-    },
-    {
-      imgUrl: 'http://www.yanda123.com/app/youjiao-demo.png', desc: '妈妈生病了还能继续哺乳吗?',
-      kind: '幼教/宝宝养育与教育系列', isVideoImg: '1'
-    },
-    {
-      imgUrl: 'http://www.yanda123.com/app/youjiao-demo.png', desc: '妈妈生病了还能继续哺乳吗?',
-      kind: '幼教/宝宝养育与教育系列', isVideoImg: '1'
-    },
-    {
-      imgUrl: 'http://www.yanda123.com/app/poem.png', desc: ' 送綦母潜落第还乡_王维 （唐代）',
-      kind: '国学/古诗词系列', isVideoImg: '1'
+      mvName: '',
+      mvIntro: ' 送綦母潜落第还乡_王维 （唐代）',
+      imgUrl: 'http://www.yanda123.com/app/poem.png', 
+      classifyName: '国学/古诗词系列', 
+      isVideoImg: '1'
     }
 ]
 
@@ -43,11 +34,39 @@ Page({
     videoStations: videoStations,
     loadMore: 0
   },
-
   /**
-   * 生命周期函数--监听页面加载
+   * 加载视频数据
    */
-  onLoad: function (options) {
+  loadMovies: function(pageNum, pageSize) {
+    var that = this;
+    wx.request({
+      url: "http://www.yanda123.com/yanda/movie/list",
+      data: { pageNum: pageNum, pageSize: pageSize },
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: function (res) {
+        if (res.data.status == 200) {
+          let data = res.data.data.list;
+          let movies = [];
+          for (var i = 0; i < data.length; i++) {
+            let movie = data[i];
+            movie.desc = movie.mvName;
+            movie.imgUrl = 'http://www.yanda123.com/yanda/attach/readFile?size=200&id='+data[i].imgAppendixId;
+            movie.isVideoImg = '1';
+            movies.push(movie);
+          }
+          that.setData({
+            videoStations: movies
+          });
+        }
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+    });
+  },
+  loadBanners: function() {
     var that = this;
     wx.request({
       url: "http://www.yanda123.com/yanda/banner/list",
@@ -57,10 +76,10 @@ Page({
       },
       success: function (res) {
         if (res.data.status == 200) {
-          var data = res.data.data.list;
-          var urlArr = [];
-          for (var i = 0; i < data.length; i++) {
-            var url = 'http://www.yanda123.com/yanda/attach/readFile?size=500&id='+ data[i].appendixId;
+          let data = res.data.data.list;
+          let urlArr = [];
+          for (let i = 0; i < data.length; i++) {
+            let url = 'http://www.yanda123.com/yanda/attach/readFile?size=500&id=' + data[i].appendixId;
             urlArr.push(url);
           }
           that.setData({
@@ -72,7 +91,13 @@ Page({
         console.log(err)
       }
     });
-
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.loadBanners();
+    this.loadMovies(1, 4);
   },
 
   /**
