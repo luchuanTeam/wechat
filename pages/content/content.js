@@ -52,7 +52,7 @@ Page({
           for (var i = 0; i < data.length; i++) {
             let movie = data[i];
             movie.desc = movie.mvName;
-            movie.imgUrl = 'http://www.yanda123.com/yanda/attach/readFile?size=200&id='+data[i].imgAppendixId;
+            movie.imgUrl = 'http://www.yanda123.com/yanda/attach/readFile?size=500&id='+data[i].imgAppendixId;
             movie.isVideoImg = '1';
             movies.push(movie);
           }
@@ -79,7 +79,7 @@ Page({
           let data = res.data.data.list;
           let urlArr = [];
           for (let i = 0; i < data.length; i++) {
-            let url = 'http://www.yanda123.com/yanda/attach/readFile?size=500&id=' + data[i].appendixId;
+            let url = 'http://www.yanda123.com/yanda/attach/readFile?size=800&id=' + data[i].appendixId;
             urlArr.push(url);
           }
           that.setData({
