@@ -79,6 +79,7 @@ Page({
    * 获取用户输入的评论内容
    */
   commentInput(e) {
+    let data = 'commentData.commentContent';
     this.setData({
       [data]: e.detail.value
     });
