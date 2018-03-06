@@ -1,5 +1,5 @@
 <view class='video-page-container'> 
-  
+
   <video src='http://www.yanda123.com/video/testvideo.mp4' objectFit='fill' class='video'></video>
   
   <view class='tab-wrapper'>
