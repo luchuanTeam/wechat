@@ -60,8 +60,7 @@ Page({
           var data = res.data.data.list;
           var urlArr = [];
           for (var i = 0; i < data.length; i++) {
-            var url = data[i].imgUrl;
-            url = url.substr(0, url.lastIndexOf("\.")) + "_500" + url.substr(url.lastIndexOf("\."));
+            var url = 'http://www.yanda123.com/yanda/attach/readFile?size=500&id='+ data[i].appendixId;
             urlArr.push(url);
           }
           that.setData({

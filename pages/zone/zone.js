@@ -1,9 +1,15 @@
-
-const TOP_CATEGORY = ['胎教', '早教(1-3岁)', '幼教(4-6岁)', '小学课程', '初中课程', '高中课程', '国学', '手工课程'];
+const TOP_CATEGORY = [
+    { 
+      id: 1, 
+      label: '胎教', 
+      desc: '胎教'
+    }
+  ]; 
 const STYLE_ARR = ['baby-blue', 'pink', 'olive-green', 'orange', 'light-cyan'];
-const TESTARR1 = ['胎教音乐', '国学胎教(音频)'];
-const TESTARR2 = ['小学语文(1-6年级)', '小学数学(1-6年级)', '小学英语(1-6年级)'];
-const TESTARR3 = ['helloworld', 'helloworld', 'helloworld', 'helloworld', 'helloworld', 'helloworld', 'helloworld', 'helloworld']
+const TESTARR1 = {
+  '1': { id: 9, label: '胎教音乐', desc: '胎教音乐'}
+  };
+
 Page({
 
   /**
@@ -11,27 +17,53 @@ Page({
    */
   data: {
     topCategory: TOP_CATEGORY,      // 一级目录
-    selected: 0,                    // 被选择的一级目录
+    selected: 1,                    // 被选择的一级目录
     styleArr: STYLE_ARR,            // 二级目录样式数组
-    secondCategory: TESTARR1        // 选择一级目录对应的二级目录内容
+    secondCategory: TESTARR1,        // 选择一级目录对应的二级目录内容
+    categoryCache: {}
+  },
+  /**
+   * 二级分类数据加载
+   */
+  loadSecondCategory: function(id) {
+    var that = this;
+    wx.request({
+      url: "http://www.yanda123.com/yanda/movie/getClassify/" + id,
+      data: {},
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          let data = res.data;
+          let key = 'categoryCache[' + id + ']';
+          that.setData({
+            selected: id,
+            secondCategory: data,
+            [key]: data
+          });
+        }
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+    });
   },
 
   /**
    * 点击一级目录更改显示
    */
   changeSelected(e) {
-    let data = [];
-    if(e.target.dataset.index === 0){
-      data = TESTARR1;
-    } else if (e.target.dataset.index === 1) {
-      data = TESTARR2;
+    var that = this;
+    let id = e.target.dataset.index;
+    if (this.data.categoryCache[id]) {
+      that.setData({
+        selected: id,
+        secondCategory: this.data.categoryCache[id]
+      });
     } else {
-      data = TESTARR3;
+      that.loadSecondCategory(id);
     }
-    this.setData({
-      selected: e.target.dataset.index,
-      secondCategory: data
-    })
   },
 
   /**
@@ -47,7 +79,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this;
+    wx.request({
+      url: "http://www.yanda123.com/yanda/movie/getClassify",
+      data: {},
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          let data = res.data;
+          that.setData({
+            topCategory: data
+          });
+          that.loadSecondCategory(data[0].id);
+        }
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+    });
   },
 
   /**
