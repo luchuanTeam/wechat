@@ -1,14 +1,5 @@
-const TOP_CATEGORY = [
-    { 
-      id: 1, 
-      label: '胎教', 
-      desc: '胎教'
-    }
-  ]; 
+const $ = require('../../utils/ajax.js');
 const STYLE_ARR = ['baby-blue', 'pink', 'olive-green', 'orange', 'light-cyan'];
-const TESTARR1 = {
-  '1': { id: 9, label: '胎教音乐', desc: '胎教音乐'}
-  };
 
 Page({
 
@@ -27,27 +18,20 @@ Page({
    */
   loadSecondCategory: function(id) {
     var that = this;
-    wx.request({
-      url: "http://www.yanda123.com/yanda/movie/getClassify/" + id,
-      data: {},
-      header: {
-        "Content-Type": "application/json"
-      },
-      success: function (res) {
-        if (res.statusCode == 200) {
-          let data = res.data;
-          let key = 'categoryCache[' + id + ']';
-          that.setData({
-            selected: id,
-            secondCategory: data,
-            [key]: data
-          });
-        }
-      },
-      fail: function (err) {
-        console.log(err)
-      }
-    });
+    $.get({ url: "http://www.yanda123.com/yanda/movie/getClassify/" + id})
+     .then((res)=> {
+       if (res.statusCode == 200) {
+         let data = res.data;
+         let key = 'categoryCache[' + id + ']';
+         that.setData({
+           selected: id,
+           secondCategory: data,
+           [key]: data
+         });
+       }
+     }).catch((err)=>{
+       console.log(err);
+     });
   },
 
   /**
@@ -80,25 +64,19 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    wx.request({
-      url: "http://www.yanda123.com/yanda/movie/getClassify",
-      data: {},
-      header: {
-        "Content-Type": "application/json"
-      },
-      success: function (res) {
-        if (res.statusCode == 200) {
-          let data = res.data;
-          that.setData({
-            topCategory: data
-          });
-          that.loadSecondCategory(data[0].id);
-        }
-      },
-      fail: function (err) {
-        console.log(err)
-      }
-    });
+    $.get({ url: 'http://www.yanda123.com/yanda/movie/getClassify'})
+     .then((res)=> {
+       if (res.statusCode == 200) {
+         let data = res.data;
+         that.setData({
+           topCategory: data
+         });
+         that.loadSecondCategory(data[0].id);
+       } 
+     }).catch((err)=> {
+       console.log(err);
+     });
+    
   },
 
   /**

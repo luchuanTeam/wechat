@@ -1,3 +1,5 @@
+var $ = require('../../utils/ajax.js');
+
 const stations = [
     { imgUrl: 'http://www.yanda123.com/app/taijiao.png', desc: '胎教' },
     { imgUrl: 'http://www.yanda123.com/app/zaojiao.png', desc: '早教（1-3岁）' },
@@ -42,28 +44,21 @@ Page({
    */
   loadMovies: function(pageNum, pageSize) {
     var that = this;
-    wx.request({
+    $.get({
       url: "http://www.yanda123.com/yanda/movie/list",
-      data: { pageNum: pageNum, pageSize: pageSize },
-      header: {
-        "Content-Type": "application/json"
-      },
-      success: function (res) {
-        if (res.data.status == 200) {
-          let movies = res.data.data.list,
-              pageNum = that.data.pageNum;
-          console.log(JSON.stringify(movies));
-          movies.length >= 4 ? (pageNum++) : (that.setData({canLoadMore: '0'})) ;     
-          that.groupVideoStations({
-            movies: movies,
-            pageNum: pageNum  
-          });
-          
-        }
-      },
-      fail: function (err) {
-        console.log(err);
+      data: { pageNum: pageNum, pageSize: pageSize }
+    }).then((res)=>{
+      if (res.data.status === 200) {
+        let movies = res.data.data.list,
+            pageNum = that.data.pageNum;
+        movies.length >= 4 ? (pageNum++) : (that.setData({canLoadMore: '0'}));
+        that.groupVideoStations({
+          movies: movies,
+          pageNum: pageNum
+        });
       }
+    }).catch((err)=>{
+      console.log(err);
     });
   },
   /**
@@ -88,28 +83,23 @@ Page({
 
   loadBanners: function() {
     var that = this;
-    wx.request({
-      url: "http://www.yanda123.com/yanda/banner/list",
-      data: { pageNum: 1, pageSize: 4 },
-      header: {
-        "Content-Type": "application/json"
-      },
-      success: function (res) {
-        if (res.data.status == 200) {
-          let data = res.data.data.list;
-          let urlArr = [];
-          for (let i = 0; i < data.length; i++) {
-            let url = 'http://www.yanda123.com/yanda/attach/readFile?size=800&id=' + data[i].appendixId;
-            urlArr.push(url);
-          }
-          that.setData({
-            imgUrls: urlArr
-          });
+    $.get({
+      url: 'http://www.yanda123.com/yanda/banner/list',
+      data: {pageNum: 1, pageSize: 4}
+    }).then((res)=> {
+      if (res.data.status == 200) {
+        let data = res.data.data.list;
+        let urlArr = [];
+        for (let i = 0; i < data.length; i++) {
+          let url = 'http://www.yanda123.com/yanda/attach/readFile?size=800&id=' + data[i].appendixId;
+          urlArr.push(url);
         }
-      },
-      fail: function (err) {
-        console.log(err)
+        that.setData({
+          imgUrls: urlArr
+        });
       }
+    }).catch((err)=> {
+      console.log(err);
     });
   },
   /**
@@ -117,8 +107,7 @@ Page({
    */
   onLoad: function (options) {
     this.loadBanners();
-    this.loadMovies(this.data.pageNum, this.data.pageSize);
-    
+    this.loadMovies(this.data.pageNum, this.data.pageSize);   
   },
 
   /**
