@@ -31,8 +31,11 @@ Page({
    */
   data: {
     stations: stations,
-    videoStations: videoStations,
-    loadMore: 0
+    videoStations: [],
+    loadMore: 0,
+    pageNum: 1,
+    pageSize: 4,
+    canLoadMore: '1'          // 是否可以加载更多视频数据
   },
   /**
    * 加载视频数据
@@ -47,25 +50,42 @@ Page({
       },
       success: function (res) {
         if (res.data.status == 200) {
-          let data = res.data.data.list;
-          let movies = [];
-          for (var i = 0; i < data.length; i++) {
-            let movie = data[i];
-            movie.desc = movie.mvName;
-            movie.imgUrl = 'http://www.yanda123.com/yanda/attach/readFile?size=500&id='+data[i].imgAppendixId;
-            movie.isVideoImg = '1';
-            movies.push(movie);
-          }
-          that.setData({
-            videoStations: movies
+          let movies = res.data.data.list,
+              pageNum = that.data.pageNum;
+          console.log(JSON.stringify(movies));
+          movies.length >= 4 ? (pageNum++) : (that.setData({canLoadMore: '0'})) ;     
+          that.groupVideoStations({
+            movies: movies,
+            pageNum: pageNum  
           });
+          
         }
       },
       fail: function (err) {
-        console.log(err)
+        console.log(err);
       }
     });
   },
+  /**
+   * 组合 videoStations 数据
+   */
+  groupVideoStations(data) {
+    let videoStations = this.data.videoStations,
+        movies = data.movies,
+        pageNum = data.pageNum;
+    for (let i = 0; i < movies.length; i++) {
+      let movie = movies[i];
+      movie.desc = movie.mvName;
+      movie.imgUrl = 'http://www.yanda123.com/yanda/attach/readFile?size=500&id=' + movies[i].imgAppendixId;
+      movie.isVideoImg = '1';
+      videoStations.push(movie);
+    }
+    this.setData({
+      videoStations: videoStations,
+      pageNum: pageNum
+    })
+  },
+
   loadBanners: function() {
     var that = this;
     wx.request({
@@ -97,7 +117,8 @@ Page({
    */
   onLoad: function (options) {
     this.loadBanners();
-    this.loadMovies(1, 4);
+    this.loadMovies(this.data.pageNum, this.data.pageSize);
+    
   },
 
   /**
@@ -139,19 +160,8 @@ Page({
   * 页面上拉触底事件
   */
   onReachBottom() {
-    if(true) {        // 此处应该增加一个标记，表面可以后台还可以加载更多，不用每次触底都调后台
-      this.setData({
-        loadMore: 1   //可加载的时候应该显示loading状态
-      });
-      let arrs = this.data.videoStations;
-      arrs.push(obj);
-      arrs.push(obj);
-      setTimeout(()=>{
-        this.setData({
-          videoStations: arrs,
-          loadMore: 0
-        });
-      }, 1000);
+    if(this.data.canLoadMore === '1') {       
+      this.loadMovies(this.data.pageNum, this.data.pageSize);   
     }
   },
 

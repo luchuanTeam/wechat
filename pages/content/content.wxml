@@ -36,8 +36,12 @@
         <station station='{{item}}'></station>
       </view>  
   </view>
-  <view class='loading-wrapper {{loadMore===1?"":"hide"}}'>
+  <view class='loading-wrapper {{canLoadMore==="1"?"":"hide"}}'>
     <loading></loading>
   </view>
-  
+  <view class="tip {{canLoadMore==='1'?'hide':''}}">
+    <view class='line'></view>
+    <view class='text'>没有更多内容啦</view>
+    <view class='line'></view>   
+  </view>
 </view>

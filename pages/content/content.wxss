@@ -76,3 +76,22 @@
   align-items: center;
 }
 
+.tip {
+  display: flex;
+  margin: 20rpx;
+  padding: 0 20rpx;
+}
+
+.tip .line {
+  position: relative;
+  top: -22rpx;
+  flex: 1;
+  border-bottom: 2rpx solid #aaa;
+}
+
+.tip .text {
+  padding: 0 24rpx;
+  font-size: 32rpx;
+  color: #999999;
+}
+

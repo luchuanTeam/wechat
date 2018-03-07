@@ -16,11 +16,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    topCategory: TOP_CATEGORY,      // 一级目录
+    topCategory: [],      // 一级目录
     selected: 1,                    // 被选择的一级目录
     styleArr: STYLE_ARR,            // 二级目录样式数组
-    secondCategory: TESTARR1,        // 选择一级目录对应的二级目录内容
-    categoryCache: {}
+    secondCategory: [],        // 选择一级目录对应的二级目录内容
+    categoryCache: {}         // 保存已加载的二级目录数据
   },
   /**
    * 二级分类数据加载
