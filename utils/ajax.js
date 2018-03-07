@@ -1,44 +1,54 @@
-
-
-const ajax = {  
-  request: function(obj, method){
-    if (typeof obj === 'object') {
-      let url = obj.url;      // url: 请求地址
-      if (url && typeof url === 'string') {
-        let data = obj.data || '',    // data: 请求参数
-          header = obj.header;
-        if (typeof header !== 'object' || JSON.stringify(header) === '{}') {
-          header = { "Content-Type": "application/json" };
-        }
-        !method && (method = 'GET');
-        let promise = new Promise((resolve, reject) => {
-          wx.request({
-            url: url,
-            data: data,
-            header: header,
-            method: method,
-            success: (res) => {
-              resolve(res);
-            },
-            fail: (err) => {
-              reject(err);
-            }
-          })
-        });
-        return promise;
-      } else {
-        console.log('url必须为字符串')
+const request = (obj, method)=> {
+  if (typeof obj === 'object') {
+    let url = obj.url;      // url: 请求地址
+    if (url && typeof url === 'string') {
+      let data = obj.data || '',    // data: 请求参数
+        header = obj.header || { "Content-Type": "application/json" };
+      if (typeof header !== 'object' || JSON.stringify(header) === '{}') {
+        header = { "Content-Type": "application/json" };
       }
+      !method && (method = obj.method || 'GET');
+      method = method.toUpperCase();
+      let promise = new Promise((resolve, reject) => {
+        wx.request({
+          url: url,
+          data: data,
+          header: header,
+          method: method,
+          success: (res) => {
+            resolve(res);
+          },
+          fail: (err) => {
+            reject(err);
+          }
+        })
+      });
+      return promise;
     } else {
-      console.log('传参类型必须为object类型')
+      console.log('url必须为字符串')
     }
-  },
+  } else {
+    console.log('传参类型必须为object类型')
+  }
+};
+
+const _ajax = {  
   get: function(obj) {
-    return this.request(obj, 'GET');
+    return request(obj, 'GET');
   },
   post: function(obj) {
-    return this.request(obj, 'POST');
+    return request(obj, 'POST');
+  },
+  put: function(obj) {
+    return request(obj, 'PUT');
+  },
+  delete: function(obj) {
+    return request(obj, 'DELETE');
+  },
+  ajax: function(obj) {   //使用其他请求需在 obj 里面定义 method 请求方式
+    return request(obj, obj.method);
   }
+  
 }
 
-module.exports = ajax;
+module.exports = _ajax;
