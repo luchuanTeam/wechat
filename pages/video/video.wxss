@@ -83,6 +83,16 @@
   border-bottom: 2rpx solid #e8e8e8;
 }
 
+.video-intro-wrapper .text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.video-intro-wrapper .text.show {
+  white-space: pre-wrap;
+}
+
 .episode-wrapper {
   padding: 20rpx;
   border-bottom: 2rpx solid #e8e8e8;
@@ -161,6 +171,10 @@
   margin-bottom: 20rpx;
 }
 
+.comment-wrapper {
+  overflow: auto;
+}
+
 .filter-wrapper {
   display: flex;
   padding: 20rpx 0;
@@ -184,5 +198,6 @@
 .filter-wrapper .filter .selected {
   color: #7aa247;
 }
+
  
 

@@ -27,3 +27,9 @@ image {
   padding: 10rpx 20rpx;
   background-color: #f8f8f8;
 }
+
+.clear:after {
+  display: block;
+  content: ' ';
+  clear: both;
+}

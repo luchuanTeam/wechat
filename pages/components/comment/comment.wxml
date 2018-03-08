@@ -1,0 +1,22 @@
+<view class='comment'>
+  <view class='user-wrapper'>
+    <view class='avatar'>
+      <image src='../../../resources/images/fenlei.png'></image>
+    </view>
+    <view class='info'>
+      <view class='user-name'>小鸡炖蘑菇</view>
+      <view class='create-time'>2018-2-22</view>
+    </view>
+    <view class='tip-off clear'>
+      <view class='img-wrapper' bindtap='toggleShowTip'>
+        <view class='img'></view>
+        <view class='img'></view>
+        <view class='img'></view>
+      </view>
+      <view class="tip {{showTip === '0'?'hide':''}}">举报
+        <view class='arrow-right'></view>
+      </view>
+    </view>
+  </view>
+  <view class='content'>陈大牛牛逼。陈大牛牛逼。陈大牛牛逼。</view>
+</view>

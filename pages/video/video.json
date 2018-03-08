@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "视频页面",
-  "disableScroll": true
+  "disableScroll": true,
+  "usingComponents": {
+    "comment": "../components/comment/comment"
+  }
 }
