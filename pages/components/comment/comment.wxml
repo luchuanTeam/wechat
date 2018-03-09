@@ -19,4 +19,9 @@
     </view>
   </view>
   <view class='content'>陈大牛牛逼。陈大牛牛逼。陈大牛牛逼。</view>
+  <view class='deal-comment'>
+    <view class='text'>分享</view>
+    <view class='text'>评论</view>
+    <view class='text'>326</view>
+  </view>
 </view>

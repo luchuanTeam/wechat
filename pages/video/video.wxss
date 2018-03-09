@@ -199,5 +199,35 @@
   color: #7aa247;
 }
 
- 
+.comment-wrapper .input-wrapper {
+  display: flex;
+  padding: 10rpx 20rpx;
+} 
 
+.comment-wrapper .input-wrapper .text {
+  flex: 0 0 100rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+}
+
+.comment-wrapper .input-wrapper .input {
+  flex: 1;
+  font-size: 28rpx;
+  background-color: #f1f0f0;
+  border-radius: 10rpx;
+}
+
+.comment-wrapper .input-wrapper .input input {
+  line-height: 70rpx;
+  height: 70rpx;
+  vertical-align: middle;
+}
+
+.comment-wrapper .input-wrapper .input input::-ms-input-placeholder {
+  text-align: center;
+}
+
+.comment-wrapper .input-wrapper .input input::-webkit-input-placeholder {
+  text-align: center;
+}

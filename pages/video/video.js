@@ -1,4 +1,5 @@
-var utils = require('../../utils/util.js');
+const utils = require('../../utils/util.js');
+const $ = require('../../utils/ajax.js');
 Page({
 
   /**
@@ -9,11 +10,13 @@ Page({
     selected: '1',        // 决定显示视频组件或者评论组件, '1'代表视频组件, '2'代表评论组件
     videoData: {        // 视频组件的状态数据
       video: {
-        mvPath: '',                           // 视频地址
-        mvName: '我是陈大牛',                  // 视频标题
-        mvIntro: '这是唐代诗人王维创作的一首劝慰友人落第的诗',
+        src: '',                           // 视频地址
+        episodeName: '我是陈大牛',                  // 视频标题
+        episodeIntro: '这是唐代诗人王维创作的一首劝慰友人落第的诗',
         series: '国学/唐诗系列',                 // 系列  
-        episodeCount: 20                          // 集数
+        episodeCount: 20,                       // 集数
+        episodeId: '',                          // 视频id
+        episodeNum: 1                           // 当前正在播放的集数          
       },
       showVideoHiddenIntro: '0',  //  控制隐藏简介的显示状态, '1'代表显示
       playing: 0,               // 正在播放的集数，控制绿色三角形的显示
@@ -48,7 +51,7 @@ Page({
    * 点击更换播放的集数
    */
   togglePlay(e) {
-    let data = 'videoData.playing';
+    let data = 'videoData.video.episodeNum';
     this.setData({
       [data]: e.currentTarget.dataset.index   
     });
@@ -95,9 +98,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.loadComments(); 
   },
 
+  /**
+   * 加载评论数据
+   */
+  loadComments(commentId) {
+
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
