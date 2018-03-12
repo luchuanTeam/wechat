@@ -23,8 +23,13 @@ Page({
       showHideEpisode: '0'      // 控制全部集数的组件的显示状态, '1'代表显示
     },
     commentData: {
+      pageNum: 1,
+      pageSize: 3,
       selected: '1',           // 评论的展示类型 1所有 2最新 3精华
-      commentContent: ''        // 评论内容
+      comment: {
+        commentContent: '',
+        agreeCount: 0
+      }
     }
   },
 
@@ -98,14 +103,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.loadComments(); 
+    this.loadComments(1); 
   },
 
   /**
    * 加载评论数据
    */
-  loadComments(commentId) {
-
+  loadComments(episodeId) {
+    let that = this;
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

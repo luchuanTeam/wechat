@@ -9,6 +9,7 @@
 
 .tab-wrapper {
   display: flex;
+  position: relative;
   height: 100rpx;
   border-bottom: 2rpx solid #e8e8e8;
 }
@@ -23,20 +24,43 @@
 }
 
 .tab-wrapper .text.selected {
-  position: relative;
   color: #7aa247;
 }
 
-.tab-wrapper .selected text {
+.tab-wrapper text {
   display: block;
   position: absolute;
   bottom: 0;
-  left: 50%;
   transform: translate3d(-50%, 0, 0);
   width: 60rpx;
   height: 10rpx;
   background: #7aa247;
+  transition: all 0.2s linear;
 }
+
+.tab-wrapper .text-left {
+  left: 25%;
+}
+
+.tab-wrapper .text-right {
+  left: 75%;
+}
+
+.video-content-wrapper, .comment-wrapper {
+  transition: all 0.2s linear;
+}
+.video-content-wrapper.content-left, .comment-wrapper.content-left {
+  transform: translate3d(0, 0, 0);
+}
+
+.video-content-wrapper.content-right {
+  transform: translate3d(-100%, 0, 0);
+}
+
+.comment-wrapper.content-right {
+  transform: translate3d(100%, 0, 0);
+}
+
 
 .video-content-wrapper, .comment-wrapper {
   position: absolute;
