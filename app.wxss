@@ -33,3 +33,41 @@ image {
   content: ' ';
   clear: both;
 }
+
+
+.station-wrapper-four {
+  display: inline-block;
+  margin-bottom: 10rpx;
+  width: 25%;
+}
+
+.station-wrapper-two {
+  display: inline-block;
+  margin-bottom: 20rpx;
+  width: 50%;
+}
+
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tip-nomore {
+  display: flex;
+  margin-top: 10rpx;
+  padding: 0 20rpx 20rpx 20rpx;
+}
+
+.tip-nomore .line {
+  position: relative;
+  top: -22rpx;
+  flex: 1;
+  border-bottom: 2rpx solid #aaa;
+}
+
+.tip-nomore .text {
+  padding: 0 24rpx;
+  font-size: 32rpx;
+  color: #999999;
+}

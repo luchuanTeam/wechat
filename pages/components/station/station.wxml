@@ -6,7 +6,4 @@
   <view class='{{station.isVideoImg==="1"?"video-text":"text"}}'>
     {{station.desc}}
   </view>
-  <view class='kind {{station.classifyName? "":"hide"}}'>
-    {{station.classifyName}}  
-  </view>
 </view>

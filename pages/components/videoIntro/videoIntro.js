@@ -1,14 +1,15 @@
-// pages/components/station/station.js
+// pages/components/videoImg/videoImg.js
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    station: {
+    videoIntro: {
       type: Object,
       value: {
         imgUrl: '',
-        desc: ''
+        mvName: '',
+        classifyName: ''
       }
     }
   },

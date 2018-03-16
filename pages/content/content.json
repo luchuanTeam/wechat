@@ -3,7 +3,8 @@
     "search": "../components/search/search",
     "header": "../components/header/header",
     "station": "../components/station/station",
-    "loading": "../components/loading/loading"
+    "loading": "../components/loading/loading",
+    "videoIntro": "../components/videoIntro/videoIntro"
   },
   "enablePullDownRefresh": true,
   "onReachBottomDistance": 50

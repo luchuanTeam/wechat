@@ -16,7 +16,7 @@ Page({
         series: '国学/唐诗系列',                 // 系列  
         episodeCount: 20,                       // 集数
         episodeId: '',                          // 视频id
-        episodeNum: 1                           // 当前正在播放的集数          
+        episodeNum: 0                           // 当前正在播放的集数          
       },
       showVideoHiddenIntro: '0',  //  控制隐藏简介的显示状态, '1'代表显示
       playing: 0,               // 正在播放的集数，控制绿色三角形的显示

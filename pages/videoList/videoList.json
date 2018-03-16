@@ -1,1 +1,8 @@
-{}
+{
+  "usingComponents": {
+    "search": "../components/search/search",
+    "header": "../components/header/header",
+    "loading": "../components/loading/loading",
+    "videoIntro": "../components/videoIntro/videoIntro"
+  }
+}

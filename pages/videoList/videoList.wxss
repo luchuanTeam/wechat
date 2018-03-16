@@ -1,1 +1,16 @@
-/* pages/videoList/videoList.wxss */
+.classify {
+  height: 200rpx;
+  background: linear-gradient(#92dce0, #e4f5f5);
+  color: #fff;
+  text-align: center;
+  border: 2rpx solid transparent;
+}
+
+.classify .text {
+  font-size: 60rpx;
+  margin-top: 30rpx;
+}
+
+.video-list {
+  margin-top: 20rpx;
+}

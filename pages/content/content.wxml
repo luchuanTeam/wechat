@@ -17,7 +17,6 @@
     </block>
   </swiper>
   
-  
   <view class='station-container'>
       <view class='station-wrapper-four' wx:for='{{stations}}' wx:key='{{index}}'>
         <station station='{{item}}'></station>
@@ -32,14 +31,15 @@
   </view>
   
   <view class='station-container'>
-      <view class='station-wrapper-two' wx:for='{{videoStations}}' wx:key='{{index}}'>
-        <station station='{{item}}'></station>
+      <view class='station-wrapper-two' wx:for='{{videoIntros}}' wx:key='{{index}}'>
+        <videoIntro videoIntro='{{item}}'></videoIntro>
       </view>  
   </view>
+  
   <view class='loading-wrapper {{canLoadMore==="1"?"":"hide"}}'>
     <loading></loading>
   </view>
-  <view class="tip {{canLoadMore==='1'?'hide':''}}">
+  <view class="tip-nomore {{canLoadMore==='1'?'hide':''}}">
     <view class='line'></view>
     <view class='text'>没有更多内容啦</view>
     <view class='line'></view>   

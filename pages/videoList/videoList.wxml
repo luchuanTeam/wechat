@@ -1,2 +1,27 @@
-<!--pages/videoList/videoList.wxml-->
-<text>pages/videoList/videoList.wxml</text>
+<view class='video-list-page'>
+  <view class='header-wrapper'>
+    <header></header>
+  </view>
+  <view class='search-wrapper'>
+    <search class="search"></search>
+  </view>
+  <view class='classify'>
+    <view class='text'>国学/唐诗系列</view>
+    <view class='py'>TANG SHI XI LIE</view>
+  </view>
+
+  <view class='video-list'>
+    <view class='station-wrapper-two' wx:for='{{videoIntros}}' wx:key='{{index}}'>
+      <videoIntro videoIntro='{{item}}'></videoIntro>
+    </view> 
+  </view>
+
+  <view class='loading-wrapper {{canLoadMore==="1"?"":"hide"}}'>
+    <loading></loading>
+  </view>
+  <view class="tip-nomore {{canLoadMore==='1'?'hide':''}}">
+    <view class='line'></view>
+    <view class='text'>没有更多内容啦</view>
+    <view class='line'></view>   
+  </view>
+</view>

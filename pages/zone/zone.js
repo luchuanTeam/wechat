@@ -22,6 +22,7 @@ Page({
      .then((res)=> {
        if (res.statusCode == 200) {
          let data = res.data;
+         console.log(JSON.stringify(data));
          let key = 'categoryCache[' + id + ']';
          that.setData({
            selected: id,

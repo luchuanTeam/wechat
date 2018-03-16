@@ -11,20 +11,6 @@ const stations = [
     { imgUrl: 'http://www.yanda123.com/app/shougong.png', desc: '手工教程' }
 ]
 
-const videoStations = [
-    {
-      mvName: '',
-      mvIntro: ' 送綦母潜落第还乡_王维 （唐代）',
-      imgUrl: 'http://www.yanda123.com/app/poem.png', 
-      classifyName: '国学/古诗词系列', 
-      isVideoImg: '1'
-    }
-]
-
-const obj = {
-  imgUrl: 'http://www.yanda123.com/app/poem.png', desc: ' 送綦母潜落第还乡_王维 （唐代）',
-  kind: '国学/古诗词系列', isVideoImg: '1'
-};
 
 Page({
 
@@ -33,7 +19,7 @@ Page({
    */
   data: {
     stations: stations,
-    videoStations: [],
+    videoIntros: [],
     loadMore: 0,
     pageNum: 1,
     pageSize: 4,
@@ -52,7 +38,7 @@ Page({
         let movies = res.data.data.list,
             pageNum = that.data.pageNum;
         movies.length >= 4 ? (pageNum++) : (that.setData({canLoadMore: '0'}));
-        that.groupVideoStations({
+        that.groupvideoIntros({
           movies: movies,
           pageNum: pageNum
         });
@@ -64,19 +50,17 @@ Page({
   /**
    * 组合 videoStations 数据
    */
-  groupVideoStations(data) {
-    let videoStations = this.data.videoStations,
+  groupvideoIntros(data) {
+    let videoIntros = this.data.videoIntros,
         movies = data.movies,
         pageNum = data.pageNum;
     for (let i = 0; i < movies.length; i++) {
       let movie = movies[i];
-      movie.desc = movie.mvName;
       movie.imgUrl = 'http://www.yanda123.com/yanda/attach/readFile?size=500&id=' + movies[i].imgAppendixId;
-      movie.isVideoImg = '1';
-      videoStations.push(movie);
+      videoIntros.push(movie);
     }
     this.setData({
-      videoStations: videoStations,
+      videoIntros: videoIntros,
       pageNum: pageNum
     })
   },
