@@ -1,28 +1,36 @@
-var utils = require('../../utils/util.js');
+const utils = require('../../utils/util.js');
+const $ = require('../../utils/ajax.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    id: '',
+    mvId: '',            //从页面传过来的视频ID参数
     showCenterPlayBtn: false,
     selected: '1',        // 决定显示视频组件或者评论组件, '1'代表视频组件, '2'代表评论组件
     videoData: {        // 视频组件的状态数据
       video: {
-        mvPath: '',                           // 视频地址
-        mvName: '我是陈大牛',                  // 视频标题
-        mvIntro: '这是唐代诗人王维创作的一首劝慰友人落第的诗',
+        src: '',                           // 视频地址
+        episodeName: '我是陈大牛',                  // 视频标题
+        episodeIntro: '这是唐代诗人王维创作的一首劝慰友人落第的诗',
         series: '国学/唐诗系列',                 // 系列  
-        episodeCount: 20                          // 集数
+        episodeCount: 20,                       // 集数
+        episodeId: '',                          // 视频id
+        episodeNum: 1                           // 当前正在播放的集数          
       },
       showVideoHiddenIntro: '0',  //  控制隐藏简介的显示状态, '1'代表显示
       playing: 0,               // 正在播放的集数，控制绿色三角形的显示
       showHideEpisode: '0'      // 控制全部集数的组件的显示状态, '1'代表显示
     },
     commentData: {
+      pageNum: 1,
+      pageSize: 3,
       selected: '1',           // 评论的展示类型 1所有 2最新 3精华
-      commentContent: ''        // 评论内容
+      comment: {
+        commentContent: '',
+        agreeCount: 0
+      }
     }
   },
 
@@ -49,7 +57,7 @@ Page({
    * 点击更换播放的集数
    */
   togglePlay(e) {
-    let data = 'videoData.playing';
+    let data = 'videoData.video.episodeNum';
     this.setData({
       [data]: e.currentTarget.dataset.index   
     });
@@ -96,12 +104,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 获取从页面传递过来的视频id
+    // 初始化从页面传递过来的视频id
     this.setData({
-      id: options.id
+      mvId: options.id
     });
+    // 通过视频ID获取第一集的ID
+    let episodeId = 1;
+    this.loadComments(episodeId); 
   },
 
+  /**
+   * 加载评论数据
+   */
+  loadComments(episodeId) {
+    let that = this;
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

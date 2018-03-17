@@ -26,9 +26,9 @@ Component({
     },
     search() {
       let data = utils.trim(this.data.inputValue);
-      if(data !== '') {
+      if(/*data !== ''*/ true) {
         wx.navigateTo({
-          url: '../video/video',
+          url: '../video/video?episodeId=1',
         });
       } else {
         wx.showToast({

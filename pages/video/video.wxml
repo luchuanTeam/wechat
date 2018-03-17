@@ -3,17 +3,18 @@
   <video src='http://www.yanda123.com/video/testvideo.mp4' objectFit='fill' class='video'></video>
   
   <view class='tab-wrapper'>
-    <view class="text {{selected === '1'? 'selected':''}}" data-index='1' bindtap='changeSelected'>视频 <text></text></view>
-    <view class="text {{selected === '2'? 'selected':''}}" data-index='2' bindtap='changeSelected'>评论 <text></text></view>
+    <view class="text {{selected === '1'? 'selected':''}}" data-index='1' bindtap='changeSelected'>视频</view>
+    <view class="text {{selected === '2'? 'selected':''}}" data-index='2' bindtap='changeSelected'>评论</view>
+    <text class="{{ selected === '2'? 'text-right': 'text-left' }}"></text>
   </view>
 
-  <view class='video-content-wrapper' wx:if="{{selected === '1'}}">
+  <view class="video-content-wrapper {{selected === '2'?'content-right':'content-left'}}" >
     <view class='vip-wrapper'>
       <view class='vip'>开通VIP，获取更多精彩内容~</view> 
     </view>
     <view class='video-intro-wrapper' bindtap='toggleHideIntro'>
-      <view class='title'>{{videoData.video.mvName}}</view>
-      <view class="text {{videoData.showVideoHiddenIntro === '1'?'show':''}}">{{videoData.video.mvIntro}}</view>
+      <view class='title'>{{videoData.video.episodeName}}</view>
+      <view class="text {{videoData.showVideoHiddenIntro === '1'?'show':''}}">{{videoData.video.episodeIntro}}</view>
     </view>
     <view class='episode-wrapper'>
       <view class='series-wrapper'>
@@ -22,8 +23,8 @@
       </view>
       <scroll-view scroll-x='true' class='scroll'>
         <view wx:for='{{videoData.video.episodeCount}}' class='episode' data-index='{{item}}' bindtap='togglePlay' wx:key='{{item}}'>
-          <text class="text {{item===videoData.playing?'hide':''}}">{{item+1}}</text>
-          <view class="arrow-right {{item===videoData.playing?'':'hide'}}"></view>
+          <text class="text {{item==videoData.video.episodeNum?'hide':''}}">{{item+1}}</text>
+          <view class="arrow-right {{item==videoData.video.episodeNum?'':'hide'}}"></view>
         </view>
       </scroll-view>
     </view>
@@ -33,15 +34,15 @@
         <view class='title'>选集</view>
         <view class='text' bindtap='toggleHideEpisode'>关闭</view>
       </view>   
-      <view wx:for='{{videoData.video.episodes}}' class='episode' data-index='{{item}}' bindtap='togglePlay' wx:key='{{item}}'>
-        <text class="text {{item===videoData.playing?'hide':''}}">{{item+1}}</text>
-        <view class="arrow-right {{item===videoData.playing?'':'hide'}}"></view>
+      <view wx:for='{{videoData.video.episodeCount}}' class='episode' data-index='{{item}}' bindtap='togglePlay' wx:key='{{item}}'>
+        <text class="text {{item==videoData.video.episodeNum?'hide':''}}">{{item+1}}</text>
+        <view class="arrow-right {{item==videoData.video.episodeNum?'':'hide'}}"></view>
       </view> 
     </view> 
 
   </view>
 
-  <view class='comment-wrapper' wx:if="{{selected === '2'}}">
+  <view class="comment-wrapper {{selected === '1'?'content-right':'content-left'}}">
     <view class='filter-wrapper'>
       <view class='filter'><text class="text {{commentData.selected === '1'?'selected':''}}" data-index='1' bindtap='toggleCommentFilter'>所有评论</text></view>
       <view class='filter'><text class="text {{commentData.selected === '2'?'selected':''}}" data-index='2' bindtap='toggleCommentFilter'>最新发表</text></view>
@@ -53,6 +54,14 @@
       <comment></comment>
       <comment></comment>
       <comment></comment>
+    </view>
+
+    <view class='input-wrapper'>
+      <view class='text'>分享</view>
+      <view class='text'>收藏</view>
+      <view class='input'>
+        <input placeholder='我来评论一下'></input>
+      </view>
     </view>
   </view>
 </view>
