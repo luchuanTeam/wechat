@@ -7,7 +7,7 @@
   </view>
   <view class='category-wrapper'>
     <view class='top-category'>
-      <view class="text {{selected===item.id? 'selected':''}}" wx:for='{{topCategory}}' wx:key='{{index}}' data-index='{{item.id}}' bindtap='changeSelected'>
+      <view class="text {{selected==item.id? 'selected':''}}" wx:for='{{topCategory}}' wx:key='{{index}}' data-id='{{item.id}}' bindtap='changeSelected'>
         <text></text>
         {{item.desc}}
       </view>

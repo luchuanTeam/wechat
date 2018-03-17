@@ -20,7 +20,7 @@
   
   <view class='station-container'>
       <view class='station-wrapper-four' wx:for='{{stations}}' wx:key='{{index}}'>
-        <station station='{{item}}'></station>
+        <station station='{{item}}' bindstationHandle="classifyClickHandle"></station>
       </view>
   </view>
   
@@ -33,7 +33,7 @@
   
   <view class='station-container'>
       <view class='station-wrapper-two' wx:for='{{videoStations}}' wx:key='{{index}}'>
-        <station station='{{item}}'></station>
+        <station station='{{item}}' bindstationHandle="mvClickHandle"></station>
       </view>  
   </view>
   <view class='loading-wrapper {{canLoadMore==="1"?"":"hide"}}'>

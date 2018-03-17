@@ -1,4 +1,4 @@
-<view class='station'>
+<view class='station' data-id='{{station.id}}' bindtap='stationHandle'>
   <view class='img-wrapper {{station.isVideoImg==="1"? "video-img":""}}'>
     <image src='{{station.imgUrl}}'></image>
     <image class="img-play" wx:if="{{station.isVideoImg==='1'}}" src='http://www.yanda123.com/app/play.png'></image>

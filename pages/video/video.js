@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    id: '',
     showCenterPlayBtn: false,
     selected: '1',        // 决定显示视频组件或者评论组件, '1'代表视频组件, '2'代表评论组件
     videoData: {        // 视频组件的状态数据
@@ -95,7 +96,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    // 获取从页面传递过来的视频id
+    this.setData({
+      id: options.id
+    });
   },
 
   /**
