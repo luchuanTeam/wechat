@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    mvId: '',            //从页面传过来的视频ID参数
     showCenterPlayBtn: false,
     selected: '1',        // 决定显示视频组件或者评论组件, '1'代表视频组件, '2'代表评论组件
     videoData: {        // 视频组件的状态数据
@@ -103,7 +104,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.loadComments(1); 
+    // 初始化从页面传递过来的视频id
+    this.setData({
+      mvId: options.id
+    });
+    // 通过视频ID获取第一集的ID
+    let episodeId = 1;
+    this.loadComments(episodeId); 
   },
 
   /**

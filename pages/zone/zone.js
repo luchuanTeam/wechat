@@ -8,7 +8,7 @@ Page({
    */
   data: {
     topCategory: [],      // 一级目录
-    selected: 1,                    // 被选择的一级目录
+    selected: '',                    // 被选择的一级目录
     styleArr: STYLE_ARR,            // 二级目录样式数组
     secondCategory: [],        // 选择一级目录对应的二级目录内容
     categoryCache: {}         // 保存已加载的二级目录数据
@@ -40,7 +40,7 @@ Page({
    */
   changeSelected(e) {
     var that = this;
-    let id = e.target.dataset.index;
+    let id = e.target.dataset.id;
     if (this.data.categoryCache[id]) {
       that.setData({
         selected: id,
@@ -64,6 +64,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 获取从页面传递过来的分类id
+    let id = options.id;
+    this.setData({
+      selected: id
+    });
+
     var that = this;
     $.get({ url: 'http://www.yanda123.com/yanda/movie/getClassify'})
      .then((res)=> {
@@ -72,7 +78,7 @@ Page({
          that.setData({
            topCategory: data
          });
-         that.loadSecondCategory(data[0].id);
+         that.loadSecondCategory(options.id);
        } 
      }).catch((err)=> {
        console.log(err);
@@ -90,8 +96,8 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  
+  onShow: function (options) {
+
   },
 
   /**

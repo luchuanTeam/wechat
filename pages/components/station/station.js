@@ -24,6 +24,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    stationHandle: function(e) {
+      let options = {
+        id: e.currentTarget.dataset.id
+      };
+      this.triggerEvent('stationHandle', options);
+    }
   }
 })
