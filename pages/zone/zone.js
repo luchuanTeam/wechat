@@ -17,14 +17,13 @@ Page({
    * 二级分类数据加载
    */
   loadSecondCategory: function(id) {
-    var that = this;
     $.get({ url: "http://www.yanda123.com/yanda/movie/getClassify/" + id})
      .then((res)=> {
        if (res.statusCode == 200) {
          let data = res.data;
          console.log(JSON.stringify(data));
          let key = 'categoryCache[' + id + ']';
-         that.setData({
+         this.setData({
            selected: id,
            secondCategory: data,
            [key]: data
@@ -39,15 +38,14 @@ Page({
    * 点击一级目录更改显示
    */
   changeSelected(e) {
-    var that = this;
     let id = e.target.dataset.id;
     if (this.data.categoryCache[id]) {
-      that.setData({
+      this.setData({
         selected: id,
         secondCategory: this.data.categoryCache[id]
       });
     } else {
-      that.loadSecondCategory(id);
+      this.loadSecondCategory(id);
     }
   },
 
@@ -65,20 +63,20 @@ Page({
    */
   onLoad: function (options) {
     // 获取从页面传递过来的分类id
-    let id = options.id;
+    let id = options.id || '1';
+    console.log(id);
     this.setData({
       selected: id
     });
 
-    var that = this;
     $.get({ url: 'http://www.yanda123.com/yanda/movie/getClassify'})
      .then((res)=> {
        if (res.statusCode == 200) {
          let data = res.data;
-         that.setData({
+         this.setData({
            topCategory: data
          });
-         that.loadSecondCategory(options.id);
+         this.loadSecondCategory(id);
        } 
      }).catch((err)=> {
        console.log(err);

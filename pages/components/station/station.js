@@ -7,6 +7,7 @@ Component({
     station: {
       type: Object,
       value: {
+        id: '',
         imgUrl: '',
         desc: ''
       }
@@ -25,10 +26,9 @@ Component({
    */
   methods: {
     stationHandle: function(e) {
-      let options = {
-        id: e.currentTarget.dataset.id
-      };
-      this.triggerEvent('stationHandle', options);
+      wx.reLaunch({
+      	url: '../zone/zone?id=' + this.properties.station.id,
+    	});
     }
   }
 })

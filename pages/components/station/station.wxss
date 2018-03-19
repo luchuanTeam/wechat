@@ -1,17 +1,12 @@
-
 .station {
   display: block;
   width: 100%;
   text-align: center;
 }
+
 .station .img-wrapper {
   width: 100%;
   height: 100rpx;
-}
-
-.station .img-wrapper.video-img {
-  position: relative;
-  height: 250rpx;
 }
 
 .station .img-wrapper image {
@@ -19,34 +14,7 @@
   width: 60%;
 }
 
-.station .img-wrapper.video-img image {
-  width: 95%;
-}
-
 .station .text {
   font-size: 24rpx;
 }
 
-.station .video-text {
-  padding-left: 10rpx; 
-  font-size: 24rpx;
-  text-align: left;
-}
-
-.station .kind {
-  padding-left: 10rpx;
-  font-size: 24rpx;
-  text-align: left;
-  color: #999999;
-}
-
-.img-play {
-  position:absolute;
-  width:72rpx!important;
-  height:72rpx;
-  display:inline-block;
-  top:50%;
-  left:50%;
-  margin-left: -36rpx!important;
-  margin-top: -36rpx!important;
-}

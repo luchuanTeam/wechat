@@ -1,4 +1,4 @@
-<view class='video-intro-component'>
+<view class='video-intro-component' bindtap='toVideoPage'>
   <view class='img-wrapper'>
     <image src='{{videoIntro.imgUrl}}'></image>
     <image class="img-play" src='http://www.yanda123.com/app/play.png'></image>

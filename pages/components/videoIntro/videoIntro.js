@@ -7,6 +7,7 @@ Component({
     videoIntro: {
       type: Object,
       value: {
+      	mvId: '',
         imgUrl: '',
         mvName: '',
         classifyName: ''
@@ -25,6 +26,10 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+		toVideoPage() {
+			wx.navigateTo({
+      	url: '../video/video?id=' + this.properties.videoIntro.mvId,
+    	});
+		}
   }
 })

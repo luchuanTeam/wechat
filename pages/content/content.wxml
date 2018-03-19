@@ -17,9 +17,10 @@
     </block>
   </swiper>
   
+  
   <view class='station-container'>
       <view class='station-wrapper-four' wx:for='{{stations}}' wx:key='{{index}}'>
-        <station station='{{item}}'></station>
+        <station station='{{item}}' bindstationHandle="classifyClickHandle"></station>
       </view>
   </view>
   
@@ -35,7 +36,6 @@
         <videoIntro videoIntro='{{item}}'></videoIntro>
       </view>  
   </view>
-  
   <view class='loading-wrapper {{canLoadMore==="1"?"":"hide"}}'>
     <loading></loading>
   </view>

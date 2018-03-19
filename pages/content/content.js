@@ -1,14 +1,14 @@
 var $ = require('../../utils/ajax.js');
 
 const stations = [
-    { imgUrl: 'http://www.yanda123.com/app/taijiao.png', desc: '胎教' },
-    { imgUrl: 'http://www.yanda123.com/app/zaojiao.png', desc: '早教（1-3岁）' },
-    { imgUrl: 'http://www.yanda123.com/app/youjiao.png', desc: '幼教（4-6岁）' },
-    { imgUrl: 'http://www.yanda123.com/app/xiaoxue.png', desc: '小学课程' },
-    { imgUrl: 'http://www.yanda123.com/app/chuzhong.png', desc: '初中课程' },
-    { imgUrl: 'http://www.yanda123.com/app/gaozhong.png', desc: '高中课程' },
-    { imgUrl: 'http://www.yanda123.com/app/guoxue.png', desc: '国学' },
-    { imgUrl: 'http://www.yanda123.com/app/shougong.png', desc: '手工教程' }
+    { id: 1, imgUrl: 'http://www.yanda123.com/app/taijiao.png', desc: '胎教' },
+    { id: 2, imgUrl: 'http://www.yanda123.com/app/zaojiao.png', desc: '早教（1-3岁）' },
+    { id: 3, imgUrl: 'http://www.yanda123.com/app/youjiao.png', desc: '幼教（4-6岁）' },
+    { id: 4, imgUrl: 'http://www.yanda123.com/app/xiaoxue.png', desc: '小学课程' },
+    { id: 5, imgUrl: 'http://www.yanda123.com/app/chuzhong.png', desc: '初中课程' },
+    { id: 6, imgUrl: 'http://www.yanda123.com/app/gaozhong.png', desc: '高中课程' },
+    { id: 7, imgUrl: 'http://www.yanda123.com/app/guoxue.png', desc: '国学' },
+    { id: 8, imgUrl: 'http://www.yanda123.com/app/shougong.png', desc: '手工教程' }
 ]
 
 
@@ -64,6 +64,28 @@ Page({
       pageNum: pageNum
     })
   },
+   /**
+   * 加载分类
+   */
+  loadClassify: function() {
+    var that = this;
+    $.get({ url: 'http://www.yanda123.com/yanda/movie/getClassify' })
+      .then((res) => {
+        if (res.statusCode == 200) {
+          let data = res.data;
+          let classifies = data;
+          for (let i = 0; i < classifies.length; i++) {
+            classifies[i].imgUrl = classifies[i].iconUrl;
+          }
+          that.setData({
+            stations: classifies
+          });
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
+  },
+
 
   loadBanners: function() {
     var that = this;
