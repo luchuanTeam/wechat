@@ -21,7 +21,6 @@ Page({
      .then((res)=> {
        if (res.statusCode == 200) {
          let data = res.data;
-         console.log(JSON.stringify(data));
          let key = 'categoryCache[' + id + ']';
          this.setData({
            selected: id,
@@ -64,7 +63,6 @@ Page({
   onLoad: function (options) {
     // 获取从页面传递过来的分类id
     let id = options.id || '1';
-    console.log(id);
     this.setData({
       selected: id
     });

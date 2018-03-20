@@ -1,14 +1,14 @@
 var $ = require('../../utils/ajax.js');
 
 const stations = [
-    { id: 1, imgUrl: 'http://www.yanda123.com/app/taijiao.png', desc: '胎教' },
-    { id: 2, imgUrl: 'http://www.yanda123.com/app/zaojiao.png', desc: '早教（1-3岁）' },
-    { id: 3, imgUrl: 'http://www.yanda123.com/app/youjiao.png', desc: '幼教（4-6岁）' },
-    { id: 4, imgUrl: 'http://www.yanda123.com/app/xiaoxue.png', desc: '小学课程' },
-    { id: 5, imgUrl: 'http://www.yanda123.com/app/chuzhong.png', desc: '初中课程' },
-    { id: 6, imgUrl: 'http://www.yanda123.com/app/gaozhong.png', desc: '高中课程' },
-    { id: 7, imgUrl: 'http://www.yanda123.com/app/guoxue.png', desc: '国学' },
-    { id: 8, imgUrl: 'http://www.yanda123.com/app/shougong.png', desc: '手工教程' }
+  { id: 1, imgUrl: 'http://www.yanda123.com/app/taijiao.png', desc: '胎教' },
+  { id: 2, imgUrl: 'http://www.yanda123.com/app/zaojiao.png', desc: '早教（1-3岁）' },
+  { id: 3, imgUrl: 'http://www.yanda123.com/app/youjiao.png', desc: '幼教（4-6岁）' },
+  { id: 4, imgUrl: 'http://www.yanda123.com/app/xiaoxue.png', desc: '小学课程' },
+  { id: 5, imgUrl: 'http://www.yanda123.com/app/chuzhong.png', desc: '初中课程' },
+  { id: 6, imgUrl: 'http://www.yanda123.com/app/gaozhong.png', desc: '高中课程' },
+  { id: 7, imgUrl: 'http://www.yanda123.com/app/guoxue.png', desc: '国学' },
+  { id: 8, imgUrl: 'http://www.yanda123.com/app/shougong.png', desc: '手工教程' }
 ]
 
 
@@ -28,22 +28,21 @@ Page({
   /**
    * 加载视频数据
    */
-  loadMovies: function(pageNum, pageSize) {
-    var that = this;
+  loadMovies: function (pageNum, pageSize) {
     $.get({
       url: "http://www.yanda123.com/yanda/movie/list",
       data: { pageNum: pageNum, pageSize: pageSize }
-    }).then((res)=>{
+    }).then((res) => {
       if (res.data.status === 200) {
         let movies = res.data.data.list,
-            pageNum = that.data.pageNum;
-        movies.length >= 4 ? (pageNum++) : (that.setData({canLoadMore: '0'}));
-        that.groupvideoIntros({
+          pageNum = this.data.pageNum;
+        movies.length >= 4 ? (pageNum++) : (this.setData({ canLoadMore: '0' }));
+        this.groupvideoIntros({
           movies: movies,
           pageNum: pageNum
         });
       }
-    }).catch((err)=>{
+    }).catch((err) => {
       console.log(err);
     });
   },
@@ -52,8 +51,8 @@ Page({
    */
   groupvideoIntros(data) {
     let videoIntros = this.data.videoIntros,
-        movies = data.movies,
-        pageNum = data.pageNum;
+      movies = data.movies,
+      pageNum = data.pageNum;
     for (let i = 0; i < movies.length; i++) {
       let movie = movies[i];
       movie.imgUrl = 'http://www.yanda123.com/yanda/attach/readFile?size=500&id=' + movies[i].imgAppendixId;
@@ -64,10 +63,10 @@ Page({
       pageNum: pageNum
     })
   },
-   /**
-   * 加载分类
-   */
-  loadClassify: function() {
+  /**
+  * 加载分类
+  */
+  loadClassify: function () {
     var that = this;
     $.get({ url: 'http://www.yanda123.com/yanda/movie/getClassify' })
       .then((res) => {
@@ -87,12 +86,12 @@ Page({
   },
 
 
-  loadBanners: function() {
+  loadBanners: function () {
     var that = this;
     $.get({
       url: 'http://www.yanda123.com/yanda/banner/list',
-      data: {pageNum: 1, pageSize: 4}
-    }).then((res)=> {
+      data: { pageNum: 1, pageSize: 4 }
+    }).then((res) => {
       if (res.data.status == 200) {
         let data = res.data.data.list;
         let urlArr = [];
@@ -104,7 +103,7 @@ Page({
           imgUrls: urlArr
         });
       }
-    }).catch((err)=> {
+    }).catch((err) => {
       console.log(err);
     });
   },
@@ -113,7 +112,7 @@ Page({
    */
   onLoad: function (options) {
     this.loadBanners();
-    this.loadMovies(this.data.pageNum, this.data.pageSize);   
+    this.loadMovies(this.data.pageNum, this.data.pageSize);
   },
 
   /**
@@ -155,8 +154,8 @@ Page({
   * 页面上拉触底事件
   */
   onReachBottom() {
-    if(this.data.canLoadMore === '1') {       
-      this.loadMovies(this.data.pageNum, this.data.pageSize);   
+    if (this.data.canLoadMore === '1') {
+      this.loadMovies(this.data.pageNum, this.data.pageSize);
     }
   },
 
