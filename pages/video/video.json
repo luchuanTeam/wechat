@@ -2,6 +2,7 @@
   "navigationBarTitleText": "视频页面",
   "disableScroll": true,
   "usingComponents": {
-    "comment": "../components/comment/comment"
+    "comment": "../components/comment/comment",
+    "loadingTip": "../components/loadingTip/loadingTip"
   }
 }

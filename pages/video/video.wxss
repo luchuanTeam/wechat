@@ -1,5 +1,7 @@
 .video-page-container {
+  position: relative;
   width: 100%;
+  height: 100%;
 }
 
 .video {
@@ -226,6 +228,7 @@
 .comment-wrapper .input-wrapper {
   display: flex;
   padding: 10rpx 20rpx;
+  border-bottom: 2rpx solid #e8e8e8;
 } 
 
 .comment-wrapper .input-wrapper .text {
@@ -242,16 +245,64 @@
   border-radius: 10rpx;
 }
 
-.comment-wrapper .input-wrapper .input input {
+.comment-wrapper .input-wrapper .input view {
+  padding-left: 20rpx;
   line-height: 70rpx;
   height: 70rpx;
   vertical-align: middle;
+  font-size:28rpx;
+  color:#666;
 }
 
-.comment-wrapper .input-wrapper .input input::-ms-input-placeholder {
+.model-input {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 20rpx 30rpx;
+  z-index: 999;
+  background: #fff;
+  transition: all 0.3s linear;
+  transform: translate3d(0, 100%, 0);
+}
+
+.model-input.show {
+  transform: translate3d(0, 0, 0);
+}
+
+.model-input .text-wrapper {
+  display: flex;
+  margin-bottom: 10rpx;
+}
+
+.model-input .text-wrapper .text {
+  flex: 1;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.hide-btn {
+  flex: 0 0 40rpx;
+  padding: 0 10rpx;
   text-align: center;
 }
 
-.comment-wrapper .input-wrapper .input input::-webkit-input-placeholder {
-  text-align: center;
+.model-input .text-area {
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  border: 2rpx solid #aaa;
+  border-radius: 10rpx;
 }
+
+.model-input .text-area textarea {
+  width: 100%;
+}
+
+.model-input .commit-btn {
+  float: right;
+  padding: 10rpx;
+  border: 2rpx solid #e8e8e8;
+  border-radius: 10rpx;
+}
+

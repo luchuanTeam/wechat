@@ -1,0 +1,10 @@
+<view>
+  <view class='loading-wrapper {{canLoadMore==="1"?"":"hide"}}'>
+    <loading></loading>
+  </view>
+  <view class="tip-nomore {{canLoadMore==='1'?'hide':''}}">
+    <view class='line'></view>
+    <view class='text'>没有更多内容啦</view>
+    <view class='line'></view>   
+  </view>
+</view>

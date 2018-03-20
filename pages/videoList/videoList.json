@@ -2,7 +2,7 @@
   "usingComponents": {
     "search": "../components/search/search",
     "header": "../components/header/header",
-    "loading": "../components/loading/loading",
+    "loadingTip": "../components/loadingTip/loadingTip",
     "videoIntro": "../components/videoIntro/videoIntro"
   }
 }

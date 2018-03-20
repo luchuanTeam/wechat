@@ -1,4 +1,7 @@
-/**app.wxss**/
+page {
+  width: 100%;
+  height: 100%;
+}
 .container {
   height: 100%;
   display: flex;
@@ -47,27 +50,3 @@ image {
   width: 50%;
 }
 
-.loading-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.tip-nomore {
-  display: flex;
-  margin-top: 10rpx;
-  padding: 0 20rpx 20rpx 20rpx;
-}
-
-.tip-nomore .line {
-  position: relative;
-  top: -22rpx;
-  flex: 1;
-  border-bottom: 2rpx solid #aaa;
-}
-
-.tip-nomore .text {
-  padding: 0 24rpx;
-  font-size: 32rpx;
-  color: #999999;
-}

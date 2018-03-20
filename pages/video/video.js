@@ -16,7 +16,7 @@ Page({
         episodeIntro: '这是唐代诗人王维创作的一首劝慰友人落第的诗',
         series: '国学/唐诗系列',                 // 系列  
         episodeCount: 20,                       // 集数
-        episodeId: '',                          // 视频id
+        episodeId: '1',                          // 视频id
         episodeNum: 0                           // 当前正在播放的集数          
       },
       showVideoHiddenIntro: '0',  //  控制隐藏简介的显示状态, '1'代表显示
@@ -25,12 +25,11 @@ Page({
     },
     commentData: {
       pageNum: 1,
-      pageSize: 3,
-      selected: '1',           // 评论的展示类型 1所有 2最新 3精华
-      comment: {
-        commentContent: '',
-        agreeCount: 0
-      }
+      pageSize: 3,          
+      selected: '1',            // 评论的展示类型 1所有 2最新 3精华
+      commentList: [],          // 评论列表数
+      modelInput: '0',           // 评论模态框的展示, 0 隐藏, 1 显示
+      canLoadMore: '1'
     }
   },
 
@@ -81,10 +80,18 @@ Page({
     });
   },
 
+  toggleModelInput() {
+    let data = 'commentData.modelInput';
+    this.setData({
+      [data]: this.data.commentData.modelInput === '0'? '1':'0'
+    });
+    this.data.commentData.modelInput === '1' && (this.videoContext.pause());  //弹出评论模态框后暂停视频播放
+  },
+
   /**
    * 获取用户输入的评论内容
    */
-  commentInput(e) {
+  enterComment(e) {
     let data = 'commentData.commentContent';
     this.setData({
       [data]: e.detail.value
@@ -94,10 +101,42 @@ Page({
   /**
    * 提交评论，此处将换行符统一替换为逗号再提交
    */
-  enterComment() {
+  commitComment() {
     let data = this.data.commentData.commentContent;
     data = utils.formatLine(data);
-    console.log(data);
+    data = utils.trim(data);
+    if(data !== ''){
+      let commentInfo = {
+        commentContent: data,     // 评论内容
+        userId: 1,               // 用户id
+        episodeId: this.data.videoData.video.episodeId      // 视频id
+      }  
+      $.post({
+        url: 'http://www.yanda123.com/yanda/comment/saveComment',
+        data: commentInfo
+      }).then((res)=> {
+        console.log(JSON.stringify(res));
+        if(res.data.status === 200) {
+          this.toggleModelInput();
+          if (this.data.commentData.commentList.length < this.data.commentData.pageNum * this.data.commentData.pageSize) {
+            this.loadComments(this.data.videoData.video.episodeId);
+          }
+        }
+      }).catch((err)=> {
+        consoe.log(err);
+      });
+    } else {
+      wx.showToast({
+        title: '请输入评论内容',
+        icon: 'none',
+        mask: true,
+        complete: () => {
+          setTimeout(function () {
+            wx.hideToast();
+          }, 1000)
+        }
+      });
+    }
   },
 
   /**
@@ -106,7 +145,7 @@ Page({
   onLoad: function (options) {
     // 初始化从页面传递过来的视频id
     this.setData({
-      mvId: options.id
+      mvId: options.id || 1
     });
     // 通过视频ID获取第一集的ID
     let episodeId = 1;
@@ -117,13 +156,50 @@ Page({
    * 加载评论数据
    */
   loadComments(episodeId) {
-    let that = this;
+    $.get({
+      url: 'http://www.yanda123.com/yanda/comment/list',
+      data: {
+        pageNum: this.data.commentData.pageNum,
+        pageSize: this.data.commentData.pageSize,
+        episodeId: episodeId || '1'
+      }
+    }).then((res) => {
+      let list = res.data.data.list,
+          pageNum = this.data.commentData.pageNum,
+          canLoadMore = 'commentData.canLoadMore';
+      list.length >= 3 ? (pageNum++) : (this.setData({ [canLoadMore]: '0' }))    
+      this.groupCommentList({
+        list: list,
+        pageNum: pageNum
+      });
+
+    }).catch((err) => {
+      console.log(err);
+    });
   },
+
+  groupCommentList(data) {
+    console.log('group');
+    let commentList = this.data.commentData.commentList,
+        list = data.list,
+        pageNum = data.pageNum;
+    for(let i=0; i<list.length; i++) {
+      list[i].userName = '樱木花道',
+      list[i].avatar = '../../../resources/images/fenlei.png',
+      commentList.push(list[i]);
+    }
+    let str = 'commentData.commentList';
+    this.setData({
+      [str]: commentList,
+      pageNum: pageNum
+    });
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    this.videoContext = wx.createVideoContext('myVideo');   // 获取控制视频的对象，操作组件内 <video/> 组件
   },
 
   /**

@@ -1,11 +1,11 @@
 <view class='comment'>
   <view class='user-wrapper'>
     <view class='avatar'>
-      <image src='../../../resources/images/fenlei.png'></image>
+      <image src='{{commentInfo.avatar}}'></image>
     </view>
     <view class='info'>
-      <view class='user-name'>小鸡炖蘑菇</view>
-      <view class='create-time'>2018-2-22</view>
+      <view class='user-name'>{{commentInfo.userName}}</view>
+      <view class='create-time'>{{commentInfo.createTime}}</view>
     </view>
     <view class='tip-off clear'>
       <view class='img-wrapper' bindtap='toggleShowTip'>
@@ -18,10 +18,10 @@
       </view>
     </view>
   </view>
-  <view class='content'>陈大牛牛逼。陈大牛牛逼。陈大牛牛逼。</view>
+  <view class='content'>{{commentInfo.commentContent}}</view>
   <view class='deal-comment'>
     <view class='text'>分享</view>
     <view class='text'>评论</view>
-    <view class='text'>326</view>
+    <view class='text'>{{commentInfo.agreeCount}}</view>
   </view>
 </view>

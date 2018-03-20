@@ -1,6 +1,6 @@
 <view class='video-page-container'> 
 
-  <video src='http://www.yanda123.com/video/testvideo.mp4' objectFit='fill' class='video'></video>
+  <video id='myVideo' src='http://www.yanda123.com/video/testvideo.mp4' objectFit='fill' class='video' hidden="{{commentData.modelInput === '1'}}"></video>
   
   <view class='tab-wrapper'>
     <view class="text {{selected === '1'? 'selected':''}}" data-index='1' bindtap='changeSelected'>视频</view>
@@ -49,19 +49,29 @@
       <view class='filter'><text class="text {{commentData.selected === '3'?'selected':''}}" data-index='3' bindtap='toggleCommentFilter'>精华评论</text></view>
     </view>
 
-    <view class='comment-list'>
-      <comment></comment> 
-      <comment></comment>
-      <comment></comment>
-      <comment></comment>
-    </view>
-
     <view class='input-wrapper'>
       <view class='text'>分享</view>
       <view class='text'>收藏</view>
       <view class='input'>
-        <input placeholder='我来评论一下'></input>
+        <view bindtap='toggleModelInput'>我来评论一下</view>
       </view>
     </view>
+
+    <view class='comment-list'>
+      <comment wx:for='{{commentData.commentList}}' wx:key='{{index}}' commentInfo='{{item}}'></comment>
+      <loadingTip canLoadMore='{{commentData.canLoadMore}}'></loadingTip>
+    </view>
   </view>
+
+  <view class="model-input {{commentData.modelInput === '1' ? 'show' : ''}}">
+    <view class='text-wrapper'>
+      <view class='text'>评论</view>
+      <view class='hide-btn' bindtap='toggleModelInput'>∨</view>
+    </view>
+    <view class='text-area'>
+      <textarea class='text' auto-focus="{{commentData.modelInput === '1'}}" placeholder='我也来说两句' bindinput='enterComment'></textarea>
+    </view>
+    <view class='commit-btn text' bindtap='commitComment'>提 交</view>
+  </view> 
+  
 </view>
