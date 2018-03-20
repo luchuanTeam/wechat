@@ -197,9 +197,6 @@
   margin-bottom: 20rpx;
 }
 
-.comment-wrapper {
-  overflow: auto;
-}
 
 .filter-wrapper {
   display: flex;
@@ -225,8 +222,21 @@
   color: #7aa247;
 }
 
+
+.comment-wrapper .comment-list {
+  position: absolute;
+  top: 98rpx;
+  right: 0;
+  bottom: 92rpx;
+  left: 0;
+}
+
 .comment-wrapper .input-wrapper {
   display: flex;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
   padding: 10rpx 20rpx;
   border-bottom: 2rpx solid #e8e8e8;
 } 

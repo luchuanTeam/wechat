@@ -119,7 +119,7 @@ Page({
         if(res.data.status === 200) {
           this.toggleModelInput();
           if (this.data.commentData.commentList.length < this.data.commentData.pageNum * this.data.commentData.pageSize) {
-            this.loadComments(this.data.videoData.video.episodeId);
+            this.loadComments();
           }
         }
       }).catch((err)=> {
@@ -147,27 +147,27 @@ Page({
     this.setData({
       mvId: options.id || 1
     });
-    // 通过视频ID获取第一集的ID
-    let episodeId = 1;
-    this.loadComments(episodeId); 
+  
+    this.loadComments(); 
   },
 
   /**
    * 加载评论数据
    */
-  loadComments(episodeId) {
+  loadComments() {
+    
     $.get({
       url: 'http://www.yanda123.com/yanda/comment/list',
       data: {
         pageNum: this.data.commentData.pageNum,
         pageSize: this.data.commentData.pageSize,
-        episodeId: episodeId || '1'
+        episodeId: this.data.videoData.video.episodeId || '1'
       }
     }).then((res) => {
       let list = res.data.data.list,
-          pageNum = this.data.commentData.pageNum,
-          canLoadMore = 'commentData.canLoadMore';
-      list.length >= 3 ? (pageNum++) : (this.setData({ [canLoadMore]: '0' }))    
+        pageNum = this.data.commentData.pageNum,
+        canLoadMore = 'commentData.canLoadMore';
+      list.length >= 3 ? (pageNum++) : (this.setData({ [canLoadMore]: '0' }))
       this.groupCommentList({
         list: list,
         pageNum: pageNum
@@ -176,22 +176,22 @@ Page({
     }).catch((err) => {
       console.log(err);
     });
+    
   },
 
   groupCommentList(data) {
-    console.log('group');
     let commentList = this.data.commentData.commentList,
-        list = data.list,
-        pageNum = data.pageNum;
+        list = data.list;
     for(let i=0; i<list.length; i++) {
       list[i].userName = '樱木花道',
       list[i].avatar = '../../../resources/images/fenlei.png',
       commentList.push(list[i]);
     }
-    let str = 'commentData.commentList';
+    let str = 'commentData.commentList',
+        _pageNum = 'commentData.pageNum';
     this.setData({
       [str]: commentList,
-      pageNum: pageNum
+      [_pageNum]: data.pageNum
     });
   },
 
@@ -234,7 +234,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    if(this.data.selected === '2') {
+      console.log('111');
+    }
   },
 
   /**
