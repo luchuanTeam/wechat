@@ -51,7 +51,7 @@
     </view>
 
     <scroll-view class='comment-list' scroll-y bindscrolltolower='loadComments'>
-      <comment wx:for='{{commentData.commentList}}' wx:key='{{index}}' commentInfo='{{item}}'></comment>
+      <comment wx:for='{{commentData.commentList}}' wx:key='{{index}}' commentInfo='{{item}}' bind:agreeChange='agreeChange' data-index='{{index}}'></comment>
       <loadingTip canLoadMore='{{commentData.canLoadMore}}'></loadingTip>     
     </scroll-view>
 

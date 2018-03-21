@@ -22,6 +22,6 @@
   <view class='deal-comment'>
     <view class='text'>分享</view>
     <view class='text'>评论</view>
-    <view class='text'>{{commentInfo.agreeCount}}</view>
+    <view class='text' bindtap='toggleAgree'>{{agree}}</view>
   </view>
 </view>
