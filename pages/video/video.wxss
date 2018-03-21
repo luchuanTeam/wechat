@@ -311,8 +311,9 @@
 
 .model-input .commit-btn {
   float: right;
-  padding: 10rpx;
+  padding: 10rpx 20rpx;
   border: 2rpx solid #e8e8e8;
   border-radius: 10rpx;
+  line-height: 1.8;
 }
 

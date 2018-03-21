@@ -1,6 +1,6 @@
 <view class='video-page-container'> 
 
-  <video id='myVideo' src='http://www.yanda123.com/video/testvideo.mp4' objectFit='fill' class='video' hidden="{{commentData.modelInput === '1'}}"></video>
+  <video id='myVideo' src='http://www.yanda123.com/video/testvideo.mp4' class='video' hidden="{{commentData.modelInput === '1'}}"></video>
   
   <view class='tab-wrapper'>
     <view class="text {{selected === '1'? 'selected':''}}" data-index='1' bindtap='changeSelected'>视频</view>
@@ -45,9 +45,9 @@
   <view class="comment-wrapper {{selected === '1'?'content-right':'content-left'}}"> 
 
     <view class='filter-wrapper'>
-      <view class='filter'><text class="text {{commentData.selected === '1'?'selected':''}}" data-index='1' bindtap='toggleCommentFilter'>所有评论</text></view>
-      <view class='filter'><text class="text {{commentData.selected === '2'?'selected':''}}" data-index='2' bindtap='toggleCommentFilter'>最新发表</text></view>
-      <view class='filter'><text class="text {{commentData.selected === '3'?'selected':''}}" data-index='3' bindtap='toggleCommentFilter'>精华评论</text></view>
+      <view class='filter'><text class="text {{commentData.criteria === '1'?'selected':''}}" data-index='1' bindtap='toggleCommentFilter'>最新发表</text></view>
+      <view class='filter'><text class="text {{commentData.criteria === '2'?'selected':''}}" data-index='2' bindtap='toggleCommentFilter'>所有评论</text></view>
+      <view class='filter'><text class="text {{commentData.criteria === '3'?'selected':''}}" data-index='3' bindtap='toggleCommentFilter'>精华评论</text></view>
     </view>
 
     <scroll-view class='comment-list' scroll-y bindscrolltolower='loadComments'>
@@ -70,10 +70,12 @@
       <view class='text'>评论</view>
       <view class='hide-btn' bindtap='toggleModelInput'>∨</view>
     </view>
+    <form>
     <view class='text-area'>
-      <textarea class='text' auto-focus="{{commentData.modelInput === '1'}}" placeholder='我也来说两句' bindinput='enterComment'></textarea>
+      <textarea class='text' auto-focus="{{commentData.modelInput === '1'}}" placeholder='我也来说两句' bindinput='enterComment' value='{{commentData.textArea}}'></textarea>
     </view>
-    <view class='commit-btn text' bindtap='commitComment'>提 交</view>
+    <button class='commit-btn text' bindtap='commitComment' form-type='reset'>提 交</button>
+    </form>
   </view> 
   
 </view>

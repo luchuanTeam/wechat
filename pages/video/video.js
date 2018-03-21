@@ -1,5 +1,10 @@
 const utils = require('../../utils/util.js');
 const $ = require('../../utils/ajax.js');
+
+var _pageNum = 'commentData.pageNum',
+    _canLoadMore = 'commentData.canLoadMore',
+    _commentList = 'commentData.commentList';    
+
 Page({
 
   /**
@@ -26,10 +31,11 @@ Page({
     commentData: {
       pageNum: 1,
       pageSize: 3,          
-      selected: '1',            // 评论的展示类型 1所有 2最新 3精华
+      criteria: '1',            // 评论的展示类型 1最新 2所有 3精华
       commentList: [],          // 评论列表数
       modelInput: '0',           // 评论模态框的展示, 0 隐藏, 1 显示
-      canLoadMore: '1'
+      canLoadMore: '1',
+      textArea: ''
     }
   },
 
@@ -74,10 +80,11 @@ Page({
    * 点击改变 评论 的过滤条件
    */
   toggleCommentFilter(e) {
-    let data = 'commentData.selected';
+    let data = 'commentData.criteria';
     this.setData({
       [data]: e.currentTarget.dataset.index
     });
+    this.refreshComments(e.currentTarget.dataset.index);
   },
 
   toggleModelInput() {
@@ -115,15 +122,12 @@ Page({
         url: 'http://www.yanda123.com/yanda/comment/saveComment',
         data: commentInfo
       }).then((res)=> {
-        console.log(JSON.stringify(res));
         if(res.data.status === 200) {
           this.toggleModelInput();
-          if (this.data.commentData.commentList.length < this.data.commentData.pageNum * this.data.commentData.pageSize) {
-            this.loadComments();
-          }
+          this.refreshComments();   
         }
       }).catch((err)=> {
-        consoe.log(err);
+        console.log(err);
       });
     } else {
       wx.showToast({
@@ -140,6 +144,34 @@ Page({
   },
 
   /**
+   * 刷新评论列表数据
+   */
+  refreshComments(criteria) {
+    let _pageSize = this.data.commentData.pageNum * this.data.commentData.pageSize;
+    $.get({
+      url: 'http://www.yanda123.com/yanda/comment/list',
+      data: {
+        pageNum: 1,
+        pageSize: _pageSize,
+        episodeId: this.data.videoData.video.episodeId,
+        criteria: criteria || '1'
+      }
+    }).then((res) => {
+      let list = res.data.data.list,
+          pageNum = this.data.commentData.pageNum;       
+      this.setData({
+        [_commentList]: list,
+        [_canLoadMore]: '1',
+        [_pageNum]: pageNum+1
+      });
+      
+    }).catch((err) => {
+      console.log(err);
+    });
+
+  },
+
+  /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
@@ -147,7 +179,6 @@ Page({
     this.setData({
       mvId: options.id || 1
     });
-  
     this.loadComments(); 
   },
 
@@ -155,28 +186,28 @@ Page({
    * 加载评论数据
    */
   loadComments() {
-    
-    $.get({
-      url: 'http://www.yanda123.com/yanda/comment/list',
-      data: {
-        pageNum: this.data.commentData.pageNum,
-        pageSize: this.data.commentData.pageSize,
-        episodeId: this.data.videoData.video.episodeId || '1'
-      }
-    }).then((res) => {
-      let list = res.data.data.list,
-        pageNum = this.data.commentData.pageNum,
-        canLoadMore = 'commentData.canLoadMore';
-      list.length >= 3 ? (pageNum++) : (this.setData({ [canLoadMore]: '0' }))
-      this.groupCommentList({
-        list: list,
-        pageNum: pageNum
+    if(this.data.commentData.canLoadMore === '1') {
+      
+      $.get({
+        url: 'http://www.yanda123.com/yanda/comment/list',
+        data: {
+          pageNum: this.data.commentData.pageNum,
+          pageSize: this.data.commentData.pageSize,
+          episodeId: this.data.videoData.video.episodeId,
+          criteria: this.data.commentData.criteria
+        }
+      }).then((res) => {
+        let list = res.data.data.list,
+          pageNum = this.data.commentData.pageNum;
+        list.length >= 3 ?  pageNum++ : (this.setData({ [_canLoadMore]: '0' }))
+        this.groupCommentList({
+          list: list,
+          pageNum: pageNum
+        });
+      }).catch((err) => {
+        console.log(err);
       });
-
-    }).catch((err) => {
-      console.log(err);
-    });
-    
+    }  
   },
 
   groupCommentList(data) {
@@ -187,12 +218,11 @@ Page({
       list[i].avatar = '../../../resources/images/fenlei.png',
       commentList.push(list[i]);
     }
-    let str = 'commentData.commentList',
-        _pageNum = 'commentData.pageNum';
     this.setData({
-      [str]: commentList,
+      [_commentList]: commentList,
       [_pageNum]: data.pageNum
     });
+    
   },
 
   /**
@@ -234,9 +264,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if(this.data.selected === '2') {
-      console.log('111');
-    }
   },
 
   /**
