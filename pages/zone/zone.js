@@ -61,24 +61,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 获取从页面传递过来的分类id
-    let id = options.id || '1';
-    this.setData({
-      selected: id
-    });
-
-    $.get({ url: 'https://www.yanda123.com/yanda/movie/getClassify'})
-     .then((res)=> {
-       if (res.statusCode == 200) {
-         let data = res.data;
-         this.setData({
-           topCategory: data
-         });
-         this.loadSecondCategory(id);
-       } 
-     }).catch((err)=> {
-       console.log(err);
-     });
     
   },
 
@@ -93,7 +75,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
+    // 获取从页面传递过来的分类id
+    let id = getApp().globalData.selected;
+    this.setData({
+      selected: id
+    });
 
+    $.get({ url: 'https://www.yanda123.com/yanda/movie/getClassify' })
+      .then((res) => {
+        if (res.statusCode == 200) {
+          let data = res.data;
+          this.setData({
+            topCategory: data
+          });
+          this.loadSecondCategory(id);
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
   },
 
   /**

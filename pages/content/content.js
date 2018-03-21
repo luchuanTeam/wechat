@@ -30,7 +30,7 @@ Page({
    */
   loadMovies: function (pageNum, pageSize) {
     $.get({
-      url: "https://www.yanda123.com/yanda/movie/list",
+      url: "https://www.yanda123.com/yanda/movie/getPubMovies",
       data: { pageNum: pageNum, pageSize: pageSize }
     }).then((res) => {
       if (res.data.status === 200) {

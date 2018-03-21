@@ -26,8 +26,9 @@ Component({
    */
   methods: {
     stationHandle: function(e) {
-      wx.reLaunch({
-      	url: '../zone/zone?id=' + this.properties.station.id,
+      getApp().globalData.selected = this.properties.station.id;
+      wx.switchTab({
+      	url: '../zone/zone',
     	});
     }
   }

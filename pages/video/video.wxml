@@ -1,6 +1,7 @@
 <view class='video-page-container'> 
 
-  <video id='myVideo' src='https://www.yanda123.com/video/testvideo.mp4' class='video' hidden="{{commentData.modelInput === '1'}}"></video>
+  <video id='myVideo' src='{{ videoData.video.mvSrc }}' class='video' hidden="{{commentData.modelInput === '1'}}" poster="{{ videoData.video.imgSrc }}">
+  </video>
   
   <view class='tab-wrapper'>
     <view class="text {{selected === '1'? 'selected':''}}" data-index='1' bindtap='changeSelected'>视频</view>
@@ -22,9 +23,9 @@
         <view class='text' bindtap='toggleHideEpisode'>{{videoData.video.series}}</view>
       </view>
       <scroll-view scroll-x='true' class='scroll'>
-        <view wx:for='{{videoData.video.episodeCount}}' class='episode' data-index='{{item}}' bindtap='togglePlay' wx:key='{{item}}'>
-          <text class="text {{item==videoData.video.episodeNum?'hide':''}}">{{item+1}}</text>
-          <view class="arrow-right {{item==videoData.video.episodeNum?'':'hide'}}"></view>
+        <view wx:for='{{episodeCount}}' class='episode' data-index='{{item+1}}' bindtap='togglePlay' wx:key='{{item}}'>
+          <text class="text {{item==(videoData.video.episodeNum-1)?'hide':''}}">{{item+1}}</text>
+          <view class="arrow-right {{item==(videoData.video.episodeNum-1)?'':'hide'}}"></view>
         </view>
       </scroll-view>
     </view>
@@ -35,7 +36,7 @@
         <view class='text' bindtap='toggleHideEpisode'>关闭</view>
       </view>   
       <view wx:for='{{videoData.video.episodeCount}}' class='episode' data-index='{{item}}' bindtap='togglePlay' wx:key='{{item}}'>
-        <text class="text {{item==videoData.video.episodeNum?'hide':''}}">{{item+1}}</text>
+        <text class="text {{item+1==videoData.video.episodeNum?'hide':''}}">{{item+1}}</text>
         <view class="arrow-right {{item==videoData.video.episodeNum?'':'hide'}}"></view>
       </view> 
     </view> 

@@ -3,7 +3,8 @@ const $ = require('../../utils/ajax.js');
 
 var _pageNum = 'commentData.pageNum',
     _canLoadMore = 'commentData.canLoadMore',
-    _commentList = 'commentData.commentList';    
+    _commentList = 'commentData.commentList',
+    _video = 'videoData.video';
 
 Page({
 
@@ -12,11 +13,13 @@ Page({
    */
   data: {
     mvId: '',            //从页面传过来的视频ID参数
+    episodeCount: '',
     showCenterPlayBtn: false,
     selected: '1',        // 决定显示视频组件或者评论组件, '1'代表视频组件, '2'代表评论组件
     videoData: {        // 视频组件的状态数据
       video: {
-        src: '',                           // 视频地址
+        mvSrc: '',                           // 视频地址
+        imgSrc: '',                           //视频封面地址
         episodeName: '我是陈大牛',                  // 视频标题
         episodeIntro: '这是唐代诗人王维创作的一首劝慰友人落第的诗',
         series: '国学/唐诗系列',                 // 系列  
@@ -63,9 +66,10 @@ Page({
    */
   togglePlay(e) {
     let data = 'videoData.video.episodeNum';
-    this.setData({
-      [data]: e.currentTarget.dataset.index   
-    });
+    // this.setData({
+    //   [data]: e.currentTarget.dataset.index   
+    // });
+    this.loadEpisode(e.currentTarget.dataset.index);
   },
   /**
    * 点击改变 全部集数的组件 的显示状态
@@ -179,6 +183,7 @@ Page({
     this.setData({
       mvId: options.id || 1
     });
+    this.loadMovie(this.data.mvId);
     this.loadComments(); 
   },
 
@@ -223,6 +228,47 @@ Page({
       [_pageNum]: data.pageNum
     });
     
+  },
+  /**
+   * 首次进入视频播放页，先获取视频信息：视频集数
+   */
+  loadMovie(mvId) {
+    $.get({
+      url: 'https://www.yanda123.com/yanda/movie/' + mvId
+    }).then((res) => {
+      if (res.data) {
+        this.setData({
+          episodeCount: res.data.episodeCount
+        });
+        this.loadEpisode(1);
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
+  },
+
+  /**
+   * 点击不同集数获取对应的视频集信息
+   */
+  loadEpisode(episodeNum) {
+    $.get({
+      url: 'https://www.yanda123.com/yanda/episode/getEpisode',
+      data: {
+        mvId: this.data.mvId,
+        episodeNum: episodeNum || 1
+      }
+    }).then((res) => {
+      let episodeInfo = res.data;
+      if (episodeInfo) {
+        episodeInfo.mvSrc = 'https://www.yanda123.com/yanda/attach/readFile?id=' + episodeInfo.mvAppendixId;
+        episodeInfo.imgSrc = 'https://www.yanda123.com/yanda/attach/readFile?size=800&id=' + episodeInfo.imgAppendixId;
+        this.setData({
+          [_video]: episodeInfo
+        });
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
   },
 
   /**
