@@ -1,5 +1,6 @@
 const utils = require('../../utils/util.js');
 const $ = require('../../utils/ajax.js');
+const REFRESH = '1';
 
 var _pageNum = 'commentData.pageNum',
     _canLoadMore = 'commentData.canLoadMore',
@@ -84,7 +85,7 @@ Page({
     this.setData({
       [data]: e.currentTarget.dataset.index
     });
-    this.refreshComments(e.currentTarget.dataset.index);
+    this.loadComments(REFRESH);
   },
 
   toggleModelInput() {
@@ -124,7 +125,7 @@ Page({
       }).then((res)=> {
         if(res.data.status === 200) {
           this.toggleModelInput();
-          this.refreshComments();   
+          this.loadComments(REFRESH); 
         }
       }).catch((err)=> {
         console.log(err);
@@ -143,34 +144,7 @@ Page({
     }
   },
 
-  /**
-   * 刷新评论列表数据
-   */
-  refreshComments(criteria) {
-    let _pageSize = this.data.commentData.pageNum * this.data.commentData.pageSize;
-    $.get({
-      url: 'https://www.yanda123.com/yanda/comment/list',
-      data: {
-        pageNum: 1,
-        pageSize: _pageSize,
-        episodeId: this.data.videoData.video.episodeId,
-        criteria: criteria || '1'
-      }
-    }).then((res) => {
-      let list = res.data.data.list,
-          pageNum = this.data.commentData.pageNum;       
-      this.setData({
-        [_commentList]: list,
-        [_canLoadMore]: '1',
-        [_pageNum]: pageNum+1
-      });
-      
-    }).catch((err) => {
-      console.log(err);
-    });
-
-  },
-
+  
   /**
    * 生命周期函数--监听页面加载
    */
@@ -179,30 +153,31 @@ Page({
     this.setData({
       mvId: options.id || 1
     });
-    this.loadComments(); 
+    this.loadComments(REFRESH); 
   },
 
   /**
    * 加载评论数据
+   * @param refresh: 代表是否刷新评论 '1' 代表刷新，其他代表加载更多
    */
-  loadComments() {
-    if(this.data.commentData.canLoadMore === '1') {
-      
+  loadComments(refresh) {
+    if(this.data.commentData.canLoadMore === '1' || refresh === '1') {
+      let pageSize = this.data.commentData.pageSize,
+          pageNum = this.data.commentData.pageNum;
       $.get({
         url: 'https://www.yanda123.com/yanda/comment/list',
-        data: {
-          pageNum: this.data.commentData.pageNum,
-          pageSize: this.data.commentData.pageSize,
+        data: { 
+          pageNum: pageNum,
+          pageSize: pageSize,
           episodeId: this.data.videoData.video.episodeId,
           criteria: this.data.commentData.criteria
         }
       }).then((res) => {
-        let list = res.data.data.list,
-          pageNum = this.data.commentData.pageNum;
-        list.length >= 3 ?  pageNum++ : (this.setData({ [_canLoadMore]: '0' }))
+        let list = res.data.data.list;
         this.groupCommentList({
           list: list,
-          pageNum: pageNum
+          pageNum: pageNum,
+          refresh: refresh
         });
       }).catch((err) => {
         console.log(err);
@@ -210,9 +185,17 @@ Page({
     }  
   },
 
+  /**
+   * 整合commentList 数据
+   */
   groupCommentList(data) {
     let commentList = this.data.commentData.commentList,
-        list = data.list;
+        canLoadMore = '1',
+        list = data.list,
+        pageNum = data.pageNum,
+        refresh = data.refresh;   
+    
+    list.length >= 3 ? pageNum++ : canLoadMore = '0';
     for(let i=0; i<list.length; i++) {
       list[i].userName = '樱木花道',
       list[i].avatar = '../../../resources/images/fenlei.png',
@@ -220,7 +203,8 @@ Page({
     }
     this.setData({
       [_commentList]: commentList,
-      [_pageNum]: data.pageNum
+      [_pageNum]: pageNum,
+      [_canLoadMore]: canLoadMore
     });
     
   },
@@ -250,7 +234,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    console.log('unload????');
   },
 
   /**
