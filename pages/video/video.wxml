@@ -1,6 +1,6 @@
 <view class='video-page-container'> 
 
-  <video id='myVideo' src='http://www.yanda123.com/video/testvideo.mp4' class='video' hidden="{{commentData.modelInput === '1'}}"></video>
+  <video id='myVideo' src='https://www.yanda123.com/video/testvideo.mp4' class='video' hidden="{{commentData.modelInput === '1'}}"></video>
   
   <view class='tab-wrapper'>
     <view class="text {{selected === '1'? 'selected':''}}" data-index='1' bindtap='changeSelected'>视频</view>

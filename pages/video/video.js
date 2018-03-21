@@ -119,7 +119,7 @@ Page({
         episodeId: this.data.videoData.video.episodeId      // 视频id
       }  
       $.post({
-        url: 'http://www.yanda123.com/yanda/comment/saveComment',
+        url: 'https://www.yanda123.com/yanda/comment/saveComment',
         data: commentInfo
       }).then((res)=> {
         if(res.data.status === 200) {
@@ -149,7 +149,7 @@ Page({
   refreshComments(criteria) {
     let _pageSize = this.data.commentData.pageNum * this.data.commentData.pageSize;
     $.get({
-      url: 'http://www.yanda123.com/yanda/comment/list',
+      url: 'https://www.yanda123.com/yanda/comment/list',
       data: {
         pageNum: 1,
         pageSize: _pageSize,
@@ -189,7 +189,7 @@ Page({
     if(this.data.commentData.canLoadMore === '1') {
       
       $.get({
-        url: 'http://www.yanda123.com/yanda/comment/list',
+        url: 'https://www.yanda123.com/yanda/comment/list',
         data: {
           pageNum: this.data.commentData.pageNum,
           pageSize: this.data.commentData.pageSize,

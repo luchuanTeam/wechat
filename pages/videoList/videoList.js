@@ -24,7 +24,7 @@ Page({
   loadMovies: function (pageNum, pageSize) {
     var that = this;
     $.get({
-      url: "http://www.yanda123.com/yanda/movie/list",
+      url: "https://www.yanda123.com/yanda/movie/list",
       data: { pageNum: pageNum, pageSize: pageSize }
     }).then((res) => {
       if (res.data.status === 200) {
@@ -50,7 +50,7 @@ Page({
       pageNum = data.pageNum;
     for (let i = 0; i < movies.length; i++) {
       let movie = movies[i];
-      movie.imgUrl = 'http://www.yanda123.com/yanda/attach/readFile?size=500&id=' + movies[i].imgAppendixId;
+      movie.imgUrl = 'https://www.yanda123.com/yanda/attach/readFile?size=500&id=' + movies[i].imgAppendixId;
       videoIntros.push(movie);
     }
     this.setData({

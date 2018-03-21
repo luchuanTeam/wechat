@@ -1,7 +1,7 @@
 <view class='video-intro-component' bindtap='toVideoPage'>
   <view class='img-wrapper'>
     <image src='{{videoIntro.imgUrl}}'></image>
-    <image class="img-play" src='http://www.yanda123.com/app/play.png'></image>
+    <image class="img-play" src='https://www.yanda123.com/app/play.png'></image>
   </view>
   <view class='text'>
     {{videoIntro.mvName}}

@@ -17,7 +17,7 @@ Page({
    * 二级分类数据加载
    */
   loadSecondCategory: function(id) {
-    $.get({ url: "http://www.yanda123.com/yanda/movie/getClassify/" + id})
+    $.get({ url: "https://www.yanda123.com/yanda/movie/getClassify/" + id})
      .then((res)=> {
        if (res.statusCode == 200) {
          let data = res.data;
@@ -67,7 +67,7 @@ Page({
       selected: id
     });
 
-    $.get({ url: 'http://www.yanda123.com/yanda/movie/getClassify'})
+    $.get({ url: 'https://www.yanda123.com/yanda/movie/getClassify'})
      .then((res)=> {
        if (res.statusCode == 200) {
          let data = res.data;

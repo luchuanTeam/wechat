@@ -26,7 +26,7 @@
   
   <view class='info-wrapper'>
     <view class='video-img-wrapper'>
-      <image src='http://www.yanda123.com/app/video-recommend.png'></image>
+      <image src='https://www.yanda123.com/app/video-recommend.png'></image>
     </view>
     <view class='text'>视频推荐</view>
   </view>
