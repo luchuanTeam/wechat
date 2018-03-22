@@ -231,7 +231,7 @@
   left: 0;
 }
 
-.comment-wrapper .input-wrapper {
+.comment-wrapper .input-wrapper, .child-comment-wrapper .input-wrapper {
   display: flex;
   position: absolute;
   bottom: 0;
@@ -248,20 +248,32 @@
   text-align: center;
 }
 
-.comment-wrapper .input-wrapper .input {
+.comment-wrapper .input-wrapper .input, .child-comment-wrapper .input-wrapper .input {
   flex: 1;
   font-size: 28rpx;
   background-color: #f1f0f0;
   border-radius: 10rpx;
 }
 
-.comment-wrapper .input-wrapper .input view {
+.comment-wrapper .input-wrapper .input view, .child-comment-wrapper .input-wrapper .input view {
   padding-left: 20rpx;
   line-height: 70rpx;
   height: 70rpx;
   vertical-align: middle;
   font-size:28rpx;
   color:#666;
+}
+
+.child-comment-wrapper {
+	position: fixed;
+	top: 450rpx;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 199;
+  background: #fff;
+  transition: all 0.3s linear;
+  transform: translate3d(0, 100%, 0);
 }
 
 .model-input {
@@ -277,16 +289,22 @@
   transform: translate3d(0, 100%, 0);
 }
 
-.model-input.show {
+.model-input.show, .child-comment-wrapper.show {
   transform: translate3d(0, 0, 0);
 }
 
-.model-input .text-wrapper {
+.child-comment-wrapper .text-wrapper {
+	margin-bottom: 0;
+	padding: 20rpx 30rpx;
+	border-bottom: 2rpx solid #e8e8e8;
+}
+
+.text-wrapper {
   display: flex;
   margin-bottom: 10rpx;
 }
 
-.model-input .text-wrapper .text {
+.text-wrapper .text {
   flex: 1;
   font-size: 32rpx;
   font-weight: 700;
