@@ -16,9 +16,13 @@ Component({
       },
       observer(newVal, oldVal) {    // 当父组件传入 commentInfo 的值发生改变时
         this.setData({
-          agree: newVal.agreeCount
+          agree: newVal.agreeCount || oldVal.agreeCount || 0
         });
       }
+    },
+    showCommentBtn: {
+    	type: String,
+    	value: '1'
     }
   },
 
@@ -49,6 +53,9 @@ Component({
         clickAgree: !_clickAgree
       });   
       this.triggerEvent('agreeChange', {agree: this.data.agree, commentId: this.properties.commentInfo.commentId});
+    },
+    comment() {
+    	this.triggerEvent('toggleModelChild');
     }
   }
 })

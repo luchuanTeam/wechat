@@ -19,9 +19,9 @@
     </view>
   </view>
   <view class='content'>{{commentInfo.commentContent}}</view>
-  <view class='deal-comment'>
+  <view class="deal-comment {{(showCommentBtn==='0' || commentInfo.parentId != 0)?'hide': ''}}">
     <view class='text'>分享</view>
-    <view class='text'>评论</view>
+    <view class="text" bindtap='comment'>评论</view>
     <view class='text' bindtap='toggleAgree'>{{agree}}</view>
   </view>
 </view>

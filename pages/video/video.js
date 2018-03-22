@@ -1,6 +1,7 @@
 const utils = require('../../utils/util.js');
 const $ = require('../../utils/ajax.js');
-const REFRESH = '1';
+const REFRESH = '1',
+      PAGE_SIZE = 3;
 
 var _pageNum = 'commentData.pageNum',
     _canLoadMore = 'commentData.canLoadMore',
@@ -34,14 +35,17 @@ Page({
     },
     commentData: {
       pageNum: 1,
-      pageSize: 3,          
+      pageSize: PAGE_SIZE,          
       criteria: '1',            // 评论的展示类型 1最新 2所有 3精华
       commentList: [],          // 评论列表数
       modelInput: '0',           // 评论模态框的展示, 0 隐藏, 1 显示
       canLoadMore: '1',
-      textArea: ''
+      modelChildComment: '0',
+      parentComment: {}
     },
-    agreeChangeComments: {}
+    agreeChangeComments: {},
+    childComments: {},
+    currentChildComment: {}
   },
 
   /**
@@ -90,7 +94,7 @@ Page({
     this.setData({
       [data]: e.currentTarget.dataset.index
     });
-    this.loadComments(REFRESH);
+    this.loadFatherComments(REFRESH);
   },
 
   toggleModelInput() {
@@ -115,13 +119,18 @@ Page({
    * 提交评论，此处将换行符统一替换为逗号再提交
    */
   commitComment() {
-    let data = this.data.commentData.commentContent;
+    let data = this.data.commentData.commentContent,
+        parentId = 0;
     data = utils.formatLine(data);
     data = utils.trim(data);
+    if (this.data.commentData.modelChildComment === '1') {  // 表示是在父评论下评论
+      parentId = this.data.currentChildComment.parentId || 0;
+    }
     if(data !== ''){
       let commentInfo = {
         commentContent: data,     // 评论内容
         userId: 1,               // 用户id
+        parentId: parentId,
         episodeId: this.data.videoData.video.episodeId      // 视频id
       }  
       $.post({
@@ -130,7 +139,12 @@ Page({
       }).then((res)=> {
         if(res.data.status === 200) {
           this.toggleModelInput();
-          this.loadComments(REFRESH); 
+          if(parentId === 0) {
+            this.loadFatherComments(REFRESH);   // 评论完刷新数据
+          } else {
+            this.loadChildComments(parentId, REFRESH);
+          }
+          
         }
       }).catch((err)=> {
         console.log(err);
@@ -161,36 +175,61 @@ Page({
 
     this.loadMovie(this.data.mvId);
     this.loadComments(REFRESH); 
-
+    this.loadFatherComments(REFRESH); 
+ 
   },
 
   /**
-   * 加载评论数据
+   * obj: {
+   *  @param pageNum: 页码数 必填
+   *  @param pageSize: 每页数目 必填
+   *  @param criteria: 评论展示排序规则 可不填 默认为最新排序
+   *  @param parentId: 父评论的id 可不填 默认直接加载父评论，若有，代表加载的是子评论
+   * }
+   */
+  loadComments(obj) {
+    return new Promise((resolve, reject)=> {
+      $.get({
+        url: 'https://www.yanda123.com/yanda/comment/list',
+        data: {
+          pageNum: obj.pageNum,
+          pageSize: obj.pageSize,
+          episodeId: this.data.videoData.video.episodeId,
+          criteria: obj.criteria || this.data.commentData.criteria,
+          parentId: obj.parentId || 0
+        }
+      }).then((res) => {
+        resolve(res);
+      }).catch((err) => {
+        reject(err);
+      });
+    })
+    
+  },
+  /**
+   * 加载父评论数据
    * @param refresh: 代表是否刷新评论 '1' 代表刷新，其他代表加载更多
    */
-  loadComments(refresh) {
+  loadFatherComments(refresh) {
     if(this.data.commentData.canLoadMore === '1' || refresh === '1') {
       let pageSize = this.data.commentData.pageSize,
           pageNum = this.data.commentData.pageNum;
       refresh === '1' && (pageNum = 1);   //如果是刷新数据，则页码数重置为 1
-      $.get({
-        url: 'https://www.yanda123.com/yanda/comment/list',
-        data: { 
-          pageNum: pageNum,
-          pageSize: pageSize,
-          episodeId: this.data.videoData.video.episodeId,
-          criteria: this.data.commentData.criteria
+      this.loadComments({
+        pageNum: pageNum,
+        pageSize: pageSize
+      }).then((res)=> {
+        if(res.data.status === 200) {
+          this.groupCommentList({
+            list: res.data.data.list,
+            pageNum: pageNum,
+            refresh: refresh,
+            total: res.data.data.total
+          });
         }
-      }).then((res) => {
-        let list = res.data.data.list;
-        this.groupCommentList({
-          list: list,
-          pageNum: pageNum,
-          refresh: refresh
-        });
-      }).catch((err) => {
+      }).catch((err)=> {
         console.log(err);
-      });
+      }) 
     }  
   },
 
@@ -201,10 +240,11 @@ Page({
     let commentList = this.data.commentData.commentList,
         canLoadMore = '1',
         list = data.list,
+        total = data.total,
         pageNum = data.pageNum,
         refresh = data.refresh;      
     refresh === '1' && (commentList = []);  
-    list.length >= 3 ? pageNum++ : canLoadMore = '0';
+    pageNum * PAGE_SIZE < total ? pageNum++ : canLoadMore = '0';
     for(let i=0; i<list.length; i++) {
       list[i].userName = '樱木花道',
       list[i].avatar = '../../../resources/images/fenlei.png',
@@ -217,6 +257,7 @@ Page({
     });
     
   },
+
   /**
    * 首次进入视频播放页，先获取视频信息：视频集数
    */
@@ -256,6 +297,67 @@ Page({
       }
     }).catch((err) => {
       console.log(err);
+    });
+  },
+  
+  toggleModelChild(e) {
+  	let index = e.currentTarget.dataset.index,
+  		_mcd = this.data.commentData.modelChildComment,
+  		mcd = 'commentData.modelChildComment',
+  		pc = 'commentData.parentComment';
+    if(index !== undefined) {
+      let _pc = this.data.commentData.commentList[index];
+      this.setData({ [pc]: _pc });
+      this.loadChildComments(_pc.commentId);
+    } 
+    _mcd === '1' && (this.setData({ currentChildComment: {}}));
+  	this.setData({
+		  [mcd]: _mcd === '1'? '0':'1'
+	  });
+  },
+
+  /**
+   * 加载子评论事件
+   */
+  loadChildComments(parentId, refresh) {
+    let childComment;
+    if((typeof parentId === 'number' && !this.data.childComments[parentId]) || refresh === '1') {
+      childComment = { pageNum: 1, pageSize: 3, canLoadMore: '1', comments:[], total: 0, parentId: parentId};
+    } else if (this.data.currentChildComment.canLoadMore === '1') {
+      let pid = this.data.currentChildComment.parentId;
+      childComment = this.data.childComments[pid];
+    }
+    
+    if(childComment) {
+      this.loadComments({
+        pageNum: childComment.pageNum,
+        pageSize: childComment.pageSize,
+        parentId: childComment.parentId
+      }).then((res) => {
+        if (res.data.status === 200) {
+          childComment.total = res.data.data.total;
+          this.groupChildComments(childComment, res.data.data.list, parentId);
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
+    
+  },
+
+  groupChildComments(childComment, list, parentId) {
+    let childComments = this.data.childComments;
+    childComment.pageNum * childComment.pageSize > childComment.total ? childComment.canLoadMore = '0' : childComment.pageNum++ ;
+    
+    for(let i=0; i<list.length; i++) {
+      list[i].userName = '樱木花道',
+      list[i].avatar = '../../../resources/images/fenlei.png',
+      childComment.comments.push(list[i]); 
+    }
+    childComments[parentId] = childComment;
+    this.setData({
+      childComments: childComments,
+      currentChildComment: childComment
     });
   },
 
@@ -304,18 +406,19 @@ Page({
    * 客户离开页面时先判断客户有没有点赞，若有点赞再统一请求点赞接口
    */
   onUnload: function () {
-    let agreeChangeComments = this.data.agreeChangeComments;
-    if(JSON.stringify(agreeChangeComments) !== '{}') {
-      agreeChangeComments.userId = 1;     // 暂时写上，user功能完善从user获取
-      $.post({
-        url: 'https://www.yanda123.com/yanda/comment/addAgreeCount',
-        data: agreeChangeComments
-      }).then((res)=>{
+    console.log('unload');
+    // let agreeChangeComments = this.data.agreeChangeComments;
+    // if(JSON.stringify(agreeChangeComments) !== '{}') {
+    //   agreeChangeComments.userId = 1;     // 暂时写上，user功能完善从user获取
+    //   $.post({
+    //     url: 'https://www.yanda123.com/yanda/comment/addAgreeCount',
+    //     data: agreeChangeComments
+    //   }).then((res)=>{
 
-      }).catch((err)=>{
-        console.log(err);
-      })   
-    }  
+    //   }).catch((err)=>{
+    //     console.log(err);
+    //   })   
+    // }  
   },
 
   /**
