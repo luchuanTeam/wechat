@@ -1,5 +1,6 @@
 const utils = require('../../utils/util.js');
 const $ = require('../../utils/ajax.js');
+const REFRESH = '1';
 
 var _pageNum = 'commentData.pageNum',
     _canLoadMore = 'commentData.canLoadMore',
@@ -39,7 +40,8 @@ Page({
       modelInput: '0',           // 评论模态框的展示, 0 隐藏, 1 显示
       canLoadMore: '1',
       textArea: ''
-    }
+    },
+    agreeChangeComments: {}
   },
 
   /**
@@ -88,7 +90,7 @@ Page({
     this.setData({
       [data]: e.currentTarget.dataset.index
     });
-    this.refreshComments(e.currentTarget.dataset.index);
+    this.loadComments(REFRESH);
   },
 
   toggleModelInput() {
@@ -128,7 +130,7 @@ Page({
       }).then((res)=> {
         if(res.data.status === 200) {
           this.toggleModelInput();
-          this.refreshComments();   
+          this.loadComments(REFRESH); 
         }
       }).catch((err)=> {
         console.log(err);
@@ -147,34 +149,7 @@ Page({
     }
   },
 
-  /**
-   * 刷新评论列表数据
-   */
-  refreshComments(criteria) {
-    let _pageSize = this.data.commentData.pageNum * this.data.commentData.pageSize;
-    $.get({
-      url: 'https://www.yanda123.com/yanda/comment/list',
-      data: {
-        pageNum: 1,
-        pageSize: _pageSize,
-        episodeId: this.data.videoData.video.episodeId,
-        criteria: criteria || '1'
-      }
-    }).then((res) => {
-      let list = res.data.data.list,
-          pageNum = this.data.commentData.pageNum;       
-      this.setData({
-        [_commentList]: list,
-        [_canLoadMore]: '1',
-        [_pageNum]: pageNum+1
-      });
-      
-    }).catch((err) => {
-      console.log(err);
-    });
-
-  },
-
+  
   /**
    * 生命周期函数--监听页面加载
    */
@@ -183,31 +158,35 @@ Page({
     this.setData({
       mvId: options.id || 1
     });
+
     this.loadMovie(this.data.mvId);
-    this.loadComments(); 
+    this.loadComments(REFRESH); 
+
   },
 
   /**
    * 加载评论数据
+   * @param refresh: 代表是否刷新评论 '1' 代表刷新，其他代表加载更多
    */
-  loadComments() {
-    if(this.data.commentData.canLoadMore === '1') {
-      
+  loadComments(refresh) {
+    if(this.data.commentData.canLoadMore === '1' || refresh === '1') {
+      let pageSize = this.data.commentData.pageSize,
+          pageNum = this.data.commentData.pageNum;
+      refresh === '1' && (pageNum = 1);   //如果是刷新数据，则页码数重置为 1
       $.get({
         url: 'https://www.yanda123.com/yanda/comment/list',
-        data: {
-          pageNum: this.data.commentData.pageNum,
-          pageSize: this.data.commentData.pageSize,
+        data: { 
+          pageNum: pageNum,
+          pageSize: pageSize,
           episodeId: this.data.videoData.video.episodeId,
           criteria: this.data.commentData.criteria
         }
       }).then((res) => {
-        let list = res.data.data.list,
-          pageNum = this.data.commentData.pageNum;
-        list.length >= 3 ?  pageNum++ : (this.setData({ [_canLoadMore]: '0' }))
+        let list = res.data.data.list;
         this.groupCommentList({
           list: list,
-          pageNum: pageNum
+          pageNum: pageNum,
+          refresh: refresh
         });
       }).catch((err) => {
         console.log(err);
@@ -215,9 +194,17 @@ Page({
     }  
   },
 
+  /**
+   * 整合commentList 数据
+   */
   groupCommentList(data) {
     let commentList = this.data.commentData.commentList,
-        list = data.list;
+        canLoadMore = '1',
+        list = data.list,
+        pageNum = data.pageNum,
+        refresh = data.refresh;      
+    refresh === '1' && (commentList = []);  
+    list.length >= 3 ? pageNum++ : canLoadMore = '0';
     for(let i=0; i<list.length; i++) {
       list[i].userName = '樱木花道',
       list[i].avatar = '../../../resources/images/fenlei.png',
@@ -225,7 +212,8 @@ Page({
     }
     this.setData({
       [_commentList]: commentList,
-      [_pageNum]: data.pageNum
+      [_pageNum]: pageNum,
+      [_canLoadMore]: canLoadMore
     });
     
   },
@@ -272,6 +260,25 @@ Page({
   },
 
   /**
+   * 点赞事件，子组件触发
+   */
+  agreeChange(e) {
+    let index = e.currentTarget.dataset.index,      // 获取点赞的评论在 commentList 的下标
+        agree = e.detail.agree,                        
+        commentId = e.detail.commentId,
+        comment = this.data.commentData.commentList[index],   // 获取点赞或取消点赞的评论
+        agreeChangeComments = this.data.agreeChangeComments;
+    if (comment.commentId === commentId && comment.agreeCount !== agree) {
+      agreeChangeComments[commentId] = agree;         //如果点赞增加则要记录
+    } else {
+      agreeChangeComments[commentId] && delete agreeChangeComments[commentId];  //如果取消点赞则删除记录
+    }   
+    this.setData({
+      agreeChangeComments: agreeChangeComments
+    });
+  },
+
+  /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
@@ -294,9 +301,21 @@ Page({
 
   /**
    * 生命周期函数--监听页面卸载
+   * 客户离开页面时先判断客户有没有点赞，若有点赞再统一请求点赞接口
    */
   onUnload: function () {
-  
+    let agreeChangeComments = this.data.agreeChangeComments;
+    if(JSON.stringify(agreeChangeComments) !== '{}') {
+      agreeChangeComments.userId = 1;     // 暂时写上，user功能完善从user获取
+      $.post({
+        url: 'https://www.yanda123.com/yanda/comment/addAgreeCount',
+        data: agreeChangeComments
+      }).then((res)=>{
+
+      }).catch((err)=>{
+        console.log(err);
+      })   
+    }  
   },
 
   /**
