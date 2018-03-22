@@ -50,7 +50,7 @@
       <view class='filter'><text class="text {{commentData.criteria === '3'?'selected':''}}" data-index='3' bindtap='toggleCommentFilter'>精华评论</text></view>
     </view>
 
-    <scroll-view class='comment-list' scroll-y bindscrolltolower='loadComments'>
+    <scroll-view class='comment-list' scroll-y bindscrolltolower='loadFatherComments'>
       <comment wx:for='{{commentData.commentList}}' wx:key='{{index}}' commentInfo='{{item}}' bind:agreeChange='agreeChange' bind:toggleModelChild='toggleModelChild' data-index='{{index}}'></comment>
       <loadingTip canLoadMore='{{commentData.canLoadMore}}'></loadingTip>     
     </scroll-view>
@@ -70,8 +70,15 @@
   		<view class='text'>详情</view>
       <view class='hide-btn' bindtap='toggleModelChild'>X</view>	
   	</view>
-  	<comment commentInfo='{{commentData.parentComment}}' showCommentBtn = "0"></comment>
-    <comment wx:for='{{childComments[commentData.parentComment.commentId].comments}}' wx:key='{{index}}' commentInfo='{{item}}' data-index='{{index}}'></comment>
+  	
+    <scroll-view scroll-y class='child-comment-list' bindscrolltolower='loadChildComments'>
+      <comment commentInfo='{{commentData.parentComment}}' showCommentBtn = "0"></comment>
+      <view class='tip'>
+        <text>相关回复</text>
+        <text class='text'>共 {{childComments[commentData.parentComment.commentId].total}} 条</text>
+      </view>
+      <comment wx:for='{{childComments[commentData.parentComment.commentId].comments}}' wx:key='{{index}}' commentInfo='{{item}}' data-index='{{index}}'></comment>
+    </scroll-view>
 
     <view class='input-wrapper'>
       <view class='input'>

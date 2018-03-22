@@ -316,6 +316,28 @@
   text-align: center;
 }
 
+.child-comment-list {
+  position: absolute;
+  top: 92rpx;
+  right: 0;
+  bottom: 92rpx;
+  left: 0;
+}
+
+.child-comment-list .tip {
+  margin: 20rpx 0;
+  padding: 0 20rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+
+.child-comment-list .tip text:first-child {
+  display: inline-block;
+  margin-right: 20rpx;
+  font-size: 28rpx;
+  color: #222;
+}
+
 .model-input .text-area {
   margin-bottom: 20rpx;
   padding: 20rpx;
