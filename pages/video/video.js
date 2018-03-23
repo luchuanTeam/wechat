@@ -174,7 +174,6 @@ Page({
     });
 
     this.loadMovie(this.data.mvId);
-    this.loadComments(REFRESH); 
     this.loadFatherComments(REFRESH); 
  
   },
@@ -265,6 +264,7 @@ Page({
     $.get({
       url: 'https://www.yanda123.com/yanda/movie/' + mvId
     }).then((res) => {
+      console.log(`movie: ${JSON.stringify(res)}`);
       if (res.data) {
         this.setData({
           episodeCount: res.data.episodeCount
@@ -287,6 +287,7 @@ Page({
         episodeNum: episodeNum || 1
       }
     }).then((res) => {
+      console.log(`episode: ${JSON.stringify(res)}`);
       let episodeInfo = res.data;
       if (episodeInfo) {
         episodeInfo.mvSrc = 'https://www.yanda123.com/yanda/attach/readFile?id=' + episodeInfo.mvAppendixId;
