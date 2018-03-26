@@ -16,7 +16,7 @@ Component({
         commentCount: 0
       },
       observer(newVal, oldVal) {    // 当父组件传入 commentInfo 的值发生改变时
-        console.log(`newVal: ${JSON.stringify(newVal)}, oldVal: ${JSON.stringify(oldVal)}`);
+        
         this.setData({
           agree: newVal.agreeCount || oldVal.agreeCount || 0
         });
