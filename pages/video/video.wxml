@@ -53,7 +53,7 @@
 
     <scroll-view class='comment-list' scroll-y bindscrolltolower='loadFatherComments'>
       <comment wx:for='{{commentData.commentList}}' wx:key='{{index}}' commentInfo='{{item}}' bind:agreeChange='agreeChange' bind:toggleModelChild='toggleModelChild' data-index='{{index}}'></comment>
-      <loadingTip canLoadMore='{{commentData.canLoadMore}}'></loadingTip>     
+
     </scroll-view>
 
     <view class='input-wrapper'>

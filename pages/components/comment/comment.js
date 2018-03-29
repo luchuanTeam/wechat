@@ -1,4 +1,4 @@
-// pages/components/comment/comment.js
+
 Component({
   /**
    * 组件的属性列表
@@ -16,7 +16,6 @@ Component({
         commentCount: 0
       },
       observer(newVal, oldVal) {    // 当父组件传入 commentInfo 的值发生改变时
-        
         this.setData({
           agree: newVal.agreeCount || oldVal.agreeCount || 0
         });
@@ -47,14 +46,15 @@ Component({
       });
     },
     toggleAgree() {
-      let _clickAgree = this.data.clickAgree;
-      let _agree = _clickAgree ? this.data.agree-1 : this.data.agree+1;
+      let _clickAgree = this.data.clickAgree,
+          _agree = _clickAgree ? this.data.agree-1 : this.data.agree+1,
+          flag = _clickAgree ? 0 : 1
           
       this.setData({
         agree: _agree,
         clickAgree: !_clickAgree
       });   
-      this.triggerEvent('agreeChange', {agree: this.data.agree, commentId: this.properties.commentInfo.commentId});
+      this.triggerEvent('agreeChange', {commentId: this.properties.commentInfo.commentId, flag: flag})
     },
     comment() {
     	this.triggerEvent('toggleModelChild');

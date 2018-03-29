@@ -4,8 +4,7 @@ const $ = require('../../utils/ajax.js'),
 const REFRESH = 1,
       PAGE_SIZE = 3;
 
-var _canLoadMore = 'commentData.canLoadMore',
-    _commentList = 'commentData.commentList',
+var  _commentList = 'commentData.commentList',
     _video = 'videoData.video';
 
 Page({
@@ -37,12 +36,11 @@ Page({
       criteria: '1',            // 评论的展示类型 1最新 2所有 3精华
       commentList: [],          // 评论列表数
       modelInput: '0',           // 评论模态框的展示, 0 隐藏, 1 显示
-      canLoadMore: '1',
-      modelChildComment: '0',
+      modelChildComment: '0',   // 用于确定父评论下 子评论列表页面 的展示 1 显示 0 隐藏
       parentComment: {}       // 用于存储父评论，当要获取某一评论的所有子评论时，用该对象存储点击的父评论
     },
     agreeChangeComments: {},
-    childComments: {}
+    childComments: {}       // 存储父评论的子评论 key:父评论Id, value : {} 包含comments 属性，该属性对应的值是父评论的子评论列表
   },
 
   /**
@@ -164,6 +162,7 @@ Page({
    */
   onLoad: function (options) {
     // 初始化从页面传递过来的视频id
+    commentStore.init();      // 初始化数据
     this.setData({
       mvId: options.id || 1
     });
@@ -181,14 +180,9 @@ Page({
       .then((res) => {
         if(res.status === 200) {
           this.setData({
-            [_commentList]: res.data.commentList,
-            [_canLoadMore]: res.data.canLoadMore
+            [_commentList]: res.data.commentList
           });
-        } else if(res.status === 100 && this.data.commentData.canLoadMore === '1') {
-          this.setData({
-            [_canLoadMore]: res.data.canLoadMore
-          });  
-        }
+        } 
       }).catch((err) => {
         console.log(err);
       });
@@ -275,18 +269,12 @@ Page({
    */
   agreeChange(e) {
     let index = e.currentTarget.dataset.index,      // 获取点赞的评论在 commentList 的下标
-        agree = e.detail.agree,                        
+        agree = e.detail.agree,          
+        flag = e.detail.flag,              
         commentId = e.detail.commentId,
-        comment = this.data.commentData.commentList[index],   // 获取点赞或取消点赞的评论
-        agreeChangeComments = this.data.agreeChangeComments;
-    if (comment.commentId === commentId && comment.agreeCount !== agree) {
-      agreeChangeComments[commentId] = agree;         //如果点赞增加则要记录
-    } else {
-      agreeChangeComments[commentId] && delete agreeChangeComments[commentId];  //如果取消点赞则删除记录
-    }   
-    this.setData({
-      agreeChangeComments: agreeChangeComments
-    });
+        commentList = this.data.commentData.commentList;   // 获取点赞或取消点赞的评论
+    commentStore.dispatch('toggleAgree', { commentId: commentId, flag: flag});  
+    
   },
 
   /**
@@ -294,6 +282,7 @@ Page({
    */
   onReady: function () {
     this.videoContext = wx.createVideoContext('myVideo');   // 获取控制视频的对象，操作组件内 <video/> 组件
+    
   },
 
   /**
@@ -315,19 +304,7 @@ Page({
    * 客户离开页面时先判断客户有没有点赞，若有点赞再统一请求点赞接口
    */
   onUnload: function () {
-    console.log('unload');
-    // let agreeChangeComments = this.data.agreeChangeComments;
-    // if(JSON.stringify(agreeChangeComments) !== '{}') {
-    //   agreeChangeComments.userId = 1;     // 暂时写上，user功能完善从user获取
-    //   $.post({
-    //     url: 'https://www.yanda123.com/yanda/comment/addAgreeCount',
-    //     data: agreeChangeComments
-    //   }).then((res)=>{
-
-    //   }).catch((err)=>{
-    //     console.log(err);
-    //   })   
-    // }  
+    
   },
 
   /**
