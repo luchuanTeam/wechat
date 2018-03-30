@@ -31,6 +31,7 @@ const INIT = function() {
   this.evilAgree = false;        // 频繁点赞
   this.agreeChangeObj = {};
   this.startTime = '';         // 点赞的起始时间
+  this.hasAgrees = [];        // 已经点赞过的评论
 }
 
 /**
@@ -83,8 +84,14 @@ const privateActions = {
     refresh === 1 && (commentList = []);
     privateState.pageNum * privateState.pageSize < total ? privateState.pageNum++ : privateState.canLoadMore = '0';
     for (let i = 0; i < list.length; i++) {
-      list[i].userName = privateState.user.userName,
-      list[i].avatar = privateState.user.avatar,
+      list[i].userName = privateState.user.userName;
+      list[i].avatar = privateState.user.avatar;
+      for (let j = 0, hasAgrees = privateState.hasAgrees; j < hasAgrees.length; j++) {
+        if(list[i].commentId === hasAgrees[j].commentId) {
+          list[i].hasAgree = 1;
+          break;
+        }
+      }
       commentList.push(list[i]);
     }
     privateState.commentList = commentList;
@@ -104,8 +111,8 @@ const privateActions = {
     childComment.pageNum * childComment.pageSize > childComment.total ? childComment.canLoadMore = '0' : childComment.pageNum++;
 
     for (let i = 0; i < list.length; i++) {
-      list[i].userName = privateState.user.userName,
-      list[i].avatar = privateState.user.avatar,
+      list[i].userName = privateState.user.userName;
+      list[i].avatar = privateState.user.avatar;
       childComment.comments.push(list[i]);
     }
     childComments[parentId] = childComment;
@@ -118,7 +125,7 @@ const privateActions = {
    * 发送点赞或取消点赞请求
    * @param obj.userId 点赞用户Id
    * @param obj.commentId 点赞评论的Id
-   * @param obj.flag 点赞或取消点赞的标记。1：点赞， 其他： 取消点赞
+   * @param obj.episodeId 对应的视频Id
    */
   toggleAgreeCount(obj) {
     return new Promise((resolve, reject)=> {
@@ -127,7 +134,7 @@ const privateActions = {
         data: {
           userId: obj.userId,
           commentId: obj.commentId,
-          flag: obj.flag
+          episodeId: obj.episodeId
         }
       }).then((res) => {
         resolve(res);
@@ -135,9 +142,28 @@ const privateActions = {
         reject(err);
       });
     })
+  },
+
+  /**
+   * 获取用户在某一视频下所有点赞过的评论记录
+   * @param userId 用户ID
+   * @param episodeId 视频ID
+   */
+  listUserAgrees(userId, episodeId) {
+    return new Promise((resolve, reject)=> {
+      $.get({
+        url: 'http://localhost:8080/yanda/userAgree/list',
+        data: {
+          userId: userId,
+          episodeId: episodeId
+        }
+      }).then((res) => {
+        resolve(res);
+      }).catch((err) => {
+        reject(err);
+      });
+    });
   }
-
-
 
 }
 
@@ -254,10 +280,8 @@ const actions = {
    * @param obj.flag 标记 1 代表点赞，其他（默认为0）代表取消点赞
    */
   toggleAgree(obj) {
-    let commentId = obj.commentId,
-        flag = obj.flag;
+    let commentId = obj.commentId, episodeId = obj.episodeId;
     privateState.agreeChangeObj[commentId] ? privateState.agreeChangeObj[commentId]++ : privateState.agreeChangeObj[commentId] = 1;
-    console.log(privateState.agreeChangeObj[commentId], privateState.evilAgree);
     // 获取现在点赞的时间，上一次点赞的时间
     let now = new Date(), lastTime = privateState.startTime;
     privateState.startTime = now;
@@ -271,15 +295,33 @@ const actions = {
     privateState.evilAgree = false;
     return new Promise((resolve, reject)=> {
       privateActions.toggleAgreeCount({
-        userId: privateState.user.userId,
+        userId: 1,
         commentId: commentId,
-        flag: flag
+        episodeId: episodeId
       }).then((res) => {
         resolve(res);
       }).catch((err) => {
         reject(err);
       });
     })
+  },
+
+  /**
+   * 加载用户在该视频下已点赞过的评论 
+   * @param episodeId 视频Id
+   */
+  loadUserAgrees(episodeId) {
+    let userId = privateState.user.userId;
+    return new Promise((resolve, reject)=> {
+      privateActions.listUserAgrees(userId, episodeId).then((res) => {
+        if (res.data.status === 200) {
+          privateState.hasAgrees = res.data.data.list;
+          resolve(res);
+        }
+      }).catch((err) => {
+        reject(err);
+      });
+    });
   }
 }
 

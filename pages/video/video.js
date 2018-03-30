@@ -1,14 +1,12 @@
-const utils = require('../../utils/util.js');
-const $ = require('../../utils/ajax.js'),
+const utils = require('../../utils/util.js'),
+      $ = require('../../utils/ajax.js'),
       commentStore = require('../../store/commentStore.js');
-const REFRESH = 1,
-      PAGE_SIZE = 3;
 
-var  _commentList = 'commentData.commentList',
+const REFRESH = 1,
+    _commentList = 'commentData.commentList',
     _video = 'videoData.video';
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -161,13 +159,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    commentStore.init();
     // 初始化从页面传递过来的视频id
-    commentStore.init();      // 初始化数据
     this.setData({
       mvId: options.id || 1
     });
     this.loadMovie(this.data.mvId);
-    this.loadFatherComments(REFRESH)
+    let self = this;
+    commentStore.dispatch('loadUserAgrees', self.data.videoData.video.episodeId).then((res)=>{
+      self.loadFatherComments(REFRESH);
+    }).catch((err)=> {
+      console.log(err);
+    });
+    
   },
 
   /**
@@ -268,13 +272,8 @@ Page({
    * 点赞事件，子组件触发
    */
   agreeChange(e) {
-    let index = e.currentTarget.dataset.index,      // 获取点赞的评论在 commentList 的下标
-        agree = e.detail.agree,          
-        flag = e.detail.flag,              
-        commentId = e.detail.commentId,
-        commentList = this.data.commentData.commentList;   // 获取点赞或取消点赞的评论
-    commentStore.dispatch('toggleAgree', { commentId: commentId, flag: flag});  
-    
+    let commentId = e.detail.commentId;
+    commentStore.dispatch('toggleAgree', {commentId: commentId, episodeId: this.data.videoData.video.episodeId});  
   },
 
   /**
