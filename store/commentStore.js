@@ -293,13 +293,14 @@ const actions = {
     }      
     // 间隔超过10秒, 直接发送请求
     privateState.evilAgree = false;
+    let self = this;
     return new Promise((resolve, reject)=> {
       privateActions.toggleAgreeCount({
         userId: 1,
         commentId: commentId,
         episodeId: episodeId
       }).then((res) => {
-        resolve(res);
+        self.loadUserAgrees(episodeId);   //点赞完后要重新获取点赞过的记录
       }).catch((err) => {
         reject(err);
       });
