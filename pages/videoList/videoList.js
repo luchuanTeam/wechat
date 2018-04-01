@@ -8,13 +8,19 @@ Page({
     pageSize: 8,
     pageNum: 1,
     videoIntros: [],
-    canLoadMore: '1'
+    canLoadMore: '1',
+    classifyId: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 获取页面传过来的分类ID
+    let id = options.classifyId;
+    this.setData({
+      classifyId: id
+    });
     this.loadMovies(this.data.pageNum, this.data.pageSize);
   },
 
@@ -24,8 +30,8 @@ Page({
   loadMovies: function (pageNum, pageSize) {
     var that = this;
     $.get({
-      url: "https://www.yanda123.com/yanda/movie/list",
-      data: { pageNum: pageNum, pageSize: pageSize }
+      url: "https://www.yanda123.com/yanda/movie/getPubMovies",
+      data: { pageNum: pageNum, pageSize: pageSize, classifyId: this.data.classifyId}
     }).then((res) => {
       if (res.data.status === 200) {
         let movies = res.data.data.list,
