@@ -53,7 +53,7 @@ Page({
    */
   toVideoList(e) {
     wx.navigateTo({
-      url: '../videoList/videoList',
+      url: '../videoList/videoList?classifyId=' + e.target.dataset.id,
     });
   },
 
