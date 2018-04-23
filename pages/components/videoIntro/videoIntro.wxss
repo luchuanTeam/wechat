@@ -40,6 +40,5 @@
   display:inline-block;
   top:50%;
   left:50%;
-  margin-left: -36rpx!important;
-  margin-top: -36rpx!important;
+  transform: translate3d(-50%, -50%, 0);
 }

@@ -19,12 +19,12 @@ Page({
       video: {
         mvSrc: '',                           // 视频地址
         imgSrc: '',                           //视频封面地址
-        episodeName: '我是陈大牛',                  // 视频标题
-        episodeIntro: '这是唐代诗人王维创作的一首劝慰友人落第的诗',
-        series: '国学/唐诗系列',                 // 系列  
-        episodeCount: 20,                       // 集数
+        episodeName: '',                  // 视频标题
+        episodeIntro: '',
+        series: '',                 // 系列  
+        episodeCount: 1,                       // 集数
         episodeId: '1',                          // 视频id
-        episodeNum: 0                           // 当前正在播放的集数          
+        episodeNum: 1                           // 当前正在播放的集数          
       },
       showVideoHiddenIntro: '0',  //  控制隐藏简介的显示状态, '1'代表显示
       playing: 0,               // 正在播放的集数，控制绿色三角形的显示
@@ -68,6 +68,7 @@ Page({
     // this.setData({
     //   [data]: e.currentTarget.dataset.index   
     // });
+    commentStore.init();
     this.loadEpisode(e.currentTarget.dataset.index);
   },
   /**
@@ -133,9 +134,9 @@ Page({
         if(res.data.status === 200) {
           this.toggleModelInput();
           if(parentId) {
-            this.loadChildComments(parentId, REFRESH);  
+            this.loadChildComments(parentId, REFRESH);  //如果是在父评论下评论，要刷新子评论
           }
-          this.loadFatherComments(REFRESH);   // 评论完刷新数据
+          this.loadFatherComments(REFRESH);   // 评论完刷新父评论数据
         }
       }).catch((err)=> {
         console.log(err);
@@ -165,13 +166,6 @@ Page({
       mvId: options.id || 1
     });
     this.loadMovie(this.data.mvId);
-    let self = this;
-    commentStore.dispatch('loadUserAgrees', self.data.videoData.video.episodeId).then((res)=>{
-      self.loadFatherComments(REFRESH);
-    }).catch((err)=> {
-      console.log(err);
-    });
-    
   },
 
   /**
@@ -180,7 +174,7 @@ Page({
    */
   loadFatherComments(refresh) {
     commentStore.dispatch('loadFatherComments', 
-      { episodeId: 1, criteria: this.data.commentData.criteria, refresh: refresh })
+      { episodeId: this.data.videoData.video.episodeId, criteria: this.data.commentData.criteria, refresh: refresh })
       .then((res) => {
         if(res.status === 200) {
           this.setData({
@@ -227,6 +221,12 @@ Page({
         episodeInfo.imgSrc = 'https://www.yanda123.com/yanda/attach/readFile?size=800&id=' + episodeInfo.imgAppendixId;
         this.setData({
           [_video]: episodeInfo
+        });
+        let self = this;
+        commentStore.dispatch('loadUserAgrees', self.data.videoData.video.episodeId).then((res) => {
+          self.loadFatherComments(REFRESH);
+        }).catch((err) => {
+          console.log(err);
         });
       }
     }).catch((err) => {

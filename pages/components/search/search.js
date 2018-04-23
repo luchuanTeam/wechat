@@ -26,10 +26,17 @@ Component({
     },
     search() {
       let data = utils.trim(this.data.inputValue);
-      if(/*data !== ''*/ true) {
-        wx.navigateTo({
-          url: '../video/video?episodeId=1',
-        });
+      if(data !== '') {
+        wx.showToast({
+          title: '该功能尚未开发',
+          icon: 'none',
+          mask: true,
+          complete: () => {
+            setTimeout(function () {
+              wx.hideToast();
+            }, 1000)
+          }
+        });     
       } else {
         wx.showToast({
           title: '请输入搜索内容',
