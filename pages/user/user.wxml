@@ -1,4 +1,9 @@
-<!--logs.wxml-->
-<view class="container">
-    <text class="">用户名: {{ userInfo.userName }}</text>
+<view class="user-container">
+  <view class='header-wrapper'>
+    <header></header>
+  </view>
+  <view class='search-wrapper'>
+    <search></search>
+  </view>
+  <view class='setting' data-page='mySetting' bindtap='toOtherPage'>我的设置</view>
 </view>

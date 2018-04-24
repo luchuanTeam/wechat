@@ -3,8 +3,12 @@ Page({
     userInfo: {}
   },
   onLoad: function () {
-    this.setData({
-      userInfo: {userName: '克劳德'}
-    })
+    
+  },
+  toOtherPage(e) {
+    let pageName = e.currentTarget.dataset.page + '/' + e.currentTarget.dataset.page;
+    wx.navigateTo({
+      url: '../' + pageName ,
+    });
   }
 })

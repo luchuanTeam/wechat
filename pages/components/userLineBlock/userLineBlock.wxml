@@ -1,0 +1,4 @@
+<view class='user-line-block'>
+  <view class='text'>{{text}}</view>
+  <view class='icon'>{{msg}} ></view>
+</view>

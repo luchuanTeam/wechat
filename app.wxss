@@ -12,6 +12,13 @@ page {
   box-sizing: border-box;
 } 
 
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
 .hide {
   display: none !important;
 }
@@ -50,3 +57,40 @@ image {
   width: 50%;
 }
 
+/*背景颜色为 #e5e5e5 的容器，宽高都为100% */
+.gray-container {
+  width: 100%;
+  height: 100%;
+  background: #e5e5e5;
+}
+
+/*个人主页某些包含特殊内容 通用行的样式*/
+.common-user-line-wrapper {
+  box-sizing:border-box;
+  padding:47rpx 30rpx;
+  width:100%;
+  height: 120rpx;
+  background:#fff;
+}
+/*个人主页通用行内 文字样式*/
+.common-user-line-wrapper .text {
+  font-family: SourceHanSansSC-Regular;
+  color: #333;
+  line-height: 26rpx;
+  font-size: 26rpx;
+}
+
+/*个人主页通用行内 图标样式*/
+.common-user-line-wrapper .icon {
+  height: 26rpx;
+  line-height: 26rpx;
+  font-size: 26rpx;
+}
+
+/*模拟1px的border, 颜色为 #e5e5e5 */
+.line-gray-border {
+  display: block;
+  width: 100%;
+  height: 2rpx;
+  background: #e5e5e5;
+}

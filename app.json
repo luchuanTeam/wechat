@@ -6,7 +6,9 @@
     "pages/user/user",
     "pages/video/video",
     "pages/zone/zone",
-    "pages/videoList/videoList"
+    "pages/videoList/videoList",
+    "pages/mySetting/mySetting",
+    "pages/account/account"
   ],
   "window": {
     "backgroundTextStyle": "light",
