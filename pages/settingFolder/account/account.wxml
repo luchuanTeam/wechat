@@ -1,10 +1,10 @@
 <view class='account-container gray-container'>
-  <view class='account-wrapper common-user-line-wrapper'>
+  <view class='account-wrapper common-user-line-wrapper' bindtap='toUserMsgPage'>
     <view class='text float-left'>账号资料</view>
     <view class='icon float-right'>></view>
     <view class='text float-right user-name'>樱木花道</view>
     <view class='avatar float-right'>
-      <image src='../../resources/images/fenlei.png'></image>
+      <image src='../../../resources/images/fenlei.png'></image>
     </view>
   </view>
   <view class='line-gray-border'></view>

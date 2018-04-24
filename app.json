@@ -7,8 +7,10 @@
     "pages/video/video",
     "pages/zone/zone",
     "pages/videoList/videoList",
-    "pages/mySetting/mySetting",
-    "pages/account/account"
+    "pages/settingFolder/mySetting/mySetting",
+    "pages/settingFolder/account/account",
+    "pages/settingFolder/aboutUs/aboutUs",
+    "pages/settingFolder/userMsg/userMsg"
   ],
   "window": {
     "backgroundTextStyle": "light",

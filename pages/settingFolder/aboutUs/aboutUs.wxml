@@ -1,0 +1,35 @@
+<view class='about-us-container'>
+  <view class='common-user-line-wrapper'>
+    <view class='image-wrapper float-left'>
+      <image src='../../../resources/images/fenlei.png'></image>
+    </view>
+    <view class='text float-left'>公司介绍</view>
+    <view class='icon float-right'>></view>
+  </view>
+  <view class='line-gray-border'></view>
+  <view class='common-user-line-wrapper'>
+    <view class='image-wrapper float-left'>
+      <image src='../../../resources/images/fenlei.png'></image>
+    </view>
+    <view class='text float-left'>联系方式</view>
+    <view class='icon float-right'>></view>
+  </view>
+  <view class='line-gray-border'></view>
+  <view class='common-user-line-wrapper'>
+    <view class='image-wrapper float-left'>
+      <image src='../../../resources/images/fenlei.png'></image>
+    </view>
+    <view class='text float-left'>加入我们</view>
+    <view class='icon float-right'>></view>
+  </view>
+  <view class='line-gray-border'></view>
+  <view class='common-user-line-wrapper'>
+    <view class='image-wrapper float-left'>
+      <image src='../../../resources/images/fenlei.png'></image>
+    </view>
+    <view class='text float-left'>隐私保护声明</view>
+    <view class='icon float-right'>></view>
+  </view>
+  <view class='line-gray-border'></view>
+  <view class='yanda-intro'>燕达教育 小程序</view>
+</view>

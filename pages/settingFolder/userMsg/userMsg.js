@@ -1,15 +1,11 @@
-// pages/account/account.js
+// pages/settingFolder/userMsg/userMsg.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    phoneText: '手机号',
-    phone: '187****0407',
-    emailText: '邮箱',
-    email: '277514786@qq.com',
-    modifyPassword: '修改密码'
+  
   },
 
   /**

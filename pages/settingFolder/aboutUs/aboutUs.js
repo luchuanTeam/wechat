@@ -1,21 +1,12 @@
-// pages/mySetting/mySetting.js
+// pages/aboutUs/aboutUs.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    accountAndSafe: '账户与安全',
-    checkAndUpdate: '检查更新',
-    aboutUs: '关于我们'
+  
   },
-
-  toAccountPage() {
-    wx.navigateTo({
-      url: '../account/account',
-    });
-  },
-
 
   /**
    * 生命周期函数--监听页面加载
