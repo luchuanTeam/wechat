@@ -1,0 +1,48 @@
+.login-container {
+  position: absolute;
+  top: 158.5rpx;
+  bottom: 0;
+  width: 100%;
+  z-index: 100;
+  background: #fff;
+  transition: all 0.2s linear;
+}
+
+.login-container.hidden {
+  transform: translate3d(0, 100%, 0);
+}
+
+.input-wrapper {
+  display: flex;
+  margin: 20rpx 0;
+  padding: 0 40rpx;
+}
+
+.input-wrapper .text {
+  display: inline-block;
+  line-height: 76.5rpx;
+}
+
+.input-wrapper .input {
+  margin-left: 30rpx;
+  padding: 10rpx 20rpx;
+  flex: 1;
+  border: 2rpx solid #999;
+  border-radius: 10rpx;
+}
+
+.button-line {
+  display: flex;
+}
+
+.button-line .btn-wrapper {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-line .btn-wrapper .btn {
+  display: inline-block;
+  width: 200rpx;
+}

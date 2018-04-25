@@ -3,13 +3,13 @@
     <view class='text float-left'>头像</view>
     <view class='icon float-right'>></view>
     <view class='avatar float-right'>
-      <image src='../../../resources/images/fenlei.png'></image>
+      <image src='{{userInfo.avatar}}'></image>
     </view>
   </view>
   <view class='line-gray-border'></view>
   <view class='common-user-line-wrapper'>
     <view class='text float-left'>昵称</view>
-    <view class='msg float-left'>樱木花道</view>
+    <view class='msg float-left'>{{userInfo.userName}}</view>
   </view>
   <view class='line-gray-border'></view>
   <view class='common-user-line-wrapper'>

@@ -6,10 +6,11 @@ Page({
    */
   data: {
     phoneText: '手机号',
-    phone: '187****0407',
+    mobile: '187****0407',
     emailText: '邮箱',
     email: '277514786@qq.com',
-    modifyPassword: '修改密码'
+    modifyPassword: '修改密码',
+    userInfo: {}
   },
 
   /**
@@ -24,7 +25,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let userInfo = wx.getStorageSync('userInfo');
+    console.log('userInfo is: ' + JSON.stringify(userInfo));
+    let mobile = userInfo.mobile;
+    mobile = mobile.slice(0,3) + '****' + mobile.slice(7);
+    this.setData({
+      userInfo: userInfo,
+      mobile: mobile
+    })
+
   },
 
   /**

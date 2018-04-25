@@ -48,8 +48,22 @@ const formatLine = (str)=> {
   }
 }
 
+const quickTip = (str)=> {
+  wx.showToast({
+    title: str,
+    icon: 'none',
+    mask: true,
+    complete: () => {
+      setTimeout(function () {
+        wx.hideToast();
+      }, 1000)
+    }
+  });
+}
+
 module.exports = {
   formatTime: formatTime,
   trim: trim,
-  formatLine: formatLine
+  formatLine: formatLine,
+  quickTip: quickTip
 }

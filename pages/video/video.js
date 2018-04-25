@@ -11,6 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userInfo: '',           // 已登录的用户信息
     mvId: '',            //从页面传过来的视频ID参数
     episodeCount: '',
     showCenterPlayBtn: false,
@@ -68,7 +69,7 @@ Page({
     // this.setData({
     //   [data]: e.currentTarget.dataset.index   
     // });
-    commentStore.init();
+    commentStore.init(this.data.userInfo);
     this.loadEpisode(e.currentTarget.dataset.index);
   },
   /**
@@ -92,11 +93,16 @@ Page({
   },
 
   toggleModelInput() {
-    let data = 'commentData.modelInput';
-    this.setData({
-      [data]: this.data.commentData.modelInput === '0'? '1':'0'
-    });
-    this.data.commentData.modelInput === '1' && (this.videoContext.pause());  //弹出评论模态框后暂停视频播放
+    if(this.data.userInfo) {
+      let data = 'commentData.modelInput';
+      this.setData({
+        [data]: this.data.commentData.modelInput === '0' ? '1' : '0'
+      });
+      this.data.commentData.modelInput === '1' && (this.videoContext.pause());  //弹出评论模态框后暂停视频播放
+    } else {
+      utils.quickTip('请先登录');
+    }
+    
   },
 
   /**
@@ -113,6 +119,7 @@ Page({
    * 提交评论，此处将换行符统一替换为逗号再提交
    */
   commitComment() {
+    let userInfo = this.data.userInfo;
     let data = this.data.commentData.commentContent,
         parentId = '';
     data = utils.formatLine(data);
@@ -123,12 +130,14 @@ Page({
     if(data !== ''){
       let commentInfo = {
         commentContent: data,     // 评论内容
-        userId: 1,               // 用户id
+        userId: userInfo.userId,               // 用户id
+        userName: userInfo.userName,
+        avatar: userInfo.avatar,
         parentId: parentId,
         episodeId: this.data.videoData.video.episodeId      // 视频id
       }  
       $.post({
-        url: 'https://www.yanda123.com/yanda/comment/saveComment',
+        url: 'http://localhost:8080/yanda/comment/saveComment',
         data: commentInfo
       }).then((res)=> {
         if(res.data.status === 200) {
@@ -142,16 +151,7 @@ Page({
         console.log(err);
       });
     } else {
-      wx.showToast({
-        title: '请输入评论内容',
-        icon: 'none',
-        mask: true,
-        complete: () => {
-          setTimeout(function () {
-            wx.hideToast();
-          }, 1000)
-        }
-      });
+      utils.quickTip('请输入评论内容');
     }
   },
 
@@ -160,10 +160,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    commentStore.init();
+    let userInfo = wx.getStorageSync('userInfo');
+    commentStore.init(userInfo);
+    
     // 初始化从页面传递过来的视频id
     this.setData({
-      mvId: options.id || 1
+      mvId: options.id || 1,
+      userInfo: userInfo
     });
     this.loadMovie(this.data.mvId);
   },
@@ -222,12 +225,16 @@ Page({
         this.setData({
           [_video]: episodeInfo
         });
-        let self = this;
-        commentStore.dispatch('loadUserAgrees', self.data.videoData.video.episodeId).then((res) => {
-          self.loadFatherComments(REFRESH);
-        }).catch((err) => {
-          console.log(err);
-        });
+        if(this.data.userInfo && JSON.stringify(this.data.userInfo)!== '{}') {
+          let self = this;
+          commentStore.dispatch('loadUserAgrees', self.data.videoData.video.episodeId).then((res) => {
+            self.loadFatherComments(REFRESH);
+          }).catch((err) => {
+            console.log(err);
+          });
+        } else {
+          this.loadFatherComments(REFRESH);
+        }
       }
     }).catch((err) => {
       console.log(err);
@@ -272,8 +279,13 @@ Page({
    * 点赞事件，子组件触发
    */
   agreeChange(e) {
-    let commentId = e.detail.commentId;
-    commentStore.dispatch('toggleAgree', {commentId: commentId, episodeId: this.data.videoData.video.episodeId});  
+    if(this.data.userInfo) {
+      let commentId = e.detail.commentId;
+      commentStore.dispatch('toggleAgree', { commentId: commentId, episodeId: this.data.videoData.video.episodeId, userId: this.data.userInfo.userId });  
+    } else {
+      utils.quickTip('请先登录');
+    }
+    
   },
 
   /**

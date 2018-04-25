@@ -6,4 +6,26 @@
     <search></search>
   </view>
   <view class='setting' data-page='mySetting' bindtap='toOtherPage'>我的设置</view>
+
+  <view class="login-container {{hasLogin ? 'hidden': ''}}">
+    <form bindsubmit='formSubmit'>
+      <view class='input-wrapper'>
+        <text class='text'>账号</text>
+        <input class='input' name='username'></input>
+      </view> 
+      <view class='input-wrapper'>
+        <text class='text'>密码</text>
+        <input class='input' type='password' name='password'></input>
+      </view> 
+      <view class='button-line'>
+        <view class='btn-wrapper'>
+          <button form-type='submit' class='btn'>登录</button>
+        </view>
+        <view class='btn-wrapper'>
+          <button class='btn'>注册</button>
+        </view>
+      </view>
+    </form>
+    
+  </view>
 </view>
