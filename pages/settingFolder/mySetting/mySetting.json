@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我的设置",
+  "usingComponents": {
+    "user-line-block": "../../components/userLineBlock/userLineBlock"
+  }
+}

@@ -1,0 +1,24 @@
+<view class='user-msg-container gray-container'>
+  <view class='common-user-line-wrapper'>
+    <view class='text float-left'>头像</view>
+    <view class='icon float-right'>></view>
+    <view class='avatar float-right'>
+      <image src='{{userInfo.avatar}}'></image>
+    </view>
+  </view>
+  <view class='line-gray-border'></view>
+  <view class='common-user-line-wrapper'>
+    <view class='text float-left'>昵称</view>
+    <view class='msg float-left'>{{userInfo.userName}}</view>
+  </view>
+  <view class='line-gray-border'></view>
+  <view class='common-user-line-wrapper'>
+    <view class='text float-left'>性别</view>
+    <view class='msg float-left'>男</view>
+  </view>
+  <view class='line-gray-border'></view>
+  <view class='common-user-line-wrapper'>
+    <view class='text float-left'>生日</view>
+    <view class='msg float-left'>1995-03-08</view>
+  </view>
+</view>

@@ -58,9 +58,23 @@ const getAttachSrc = (attchment) => {
   return domain + filePath + '/' + fileName + '.' + ext;
 }
 
+const quickTip = (str)=> {
+  wx.showToast({
+    title: str,
+    icon: 'none',
+    mask: true,
+    complete: () => {
+      setTimeout(function () {
+        wx.hideToast();
+      }, 1000)
+    }
+  });
+}
+
 module.exports = {
   formatTime: formatTime,
   trim: trim,
   formatLine: formatLine,
-  getAttachSrc: getAttachSrc
+  getAttachSrc: getAttachSrc,
+  quickTip: quickTip
 }

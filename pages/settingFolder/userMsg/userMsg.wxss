@@ -1,0 +1,20 @@
+.user-msg-container .avatar {
+  position: relative;
+  right: 10rpx;
+  top: -26rpx;
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.user-msg-container .avatar image {
+  border-radius: 50%;
+}
+
+.user-msg-container .msg {
+  margin-left: 40rpx;
+  font-family:SourceHanSansSC-Regular;
+  color:#999;
+  line-height:26rpx;
+  font-size:26rpx;
+
+}

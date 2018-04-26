@@ -1,0 +1,24 @@
+.user-name {
+  margin-right: 6rpx;
+}
+
+.account-wrapper .avatar {
+  position: relative;
+  right: 10rpx;
+  top: -26rpx;
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.account-wrapper .avatar image {
+  border-radius: 50%;
+}
+
+.logout {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: #EC6941;
+  font-size: 30rpx;
+}

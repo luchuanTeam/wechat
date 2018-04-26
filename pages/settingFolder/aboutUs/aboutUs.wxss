@@ -1,0 +1,14 @@
+.about-us-container .image-wrapper {
+  margin-right: 10rpx;
+  width: 40rpx;
+  height: 32rpx;
+}
+
+.about-us-container .yanda-intro {
+  position: absolute;
+  bottom: 72rpx;
+  width: 100%;
+  text-align: center;
+  color: #999;
+  font-size: 22rpx;
+}

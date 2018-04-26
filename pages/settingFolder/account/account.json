@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "账户与安全",
+  "usingComponents": {
+    "user-line-block": "../../components/userLineBlock/userLineBlock"
+  }
+}

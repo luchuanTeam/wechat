@@ -1,0 +1,13 @@
+<view class='my-setting-container gray-container'>
+  <user-line-block text='{{accountAndSafe}}' bindtap='toAccountPage'></user-line-block>
+  <view class='line-space'></view>
+  <view class='clear-cache common-user-line-wrapper'>
+    <view class='text float-left'>清除缓存</view>
+    <view class='text float-right'>45.84MB</view>
+  </view>
+  <view class='line-gray-border'></view>
+  <user-line-block text='{{checkAndUpdate}}'></user-line-block>
+  <view class='line-space'></view>
+  <user-line-block text='{{aboutUs}}' bindtap='toAboutUsPage'></user-line-block>
+  <view class='yanda-intro'>燕达教育 小程序</view>
+</view>

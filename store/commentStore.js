@@ -16,11 +16,7 @@ const RESULT = function(status, message, data) {
  * 起始数据
  */
 const INIT = function() {
-  this.user = {
-    userId: 1,
-    userName: '樱木花道',
-    avatar: '../../../resources/images/fenlei.png'  
-  };
+  this.user = {};
   this.commentList = [];      // 视频的直接评论列表
   this.parentComment = {};    // 显示子评论时用于保存对应的父评论
   this.childComments = {};    // 保存所加载过得子评论集合 key值是父评论的ID，value是object对象，其中的comments 是对应的子评论列表
@@ -55,7 +51,7 @@ const privateActions = {
   loadComments(obj) {
     return new Promise((resolve, reject) => {
       $.get({
-        url: 'https://www.yanda123.com/yanda/comment/list',
+        url: 'http://localhost:8080/yanda/comment/list',
         data: {
           pageNum: obj.pageNum,
           pageSize: obj.pageSize,
@@ -84,8 +80,6 @@ const privateActions = {
     refresh === 1 && (commentList = []);
     privateState.pageNum * privateState.pageSize < total ? privateState.pageNum++ : privateState.canLoadMore = '0';
     for (let i = 0; i < list.length; i++) {
-      list[i].userName = privateState.user.userName;
-      list[i].avatar = privateState.user.avatar;
       for (let j = 0, hasAgrees = privateState.hasAgrees; j < hasAgrees.length; j++) {
         if(list[i].commentId === hasAgrees[j].commentId) {
           list[i].hasAgree = 1;
@@ -111,8 +105,6 @@ const privateActions = {
     childComment.pageNum * childComment.pageSize > childComment.total ? childComment.canLoadMore = '0' : childComment.pageNum++;
 
     for (let i = 0; i < list.length; i++) {
-      list[i].userName = privateState.user.userName;
-      list[i].avatar = privateState.user.avatar;
       childComment.comments.push(list[i]);
     }
     childComments[parentId] = childComment;
@@ -280,7 +272,7 @@ const actions = {
    * @param obj.flag 标记 1 代表点赞，其他（默认为0）代表取消点赞
    */
   toggleAgree(obj) {
-    let commentId = obj.commentId, episodeId = obj.episodeId;
+    let commentId = obj.commentId, episodeId = obj.episodeId, userId = obj.userId;
     privateState.agreeChangeObj[commentId] ? privateState.agreeChangeObj[commentId]++ : privateState.agreeChangeObj[commentId] = 1;
     // 获取现在点赞的时间，上一次点赞的时间
     let now = new Date(), lastTime = privateState.startTime;
@@ -296,7 +288,7 @@ const actions = {
     let self = this;
     return new Promise((resolve, reject)=> {
       privateActions.toggleAgreeCount({
-        userId: 1,
+        userId: userId,
         commentId: commentId,
         episodeId: episodeId
       }).then((res) => {
@@ -339,8 +331,9 @@ const dispatch = (actionName, obj)=> {
 /**
  * 初始化数据
  */
-const init = function() {
+const init = function(userInfo) {
   privateState = new INIT();
+  privateState.user = userInfo || '';
 }
 
 module.exports = {

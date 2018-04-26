@@ -1,5 +1,5 @@
 <!--pages/content/content.wxml-->
-<view class='content'>
+<view class='content-container'>
   
   <view class='header-wrapper'>
     <header></header>

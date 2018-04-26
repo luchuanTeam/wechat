@@ -47,7 +47,7 @@ Page({
     });
   },
   /**
-   * 组合 videoStations 数据
+   * 组合 videoIntros 数据
    */
   groupvideoIntros(data) {
     let videoIntros = this.data.videoIntros,
@@ -84,7 +84,6 @@ Page({
         console.log(err);
       });
   },
-
 
   loadBanners: function () {
     var that = this;
