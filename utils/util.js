@@ -1,3 +1,5 @@
+const domain = 'https://www.yanda123.com';
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -48,8 +50,17 @@ const formatLine = (str)=> {
   }
 }
 
+const getAttachSrc = (attchment) => {
+  let filePath = attchment.filePath;
+  let fileName = attchment.newFilename;
+  let ext = attchment.fileExt;
+  filePath = filePath.substring(filePath.indexOf('/video')); 
+  return domain + filePath + '/' + fileName + '.' + ext;
+}
+
 module.exports = {
   formatTime: formatTime,
   trim: trim,
-  formatLine: formatLine
+  formatLine: formatLine,
+  getAttachSrc: getAttachSrc
 }

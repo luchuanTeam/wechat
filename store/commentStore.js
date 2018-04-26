@@ -130,7 +130,7 @@ const privateActions = {
   toggleAgreeCount(obj) {
     return new Promise((resolve, reject)=> {
       $.post({
-        url: 'http://localhost:8080/yanda/comment/toggleAgreeCount',
+        url: 'https://www.yanda123.com/yanda/comment/toggleAgreeCount',
         data: {
           userId: obj.userId,
           commentId: obj.commentId,
@@ -152,7 +152,7 @@ const privateActions = {
   listUserAgrees(userId, episodeId) {
     return new Promise((resolve, reject)=> {
       $.get({
-        url: 'http://localhost:8080/yanda/userAgree/list',
+        url: 'https://www.yanda123.com/yanda/userAgree/list',
         data: {
           userId: userId,
           episodeId: episodeId

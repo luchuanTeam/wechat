@@ -223,7 +223,7 @@ Page({
     }).then((res) => {
       let episodeInfo = res.data;
       if (episodeInfo) {
-        episodeInfo.mvSrc = 'https://www.yanda123.com/yanda/attach/readFile?id=' + episodeInfo.mvAppendixId;
+        episodeInfo.mvSrc = utils.getAttachSrc(episodeInfo.mvAttach);
         episodeInfo.imgSrc = 'https://www.yanda123.com/yanda/attach/readFile?size=800&id=' + episodeInfo.imgAppendixId;
         this.setData({
           [_video]: episodeInfo
