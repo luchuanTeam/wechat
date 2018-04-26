@@ -35,6 +35,12 @@
         "text": "分类",
         "iconPath": "resources/images/fenlei.png",
         "selectedIconPath": "resources/images/fenlei_select.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "resources/images/my.png",
+        "selectedIconPath": "resources/images/my_select.png"
       }
     ]
   },
