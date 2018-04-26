@@ -13,7 +13,7 @@ Page({
           token = wx.getStorageInfoSync('token');
       if(sessionId && token) {
         $.post({
-          url: 'http://localhost:8080/yanda/user/checkToken',
+          url: 'https://www.yanda123.com/yanda/user/checkToken',
           header: { "Content-Type": "application/x-www-form-urlencoded" },
           data: {
             sessionId: sessionId,
@@ -51,7 +51,7 @@ Page({
       util.quickTip('请输入账号');
     } else {
       $.post({
-        url: 'http://localhost:8080/yanda/user/login',
+        url: 'https://www.yanda123.com/yanda/user/login',
         header: {"Content-Type": "application/x-www-form-urlencoded"},
         data: {
           userName: userName,

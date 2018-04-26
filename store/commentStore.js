@@ -51,7 +51,7 @@ const privateActions = {
   loadComments(obj) {
     return new Promise((resolve, reject) => {
       $.get({
-        url: 'http://localhost:8080/yanda/comment/list',
+        url: 'https://www.yanda123.com/yanda/comment/list',
         data: {
           pageNum: obj.pageNum,
           pageSize: obj.pageSize,

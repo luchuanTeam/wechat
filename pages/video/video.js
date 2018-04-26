@@ -137,7 +137,7 @@ Page({
         episodeId: this.data.videoData.video.episodeId      // 视频id
       }  
       $.post({
-        url: 'http://localhost:8080/yanda/comment/saveComment',
+        url: 'https://www.yanda123.com/yanda/comment/saveComment',
         data: commentInfo
       }).then((res)=> {
         if(res.data.status === 200) {
