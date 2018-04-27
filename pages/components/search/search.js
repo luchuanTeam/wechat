@@ -1,4 +1,5 @@
-var utils = require('../../../utils/util.js');
+var utils = require('../../../utils/util.js'),
+  $ = require('../../../utils/ajax.js');
 // pages/components/search.js
 Component({
   /**
@@ -27,16 +28,7 @@ Component({
     search() {
       let data = utils.trim(this.data.inputValue);
       if(data !== '') {
-        wx.showToast({
-          title: '该功能尚未开发',
-          icon: 'none',
-          mask: true,
-          complete: () => {
-            setTimeout(function () {
-              wx.hideToast();
-            }, 1000)
-          }
-        });     
+        this.doSearch(data);
       } else {
         wx.showToast({
           title: '请输入搜索内容',
@@ -49,6 +41,38 @@ Component({
           }
         });
       }
+    },
+    doSearch(searchVal) {
+      $.get({
+        url: 'https://www.yanda123.com/yanda/movie/search',
+        data: { searchVal: searchVal}
+      }).then((res) => {
+        if (res.data.status === 200) {
+          wx.showToast({
+            title: res.data.message,
+            icon: 'none',
+            mask: true,
+            complete: () => {
+              setTimeout(function () {
+                wx.hideToast();
+              }, 1000)
+            }
+          });
+        } else {
+          wx.showToast({
+            title: res.data.message,
+            icon: 'none',
+            mask: true,
+            complete: () => {
+              setTimeout(function () {
+                wx.hideToast();
+              }, 1000)
+            }
+          });
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
     }
   }
 })
