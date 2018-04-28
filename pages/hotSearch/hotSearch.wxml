@@ -1,0 +1,10 @@
+<view class='hot-search-container'>
+  <view class='search-wrapper'>
+   <input class='search' bindinput='bindKeyInput' placeholder='搜索古诗或课程' placeholder-class="placeholder" confirm-type='search' focus='true'></input>
+   <view class='text' bindtap='search'>
+    <text>搜   索</text>
+   </view>
+  </view>
+
+  <view></view>
+</view>

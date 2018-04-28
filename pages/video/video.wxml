@@ -78,7 +78,7 @@
         <text>相关回复</text>
         <text class='text'>共 {{childComments[commentData.parentComment.commentId].total}} 条</text>
       </view>
-      <comment wx:for='{{childComments[commentData.parentComment.commentId].comments}}' wx:key='{{index}}' commentInfo='{{item}}' data-index='{{index}}'></comment>
+      <comment wx:for='{{childComments[commentData.parentComment.commentId].comments}}' wx:key='{{index}}' commentInfo='{{item}}' data-index='{{index}}' userInfo='{{userInfo}}'></comment>
     </scroll-view>
 
     <view class='input-wrapper'>
@@ -95,7 +95,7 @@
     </view>
     <form>
     <view class='text-area'>
-      <textarea class='text' auto-focus="{{commentData.modelInput === '1'}}" placeholder='我也来说两句' bindinput='enterComment'></textarea>
+      <textarea class='text' placeholder='我也来说两句' bindinput='enterComment' focus='{{textAreaFocus}}'></textarea>
     </view>
     <button class='commit-btn text' bindtap='commitComment' form-type='reset'>提 交</button>
     </form>

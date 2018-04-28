@@ -1,4 +1,4 @@
-
+const utils = require('../../../utils/util.js');
 Component({
   /**
    * 组件的属性列表
@@ -26,6 +26,10 @@ Component({
     showCommentBtn: {
     	type: String,
     	value: '1'
+    },
+    userInfo: {
+      type: Object,
+      value: ''
     }
   },
 
@@ -48,14 +52,18 @@ Component({
       });
     },
     toggleAgree() {
-      let hasAgree = this.data.hasAgree,
-          _agree = hasAgree ? this.data.agree-1 : this.data.agree+1;
-          
-      this.setData({
-        agree: _agree,
-        hasAgree: !hasAgree
-      });   
-      this.triggerEvent('agreeChange', {commentId: this.properties.commentInfo.commentId})
+      if(this.properties.userInfo) {
+        let hasAgree = this.data.hasAgree,
+          _agree = hasAgree ? this.data.agree - 1 : this.data.agree + 1;
+
+        this.setData({
+          agree: _agree,
+          hasAgree: !hasAgree
+        });
+        this.triggerEvent('agreeChange', { commentId: this.properties.commentInfo.commentId })
+      } else {
+        utils.quickTip('请先登录');
+      }
     },
     comment() {
     	this.triggerEvent('toggleModelChild');

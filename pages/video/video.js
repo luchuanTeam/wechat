@@ -15,6 +15,7 @@ Page({
     mvId: '',            //从页面传过来的视频ID参数
     episodeCount: '',
     showCenterPlayBtn: false,
+    textAreaFocus: false,
     selected: '1',        // 决定显示视频组件或者评论组件, '1'代表视频组件, '2'代表评论组件
     videoData: {        // 视频组件的状态数据
       video: {
@@ -95,10 +96,24 @@ Page({
   toggleModelInput() {
     if(this.data.userInfo) {
       let data = 'commentData.modelInput';
-      this.setData({
-        [data]: this.data.commentData.modelInput === '0' ? '1' : '0'
-      });
-      this.data.commentData.modelInput === '1' && (this.videoContext.pause());  //弹出评论模态框后暂停视频播放
+      if(this.data.commentData.modelInput === '1') {
+        this.setData({
+          textAreaFocus: false
+        });
+         // 需要先将软键盘收起，再隐藏模态框，如不延时操作，则会导致页面样式错乱
+        setTimeout(()=> {  
+          this.setData({
+            [data]: '0'
+          });  
+        }, 500);
+      } else {
+        this.setData({
+          [data]: '1',
+          textAreaFocus: true
+        });
+        this.videoContext.pause();  //弹出评论模态框后暂停视频播放
+      }
+      
     } else {
       utils.quickTip('请先登录');
     }
@@ -282,8 +297,6 @@ Page({
     if(this.data.userInfo) {
       let commentId = e.detail.commentId;
       commentStore.dispatch('toggleAgree', { commentId: commentId, episodeId: this.data.videoData.video.episodeId, userId: this.data.userInfo.userId });  
-    } else {
-      utils.quickTip('请先登录');
     }
     
   },

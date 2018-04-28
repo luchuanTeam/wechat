@@ -1,0 +1,24 @@
+.hot-search-container .search-wrapper {
+  display: flex;
+}
+
+.hot-search-container .search-wrapper .search {
+  flex: 1;
+  padding: 6rpx 20rpx 6rpx 20rpx;
+  border: 1px solid #7aa247;
+  border-radius: 10rpx;
+  height: 50rpx;
+  color: #222222;
+}
+
+.hot-search-container .search-wrapper .text {
+  display: flex;
+  flex: 0 0 150rpx;
+  margin-left: 20rpx;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #7aa247;
+  color: #fff;
+  border-radius: 10rpx;
+}

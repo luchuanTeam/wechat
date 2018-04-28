@@ -58,15 +58,28 @@ const getAttachSrc = (attchment) => {
   return domain + filePath + '/' + fileName + '.' + ext;
 }
 
-const quickTip = (str)=> {
+/**
+ * 快捷提示框
+ * @param str: 快捷提示标语
+ * @param icon: 图标，有效值只能为 'success', 'loading', 'none' 默认值为 'none'
+ * @param time: 快捷提示框显示时间 默认值设为 1000 毫秒
+ */
+const quickTip = (str, icon, time)=> {
+  if(!str) {
+    return;
+  }
+  if(icon !== 'success' || icon !== 'loading') {
+    icon = 'none'
+  }
+  !time && (time = 1000);
   wx.showToast({
     title: str,
-    icon: 'none',
+    icon: icon,
     mask: true,
     complete: () => {
       setTimeout(function () {
         wx.hideToast();
-      }, 1000)
+      }, time)
     }
   });
 }

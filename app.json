@@ -10,7 +10,8 @@
     "pages/settingFolder/mySetting/mySetting",
     "pages/settingFolder/account/account",
     "pages/settingFolder/aboutUs/aboutUs",
-    "pages/settingFolder/userMsg/userMsg"
+    "pages/settingFolder/userMsg/userMsg",
+    "pages/hotSearch/hotSearch"
   ],
   "window": {
     "backgroundTextStyle": "light",

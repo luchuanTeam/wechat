@@ -30,16 +30,7 @@ Component({
       if(data !== '') {
         this.doSearch(data);
       } else {
-        wx.showToast({
-          title: '请输入搜索内容',
-          icon: 'none',
-          mask: true,
-          complete: ()=> {
-            setTimeout(function () {
-              wx.hideToast();
-            }, 1000)
-          }
-        });
+        utils.quickTip('请输入搜索内容');
       }
     },
     doSearch(searchVal) {
@@ -47,32 +38,15 @@ Component({
         url: 'https://www.yanda123.com/yanda/movie/search',
         data: { searchVal: searchVal}
       }).then((res) => {
-        if (res.data.status === 200) {
-          wx.showToast({
-            title: res.data.message,
-            icon: 'none',
-            mask: true,
-            complete: () => {
-              setTimeout(function () {
-                wx.hideToast();
-              }, 1000)
-            }
-          });
-        } else {
-          wx.showToast({
-            title: res.data.message,
-            icon: 'none',
-            mask: true,
-            complete: () => {
-              setTimeout(function () {
-                wx.hideToast();
-              }, 1000)
-            }
-          });
-        }
+        utils.quickTip(res.data.message);
       }).catch((err) => {
         console.log(err);
       });
+    },
+    toHotSearchPage() {
+      wx.navigateTo({
+        url: '../hotSearch/hotSearch',
+      })
     }
   }
 })
