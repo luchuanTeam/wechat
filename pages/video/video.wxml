@@ -1,6 +1,6 @@
 <view class='video-page-container'> 
 
-  <video id='myVideo' src='{{ videoData.video.mvSrc }}' class='video' hidden="{{commentData.modelInput === '1'}}" poster="{{ videoData.video.imgSrc }}">
+  <video id='myVideo' src='{{ videoData.video.mvSrc }}' class='video' hidden="{{commentData.modelInput === '1'}}" poster="{{ videoData.video.imgSrc }}" autoplay="true">
   </video>
   
   <view class='tab-wrapper'>

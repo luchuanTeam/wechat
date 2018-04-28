@@ -1,22 +1,18 @@
 <view class="user-container">
-  <view class='header-wrapper'>
-    <header></header>
+  <!--<view class='setting' data-page='mySetting' bindtap='toOtherPage'>我的设置</view>-->
+  <view class="userinfo">
+    <text class="userinfo-nickname" wx:if="{{hasLogin}}">您好，{{userInfo.userName}}</text>
   </view>
-  <view class='search-wrapper'>
-    <search></search>
-  </view>
-  <view class='setting' data-page='mySetting' bindtap='toOtherPage'>我的设置</view>
-
-  <view class="login-container {{hasLogin ? 'hidden': ''}}">
+  <view wx:if="{{!hasLogin}}" class="login-container {{hasLogin ? 'hidden': ''}}">
     <form bindsubmit='formSubmit'>
       <view class='input-wrapper'>
         <text class='text'>账号</text>
         <input class='input' name='username'></input>
-      </view> 
+      </view>
       <view class='input-wrapper'>
         <text class='text'>密码</text>
         <input class='input' type='password' name='password'></input>
-      </view> 
+      </view>
       <view class='button-line'>
         <view class='btn-wrapper'>
           <button form-type='submit' class='btn'>登录</button>
@@ -26,6 +22,6 @@
         </view>
       </view>
     </form>
-    
+
   </view>
 </view>

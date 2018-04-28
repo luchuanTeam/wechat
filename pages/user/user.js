@@ -22,10 +22,10 @@ Page({
         }).then((res)=> {
           let result = res.data;
           if(result.status === 200) {
-            wx.setStorageSync('userInfo', result.data.userInfo);
+            wx.setStorageSync('userInfo', result.data);
             this.setData({
               hasLogin: true,
-              userInfo: result.data.userInfo
+              userInfo: result.data.data
             });
           }   
         }).catch((err)=> {
@@ -34,7 +34,8 @@ Page({
       }    
     } else {
       this.setData({
-        hasLogin: true
+        hasLogin: true,
+        userInfo: userInfo
       })
     }
   },
@@ -63,12 +64,11 @@ Page({
         if(result.status === -1) {
           util.quickTip(result.message);
         } else if(result.status === 200){
-          wx.setStorageSync('userInfo', result.data.userInfo);   //本地存储
+          wx.setStorageSync('userInfo', result.data.userInfo);
           wx.setStorageSync('sessionId', result.data.sessionId);
           wx.setStorageSync('token', result.data.token);
           this.setData({
-            hasLogin: true,
-            userInfo: result.data.userInfo
+            hasLogin: true
           });
         } else {
           util.quickTip('网络错误，请稍后再试'); 

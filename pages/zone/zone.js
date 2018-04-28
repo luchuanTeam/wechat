@@ -38,6 +38,7 @@ Page({
    */
   changeSelected(e) {
     let id = e.target.dataset.id;
+    getApp().globalData.selected = id;
     if (this.data.categoryCache[id]) {
       this.setData({
         selected: id,

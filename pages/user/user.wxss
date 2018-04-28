@@ -46,3 +46,14 @@
   display: inline-block;
   width: 200rpx;
 }
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 200rpx;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
