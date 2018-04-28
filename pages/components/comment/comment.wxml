@@ -4,7 +4,7 @@
       <image src='{{commentInfo.avatar}}'></image>
     </view>
     <view class='info'>
-      <view class='user-name'>{{commentInfo.userName}}</view>
+      <view class='user-name'>{{commentInfo.nickName}}</view>
       <view class='create-time'>{{commentInfo.createTime}}</view>
     </view>
     <view class='tip-off clear'>

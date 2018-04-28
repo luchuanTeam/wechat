@@ -25,7 +25,7 @@ Page({
             wx.setStorageSync('userInfo', result.data);
             this.setData({
               hasLogin: true,
-              userInfo: result.data.data
+              userInfo: result.data
             });
           }   
         }).catch((err)=> {
@@ -68,7 +68,8 @@ Page({
           wx.setStorageSync('sessionId', result.data.sessionId);
           wx.setStorageSync('token', result.data.token);
           this.setData({
-            hasLogin: true
+            hasLogin: true,
+            userInfo: result.data.userInfo
           });
         } else {
           util.quickTip('网络错误，请稍后再试'); 

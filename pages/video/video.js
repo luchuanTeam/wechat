@@ -146,7 +146,7 @@ Page({
       let commentInfo = {
         commentContent: data,     // 评论内容
         userId: userInfo.userId,               // 用户id
-        userName: userInfo.userName,
+        nickName: userInfo.nickName,
         avatar: userInfo.avatar,
         parentId: parentId,
         episodeId: this.data.videoData.video.episodeId      // 视频id
