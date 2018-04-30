@@ -78,5 +78,14 @@ Page({
         console.log(err);
       })
     }
+  },
+  logout(e) {
+    wx.removeStorageSync('userInfo');
+    wx.removeStorageSync('sessionId');
+    wx.removeStorageSync('token');
+    this.setData({
+      hasLogin: false,
+      userInfo: {}
+    });
   }
 })

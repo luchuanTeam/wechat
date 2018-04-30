@@ -57,3 +57,8 @@
 .userinfo-nickname {
   color: #aaa;
 }
+
+.logout {
+  position: relative;
+  margin-top: 40rpx; 
+}

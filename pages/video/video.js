@@ -14,6 +14,11 @@ Page({
     userInfo: '',           // 已登录的用户信息
     mvId: '',            //从页面传过来的视频ID参数
     episodeCount: '',
+    episodeList: [],
+    currentEpisode: {
+      episodeId: 1,             
+      episodeNum: 1
+    },
     showCenterPlayBtn: false,
     textAreaFocus: false,
     selected: '1',        // 决定显示视频组件或者评论组件, '1'代表视频组件, '2'代表评论组件
@@ -184,6 +189,7 @@ Page({
       userInfo: userInfo
     });
     this.loadMovie(this.data.mvId);
+    this.getEpisodeList(this.data.mvId);
   },
 
   /**
@@ -215,7 +221,6 @@ Page({
         this.setData({
           episodeCount: res.data.episodeCount
         });
-        this.loadEpisode(1);
       }
     }).catch((err) => {
       console.log(err);
@@ -225,20 +230,21 @@ Page({
   /**
    * 点击不同集数获取对应的视频集信息
    */
-  loadEpisode(episodeNum) {
+  loadEpisode(episodeId) {
     $.get({
-      url: 'https://www.yanda123.com/yanda/episode/getEpisode',
-      data: {
-        mvId: this.data.mvId,
-        episodeNum: episodeNum || 1
-      }
+      url: 'https://www.yanda123.com/yanda/episode/getDetailEpisode/' + episodeId
     }).then((res) => {
       let episodeInfo = res.data;
       if (episodeInfo) {
         episodeInfo.mvSrc = utils.getAttachSrc(episodeInfo.mvAttach);
         episodeInfo.imgSrc = 'https://www.yanda123.com/yanda/attach/readFile?size=800&id=' + episodeInfo.imgAppendixId;
+        let currentEpisode = {
+          episodeId: episodeId,
+          episodeNum: episodeInfo.episodeInfo
+        };
         this.setData({
-          [_video]: episodeInfo
+          [_video]: episodeInfo,
+          currentEpisode: currentEpisode
         });
         if(this.data.userInfo && JSON.stringify(this.data.userInfo)!== '{}') {
           let self = this;
@@ -299,6 +305,22 @@ Page({
       commentStore.dispatch('toggleAgree', { commentId: commentId, episodeId: this.data.videoData.video.episodeId, userId: this.data.userInfo.userId });  
     }
     
+  },
+
+
+  /**
+   * 获取当前视频下的视频集列表
+   */
+  getEpisodeList(mvId) {
+    $.get({
+      url: 'https://www.yanda123.com/yanda/episode/episodes/' + mvId
+    }).then((res) => {
+        this.setData({
+          episodeList: res.data,
+          currentEpisode: res.data[0]
+        });
+        this.loadEpisode(this.data.currentEpisode.episodeId);
+    });
   },
 
   /**

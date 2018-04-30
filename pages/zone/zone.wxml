@@ -1,19 +1,16 @@
 <view class='zone-container'>
-  <view class='header-wrapper'>
-    <header></header>
-  </view>
   <view class='search-wrapper'>
-    <search></search>
+    <search scrollTop='200'></search>
   </view>
   <view class='category-wrapper'>
     <view class='top-category'>
       <view class="text {{selected==item.id? 'selected':''}}" wx:for='{{topCategory}}' wx:key='{{index}}' data-id='{{item.id}}' bindtap='changeSelected'>
         <text></text>
-        {{item.desc}}
+        {{item.label}}
       </view>
     </view>
     <view class='secondary-category'>
-      <view wx:for='{{secondCategory}}' wx:key='{{index}}' class='{{styleArr[index % styleArr.length]}}' bindtap='toVideoList' data-id='{{ item.id }}'>
+      <view wx:for='{{secondCategory}}' wx:key='{{index}}' class='{{styleArr[index % styleArr.length]}} tag-common' bindtap='toVideoList' data-id='{{ item.id }}'>
         {{item.desc}}
       </view>
     </view>

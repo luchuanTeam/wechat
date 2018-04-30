@@ -1,11 +1,10 @@
 {
   "pages": [
-    "pages/content/content",
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/user/user",
-    "pages/video/video",
     "pages/zone/zone",
+    "pages/user/user",
+    "pages/user/home/home",
+    "pages/video/video",
     "pages/videoList/videoList",
     "pages/settingFolder/mySetting/mySetting",
     "pages/settingFolder/account/account",
@@ -15,9 +14,9 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#000",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "燕达教育",
-    "navigationBarTextStyle": "#fff"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "color": "#8a8a8a",
@@ -26,7 +25,7 @@
     "backgroundColor": "#fff",
     "list": [
       {
-        "pagePath": "pages/content/content",
+        "pagePath": "pages/index/index",
         "text": "首页",
         "iconPath": "resources/images/home.png",
         "selectedIconPath": "resources/images/home_select.png"
@@ -38,10 +37,16 @@
         "selectedIconPath": "resources/images/fenlei_select.png"
       },
       {
-        "pagePath": "pages/user/user",
+        "pagePath": "pages/user/home/home",
         "text": "我的",
         "iconPath": "resources/images/my.png",
         "selectedIconPath": "resources/images/my_select.png"
+      },
+      {
+        "pagePath": "pages/settingFolder/mySetting/mySetting",
+        "text": "推广",
+        "iconPath": "resources/images/tg.png",
+        "selectedIconPath": "resources/images/tg_select.png"
       }
     ]
   },

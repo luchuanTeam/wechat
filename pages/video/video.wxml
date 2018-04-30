@@ -23,9 +23,9 @@
         <view class='text' bindtap='toggleHideEpisode'>{{videoData.video.series}}</view>
       </view>
       <scroll-view scroll-x='true' class='scroll'>
-        <view wx:for='{{episodeCount}}' class='episode' data-index='{{item+1}}' bindtap='togglePlay' wx:key='{{item}}'>
-          <text class="text {{item==(videoData.video.episodeNum-1)?'hide':''}}">{{item+1}}</text>
-          <view class="arrow-right {{item==(videoData.video.episodeNum-1)?'':'hide'}}"></view>
+        <view wx:for='{{episodeList}}' class='episode' data-index='{{item.episodeId}}' bindtap='togglePlay' wx:key='{{item}}'>
+          <text class="text {{item.episodeId ==(currentEpisode.episodeId)?'hide':''}}">{{item.episodeNum}}</text>
+          <view class="arrow-right {{item.episodeId ==(currentEpisode.episodeId)?'':'hide'}}"></view>
         </view>
       </scroll-view>
     </view>

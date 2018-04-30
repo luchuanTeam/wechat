@@ -1,7 +1,8 @@
-<view class="user-container">
+<view class="container">
   <!--<view class='setting' data-page='mySetting' bindtap='toOtherPage'>我的设置</view>-->
   <view class="userinfo">
     <text class="userinfo-nickname" wx:if="{{hasLogin}}">您好，{{userInfo.nickName}}</text>
+    <button class="logout" type="default" bindtap="logout" hover-class="other-button-hover"> 注销 </button>
   </view>
   <view wx:if="{{!hasLogin}}" class="login-container {{hasLogin ? 'hidden': ''}}">
     <form bindsubmit='formSubmit'>
