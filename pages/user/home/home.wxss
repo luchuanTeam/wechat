@@ -1,21 +1,99 @@
-/**index.wxss**/
+.container {
+  background: #f7f7f7;
+}
+
+
 .userinfo {
+  width: 94%;
+  height: 240rpx;
+  background: -webkit-linear-gradient(left, rgba(236,62,61, 1),  rgba(253,109,85, 1));
+  border-radius: 10rpx;
+  position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-size: 28rpx;
+  color: #fff;
+}
+
+.userinfo .left {
+  position: relative;
+  display:flex;
+  width: 68%;
+}
+
+.userinfo .login {
+  display: flex;
+  margin: auto;
+  width: 128rpx;
+  font-size: 28rpx;
+  color: #fff;
+  background: rgba(236,62,61, 1);
 }
 
 .userinfo-avatar {
   width: 128rpx;
   height: 128rpx;
-  margin: 20rpx;
+  margin:auto 20rpx;
   border-radius: 50%;
+  display: flex;
 }
 
 .userinfo-nickname {
-  color: #aaa;
+  margin:auto 20rpx;
 }
 
-.usermotto {
-  margin-top: 100px;
+.userinfo .right {
+  position: relative;
+  display:flex;
+  margin:auto 20rpx;
+  color: #851e17;
+}
+
+.setting-icon {
+  width: 42rpx;
+  height: 42rpx;
+  margin-right: 10rpx;
+  display: inline-block;
+  top:12rpx;
+  position:relative;
+}
+
+.workbench {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30rpx 0;
+  width: 100%;
+}
+
+.workbench .work-card {
+  position: relative;
+  width: 33.3%;
+  text-align: center;
+  background: #fff;
+  height: 180rpx;
+  border: 1px solid #f7f7f7;
+  box-sizing: border-box;
+  align-items: center;
+}
+.work-card .img-wrapper {
+   width: 60rpx;
+  height: 60rpx;
+  margin: 24rpx auto;
+}
+
+.work-card .img-wrapper image {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.work-card text {
+  font-size: 28rpx;
+}
+
+.footer {
+  text-align: center;
+  font-size: 24rpx;
+  color: #888;
+  position: fixed;
+  bottom: 28rpx;
 }

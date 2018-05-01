@@ -13,5 +13,5 @@
   <user-line-block text='{{emailText}}' msg='{{email}}'></user-line-block>
   <view class='line-gray-border'></view>
   <user-line-block text='{{modifyPassword}}'></user-line-block>
-  <view class='logout common-user-line-wrapper'>退出登录</view>
+  <view class='logout common-user-line-wrapper' bindtap='logout'>退出登录</view>
 </view>

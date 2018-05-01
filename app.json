@@ -41,12 +41,6 @@
         "text": "我的",
         "iconPath": "resources/images/my.png",
         "selectedIconPath": "resources/images/my_select.png"
-      },
-      {
-        "pagePath": "pages/settingFolder/mySetting/mySetting",
-        "text": "推广",
-        "iconPath": "resources/images/tg.png",
-        "selectedIconPath": "resources/images/tg_select.png"
       }
     ]
   },

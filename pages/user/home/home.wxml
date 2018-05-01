@@ -1,13 +1,38 @@
 <!--index.wxml-->
 <view class="container">
+  <!-- 用户信息模块 -->
   <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+    <view class="left">
+      <!-- 头像 -->
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl ?  userInfo.avatarUrl: '/resources/images/my.png'}}" background-size="cover"></image>
+      <!-- 用户名 -->
+      <text wx:if="{{hasUserInfo}}" class="userinfo-nickname">用户名: {{userInfo.nickName}}</text>
+      <!-- 登录按钮 -->
+      <button class="login" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
+    </view>
+    <!-- 账号管理 -->
+    <view class="right"  wx:if="{{hasUserInfo}}">
+      <navigator url="/pages/settingFolder/mySetting/mySetting" open-type="navigate">
+        <image src="https://www.yanda123.com/app/setup_fill.png" class="setting-icon" />
+        <text>账号管理</text>
+      </navigator>
+    </view>
   </view>
-  <view class="usermotto">
-    <text bindtap="gotoContent" class="user-motto">{{motto}}</text>
+
+  <!-- 工作台模块 -->
+  <view class="workbench">
+
+    <view class='work-card' bindtap="handleWorkClick" wx:for='{{workCards}}' wx:key='{{index}}' data-id='{{ item.id }}'>
+        <view class="img-wrapper">
+          <image src='{{ item.icon }}'></image>
+        </view>
+        <text class='text'>{{ item.label }}</text>  
+    </view>
+
+  </view>
+
+  <!-- 底部信息模块 -->
+  <view class="footer">
+    版权所有者：燕达教育
   </view>
 </view>

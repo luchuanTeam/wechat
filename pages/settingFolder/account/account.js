@@ -1,4 +1,6 @@
 // pages/account/account.js
+const app = getApp();
+
 Page({
 
   /**
@@ -10,7 +12,7 @@ Page({
     emailText: '邮箱',
     email: '277514786@qq.com',
     modifyPassword: '修改密码',
-    userInfo: {}
+    userInfo: app.globalData.userInfo
   },
 
   /**
@@ -20,6 +22,18 @@ Page({
     wx.navigateTo({
       url: '../userMsg/userMsg',
     })
+  },
+  /**
+   * 退出登录
+   */
+  logout() {
+    wx.removeStorageSync('userInfo');
+    wx.removeStorageSync('sessionId');
+    wx.removeStorageSync('token');
+    app.globalData.userInfo = '';
+    wx.switchTab({
+      url: '/pages/user/home/home'
+    });
   },
   /**
    * 生命周期函数--监听页面加载
