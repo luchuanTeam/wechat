@@ -28,7 +28,7 @@ Page({
   },
   //每次进入页面
   onShow: function () {
-    if (!app.globalData.userInfo) {
+    if (!wx.getStorageSync('userInfo')) {
       this.setData({
         userInfo: {},
         hasUserInfo: false
@@ -36,9 +36,10 @@ Page({
     }
   },
   onLoad: function () {    
-    if (app.globalData.userInfo) {  
+    console.log(JSON.stringify(wx.getStorageInfo('userInfo')));
+    if (wx.getStorageInfo('userInfo')) {  
       this.setData({
-        userInfo: app.globalData.userInfo,
+        userInfo: wx.getStorageInfo('userInfo'),
         hasUserInfo: true
       })
     } else if (this.data.canIUse) {
@@ -99,7 +100,6 @@ Page({
       if (result.status === -1) {
         utils.quickTip(result.message);
       } else if (result.status === 200) {
-        app.globalData.userInfo = result.data.userInfo;
         wx.setStorageSync('userInfo', result.data.userInfo);
         wx.setStorageSync('sessionId', result.data.sessionId);
         wx.setStorageSync('token', result.data.token);
@@ -153,7 +153,7 @@ Page({
           })
         }
       });
-      
+      app.globalData.userInfo = userInfo;
     } else {
       utils.quickTip('无法获取用户信息');
     }

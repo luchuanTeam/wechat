@@ -39,7 +39,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let userInfo = app.globalData.userInfo;
+    let userInfo = wx.getStorageSync('userInfo');
     let mobile = userInfo.mobile;
     mobile && (mobile = mobile.slice(0,3) + '****' + mobile.slice(7));
     this.setData({

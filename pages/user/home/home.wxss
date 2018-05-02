@@ -21,9 +21,9 @@
 }
 
 .userinfo .login {
-  display: flex;
+  flex: 0 0 128rpx;
   margin: auto;
-  width: 128rpx;
+  text-align: center;
   font-size: 28rpx;
   color: #fff;
   background: rgba(236,62,61, 1);
@@ -34,18 +34,21 @@
   height: 128rpx;
   margin:auto 20rpx;
   border-radius: 50%;
-  display: flex;
 }
 
 .userinfo-nickname {
-  margin:auto 20rpx;
+  margin:0 20rpx;
+  height: 100%;
+  line-height: 240rpx;
 }
 
 .userinfo .right {
   position: relative;
   display:flex;
-  margin:auto 20rpx;
+  margin:0 20rpx;
   color: #851e17;
+  height: 100%;
+  line-height: 240rpx;
 }
 
 .setting-icon {
