@@ -2,7 +2,7 @@
   <view class='account-wrapper common-user-line-wrapper' bindtap='toUserMsgPage'>
     <view class='text float-left'>账号资料</view>
     <view class='icon float-right'>></view>
-    <view class='text float-right user-name'>{{userInfo.userName}}</view>
+    <view class='text float-right user-name'>{{userInfo.nickName}}</view>
     <view class='avatar float-right'>
       <image src='{{userInfo.avatar}}'></image>
     </view>

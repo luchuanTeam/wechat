@@ -4,7 +4,7 @@
   <view class="userinfo">
     <view class="left">
       <!-- 头像 -->
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl ?  userInfo.avatarUrl: '/resources/images/my.png'}}" background-size="cover"></image>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatar ?  userInfo.avatar: '/resources/images/my.png'}}" background-size="cover"></image>
       <!-- 用户名 -->
       <text wx:if="{{hasUserInfo}}" class="userinfo-nickname">用户名: {{userInfo.nickName}}</text>
       <!-- 登录按钮 -->

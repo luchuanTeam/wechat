@@ -8,9 +8,9 @@ Page({
    */
   data: {
     phoneText: '手机号',
-    mobile: '187****0407',
+    mobile: '',
     emailText: '邮箱',
-    email: '277514786@qq.com',
+    email: '',
     modifyPassword: '修改密码',
     userInfo: app.globalData.userInfo
   },
@@ -39,14 +39,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let userInfo = wx.getStorageSync('userInfo');
-    console.log('userInfo is: ' + JSON.stringify(userInfo));
+    let userInfo = app.globalData.userInfo;
     let mobile = userInfo.mobile;
-    mobile = mobile.slice(0,3) + '****' + mobile.slice(7);
+    mobile && (mobile = mobile.slice(0,3) + '****' + mobile.slice(7));
     this.setData({
       userInfo: userInfo,
-      mobile: mobile
-    })
+      mobile: mobile || ''
+    });
 
   },
 

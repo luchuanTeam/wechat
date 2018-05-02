@@ -35,8 +35,8 @@ Page({
       })
     }
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
+  onLoad: function () {    
+    if (app.globalData.userInfo) {  
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
@@ -68,7 +68,6 @@ Page({
   register: function (openId, nickName, avatar, gender) {
     $.post({
       url: 'https://www.yanda123.com/yanda/user/registerByWechat',
-      header: { "Content-Type": "application/x-www-form-urlencoded" },
       data: {
         openId: openId,
         nickName: nickName,
@@ -79,7 +78,6 @@ Page({
       let data = res.data;
       if (data.status == 200) {
         let userInfo = data.data;
-        console.log(userInfo);
         this.login(userInfo.userName, userInfo.passowrd);
       } else {
         console.log('注册微信用户失败:' + data.message);
@@ -92,7 +90,6 @@ Page({
   login: function (userName, password) {
     $.post({
       url: 'https://www.yanda123.com/yanda/user/login',
-      header: { "Content-Type": "application/x-www-form-urlencoded" },
       data: {
         userName: userName,
         password: password
@@ -102,9 +99,14 @@ Page({
       if (result.status === -1) {
         utils.quickTip(result.message);
       } else if (result.status === 200) {
+        app.globalData.userInfo = result.data.userInfo;
         wx.setStorageSync('userInfo', result.data.userInfo);
         wx.setStorageSync('sessionId', result.data.sessionId);
         wx.setStorageSync('token', result.data.token);
+        this.setData({
+          userInfo: result.data.userInfo,
+          hasUserInfo: true
+        });
       } else {
         utils.quickTip('网络错误，请稍后再试');
       }
@@ -116,6 +118,7 @@ Page({
    * 在微信获取用户信息后进行用户信息初始化
    */
   initUserInfo: function (userInfo) {
+    console.log(`userInfo is: ${JSON.stringify(userInfo)}`);
     if (userInfo) {
       var that = this;
       // 调用login获取code，通过code获取openid，通过openid和当前用户做绑定
@@ -150,11 +153,7 @@ Page({
           })
         }
       });
-      app.globalData.userInfo = userInfo;
-      this.setData({
-        userInfo: userInfo,
-        hasUserInfo: true
-      });
+      
     } else {
       utils.quickTip('无法获取用户信息');
     }
