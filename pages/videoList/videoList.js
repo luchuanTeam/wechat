@@ -1,4 +1,5 @@
 var $ = require('../../utils/ajax.js');
+
 Page({
 
   /**
@@ -9,7 +10,9 @@ Page({
     pageNum: 1,
     videoIntros: [],
     canLoadMore: '1',
-    classifyId: ''
+    classifyId: '',
+    classifyName: '',
+    classifyPinyin: ''
   },
 
   /**
@@ -18,9 +21,19 @@ Page({
   onLoad: function (options) {
     // 获取页面传过来的分类ID
     let id = options.classifyId;
+    let classifyName = options.classifyName;
     this.setData({
-      classifyId: id
+      classifyId: id,
+      classifyName: classifyName
     });
+    let classifyPinyin = '';
+    this.getPinyin(classifyName).then((res) => {
+      classifyPinyin = res.data;
+      this.setData({
+        classifyPinyin: classifyPinyin
+      });
+    });
+    
     this.loadMovies(this.data.pageNum, this.data.pageSize);
   },
 
@@ -31,12 +44,12 @@ Page({
     var that = this;
     $.get({
       url: "https://www.yanda123.com/yanda/movie/getPubMovies",
-      data: { pageNum: pageNum, pageSize: pageSize, classifyId: this.data.classifyId}
+      data: { pageNum: pageNum, pageSize: pageSize, classifyId: this.data.classifyId }
     }).then((res) => {
       if (res.data.status === 200) {
         let movies = res.data.data.list,
           pageNum = that.data.pageNum;
-        
+
         movies.length >= 8 ? (pageNum++) : (that.setData({ canLoadMore: '0' }));
         that.groupvideoIntros({
           movies: movies,
@@ -65,39 +78,43 @@ Page({
     });
   },
 
+  getPinyin: function (content) {
+    return $.get({ url: 'https://www.yanda123.com/yanda/classify/getPinyin', data: {content: content} });
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
@@ -113,6 +130,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

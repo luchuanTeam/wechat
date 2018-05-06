@@ -11,7 +11,8 @@ Page({
     selected: '',                    // 被选择的一级目录
     styleArr: STYLE_ARR,            // 二级目录样式数组
     secondCategory: [],        // 选择一级目录对应的二级目录内容
-    categoryCache: {}         // 保存已加载的二级目录数据
+    categoryCache: {},         // 保存已加载的二级目录数据
+    oneLevName: ''
   },
   /**
    * 二级分类数据加载
@@ -22,6 +23,7 @@ Page({
        if (res.statusCode == 200) {
          let data = res.data;
          let key = 'categoryCache[' + id + ']';
+
          this.setData({
            selected: id,
            secondCategory: data,
@@ -38,11 +40,13 @@ Page({
    */
   changeSelected(e) {
     let id = e.target.dataset.id;
+    let name = e.target.dataset.name;
     getApp().globalData.selected = id;
     if (this.data.categoryCache[id]) {
       this.setData({
         selected: id,
-        secondCategory: this.data.categoryCache[id]
+        secondCategory: this.data.categoryCache[id],
+        oneLevName: name
       });
     } else {
       this.loadSecondCategory(id);
@@ -53,8 +57,9 @@ Page({
    * 跳转到视频列表页面
    */
   toVideoList(e) {
+    let twoLevName = e.target.dataset.name;
     wx.navigateTo({
-      url: '../videoList/videoList?classifyId=' + e.target.dataset.id,
+      url: '../videoList/videoList?classifyId=' + e.target.dataset.id + '&classifyName=' + this.data.oneLevName + '/' + twoLevName,
     });
   },
 
@@ -89,6 +94,14 @@ Page({
           this.setData({
             topCategory: data
           });
+          // 设置当前选中的一级分类名称
+          for (let i = 0; i < data.length; i++ ) {
+            if (data[i].id == id) {
+              this.setData({
+                oneLevName: data[i].label
+              });
+            }
+          }
           this.loadSecondCategory(id);
         }
       }).catch((err) => {

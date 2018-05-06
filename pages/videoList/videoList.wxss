@@ -1,13 +1,17 @@
+.video-list-container {
+  padding-top: 100rpx; 
+}
+
 .classify {
   height: 200rpx;
-  background: linear-gradient(#92dce0, #e4f5f5);
+  background: -webkit-linear-gradient(top, rgba(135,194,66, 1),  rgba(138,204,175, 1));
   color: #fff;
   text-align: center;
   border: 2rpx solid transparent;
+  font-size: 42rpx;
 }
 
 .classify .text {
-  font-size: 60rpx;
   margin-top: 30rpx;
 }
 

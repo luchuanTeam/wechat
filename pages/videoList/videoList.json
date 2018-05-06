@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "search": "../components/search/search",
+    "search": "../components/newsearch/search",
     "header": "../components/header/header",
     "loadingTip": "../components/loadingTip/loadingTip",
     "videoIntro": "../components/videoIntro/videoIntro"

@@ -1,13 +1,10 @@
 <view class='video-list-container'>
-  <view class='header-wrapper'>
-    <header></header>
-  </view>
   <view class='search-wrapper'>
     <search class="search"></search>
   </view>
   <view class='classify'>
-    <view class='text'>国学/唐诗系列</view>
-    <view class='py'>TANG SHI XI LIE</view>
+    <view class='text'>{{classifyName}}</view>
+    <view class='py'>{{classifyPinyin}}</view>
   </view>
 
   <view class='video-list'>

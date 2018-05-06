@@ -1,10 +1,78 @@
-<view class='hot-search-container'>
-  <view class='search-wrapper'>
-   <input class='search' bindinput='bindKeyInput' placeholder='搜索古诗或课程' placeholder-class="placeholder" confirm-type='search' focus='true'></input>
-   <view class='text' bindtap='search'>
-    <text>搜   索</text>
-   </view>
+<!-- <scroll-view class="container"> -->
+  <!-- 搜索框 -->
+  <view class="search-header">
+    <view class="input-box">
+      <image class="icon" src="https://www.yanda123.com/app/hotsearch.png"></image>
+      <input name="input" class="keywrod" focus="true" value="{{keyword}}" confirm-type="search" bindinput="inputChange" bindfocus="inputFocus" bindconfirm="onKeywordConfirm" placeholder="{{defaultKeyword.keyword}}" />
+      <image class="del" wx:if="{{keyword}}" bindtap="clearKeyword" src="https://www.yanda123.com/app/cancel.png"></image>
+    </view>
+    <view class="right" bindtap="closeSearch">取消</view>
   </view>
 
-  <view></view>
-</view>
+  <!-- 搜索历史记录 -->
+  <view class="no-search" wx:if="{{ !searchStatus}}">
+    <view class="search-keywords search-history" wx:if="{{!keyword  && historyKeyword.length}}">
+      <view class="h">
+        <text class="title">历史记录</text>
+        <image class="icon" bindtap="clearHistory" src="https://www.yanda123.com/app/search-del.png"></image>
+      </view>
+      <view class="b">
+        <view class="item" bindtap="onKeywordTap" data-keyword="{{item.keyword}}" wx:for="{{historyKeyword}}" wx:key="keyword" hover-class="navigator-hover">{{item.keyword}}</view>
+      </view>
+    </view>
+    <view class="search-keywords search-hot" wx:if="{{!keyword && hotKeyword.length}}">
+      <view class="h">
+        <text class="title">热门搜索</text>
+      </view>
+      <view class="b">
+        <view class="item {{item.is_hot === 1 ? 'active' : ''}}" hover-class="navigator-hover" bindtap="onKeywordTap" data-keyword="{{item.keyword}}" wx:for="{{hotKeyword}}" wx:key="id">{{item.keyword}}</view>
+      </view>
+    </view>
+    <view class="shelper-list" wx:if="{{keyword}}">
+      <view class="item" hover-class="navigator-hover" wx:for="{{helpKeyword}}" wx:key="id" bindtap="onKeywordTap" data-keyword="{{item}}">{{item}}</view>
+    </view>
+  </view>
+
+  <!-- 搜索结果 -->
+  <view class="search-result" wx:if="{{ searchStatus && mvList.length}}">
+  <!-- 搜索过滤器 -->
+    <view class="sort">
+      <view class="sort-box">
+        <view class="item {{currentSortType == 'default' ? 'active' : ''}}" bindtap="openSortFilter" id="default">
+          <text class="txt">默认</text>
+        </view>
+        <view class="item by-price {{currentSortType == 'name' ? 'active' : ''}} {{currentSortOrder == 'asc'  ? 'asc' : 'desc'}}" bindtap="openSortFilter" id="nameSort">
+          <text class="txt">名称</text>
+        </view>
+        <view class="item {{currentSortType == 'classify' ? 'active' : ''}}" bindtap="openSortFilter" id="categorySort">
+          <text class="txt">分类</text>
+        </view>
+      </view>
+      <view class="sort-box-category" wx-if="{{categoryFilter}}">
+        <view class="item {{item.checked ? 'active' : ''}}" wx:for="{{filterCategory}}" wx:key="id" data-category-index="{{item.classifyId}}" bindtap="selectCategory">{{item.classifyName}}</view>
+      </view>
+    </view>
+    <!-- 结果集 -->
+    <view class="cate-item">
+      <view class="b">
+        <view class="item" wx:for="{{mvList}}" wx:key="id" wx:for-item="item" wx:for-index="index">
+          <navigator url="/pages/video/video?id={{item.mvId}}" class="a">
+            <image class="img" src="{{item.imgUrl}}"></image>
+            <view class="right">
+            <view class="text">
+                <text class="name">{{item.mvName}}</text>
+                <text class="desc">{{item.classifyName}}</text>
+            </view>
+              
+            </view>
+          </navigator>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 无搜索结果 -->
+  <view class="search-result-empty" wx:if="{{!mvList.length && searchStatus}}">
+    <image class="icon" src="https://www.yanda123.com/app/search-empty.png"></image>
+    <text class="text">您寻找的视频还未上线</text>
+  </view>
+<!-- </scroll-view> -->

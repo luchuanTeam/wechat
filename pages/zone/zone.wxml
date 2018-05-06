@@ -4,13 +4,13 @@
   </view>
   <view class='category-wrapper'>
     <view class='top-category'>
-      <view class="text {{selected==item.id? 'selected':''}}" wx:for='{{topCategory}}' wx:key='{{index}}' data-id='{{item.id}}' bindtap='changeSelected'>
+      <view class="text {{selected==item.id? 'selected':''}}" wx:for='{{topCategory}}' wx:key='{{index}}' data-id='{{item.id}}' data-name='{{item.label}}' bindtap='changeSelected'>
         <text></text>
         {{item.label}}
       </view>
     </view>
     <view class='secondary-category'>
-      <view wx:for='{{secondCategory}}' wx:key='{{index}}' class='{{styleArr[index % styleArr.length]}} tag-common' bindtap='toVideoList' data-id='{{ item.id }}'>
+      <view wx:for='{{secondCategory}}' wx:key='{{index}}' class='{{styleArr[index % styleArr.length]}} tag-common' bindtap='toVideoList' data-id='{{ item.id }}' data-name='{{item.label}}'>
         {{item.desc}}
       </view>
     </view>

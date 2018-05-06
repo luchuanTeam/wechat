@@ -11,6 +11,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    videoIconUrl: 'https://www.yanda123.com/app/live-select.png',
+    commentIconUrl: 'https://www.yanda123.com/app/message.png',
     userInfo: '',           // 已登录的用户信息
     mvId: '',            //从页面传过来的视频ID参数
     episodeCount: '',
@@ -52,8 +54,20 @@ Page({
    * 点击改变展示的是视频内容或评论内容
    */
   changeSelected(e) {
+    let index = e.target.dataset.index;
+    let videoIconUrl = '';
+    let commentIconUrl = '';
+    if (index == '1') {
+      videoIconUrl = 'https://www.yanda123.com/app/live-select.png';
+      commentIconUrl = 'https://www.yanda123.com/app/message.png';
+    } else if (index == '2') {
+      videoIconUrl = 'https://www.yanda123.com/app/live.png';
+      commentIconUrl = 'https://www.yanda123.com/app/message-select.png';
+    }
     this.setData({
-      selected: e.target.dataset.index
+      selected: index,
+      videoIconUrl: videoIconUrl,
+      commentIconUrl: commentIconUrl
     });
   },
 
@@ -158,6 +172,7 @@ Page({
       }  
       $.post({
         url: 'https://www.yanda123.com/yanda/comment/saveComment',
+        header: { "Content-Type": "application/json" },
         data: commentInfo
       }).then((res)=> {
         if(res.data.status === 200) {

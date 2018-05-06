@@ -1,7 +1,5 @@
 var utils = require('../../../utils/util.js');
 var $ = require('../../../utils/ajax.js');
-var appId = 'wx8c025f88b3f63c44';
-var appSecret = 'a308a19541497abdab9a2cad360188d3';
 
 //获取应用实例
 const app = getApp();
@@ -20,7 +18,8 @@ Page({
     openid: '',
     session_key: '',
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    canUserLoad: wx.canIUse('showLoading')
   },
   //事件处理函数
   handleWorkClick: function () {
@@ -35,11 +34,12 @@ Page({
       })
     }
   },
-  onLoad: function () {    
-    console.log(JSON.stringify(wx.getStorageInfo('userInfo')));
-    if (wx.getStorageInfo('userInfo')) {  
+  onLoad: function () {
+    let userInfo = wx.getStorageSync('userInfo');    
+    console.log(userInfo);
+    if (userInfo) {  
       this.setData({
-        userInfo: wx.getStorageInfo('userInfo'),
+        userInfo: userInfo,
         hasUserInfo: true
       })
     } else if (this.data.canIUse) {
@@ -96,6 +96,9 @@ Page({
         password: password
       }
     }).then((res) => {
+      if (this.data.canUserLoad) {
+        wx.hideLoading();
+      }
       let result = res.data;
       if (result.status === -1) {
         utils.quickTip(result.message);
@@ -111,6 +114,9 @@ Page({
         utils.quickTip('网络错误，请稍后再试');
       }
     }).catch((err) => {
+      if (this.data.canUserLoad) {
+        wx.hideLoading();
+      }
       console.log(err);
     })
   },
@@ -118,19 +124,25 @@ Page({
    * 在微信获取用户信息后进行用户信息初始化
    */
   initUserInfo: function (userInfo) {
-    console.log(`userInfo is: ${JSON.stringify(userInfo)}`);
+    if (this.data.canUserLoad) {
+      wx.showLoading({
+        title: '正在登录',
+        mask: true
+      })
+    }
     if (userInfo) {
       var that = this;
       // 调用login获取code，通过code获取openid，通过openid和当前用户做绑定
       wx.login({
         success: function (res) {
           $.get({
-            url: 'https://api.weixin.qq.com/sns/jscode2session',
-            data: { appid: appId, secret: appSecret, js_code: res.code, grant_type: 'authorization_code' }
+            url: 'https://www.yanda123.com/yanda/user/getOpenIdFromWeiXin',
+            data: { js_code: res.code }
           }).then((res) => {
+            let data = res.data.data;
             that.setData({
-              session_key: res.data.session_key,
-              openid: res.data.openid
+              session_key: data.session_key,
+              openid: data.openid
             });
             // 通过openid查询微信用户和是否存在
             $.get({
