@@ -4,11 +4,11 @@ var $ = require('../../../utils/ajax.js');
 //获取应用实例
 const app = getApp();
 const works = [
-  { id: 1, label: '历史记录', icon: 'https://www.yanda123.com/app/time.png' },
-  { id: 2, label: '我的收藏', icon: 'https://www.yanda123.com/app/collection_fill.png' },
-  { id: 3, label: '消费记录', icon: 'https://www.yanda123.com/app/redpacket.png' },
-  { id: 4, label: '在线客服', icon: 'https://www.yanda123.com/app/customerservice.png' },
-  { id: 5, label: '帮助反馈', icon: 'https://www.yanda123.com/app/feedback.png' }
+  { id: 1, label: '历史记录', icon: 'https://www.yanda123.com/app/time.png', url: 'history' },
+  { id: 2, label: '我的收藏', icon: 'https://www.yanda123.com/app/collection_fill.png', url: 'collect' },
+  { id: 3, label: '消费记录', icon: 'https://www.yanda123.com/app/redpacket.png', url: 'redpacket' },
+  { id: 4, label: '在线客服', icon: 'https://www.yanda123.com/app/customerservice.png', url: 'customerservice' },
+  { id: 5, label: '帮助反馈', icon: 'https://www.yanda123.com/app/feedback.png' ,url:'feedback'}
 ]
 
 Page({
@@ -22,8 +22,15 @@ Page({
     canUserLoad: wx.canIUse('showLoading')
   },
   //事件处理函数
-  handleWorkClick: function () {
-    utils.quickTip('功能暂未开放，敬请期待');
+  handleWorkClick: function (e) {
+    if(this.data.userInfo && JSON.stringify(this.data.userInfo) !== '{}') {
+      wx.navigateTo({
+        url: '../' + e.currentTarget.dataset.url + '/' + e.currentTarget.dataset.url,
+      });
+    } else {
+      utils.quickTip('请先登录');
+    }
+    
   },
   //每次进入页面
   onShow: function () {
@@ -36,7 +43,6 @@ Page({
   },
   onLoad: function () {
     let userInfo = wx.getStorageSync('userInfo');    
-    console.log(userInfo);
     if (userInfo) {  
       this.setData({
         userInfo: userInfo,

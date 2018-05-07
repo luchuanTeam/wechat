@@ -22,7 +22,7 @@
   <!-- 工作台模块 -->
   <view class="workbench">
 
-    <view class='work-card' bindtap="handleWorkClick" wx:for='{{workCards}}' wx:key='{{index}}' data-id='{{ item.id }}'>
+    <view class='work-card' bindtap="handleWorkClick" wx:for='{{workCards}}' wx:key='{{index}}' data-id='{{ item.id }}' data-url='{{item.url}}' >
         <view class="img-wrapper">
           <image src='{{ item.icon }}'></image>
         </view>

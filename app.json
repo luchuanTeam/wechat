@@ -10,7 +10,8 @@
     "pages/settingFolder/account/account",
     "pages/settingFolder/aboutUs/aboutUs",
     "pages/settingFolder/userMsg/userMsg",
-    "pages/hotSearch/hotSearch"
+    "pages/hotSearch/hotSearch",
+    "pages/user/collect/collect"
   ],
   "window": {
     "backgroundTextStyle": "light",

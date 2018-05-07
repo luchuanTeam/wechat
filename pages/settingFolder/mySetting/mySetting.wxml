@@ -1,9 +1,9 @@
 <view class='my-setting-container gray-container'>
   <user-line-block text='{{accountAndSafe}}' bindtap='toAccountPage'></user-line-block>
   <view class='line-space'></view>
-  <view class='clear-cache common-user-line-wrapper'>
+  <view class='clear-cache common-user-line-wrapper' bindtap='clearCache'>
     <view class='text float-left'>清除缓存</view>
-    <view class='text float-right'>45.84MB</view>
+    <view class='text float-right'>{{cache}}</view>
   </view>
   <view class='line-gray-border'></view>
   <user-line-block text='{{checkAndUpdate}}'></user-line-block>

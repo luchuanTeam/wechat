@@ -63,8 +63,9 @@ const getAttachSrc = (attchment) => {
  * @param str: 快捷提示标语
  * @param icon: 图标，有效值只能为 'success', 'loading', 'none' 默认值为 'none'
  * @param time: 快捷提示框显示时间 默认值设为 1000 毫秒
+ * @param fun: 回调函数, 提示框消失后执行
  */
-const quickTip = (str, icon, time)=> {
+const quickTip = (str, icon, time, fun)=> {
   if(!str) {
     return;
   }
@@ -79,6 +80,9 @@ const quickTip = (str, icon, time)=> {
     complete: () => {
       setTimeout(function () {
         wx.hideToast();
+        if(fun && typeof fun === 'function') {
+          fun();
+        }
       }, time)
     }
   });

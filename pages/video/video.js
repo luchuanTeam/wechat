@@ -85,10 +85,7 @@ Page({
    * 点击更换播放的集数
    */
   togglePlay(e) {
-    let data = 'videoData.video.episodeNum';
-    // this.setData({
-    //   [data]: e.currentTarget.dataset.index   
-    // });
+    
     commentStore.init(this.data.userInfo);
     this.loadEpisode(e.currentTarget.dataset.index);
   },
@@ -204,7 +201,7 @@ Page({
       userInfo: userInfo
     });
     this.loadMovie(this.data.mvId);
-    this.getEpisodeList(this.data.mvId);
+    this.getEpisodeList(this.data.mvId, options.episodeId);
   },
 
   /**
@@ -326,15 +323,23 @@ Page({
   /**
    * 获取当前视频下的视频集列表
    */
-  getEpisodeList(mvId) {
+  getEpisodeList(mvId, episodeId) {
     $.get({
       url: 'https://www.yanda123.com/yanda/episode/episodes/' + mvId
     }).then((res) => {
-        this.setData({
-          episodeList: res.data,
-          currentEpisode: res.data[0]
-        });
-        this.loadEpisode(this.data.currentEpisode.episodeId);
+        if(episodeId) {     // 如果episodeId 在页面中传进来，则使用页面传参
+          this.setData({
+            episodeList: res.data
+          });
+          this.loadEpisode(episodeId); 
+        } else {      // 否则默认播放第一集
+          this.setData({
+            episodeList: res.data,
+            currentEpisode: res.data[0]
+          });
+          this.loadEpisode(this.data.currentEpisode.episodeId);
+        }
+        
     });
   },
 
