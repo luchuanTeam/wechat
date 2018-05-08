@@ -1,0 +1,14 @@
+<view class='slider-wrapper {{deleted? "hide" : ""}}'>
+  <view class='content' bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd' style='{{hideContentClass}}'>
+    <view class='img-wrapper'>
+      <image src='https://www.yanda123.com/yanda/attach/readFile?size=500&id=167'></image>
+    </view>
+    <view class='text-wrapper'>
+      <view class='episode-name'>手工教程</view>
+      <view class='episode-intro'>手工教程/3-6岁</view>
+    </view>
+  </view>
+  <view class='hidden-btn' style='{{showDeleteClass}}' bindtap='deleteSlider'>
+    <text>删除</text>
+  </view>
+</view>
