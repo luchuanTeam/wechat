@@ -51,7 +51,7 @@ Component({
       this.triggerEvent('pressEnd');
       if (slide.x < -50) {
         this.setData({
-          hideContentClass: `left: -100rpx`,
+          hideContentClass: `left: -150rpx`,
           showDeleteClass: `right: 0`
         });
         this.triggerEvent('slideLeft', { sliderId: this.properties.sliderId });
