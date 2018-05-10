@@ -72,6 +72,8 @@ module.exports = {
   OrderComment: WxApiRoot + 'order/comment',  // 代评价商品信息
 
   FootprintList: WxApiRoot + 'footprint/list',  //足迹列表
-  FootprintDelete: WxApiRoot + 'footprint/delete'  //删除足迹
+  FootprintDelete: WxApiRoot + 'footprint/delete',  //删除足迹
 
+  CollectIndex: WxApiRoot + '/collect/index',       // 我的收藏
+  CollectDelete: WxApiRoot + '/collect/delete'      // 删除我的收藏
 };

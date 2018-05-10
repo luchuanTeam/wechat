@@ -1,10 +1,17 @@
 var slide = {},
-  start = {};
+    start = {},
+    $ = require('../../../utils/ajax.js'),
+    api = require('../../../config/api.js'),
+    util = require('../../../utils/util.js');
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
+    collectInfo: {
+      type: Object,
+      value: {}
+    },
     sliderId: {
       type: Number,
       value: -1
@@ -62,6 +69,9 @@ Component({
     },
 
     deleteSlider() {
+      $.post({
+        url: api.CollectDelete  
+      })
       this.setData({
         deleted: true
       })
