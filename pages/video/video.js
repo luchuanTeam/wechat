@@ -201,9 +201,7 @@ Page({
       mvId: options.id || 1,
       userInfo: userInfo
     });
-    this.loadMovie(this.data.mvId);
     this.getEpisodeList(this.data.mvId);
-
     // 音频事件监听
     this.audioListener();
   },
@@ -224,23 +222,6 @@ Page({
       }).catch((err) => {
         console.log(err);
       });
-  },
-
-  /**
-   * 首次进入视频播放页，先获取视频信息：视频集数
-   */
-  loadMovie(mvId) {
-    $.get({
-      url: 'https://www.yanda123.com/yanda/movie/' + mvId
-    }).then((res) => {
-      if (res.data) {
-        this.setData({
-          episodeCount: res.data.episodeCount
-        });
-      }
-    }).catch((err) => {
-      console.log(err);
-    });
   },
 
   toggleModelChild(e) {
@@ -443,6 +424,7 @@ Page({
       backgroundAudioManager.pause();
     };
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

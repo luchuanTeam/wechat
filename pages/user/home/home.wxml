@@ -22,12 +22,13 @@
   <!-- 工作台模块 -->
   <view class="workbench">
 
-    <view class='work-card' bindtap="handleWorkClick" wx:for='{{workCards}}' wx:key='{{index}}' data-id='{{ item.id }}'>
-      <view class="img-wrapper">
-        <image src='{{ item.icon }}'></image>
-      </view>
-      <text class='text'>{{ item.label }}</text>
-    </view>
+    <view class='work-card' bindtap="handleWorkClick" wx:for='{{workCards}}' wx:key='{{index}}' data-id='{{ item.id }}' data-url='{{item.url}}' >
+        <view class="img-wrapper">
+          <image src='{{ item.icon }}'></image>
+        </view>
+        <text class='text'>{{ item.label }}</text>  
+    </view>\
+
     <view class='work-card'>
       <button class="open-contact"  open-type="contact" session-from="weapp">
       </button>
@@ -36,6 +37,7 @@
       </view>
       <text class='text'>在线客服</text>
     </view>
+
   </view>
   
 

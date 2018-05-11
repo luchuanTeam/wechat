@@ -1,0 +1,28 @@
+<view class='history-container'>
+  <view class='today' wx:if='{{historyList.today.length > 0}}'>
+    <view class='title'>
+      <view class='text'>今天</view>
+    </view>
+    <view class='history-wrapper'>
+      <my-slider wx:for='{{historyList.today}}' wx:key='{{index}}' videoInfo='{{item}}' sliderId = '{{item.historyId}}' bind:pressStart='pressStart' bind:pressEnd='pressEnd' initSliderId='{{initSliderId}}' bind:slideLeft='slideLeft' deleteUrl='{{deleteUrl}}'></my-slider>
+    </view>
+  </view>
+  
+  <view class='yesterday' wx:if='{{historyList.yesterday.length > 0}}'>
+    <view class='title'>
+      <view class='text'>昨天</view>
+    </view>
+    <view class='history-wrapper'>
+      <my-slider wx:for='{{historyList.yesterday}}' wx:key='{{index}}' videoInfo='{{item}}' sliderId = '{{item.historyId}}' bind:pressStart='pressStart' bind:pressEnd='pressEnd' initSliderId='{{initSliderId}}' bind:slideLeft='slideLeft' deleteUrl='{{deleteUrl}}'></my-slider>
+    </view>
+  </view>
+
+  <view class='past' wx:if='{{historyList.past.length > 0}}'>
+    <view class='title'>
+      <view class='text'>更早</view>
+    </view>
+    <view class='history-wrapper'>
+      <my-slider wx:for='{{historyList.past}}' wx:key='{{index}}' videoInfo='{{item}}' sliderId = '{{item.historyId}}' bind:pressStart='pressStart' bind:pressEnd='pressEnd' initSliderId='{{initSliderId}}' bind:slideLeft='slideLeft' deleteUrl='{{deleteUrl}}'></my-slider>
+    </view>
+  </view>
+</view>

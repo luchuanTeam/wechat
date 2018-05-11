@@ -23,7 +23,6 @@ Page({
        if (res.statusCode == 200) {
          let data = res.data;
          let key = 'categoryCache[' + id + ']';
-
          this.setData({
            selected: id,
            secondCategory: data,

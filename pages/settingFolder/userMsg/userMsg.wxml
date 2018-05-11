@@ -9,12 +9,12 @@
   <view class='line-gray-border'></view>
   <view class='common-user-line-wrapper'>
     <view class='text float-left'>昵称</view>
-    <view class='msg float-left'>{{userInfo.userName}}</view>
+    <view class='msg float-left'>{{userInfo.nickName}}</view>
   </view>
   <view class='line-gray-border'></view>
   <view class='common-user-line-wrapper'>
     <view class='text float-left'>性别</view>
-    <view class='msg float-left'>男</view>
+    <view class='msg float-left'>{{userInfo.sex === 1? '男':'女'}}</view>
   </view>
   <view class='line-gray-border'></view>
   <view class='common-user-line-wrapper'>

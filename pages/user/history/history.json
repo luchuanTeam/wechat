@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "历史记录",
+  "usingComponents": {
+    "my-slider": "../../components/slider/slider"
+  }
+}
