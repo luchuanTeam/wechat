@@ -11,7 +11,7 @@
       <button class="login" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
     </view>
     <!-- 账号管理 -->
-    <view class="right"  wx:if="{{hasUserInfo}}">
+    <view class="right" wx:if="{{hasUserInfo}}">
       <navigator url="/pages/settingFolder/mySetting/mySetting" open-type="navigate">
         <image src="https://www.yanda123.com/app/setup_fill.png" class="setting-icon" />
         <text>账号管理</text>
@@ -23,13 +23,21 @@
   <view class="workbench">
 
     <view class='work-card' bindtap="handleWorkClick" wx:for='{{workCards}}' wx:key='{{index}}' data-id='{{ item.id }}'>
-        <view class="img-wrapper">
-          <image src='{{ item.icon }}'></image>
-        </view>
-        <text class='text'>{{ item.label }}</text>  
+      <view class="img-wrapper">
+        <image src='{{ item.icon }}'></image>
+      </view>
+      <text class='text'>{{ item.label }}</text>
     </view>
-
+    <view class='work-card'>
+      <button class="open-contact"  open-type="contact" session-from="weapp">
+      </button>
+      <view class="img-wrapper">
+        <image src='https://www.yanda123.com/app/customerservice.png'></image>
+      </view>
+      <text class='text'>在线客服</text>
+    </view>
   </view>
+  
 
   <!-- 底部信息模块 -->
   <view class="footer">

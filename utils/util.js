@@ -84,10 +84,29 @@ const quickTip = (str, icon, time)=> {
   });
 }
 
+/**
+ * 秒转时间  例：125 => 02:05
+ */
+const secondsToTime = (duration) => {
+  let time = "";
+  let minute = Math.floor(duration / 60);
+  let seconds = Math.floor(duration % 60);
+  if (minute < 10) {
+    time += "0";
+  }
+  time += minute + ":";
+  if (seconds < 10) {
+    time += "0";
+  }
+  time += seconds;
+  return time; 
+}
+
 module.exports = {
   formatTime: formatTime,
   trim: trim,
   formatLine: formatLine,
   getAttachSrc: getAttachSrc,
-  quickTip: quickTip
+  quickTip: quickTip,
+  secondsToTime: secondsToTime
 }

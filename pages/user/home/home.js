@@ -7,8 +7,7 @@ const works = [
   { id: 1, label: '历史记录', icon: 'https://www.yanda123.com/app/time.png' },
   { id: 2, label: '我的收藏', icon: 'https://www.yanda123.com/app/collection_fill.png' },
   { id: 3, label: '消费记录', icon: 'https://www.yanda123.com/app/redpacket.png' },
-  { id: 4, label: '在线客服', icon: 'https://www.yanda123.com/app/customerservice.png' },
-  { id: 5, label: '帮助反馈', icon: 'https://www.yanda123.com/app/feedback.png' }
+  { id: 4, label: '帮助反馈', icon: 'https://www.yanda123.com/app/feedback.png' }
 ]
 
 Page({

@@ -1,6 +1,7 @@
 <view class='video-intro-component' bindtap='toVideoPage'>
   <view class='img-wrapper'>
-    <image src='{{videoIntro.imgUrl}}'></image>
+    <!-- <view class="zoomImage" style='background-image:url({{videoIntro.imgUrl}})'></view> -->
+     <image class="img-fm" src='{{videoIntro.imgUrl}}'></image> 
     <image class="img-play" src='https://www.yanda123.com/app/play.png'></image>
   </view>
   <view class='text'>

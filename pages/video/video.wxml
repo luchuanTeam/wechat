@@ -1,24 +1,36 @@
 <view class='video-page-container'>
 
-  <video id='myVideo' src='{{ videoData.video.mvSrc }}' class='video' hidden="{{commentData.modelInput === '1'}}" poster="{{ videoData.video.imgSrc }}" autoplay="true">
+ <video wx:if='{{mvType == 1}}' id='myVideo' src='{{ videoData.video.mvSrc }}' class='video' hidden="{{commentData.modelInput === '1'}}" poster="{{ videoData.video.imgSrc }}" autoplay="true">
   </video>
 
-  <view class='tab-wrapper'>
-    <!-- <view class="text {{selected === '1'? 'selected':''}}" data-index='1' bindtap='changeSelected'>视频</view>
-<view class="text {{selected === '2'? 'selected':''}}" data-index='2' bindtap='changeSelected'>评论</view> -->
+<view wx:if='{{mvType == 2}}' class="audio-container">
+  <view class="audio-img">
+    <view class="zoomImage" style='background-image:url({{videoData.video.imgSrc}})'></view>
+  </view>
+  <view class="audio-process">
+        <view class="text">{{currentProcess}}</view>
+        <slider bindchange="hanleSliderChange" step='1' value='{{progress}}' left-icon="cancel" right-icon="success_no_circle"/>
+        <view class="text">{{totalProcess}}</view>
+  </view>
+  <view class="audio-btn">
+      <button class='text' bindtap="audioPlay">播放</button>
+      <button class='text' bindtap="audioStop">暂停</button>
+  </view>
+</view>
 
-    <view class="tab">
+  <view class='tab-wrapper'>
+    <view class="tab" data-index='1' bindtap='changeSelected'>
       <image class="tab-icon" src="{{videoIconUrl}}"></image>
-      <view class="text {{selected === '1'? 'selected':''}}" data-index='1' bindtap='changeSelected'>视频</view>
+      <view class="text {{selected === '1'? 'selected':''}}">视频</view>
     </view>
-    <view class="tab">
+    <view class="tab" data-index='2' bindtap='changeSelected'>
       <image class="tab-icon" src="{{commentIconUrl}}"></image>
-      <view class="text {{selected === '2'? 'selected':''}}" data-index='2' bindtap='changeSelected'>评论</view>
+      <view class="text {{selected === '2'? 'selected':''}}">评论</view>
     </view>
     <text class="{{ selected === '2'? 'text-right': 'text-left' }}"></text>
   </view>
 
-  <view class="video-content-wrapper {{selected === '2'?'content-right':'content-left'}}">
+  <view class="video-content-wrapper {{selected === '2'?'content-right':'content-left'}} {{mvType==1 ? 'top-video' : 'top-audio'}}">
     <view class='vip-wrapper'>
       <view class='vip'>开通VIP，获取更多精彩内容~</view>
     </view>
@@ -38,21 +50,9 @@
         </view>
       </scroll-view>
     </view>
-
-    <view class="hide-episode-wrapper {{videoData.showHideEpisode === '1'?'show':''}}">
-      <view class='series-wrapper'>
-        <view class='title'>选集</view>
-        <view class='text' bindtap='toggleHideEpisode'>关闭</view>
-      </view>
-      <view wx:for='{{videoData.video.episodeCount}}' class='episode' data-index='{{item}}' bindtap='togglePlay' wx:key='{{item}}'>
-        <text class="text {{item+1==videoData.video.episodeNum?'hide':''}}">{{item+1}}</text>
-        <view class="arrow-right {{item==videoData.video.episodeNum?'':'hide'}}"></view>
-      </view>
-    </view>
-
   </view>
 
-  <view class="comment-wrapper {{selected === '1'?'content-right':'content-left'}}">
+  <view class="comment-wrapper {{selected === '1'?'content-right':'content-left'}} {{mvType==1 ? 'top-video' : 'top-audio'}}">
 
     <view class='filter-wrapper'>
       <view class='filter'>
