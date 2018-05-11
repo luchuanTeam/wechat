@@ -5,6 +5,6 @@
   </view>
 
   <view class='collect-wrapper'>
-    <my-slider wx:for='{{collectList}}' wx:key='{{index}}' collectInfo='{{item}}' sliderId = '{{item.collectId}}' bind:pressStart='pressStart' bind:pressEnd='pressEnd' initSliderId='{{initSliderId}}' bind:slideLeft='slideLeft'></my-slider>
+    <my-slider wx:for='{{collectList}}' wx:key='{{index}}' videoInfo='{{item}}' sliderId = '{{item.collectId}}' bind:pressStart='pressStart' bind:pressEnd='pressEnd' initSliderId='{{initSliderId}}' bind:slideLeft='slideLeft' deleteUrl='{{deleteUrl}}'></my-slider>
   </view>
 </view>

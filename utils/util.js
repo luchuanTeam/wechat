@@ -88,10 +88,59 @@ const quickTip = (str, icon, time, fun)=> {
   });
 }
 
+const addPrefix = (str) => {
+  return ('00'+str).slice(-2);
+}
+
+const getToday = () => {
+  let t = new Date();
+  return t.getFullYear() + '-'  + addPrefix((t.getMonth()+1)) + '-' + addPrefix((t.getDate()));
+}
+
+const isToday = (str)=>{
+  if(typeof str !== 'string') {
+    return false;
+  }
+  str = trim(str);
+  if(!str || str.length < 10) {
+    return false;
+  }
+  str = str.slice(0,10);
+  let reg = /^\d{4}-\d{2}-\d{2}$/;  
+  if(!reg.test(str)) {   // 只接受 '2018-06-14' 这种格式
+    return false;
+  }
+  return new Date(getToday()).getTime() - new Date(str).getTime() === 0;
+}
+
+const isYesterday = (str)=> {
+  if (typeof str !== 'string') {
+    return false;
+  }
+  str = trim(str);
+  if (!str || str.length < 10) {
+    return false;
+  }
+  str = str.slice(0, 10);
+  let reg = /^\d{4}-\d{2}-\d{2}$/;
+  if (!reg.test(str)) {   // 只接受 '2018-06-14' 这种格式
+    return false;
+  }
+  let t1 = new Date(getToday()).getTime();
+  let t2 = new Date(str).getTime();
+  if (t1 - t2 > 0 && t1 - t2 <= 86400000 ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 module.exports = {
   formatTime: formatTime,
   trim: trim,
   formatLine: formatLine,
   getAttachSrc: getAttachSrc,
-  quickTip: quickTip
+  quickTip: quickTip,
+  isToday: isToday,
+  isYesterday: isYesterday
 }

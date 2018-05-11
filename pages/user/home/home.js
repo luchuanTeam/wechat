@@ -23,7 +23,7 @@ Page({
   },
   //事件处理函数
   handleWorkClick: function (e) {
-    if(this.data.userInfo && JSON.stringify(this.data.userInfo) !== '{}') {
+    if(this.data.userInfo && this.data.userInfo.userId) {
       wx.navigateTo({
         url: '../' + e.currentTarget.dataset.url + '/' + e.currentTarget.dataset.url,
       });

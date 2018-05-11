@@ -8,14 +8,18 @@ Page({
    */
   data: {
     userId: '',
-    deleteUrl: '',     // 传入slider组件，告知删除请求发送的url
     currentPressId: null,
     lastPressId: null,
     initSliderId: null,
     pageNum: 1,
     pageSize: 10,
-    collectList: [],
-    hasMore: true
+    historyList: {
+      today: [],
+      yesterday: [],
+      past: []
+    },
+    hasMore: true,
+    deleteUrl: ''
   },
 
   /**
@@ -33,13 +37,13 @@ Page({
    */
   pressEnd(e) {
     let _lastPressId = this.data.lastPressId,
-        _currentPressId = this.data.currentPressId;
-    if(_lastPressId && _currentPressId !== _lastPressId) {
+      _currentPressId = this.data.currentPressId;
+    if (_lastPressId && _currentPressId !== _lastPressId) {
       this.setData({
         initSliderId: _lastPressId,
         lastPressId: -1
       })
-    } 
+    }
   },
 
   /**
@@ -48,67 +52,68 @@ Page({
   slideLeft(e) {
     let sliderId = e.detail.sliderId;
     this.setData({
-      lastPressId: sliderId  
+      lastPressId: sliderId
     });
   },
-  
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let userInfo = wx.getStorageSync('userInfo');
-    if(userInfo && userInfo.userId) {
+    if (userInfo && userInfo.userId) {
       this.setData({
         userId: userInfo.userId,
-        deleteUrl: api.CollectDelete
+        deleteUrl: api.HistoryDelete
       });
-      this.getMyCollects(this.data.userId);
-    }
+      this.getMyHistories(this.data.userId);
+    }  
   },
 
-  getMyCollects(userId) {
+  getMyHistories(userId) {
     $.get({
-      url: api.CollectIndex,
+      url: api.HistoryIndex,
       data: {
-        userId: userId,
-        pageNum: this.data.pageNum,
-        pageSize: this.data.pageSize
+        userId: userId
       }
     }).then((res) => {
       if (res.data.status === 200) {
         let result = res.data.data,
           list = result.list,
           total = result.total;
-
-        this.groupCollectList(list, total);
+        this.groupHistoryList(list, total);
       } else {
-        util.quickTip('获取我的收藏失败, 请稍后再试');
+        util.quickTip('获取历史记录失败, 请稍后再试');
       }
     }).catch((err) => {
-      console.log(err);
-      util.quickTip('获取我的收藏失败, 请稍后再试');
-    })
+      util.quickTip('获取历史记录失败, 请稍后再试');
+    });
   },
 
-  groupCollectList(list, total) {
-    let collectList = this.data.collectList, 
-        pageNum = this.data.pageNum,
-        hasMore = true;
-    for(let i = 0, length = list.length; i < length; i++) {
-       // 增加 id 属性，传入slider组件，以便删除，因为 slider 组件也会被历史记录复用
-      list[i].id = list[i].collectId;  
+  groupHistoryList(list, total) {
+    let historyList = this.data.historyList,
+      pageNum = this.data.pageNum,
+      hasMore = true;
+    for (let i = 0, length = list.length; i < length; i++) {
+      // 增加 id 属性，传入slider组件，以便删除，因为 slider 组件也会被历史记录复用
+      list[i].id = list[i].historyId;
       list[i].episodeInfo.imgSrc = 'https://www.yanda123.com/yanda/attach/readFile?size=800&id=' + list[i].episodeInfo.imgAppendixId;
-      collectList.push(list[i]);
+
+      if(util.isToday( list[i].watchTime) ) {
+        historyList.today.push(list[i]);
+      } else if(util.isYesterday( list[i].watchTime )) {
+        historyList.yesterday.push(list[i]);
+      } else {
+        historyList.past.push(list[i]);  
+      }
     }
-    collectList.length < total ? (pageNum++) : (hasMore = false);
+    (historyList.today.length + historyList.yesterday.length + historyList.past.length) < total ? (pageNum++) : (hasMore = false);
     this.setData({
-      collectList: collectList,
+      historyList: historyList,
       pageNum: pageNum,
       hasMore: hasMore
     })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -148,9 +153,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if(this.data.userId) {
-      this.getMyCollects(this.data.userId);
-    }
+  
   },
 
   /**

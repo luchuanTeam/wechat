@@ -8,7 +8,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    collectInfo: {
+    videoInfo: {
       type: Object,
       value: {}
     },
@@ -23,6 +23,10 @@ Component({
           this.init();
         }
       }
+    },
+    deleteUrl: {
+      type: String,
+      value: ''
     }
   },
 
@@ -69,12 +73,25 @@ Component({
     },
 
     deleteSlider() {
-      $.post({
-        url: api.CollectDelete  
-      })
-      this.setData({
-        deleted: true
-      })
+      if (this.properties.videoInfo.id && this.properties.deleteUrl) {
+        $.post({
+          url: this.properties.deleteUrl,
+          data: {
+            id: this.properties.videoInfo.id
+          }  
+        }).then((res) => {
+          if(res.data.status === 200) {          
+            this.setData({
+              deleted: true
+            })
+          } else {
+            util.quickTip('删除失败, 请稍后再试');
+          }
+        }).catch((err)=> {
+          util.quickTip('删除失败, 请稍后再试');   
+        })
+      }
+     
     },
     
     init() {
@@ -82,6 +99,16 @@ Component({
         hideContentClass: '',
         showDeleteClass: ''
       })
+    },
+
+    toVideoPage() {
+      let episodeInfo = this.properties.videoInfo.episodeInfo;
+      if(episodeInfo && episodeInfo.mvId && episodeInfo.episodeId) {
+        wx.navigateTo({
+          url: `../../video/video?id=${episodeInfo.mvId}&episodeId=${episodeInfo.episodeId}`,
+        });
+      }
+      
     }
   }
 })

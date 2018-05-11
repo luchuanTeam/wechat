@@ -11,7 +11,8 @@
     "pages/settingFolder/aboutUs/aboutUs",
     "pages/settingFolder/userMsg/userMsg",
     "pages/hotSearch/hotSearch",
-    "pages/user/collect/collect"
+    "pages/user/collect/collect",
+    "pages/user/history/history"
   ],
   "window": {
     "backgroundTextStyle": "light",

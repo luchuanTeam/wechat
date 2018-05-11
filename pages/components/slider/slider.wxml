@@ -1,11 +1,11 @@
 <view class='slider-wrapper {{deleted? "hide" : ""}}'>
-  <view class='content' bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd' style='{{hideContentClass}}'>
+  <view class='content' bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd' style='{{hideContentClass}}' bindtap='toVideoPage'>
     <view class='img-wrapper'>
-      <image src='{{collectInfo.episodeInfo.imgSrc}}'></image>
+      <image src='{{videoInfo.episodeInfo.imgSrc}}'></image>
     </view>
     <view class='text-wrapper'>
-      <view class='episode-name'>{{collectInfo.episodeInfo.episodeName}}</view>
-      <view class='episode-intro'>{{collectInfo.episodeInfo.episodeIntro}}</view>
+      <view class='episode-name'>{{videoInfo.episodeInfo.episodeName}}</view>
+      <view class='episode-intro'>{{videoInfo.episodeInfo.episodeIntro}}</view>
     </view>
   </view>
   <view class='hidden-btn' style='{{showDeleteClass}}' bindtap='deleteSlider'>
