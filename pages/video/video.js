@@ -13,6 +13,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    videoContext: null,
     videoIconUrl: 'https://www.yanda123.com/app/live-select.png',
     commentIconUrl: 'https://www.yanda123.com/app/message.png',
     mvType: 1,               //播放的媒介类型  1：视频 2：音频
@@ -131,9 +132,8 @@ Page({
           [data]: '1',
           textAreaFocus: true
         });
-        this.videoContext.pause();  //弹出评论模态框后暂停视频播放
+        this.pause();       // 弹出评论 暂停播放
       }
-
     } else {
       utils.quickTip('请先登录');
     }
@@ -204,7 +204,7 @@ Page({
       mvId: options.id || 1,
       userInfo: userInfo
     });
-    this.getEpisodeList(this.data.mvId);
+    this.getEpisodeList(this.data.mvId, options.episodeId);
     // 音频事件监听
     this.audioListener();
   },
@@ -276,15 +276,21 @@ Page({
   /**
    * 获取当前视频下的视频集列表
    */
-  getEpisodeList(mvId) {
+  getEpisodeList(mvId, episodeId) {
     $.get({
       url: 'https://www.yanda123.com/yanda/episode/episodes/' + mvId
     }).then((res) => {
       this.setData({
-        episodeList: res.data,
-        currentEpisode: res.data[0]
+        episodeList: res.data     
       });
-      this.loadEpisode(this.data.currentEpisode.episodeId);
+      if(episodeId) {
+        this.loadEpisode(episodeId);  
+      } else {
+        this.setData({
+          currentEpisode: res.data[0]
+        });
+        this.loadEpisode(this.data.currentEpisode.episodeId);
+      }
     });
   },
 
@@ -337,8 +343,12 @@ Page({
           app.backgroundAudioManager.title = episodeInfo.episodeName;
           app.backgroundAudioManager.coverImgUrl = episodeInfo.imgSrc;
           app.backgroundAudioManager.src = episodeInfo.mvSrc;
+        } else {
+          this.setData({
+            videoContext: wx.createVideoContext('myVideo')   // 获取控制视频的对象，操作组件内 <video/> 组件
+          }); 
         };
-        if (this.data.userInfo && JSON.stringify(this.data.userInfo) !== '{}') {
+        if (this.data.userInfo && this.data.userInfo.userId) {
           let self = this;
           commentStore.dispatch('loadUserAgrees', self.data.videoData.video.episodeId).then((res) => {
             self.loadFatherComments(REFRESH);
@@ -374,6 +384,9 @@ Page({
     }
   },
 
+  videoPause(e) {
+    console.dir(e);
+  },
   /**
    * 音乐播放器事件监听
    */
@@ -411,21 +424,34 @@ Page({
       // 貌似无法触发该监听
     });
 
+    app.backgroundAudioManager.onPause(()=> {
+      let progress = app.backgroundAudioManager.currentTime;
+      console.log(progress);
+      console.log(JSON.stringify(this.data.videoData.video));
+    });
+
   },
   /**
-   * 音乐播放
+   * 播放
    */
-  audioPlay: function () {
-    var that = this;
-    app.backgroundAudioManager.play();
+  play: function () {
+    if(this.data.mvType === 1) {
+      this.data.videoContext.play();
+    } else {
+      app.backgroundAudioManager.play();
+    }
+    
   },
 
   /**
-    * 音乐暂停
+    * 暂停
     */
-  audioStop: function () {
-    var that = this;
-    app.backgroundAudioManager.pause();
+  pause: function () {
+    if(this.data.mvType === 1) {
+      this.data.videoContext.pause();
+    } else {
+      app.backgroundAudioManager.pause();
+    }
   },
 
   /**
@@ -457,7 +483,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.videoContext = wx.createVideoContext('myVideo');   // 获取控制视频的对象，操作组件内 <video/> 组件
+    
   },
 
   /**
@@ -479,7 +505,7 @@ Page({
    * 客户离开页面时先判断客户有没有点赞，若有点赞再统一请求点赞接口
    */
   onUnload: function () {
-
+    //this.pause();     // 避免退出页面 音频还在播放
   },
 
   /**
