@@ -1,22 +1,22 @@
 <view class='video-page-container'>
 
- <video wx:if='{{mvType == 1}}' id='myVideo' src='{{ videoData.video.mvSrc }}' class='video' hidden="{{commentData.modelInput === '1'}}" poster="{{ videoData.video.imgSrc }}" autoplay="true">
+  <video wx:if='{{mvType == 1}}' id='myVideo' src='{{ videoData.video.mvSrc }}' class='video' hidden="{{commentData.modelInput === '1'}}" poster="{{ videoData.video.imgSrc }}" autoplay="true">
   </video>
 
-<view wx:if='{{mvType == 2}}' class="audio-container">
-  <view class="audio-img">
-    <view class="zoomImage" style='background-image:url({{videoData.video.imgSrc}})'></view>
-  </view>
-  <view class="audio-process">
-        <view class="text">{{currentProcess}}</view>
-        <slider bindchange="hanleSliderChange" step='1' value='{{progress}}' left-icon="cancel" right-icon="success_no_circle"/>
-        <view class="text">{{totalProcess}}</view>
-  </view>
-  <view class="audio-btn">
+  <view wx:if='{{mvType == 2}}' class="audio-container">
+    <view class="audio-img">
+      <view class="zoomImage" style='background-image:url({{videoData.video.imgSrc}})'></view>
+    </view>
+    <view class="audio-process">
+      <view class="text">{{currentProcess}}</view>
+      <slider bindchange="hanleSliderChange" step='1' value='{{progress}}' max='{{duration}}' left-icon="cancel" right-icon="success_no_circle" block-size='16' />
+      <view class="text">{{totalProcess}}</view>
+    </view>
+    <view class="audio-btn">
       <button class='text' bindtap="audioPlay">播放</button>
       <button class='text' bindtap="audioStop">暂停</button>
+    </view>
   </view>
-</view>
 
   <view class='tab-wrapper'>
     <view class="tab" data-index='1' bindtap='changeSelected'>
@@ -43,12 +43,15 @@
         <view class='title'>选集</view>
         <view class='text' bindtap='toggleHideEpisode'>{{videoData.video.series}}</view>
       </view>
-      <scroll-view scroll-x='true' class='scroll'>
-        <view wx:for='{{episodeList}}' class='episode' data-index='{{item.episodeId}}' bindtap='togglePlay' wx:key='{{item}}'>
-          <text class="text {{item.episodeId ==(currentEpisode.episodeId)?'hide':''}}">{{item.episodeNum}}</text>
+      <!-- <scroll-view scroll-x='true' class='scroll'> -->
+        <view hover-class='episode-hover' wx:for='{{episodeList}}' class='episode' data-index='{{item.episodeId}}' bindtap='togglePlay' wx:key='{{item}}'>
+          <view class="text {{item.episodeId ==(currentEpisode.episodeId)?'hide':''}}">
+            {{item.episodeNum}}. {{item.episodeName}}
+          </view>
+          <view class="vip {{item.vipType == 0?'hide':''}}">VIP</view>
           <view class="arrow-right {{item.episodeId ==(currentEpisode.episodeId)?'':'hide'}}"></view>
         </view>
-      </scroll-view>
+      <!-- </scroll-view> -->
     </view>
   </view>
 
@@ -115,5 +118,4 @@
       <button class='commit-btn text' bindtap='commitComment' form-type='reset'>提 交</button>
     </form>
   </view>
-
 </view>

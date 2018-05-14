@@ -56,3 +56,18 @@
   -moz-background-size:cover;
   background-size:cover;
 }
+
+.vip-container {
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
+  background: #fc3f4c;
+  border-radius: 4rpx; 
+  padding: 4rpx;
+  box-shadow: 0 2px 12px 0 rgba(255,255,255,.1);
+}
+
+.vip-container text {
+  font-size: 28rpx;
+  color: #fff;
+}

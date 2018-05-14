@@ -27,7 +27,7 @@
           <image src='{{ item.icon }}'></image>
         </view>
         <text class='text'>{{ item.label }}</text>  
-    </view>\
+    </view>
 
     <view class='work-card'>
       <button class="open-contact"  open-type="contact" session-from="weapp">
@@ -39,7 +39,6 @@
     </view>
 
   </view>
-  
 
   <!-- 底部信息模块 -->
   <view class="footer">

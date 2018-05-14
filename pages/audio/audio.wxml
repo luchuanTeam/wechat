@@ -1,7 +1,0 @@
-<view class="audio-container">
-  <audio bindtimeupdate="MusicStart" bindended="MusicEnd" author="许巍" controls='true' poster="{{poster}}" name="{{name}}" src='{{src}}'>
-    <view class="free-MusicProgress">
-      <view style="width:{{progress}}%;"></view>
-    </view>
-  </audio>
-</view>

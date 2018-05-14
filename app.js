@@ -35,5 +35,9 @@ App({
   globalData: {
     userInfo: null,
     selected: '1'
-  }
+  },
+  /**
+   * 全局背景音频管理器
+   */
+  backgroundAudioManager: wx.getBackgroundAudioManager()
 })

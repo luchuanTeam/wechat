@@ -6,6 +6,8 @@ const REFRESH = 1,
   _commentList = 'commentData.commentList',
   _video = 'videoData.video';
 
+const app = getApp();
+
 Page({
   /**
    * 页面的初始数据
@@ -17,6 +19,7 @@ Page({
     progress: 0,            // 音频进度条播放进度
     currentProcess: '00:00',     // 音频已播放时间
     totalProcess: '00:00',       // 音频总播放时间
+    duration: 0,                // 音频总时长数值
     userInfo: '',           // 已登录的用户信息
     mvId: '',            //从页面传过来的视频ID参数
     episodeCount: '',
@@ -306,12 +309,34 @@ Page({
           currentEpisode: currentEpisode,
           mvType: mvType
         });
+        if (episodeInfo.vipType == 1) {
+          let vipCard = this.data.userInfo.vipCard;
+          if (!vipCard) {
+            wx.showToast({
+              title: '该视频需要vip方可观看',
+              icon: 'none',
+              duration: 10000
+            });
+            return;
+          } else {
+            let expTime = new Date(vipCard.expTime).getTime();
+            let nowTime = new Date().getTime();
+            if (expTime <= nowTime) {
+              wx.showToast({
+                title: '您的会员已到期，无法观看vip视频',
+                icon: 'none',
+                duration: 10000
+              });
+              return;
+            }
+          }
+        }
+
         if (mvType == 2) {
           // 音频播放
-          const backgroundAudioManager = wx.getBackgroundAudioManager()
-          backgroundAudioManager.title = episodeInfo.episodeName;
-          backgroundAudioManager.coverImgUrl = episodeInfo.imgSrc;
-          backgroundAudioManager.src = episodeInfo.mvSrc;
+          app.backgroundAudioManager.title = episodeInfo.episodeName;
+          app.backgroundAudioManager.coverImgUrl = episodeInfo.imgSrc;
+          app.backgroundAudioManager.src = episodeInfo.mvSrc;
         };
         if (this.data.userInfo && JSON.stringify(this.data.userInfo) !== '{}') {
           let self = this;
@@ -354,21 +379,21 @@ Page({
    */
   audioListener: function () {
     var that = this;
-    const backgroundAudioManager = wx.getBackgroundAudioManager();
     //背景音频播放进度更新事件
-    backgroundAudioManager.onTimeUpdate(function (callback) {
-      let currentTime = backgroundAudioManager.currentTime;
-      let duration = backgroundAudioManager.duration;
+    app.backgroundAudioManager.onTimeUpdate(function (callback) {
+      let currentTime = app.backgroundAudioManager.currentTime;
+      let duration = app.backgroundAudioManager.duration;
       let progress = parseInt((currentTime / duration) * 100);
       that.setData({
         progress: progress,
         currentProcess: utils.secondsToTime(currentTime),
-        totalProcess: utils.secondsToTime(duration)
+        totalProcess: utils.secondsToTime(duration),
+        duration: Math.floor(duration) 
       });
 
     });
     //背景音频自然播放结束事件
-    backgroundAudioManager.onEnded(function (callback) {
+    app.backgroundAudioManager.onEnded(function (callback) {
       that.setData({
         progress: 0
       });
@@ -377,8 +402,13 @@ Page({
     });
 
     //背景音频播放事件
-    backgroundAudioManager.onPlay(function (callback) {
+    app.backgroundAudioManager.onPlay(function (callback) {
+       console.log('music play');
+    });
 
+    //背景音频即将开始播放事件
+    app.backgroundAudioManager.onCanplay(function (callback) {
+      // 貌似无法触发该监听
     });
 
   },
@@ -387,8 +417,7 @@ Page({
    */
   audioPlay: function () {
     var that = this;
-    const backgroundAudioManager = wx.getBackgroundAudioManager();
-    backgroundAudioManager.play();
+    app.backgroundAudioManager.play();
   },
 
   /**
@@ -396,8 +425,7 @@ Page({
     */
   audioStop: function () {
     var that = this;
-    const backgroundAudioManager = wx.getBackgroundAudioManager();
-    backgroundAudioManager.pause();
+    app.backgroundAudioManager.pause();
   },
 
   /**
@@ -412,16 +440,15 @@ Page({
   seekCurrentAudio(position) {
     // 更新进度条
     const that = this;
-    const backgroundAudioManager = wx.getBackgroundAudioManager();
     // 音频控制跳转
     // 这里有一个诡异bug：seek在暂停状态下无法改变currentTime，需要先play后pause
-    const pauseStatusWhenSlide = backgroundAudioManager.paused;
+    const pauseStatusWhenSlide = app.backgroundAudioManager.paused;
     if (pauseStatusWhenSlide) {
-      backgroundAudioManager.play();
+      app.backgroundAudioManager.play();
     }
-    backgroundAudioManager.seek(Math.floor(position));
+    app.backgroundAudioManager.seek(Math.floor(position));
     if (pauseStatusWhenSlide) {
-      backgroundAudioManager.pause();
+      app.backgroundAudioManager.pause();
     };
   },
 
