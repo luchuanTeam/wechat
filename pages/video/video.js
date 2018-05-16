@@ -1,6 +1,7 @@
 const utils = require('../../utils/util.js'),
   $ = require('../../utils/ajax.js'),
-  commentStore = require('../../store/commentStore.js');
+  commentStore = require('../../store/commentStore.js'),
+  api = require('../../config/api.js');
 
 const REFRESH = 1,
   _commentList = 'commentData.commentList',
@@ -13,6 +14,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    initialTime: 0,
+    currentPlayTime: 0, 
     videoContext: null,
     videoIconUrl: 'https://www.yanda123.com/app/live-select.png',
     commentIconUrl: 'https://www.yanda123.com/app/message.png',
@@ -349,6 +352,7 @@ Page({
           }); 
         };
         if (this.data.userInfo && this.data.userInfo.userId) {
+          this.loadHistoryRecord();
           let self = this;
           commentStore.dispatch('loadUserAgrees', self.data.videoData.video.episodeId).then((res) => {
             self.loadFatherComments(REFRESH);
@@ -362,6 +366,27 @@ Page({
     }).catch((err) => {
       console.log(err);
     });
+  },
+
+  loadHistoryRecord() {
+    $.post({
+      url: api.HistoryRecord,
+      data: {
+        userId: this.data.userInfo.userId,
+        episodeId: this.data.videoData.video.episodeId
+      }
+    }).then((res)=> {
+      console.log(JSON.stringify(res));
+      if(res.data.status === 200) {
+        let userHistoryInfo = res.data.data;
+        this.setData({
+          initialTime: userHistoryInfo.progress || 0
+        })
+        console.log(this.data.initialTime);
+      }
+    }).catch((err)=> {
+      console.log(err);
+    })    
   },
 
   /**
@@ -384,8 +409,10 @@ Page({
     }
   },
 
-  videoPause(e) {
-    console.dir(e);
+  videoTimeUpdate(e) {
+    this.setData({
+      currentPlayTime: e.detail.currentTime
+    })
   },
   /**
    * 音乐播放器事件监听
@@ -401,9 +428,10 @@ Page({
         progress: progress,
         currentProcess: utils.secondsToTime(currentTime),
         totalProcess: utils.secondsToTime(duration),
-        duration: Math.floor(duration) 
+        duration: Math.floor(duration),
+        currentPlayTime: currentTime
       });
-
+      
     });
     //背景音频自然播放结束事件
     app.backgroundAudioManager.onEnded(function (callback) {
@@ -425,9 +453,7 @@ Page({
     });
 
     app.backgroundAudioManager.onPause(()=> {
-      let progress = app.backgroundAudioManager.currentTime;
-      console.log(progress);
-      console.log(JSON.stringify(this.data.videoData.video));
+      
     });
 
   },
@@ -506,6 +532,21 @@ Page({
    */
   onUnload: function () {
     //this.pause();     // 避免退出页面 音频还在播放
+    if(this.data.userInfo && this.data.userInfo.userId) {
+      let progress = parseInt(this.data.currentPlayTime);  
+      $.post({
+        url: api.HistoryUpsert,
+        data: {
+          userId: this.data.userInfo.userId,
+          episodeId: this.data.videoData.video.episodeId,
+          progress: progress
+        }
+      }).then((res)=> {
+
+      }).catch((err)=> {
+
+      });
+    }
   },
 
   /**

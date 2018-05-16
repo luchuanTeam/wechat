@@ -1,6 +1,6 @@
 <view class='video-page-container'>
 
-  <video wx:if='{{mvType == 1}}' id='myVideo' src='{{ videoData.video.mvSrc }}' class='video' hidden="{{commentData.modelInput === '1'}}" poster="{{ videoData.video.imgSrc }}" autoplay="true">
+  <video wx:if='{{mvType == 1}}' id='myVideo' src='{{ videoData.video.mvSrc }}' class='video' hidden="{{commentData.modelInput === '1'}}" poster="{{ videoData.video.imgSrc }}" autoplay="true" bindtimeupdate='videoTimeUpdate' initial-time='{{initialTime}}'>
   </video>
 
   <view wx:if='{{mvType == 2}}' class="audio-container">
@@ -9,12 +9,12 @@
     </view>
     <view class="audio-process">
       <view class="text">{{currentProcess}}</view>
-      <slider bindchange="hanleSliderChange" step='1' value='{{progress}}' max='{{duration}}' left-icon="cancel" right-icon="success_no_circle" block-size='16' />
+      <slider bindchange="hanleSliderChange" step='1' value='{{initialTime}}' max='{{duration}}' left-icon="cancel" right-icon="success_no_circle" block-size='16' />
       <view class="text">{{totalProcess}}</view>
     </view>
     <view class="audio-btn">
-      <button class='text' bindtap="audioPlay">播放</button>
-      <button class='text' bindtap="audioStop">暂停</button>
+      <button class='text' bindtap="play">播放</button>
+      <button class='text' bindtap="pause">暂停</button>
     </view>
   </view>
 

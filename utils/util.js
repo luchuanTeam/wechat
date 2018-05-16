@@ -106,15 +106,18 @@ const secondsToTime = (duration) => {
   return time; 
 }
 
-const addPrefix = (str) => {
-  return ('00'+str).slice(-2);
-}
-
+/**
+ * 获取今天的日期
+ */
 const getToday = () => {
   let t = new Date();
-  return t.getFullYear() + '-'  + addPrefix((t.getMonth()+1)) + '-' + addPrefix((t.getDate()));
+  return t.getFullYear() + '-' + formatNumber((t.getMonth() + 1)) + '-' + formatNumber((t.getDate()));
 }
 
+/**
+ * 判断输入的日期 是否为今天的日期
+ * 输入格式为 2018-05-15 2018-05-02
+ */
 const isToday = (str)=>{
   if(typeof str !== 'string') {
     return false;
@@ -131,6 +134,10 @@ const isToday = (str)=>{
   return new Date(getToday()).getTime() - new Date(str).getTime() === 0;
 }
 
+/**
+ * 判断输入日期是否为昨天
+ * 输入格式为 2018-05-15 2018-05-02
+ */
 const isYesterday = (str)=> {
   if (typeof str !== 'string') {
     return false;
