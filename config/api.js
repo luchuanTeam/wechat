@@ -1,8 +1,8 @@
 // 以下是业务服务器API地址
 // 本机开发时使用
-// var WxApiRoot = 'http://localhost:8080/yanda/';
+//var WxApiRoot = 'http://localhost:8080/yanda/';
 // 云平台部署时使用
-var WxApiRoot = 'https://www.yanda123.com/yanda/';
+ var WxApiRoot = 'https://www.yanda123.com/yanda/';
 
 
 
@@ -26,6 +26,8 @@ module.exports = {
 
   HistoryIndex: WxApiRoot + 'history/index',
   HistoryDelete: WxApiRoot + 'history/delete',
+  HistoryUpsert: WxApiRoot + 'history/upsert',
+  HistoryRecord: WxApiRoot + 'history/record',
 
   UserSendCode: WxApiRoot + 'user/sendCode',
   UserBindMobile: WxApiRoot + 'user/bindMobile'
