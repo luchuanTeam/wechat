@@ -24,6 +24,14 @@ Page({
     })
   },
   /**
+   * 跳转到手机号绑定界面
+   */
+  toBindMobile() {
+    wx.navigateTo({
+      url: '../mobile/mobile',
+    })
+  },
+  /**
    * 退出登录
    */
   logout() {

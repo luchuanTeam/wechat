@@ -12,7 +12,7 @@
     </view>
     <!-- 账号管理 -->
     <view class="right" wx:if="{{hasUserInfo}}">
-      <navigator url="/pages/settingFolder/mySetting/mySetting" open-type="navigate">
+      <navigator url="/pages/settingFolder/account/account" open-type="navigate">
         <image src="https://www.yanda123.com/app/setup_fill.png" class="setting-icon" />
         <text>账号管理</text>
       </navigator>
@@ -21,15 +21,14 @@
 
   <!-- 工作台模块 -->
   <view class="workbench">
-
-    <view class='work-card' bindtap="handleWorkClick" wx:for='{{workCards}}' wx:key='{{index}}' data-id='{{ item.id }}' data-url='{{item.url}}' >
+    <view class='work-card' hover-class="active" bindtap="handleWorkClick" wx:for='{{workCards}}' wx:key='{{index}}' data-id='{{ item.id }}' data-url='{{item.url}}' >
         <view class="img-wrapper">
           <image src='{{ item.icon }}'></image>
         </view>
         <text class='text'>{{ item.label }}</text>  
     </view>
 
-    <view class='work-card'>
+    <view class='work-card' hover-class="active">
       <button class="open-contact"  open-type="contact" session-from="weapp">
       </button>
       <view class="img-wrapper">
@@ -38,8 +37,13 @@
       <text class='text'>在线客服</text>
     </view>
 
+    <view class='work-card' hover-class="active" bindtap="handleWorkClick" data-url='/pages/settingFolder/mySetting/mySetting'>
+      <view class="img-wrapper">
+        <image src='https://www.yanda123.com/app/setting.png'></image>
+      </view>
+      <text class='text'>更多设置</text>
+    </view>
   </view>
-
   <!-- 底部信息模块 -->
   <view class="footer">
     版权所有者：燕达教育

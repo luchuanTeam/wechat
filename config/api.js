@@ -25,5 +25,8 @@ module.exports = {
   CollectDelete: WxApiRoot + 'collect/delete',      // 删除我的收藏
 
   HistoryIndex: WxApiRoot + 'history/index',
-  HistoryDelete: WxApiRoot + 'history/delete'
+  HistoryDelete: WxApiRoot + 'history/delete',
+
+  UserSendCode: WxApiRoot + 'user/sendCode',
+  UserBindMobile: WxApiRoot + 'user/bindMobile'
 };

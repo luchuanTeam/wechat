@@ -4,10 +4,10 @@ var $ = require('../../../utils/ajax.js');
 //获取应用实例
 const app = getApp();
 const works = [
-  { id: 1, label: '历史记录', icon: 'https://www.yanda123.com/app/time.png', url: 'history' },
-  { id: 2, label: '我的收藏', icon: 'https://www.yanda123.com/app/collection_fill.png', url: 'collect' },
-  { id: 3, label: '消费记录', icon: 'https://www.yanda123.com/app/redpacket.png', url: 'redpacket' },
-  { id: 4, label: '帮助反馈', icon: 'https://www.yanda123.com/app/feedback.png' ,url:'feedback'}
+  { id: 1, label: '历史记录', icon: 'https://www.yanda123.com/app/time.png', url: '/pages/user/history/history' },
+  { id: 2, label: '我的收藏', icon: 'https://www.yanda123.com/app/collection_fill.png', url: '/pages/user/collect/collect' },
+  { id: 3, label: '消费记录', icon: 'https://www.yanda123.com/app/redpacket.png', url: '/pages/user/redpacket/redpacket' },
+  { id: 4, label: '帮助反馈', icon: 'https://www.yanda123.com/app/feedback.png', url:'/pages/user/feedback/feedback'}
 ]
 
 Page({
@@ -24,7 +24,7 @@ Page({
   handleWorkClick: function (e) {
     if(this.data.userInfo && this.data.userInfo.userId) {
       wx.navigateTo({
-        url: '../' + e.currentTarget.dataset.url + '/' + e.currentTarget.dataset.url,
+        url: e.currentTarget.dataset.url
       });
     } else {
       utils.quickTip('请先登录');
@@ -137,6 +137,22 @@ Page({
     }
     if (userInfo) {
       var that = this;
+      // 判断用户是否已绑定手机号，若无则强制跳转到绑定手机界面
+      if (!userInfo.mobile) {
+        wx.showToast({
+          title: '您还未绑定手机号',
+          icon: 'none',
+          mask: true,
+          success: function() {
+            setTimeout(function () {
+              wx.navigateTo({
+                url: '/pages/settingFolder/mobile/mobile'
+              });
+            }, 1000);
+          }
+        });
+        return;
+      }
       // 调用login获取code，通过code获取openid，通过openid和当前用户做绑定
       wx.login({
         success: function (res) {

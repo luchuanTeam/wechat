@@ -8,7 +8,7 @@
     </view>
   </view>
   <view class='line-gray-border'></view>
-  <user-line-block text='{{phoneText}}' msg='{{mobile}}'></user-line-block>
+  <user-line-block text='{{phoneText}}' msg='{{mobile}}' bindtap='toBindMobile'></user-line-block>
   <view class='line-gray-border'></view>
   <user-line-block text='{{emailText}}' msg='{{email}}'></user-line-block>
   <view class='line-gray-border'></view>

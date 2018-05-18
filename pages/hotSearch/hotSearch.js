@@ -43,9 +43,13 @@ Page({
 
   getSearchKeyword() {
     let that = this;
+    let data = {};
+    if (that.data.userId) {
+      data.userId = that.data.userId;
+    }
     $.get({
       url: api.SearchIndex,
-      data: { userId: this.data.userId }
+      data: data
     }).then(function (res) {
       let data = res.data;
       if (data.status === 200) {
@@ -105,17 +109,20 @@ Page({
   },
   getmvList: function () {
     let that = this;
+    let data = {
+        keyword: that.data.keyword,
+      page: that.data.page,
+      size: that.data.size,
+      sort: that.data.currentSortType,
+      order: that.data.currentSortOrder,
+      classifyId: that.data.categoryId
+    };
+    if (that.data.userId) {
+      data.userId = that.data.userId;
+    };
     $.get({
       url: api.mvList,
-      data: {
-        keyword: that.data.keyword,
-        page: that.data.page,
-        size: that.data.size,
-        sort: that.data.currentSortType,
-        order: that.data.currentSortOrder,
-        classifyId: that.data.categoryId,
-        userId: that.data.userId
-      }
+      data: data
     }).then(function (res) {
       let data = res.data;
       if (data.status === 200) {

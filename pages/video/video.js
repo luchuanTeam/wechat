@@ -363,7 +363,24 @@ Page({
       console.log(err);
     });
   },
-
+  /**
+   * 播放上一首
+   */
+  playPre: function () {
+    let that = this;
+    let list = that.data.episodeList;
+    let index = that.data.currentEpisode.episodeId;
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].episodeId == index) {
+        commentStore.init(that.data.userInfo);
+        if (i != 0) {
+          that.loadEpisode(list[i - 1].episodeId);
+        } else {
+          that.loadEpisode(list[list.length - 1].episodeId);
+        }
+      }
+    }
+  },
   /**
    * 播放下一首
    */

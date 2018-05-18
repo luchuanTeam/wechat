@@ -109,3 +109,7 @@
   bottom: 0;
   opacity:0;
 }
+
+.active {
+  background: #ddd!important;
+}

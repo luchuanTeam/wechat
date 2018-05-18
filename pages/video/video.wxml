@@ -13,8 +13,10 @@
       <view class="text">{{totalProcess}}</view>
     </view>
     <view class="audio-btn">
-      <button class='text' bindtap="audioPlay">播放</button>
-      <button class='text' bindtap="audioStop">暂停</button>
+      <button class='text' bindtap="playPre">上一首</button>
+      <button class='text' bindtap="play">播放</button>
+      <button class='text' bindtap="pause">暂停</button>
+      <button class='text' bindtap="playNext">下一首</button>
     </view>
   </view>
 

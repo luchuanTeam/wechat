@@ -141,6 +141,7 @@
 
 .series-wrapper {
   display: flex;
+  margin-bottom:20rpx;
 }
 
 .series-wrapper .title {

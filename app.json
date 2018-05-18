@@ -2,7 +2,6 @@
   "pages": [
     "pages/index/index",
     "pages/zone/zone",
-    "pages/user/user",
     "pages/user/home/home",
     "pages/video/video",
     "pages/videoList/videoList",
@@ -10,6 +9,7 @@
     "pages/settingFolder/account/account",
     "pages/settingFolder/aboutUs/aboutUs",
     "pages/settingFolder/userMsg/userMsg",
+    "pages/settingFolder/mobile/mobile",
     "pages/hotSearch/hotSearch",
     "pages/user/collect/collect",
     "pages/user/history/history"

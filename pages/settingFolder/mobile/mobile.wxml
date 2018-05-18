@@ -1,0 +1,12 @@
+<view class="mobile-container">
+  <view class='row'>
+    <input class='mobile' type='number' placeholder='手机号' confirm-type='确认' bindinput='mobileChange'></input>
+  </view>
+  <view class='row'>
+    <input  class='code-input' type='number' placeholder='验证码' confirm-type='确认' bindinput='codeChange'></input>
+    <button class='code-btn' bindtap="sendCode" disabled='{{sendDisabled}}'>{{codeText}}</button>
+  </view>
+  <view class='row'>
+    <button class='submit' bindtap="bindMobile" type='primary'>提交</button>
+  </view>
+</view>
