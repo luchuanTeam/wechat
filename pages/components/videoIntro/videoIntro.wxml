@@ -1,7 +1,7 @@
 <view class='video-intro-component' bindtap='toVideoPage'>
   <view class='img-wrapper'>
-    <!-- <view class="zoomImage" style='background-image:url({{videoIntro.imgUrl}})'></view> -->
-     <image class="img-fm" src='{{videoIntro.imgUrl}}'></image> 
+     <view class="zoomImage" style='background-image:url({{videoIntro.imgUrl}})'></view> 
+     <!-- <image class="img-fm" src='{{videoIntro.imgUrl}}'></image>  -->
     <image class="img-play" src='https://www.yanda123.com/app/play.png'></image>
     <view wx:if='{{videoIntro.vipType == 1}}' class="vip-container"><text>VIP</text></view>
   </view>

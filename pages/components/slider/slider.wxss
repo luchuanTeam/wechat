@@ -44,7 +44,7 @@
 }
 
 .img-wrapper image {
-  border-radius: 10rpx;
+  border-radius: 2rpx;
 }
 
 .slider-wrapper .hidden-btn {
@@ -62,4 +62,16 @@
 
 .hide {
   display: none;
+}
+
+.zoomImage{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  border-radius: 0px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  background-size:cover;
 }

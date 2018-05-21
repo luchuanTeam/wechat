@@ -97,7 +97,7 @@ Page({
     for (let i = 0, length = list.length; i < length; i++) {
       // 增加 id 属性，传入slider组件，以便删除，因为 slider 组件也会被历史记录复用
       list[i].id = list[i].historyId;
-      list[i].episodeInfo.imgSrc = 'https://www.yanda123.com/yanda/attach/readFile?size=800&id=' + list[i].episodeInfo.imgAppendixId;
+      list[i].episodeInfo.imgSrc = 'https://www.yanda123.com/yanda/attach/readFile?size=200&id=' + list[i].episodeInfo.imgAppendixId;
 
       if(util.isToday( list[i].watchTime) ) {
         historyList.today.push(list[i]);

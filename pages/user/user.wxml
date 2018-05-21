@@ -1,0 +1,55 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- 用户信息模块 -->
+  <view class="userinfo">
+    <view class="left">
+      <!-- 头像 -->
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatar ?  userInfo.avatar: '/resources/images/my.png'}}" background-size="cover"></image>
+      <view class='info-wrapper' wx:if="{{hasUserInfo}}">
+        <!-- 用户名 -->
+        <view class="text">用户名: {{userInfo.nickName}}</view>
+        <view wx:if="{{isVip}}" class='text'>
+          <view class='vip'>VIP</view>
+          <view class='expire'>剩{{expireDay}}天到期</view>
+        </view>
+        <view wx:if="{{!isVip}}" class='text'>
+          <view class='open-vip'>开通VIP</view>
+        </view>
+      </view>
+      <view class='info-wrapper' wx:if="{{!hasUserInfo}}">
+        <!-- 登录按钮 -->
+        <button class="login" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
+      </view>
+    </view>
+    <!-- 账号管理 -->
+    <view class="right" wx:if="{{hasUserInfo}}">
+      <view bindtap='toAccountSetting'>
+        <image src="https://www.yanda123.com/app/setup_fill.png" class="setting-icon" />
+        <text>账号管理</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 工作台模块 -->
+  <view class="page__bd">
+    <view class="weui-grids">
+      <block wx:for="{{workCards}}" wx:key="*this">
+        <navigator url="{{item.url}}" class="weui-grid" hover-class="weui-grid_active">
+          <image class="weui-grid__icon" src="{{ item.icon }}" />
+          <view class="weui-grid__label">{{ item.label }}</view>
+        </navigator>
+      </block>
+      <!-- 在线客服 -->
+      <navigator url="" class="weui-grid" hover-class="weui-grid_active">
+        <button class="open-contact" open-type="contact" session-from="weapp"></button>
+          <image class="weui-grid__icon" src="https://www.yanda123.com/app/customerservice.png" />
+          <view class="weui-grid__label">在线客服</view>
+      </navigator>
+    </view>
+  </view>
+
+  <!-- 底部信息模块 -->
+  <view class="footer">
+    版权所有者：燕达教育
+  </view>
+</view>

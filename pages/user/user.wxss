@@ -1,0 +1,120 @@
+.container {
+  background: #f7f7f7;
+}
+
+
+.userinfo {
+  width: 94%;
+  height: 240rpx;
+  background: -webkit-linear-gradient(left, rgba(135,194,66, 1),  rgba(138,204,175, 1));
+  border-radius: 10rpx;
+  position: relative;
+  display: flex;
+  font-size: 28rpx;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.userinfo .left {
+  position: relative;
+  display:flex;
+  width: 68%;
+}
+
+.left .info-wrapper {
+  display: flex; 
+  flex-direction: column; 
+  margin:0 20rpx;
+  height: 100%;
+  justify-content: center;
+}
+
+.info-wrapper .text {
+  height: 36rpx;
+  margin-top: 8rpx;
+}
+
+.info-wrapper .vip, .open-vip {
+  background: -webkit-linear-gradient(45deg, #EDB214,  rgba(240,240,240, 1));
+  border-radius: 4rpx;
+  width: 60rpx;
+  height: 38rpx;
+  padding: 4rpx;
+  text-align: center;
+  color: #777777;
+  margin-top: 24rpx;
+  font-size: 24rpx;
+  display: inline-block;
+}
+
+.open-vip {
+  background: -webkit-linear-gradient(45deg, rgba(149,149,149, 1),  rgba(240,240,240, 1));
+  width: 120rpx;
+}
+
+.info-wrapper .expire {
+  font-size: 24rpx;
+  display: inline-block;
+  margin-left: 10rpx;
+  color: #F94C3E;
+}
+
+.userinfo .login {
+  margin: auto;
+  text-align: center;
+  font-size: 28rpx;
+  color: #fff;
+  background: rgba(135,194,66, 1);
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin:auto 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo .right {
+  position: relative;
+  display:flex;
+  margin:0 20rpx;
+  color: #851e17;
+  height: 100%;
+  line-height: 240rpx;
+}
+
+.setting-icon {
+  width: 42rpx;
+  height: 42rpx;
+  margin-right: 10rpx;
+  display: inline-block;
+  top:12rpx;
+  position:relative;
+}
+
+.weui-grid {
+  background: #fff;
+  border-right: 6rpx solid #f7f7f7;
+  border-bottom: 6rpx solid #f7f7f7;
+}
+
+.weui-grid_active { 
+  background-color:#ececec!important;
+}
+
+.footer {
+  text-align: center;
+  font-size: 24rpx;
+  color: #888;
+  position: fixed;
+  bottom: 28rpx;
+}
+
+.open-contact {
+  position:absolute;
+  left:0;
+  top:0;
+  right: 0;
+  bottom: 0;
+  opacity:0;
+}

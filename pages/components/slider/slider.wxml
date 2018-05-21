@@ -1,7 +1,8 @@
 <view class='slider-wrapper {{deleted? "hide" : ""}}'>
   <view class='content' bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd' style='{{hideContentClass}}' bindtap='toVideoPage'>
     <view class='img-wrapper'>
-      <image src='{{videoInfo.episodeInfo.imgSrc}}'></image>
+      <!-- <image src='{{videoInfo.episodeInfo.imgSrc}}'></image> -->
+      <view class="zoomImage" style='background-image:url({{videoInfo.episodeInfo.imgSrc}})'></view>
     </view>
     <view class='text-wrapper'>
       <view class='episode-name'>{{videoInfo.episodeInfo.episodeName}}</view>

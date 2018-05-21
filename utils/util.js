@@ -160,6 +160,24 @@ const isYesterday = (str)=> {
   }
 }
 
+const isVip = (userInfo) => {
+  if (!userInfo)
+    return false;
+  if (!userInfo.vipCard)
+    return false;
+  let expTime = new Date(userInfo.vipCard.expTime).getTime();
+  let nowTime = new Date().getTime();
+  if (expTime <= nowTime)
+    return false;
+  return true;
+}
+
+const expireToDay = (time) => {
+  let expTime = new Date(time).getTime();
+  let nowTime = new Date().getTime();
+  return Math.floor((expTime - nowTime) / (1000 * 60 * 60 * 24));
+}
+
 module.exports = {
   formatTime: formatTime,
   trim: trim,
@@ -168,5 +186,7 @@ module.exports = {
   quickTip: quickTip,
   secondsToTime: secondsToTime,
   isToday: isToday,
-  isYesterday: isYesterday
+  isYesterday: isYesterday,
+  isVip: isVip,
+  expireToDay: expireToDay
 }

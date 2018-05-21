@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "search": "../components/newsearch/search",
-    "header": "../components/header/header"
+    "search": "../components/search/search"
   }
 }

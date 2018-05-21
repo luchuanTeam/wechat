@@ -4,6 +4,7 @@ App({
     let userInfo = wx.getStorageSync('userInfo');
     // 判断用户是否已绑定手机号，若无则强制跳转到绑定手机界面
     if (userInfo) {
+      this.globalData.userInfo = userInfo;
       // 这里是为了对之前已经登录的用户强制绑定手机号
       if (!userInfo.mobile) {
         wx.showToast({
