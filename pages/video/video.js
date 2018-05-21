@@ -312,6 +312,7 @@ Page({
           episodeId: episodeId,
           episodeNum: episodeInfo.episodeInfo
         };
+        console.log(JSON.stringify(episodeInfo));
         let mvType = episodeInfo.type;
         this.setData({
           [_video]: episodeInfo,
@@ -376,13 +377,11 @@ Page({
         episodeId: this.data.videoData.video.episodeId
       }
     }).then((res)=> {
-      console.log(JSON.stringify(res));
       if(res.data.status === 200) {
         let userHistoryInfo = res.data.data;
         this.setData({
           initialTime: userHistoryInfo.progress || 0
         })
-        console.log(this.data.initialTime);
       }
     }).catch((err)=> {
       console.log(err);
@@ -430,6 +429,27 @@ Page({
     this.setData({
       currentPlayTime: e.detail.currentTime
     })
+  },
+
+  /**
+   * 增加收藏
+   */
+  addCollect() {
+    if(this.data.userInfo && this.data.userInfo.userId) {
+      $.post({
+        url: api.CollectAdd,
+        data: {
+          userId: this.data.userInfo.userId,
+          episodeId: this.data.videoData.video.episodeId
+        }
+      }).then((res)=> {
+        utils.quickTip(res.data.message);
+      }).catch((err)=> {
+        utils.quickTip('网络错误, 请稍后再试'); 
+      })
+    } else {
+      utils.quickTip('请先登录');
+    }
   },
   /**
    * 音乐播放器事件监听
@@ -550,7 +570,8 @@ Page({
   onUnload: function () {
     //this.pause();     // 避免退出页面 音频还在播放
     if(this.data.userInfo && this.data.userInfo.userId) {
-      let progress = parseInt(this.data.currentPlayTime);  
+      let progress = parseInt(this.data.currentPlayTime) * 1000,
+          duration = parseInt(this.data.duration);
       $.post({
         url: api.HistoryUpsert,
         data: {

@@ -1,10 +1,19 @@
 <view class='collect-container'>
-  <view class='title'>
+  <view class='title' wx:if='{{collectList.videoList.length > 0}}'>
     <image class='icon' src='https://www.yanda123.com/app/live-select.png'></image>
     <view class='text float-left'>视频</view>
   </view>
 
   <view class='collect-wrapper'>
-    <my-slider wx:for='{{collectList}}' wx:key='{{index}}' videoInfo='{{item}}' sliderId = '{{item.collectId}}' bind:pressStart='pressStart' bind:pressEnd='pressEnd' initSliderId='{{initSliderId}}' bind:slideLeft='slideLeft' deleteUrl='{{deleteUrl}}'></my-slider>
+    <my-slider wx:for='{{collectList.videoList}}' wx:key='{{index}}' videoInfo='{{item}}' sliderId = '{{item.collectId}}' bind:pressStart='pressStart' bind:pressEnd='pressEnd' initSliderId='{{initSliderId}}' bind:slideLeft='slideLeft' deleteUrl='{{deleteUrl}}'></my-slider>
+  </view>
+
+  <view class='title' wx:if='{{collectList.musicList.length > 0}}'>
+    <image class='icon' src='https://www.yanda123.com/app/live-select.png'></image>
+    <view class='text float-left'>音频</view>
+  </view>
+
+  <view class='collect-wrapper'>
+    <my-slider wx:for='{{collectList.musicList}}' wx:key='{{index}}' videoInfo='{{item}}' sliderId = '{{item.collectId}}' bind:pressStart='pressStart' bind:pressEnd='pressEnd' initSliderId='{{initSliderId}}' bind:slideLeft='slideLeft' deleteUrl='{{deleteUrl}}'></my-slider>
   </view>
 </view>

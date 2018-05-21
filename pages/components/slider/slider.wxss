@@ -16,12 +16,22 @@
 }
 
 .img-wrapper {
+  position: relative;
   flex: 0 0 32%;
   margin-left: 30rpx;
   height: 136rpx;
 }
 
+.img-wrapper .progress-duration {
+  position: absolute;
+  bottom: -10rpx;
+  right: 10rpx;
+  color: #fff;
+  font-size: 28rpx;
+}
+
 .text-wrapper {
+  position: relative;
   flex: 1;
   margin-left: 30rpx;
   height: 100%;
@@ -29,7 +39,6 @@
 }
 
 .text-wrapper .episode-name {
-  margin-top: 30rpx;
   color: #333;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -41,6 +50,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.text-wrapper .watch-time {
+  position: absolute;
+  bottom: -10rpx;
+  left: 0;
+  color: #ddd;
 }
 
 .img-wrapper image {

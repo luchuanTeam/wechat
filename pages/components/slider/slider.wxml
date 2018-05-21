@@ -3,10 +3,12 @@
     <view class='img-wrapper'>
       <!-- <image src='{{videoInfo.episodeInfo.imgSrc}}'></image> -->
       <view class="zoomImage" style='background-image:url({{videoInfo.episodeInfo.imgSrc}})'></view>
+      <view class='progress-duration'>{{videoInfo.progress}}/{{videoInfo.duration}}</view>
     </view>
     <view class='text-wrapper'>
       <view class='episode-name'>{{videoInfo.episodeInfo.episodeName}}</view>
       <view class='episode-intro'>{{videoInfo.episodeInfo.episodeIntro}}</view>
+      <view class='watch-time'>{{videoInfo.watchTime}}</view>
     </view>
   </view>
   <view class='hidden-btn' style='{{showDeleteClass}}' bindtap='deleteSlider'>

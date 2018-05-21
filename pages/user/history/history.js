@@ -81,6 +81,7 @@ Page({
         let result = res.data.data,
           list = result.list,
           total = result.total;
+        console.log(JSON.stringify(result));  
         this.groupHistoryList(list, total);
       } else {
         util.quickTip('获取历史记录失败, 请稍后再试');
@@ -98,12 +99,16 @@ Page({
       // 增加 id 属性，传入slider组件，以便删除，因为 slider 组件也会被历史记录复用
       list[i].id = list[i].historyId;
       list[i].episodeInfo.imgSrc = 'https://www.yanda123.com/yanda/attach/readFile?size=200&id=' + list[i].episodeInfo.imgAppendixId;
-
+      list[i].progress = util.secondsToTime(parseInt(list[i].progress/1000));
+      list[i].duration = util.secondsToTime(parseInt(list[i].episodeInfo.duration/1000));
       if(util.isToday( list[i].watchTime) ) {
+        list[i].watchTime = `今天 ${list[i].watchTime.slice(11, 16)}`;
         historyList.today.push(list[i]);
       } else if(util.isYesterday( list[i].watchTime )) {
+        list[i].watchTime = `昨天 ${list[i].watchTime.slice(11, 16)}`;
         historyList.yesterday.push(list[i]);
       } else {
+        list[i].watchTime = list[i].watchTime.slice(0, 16);
         historyList.past.push(list[i]);  
       }
     }

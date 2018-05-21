@@ -78,7 +78,7 @@
 
     <view class='input-wrapper'>
       <view class='text'>分享</view>
-      <view class='text'>收藏</view>
+      <view class='text' bindtap='addCollect'>收藏</view>
       <view class='input'>
         <view bindtap='toggleModelInput'>我来评论一下</view>
       </view>
