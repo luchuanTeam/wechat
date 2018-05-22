@@ -5,7 +5,7 @@
     <search class="search" scrollTop='{{scrollTop}}'></search>
   </view>
   <swiper class="banner" autoplay="autoplay" interval="5000" duration="500">
-    <block wx:for="{{imgUrls}}">
+    <block wx:for="{{imgUrls}}" wx:key="{{item}}">
       <swiper-item>
         <view class="slide-image">
 					<view class="zoomImage" style='background-image:url({{item}})'></view>

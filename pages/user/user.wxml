@@ -33,7 +33,7 @@
   <!-- 工作台模块 -->
   <view class="page__bd">
     <view class="weui-grids">
-      <block wx:for="{{workCards}}" wx:key="*this">
+      <block wx:for="{{workCards}}" wx:key="{{item}}">
         <navigator url="{{item.url}}" class="weui-grid" hover-class="weui-grid_active">
           <image class="weui-grid__icon" src="{{ item.icon }}" />
           <view class="weui-grid__label">{{ item.label }}</view>
