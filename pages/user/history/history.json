@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "历史记录",
+  "navigationBarBackgroundColor": "#87C242",
+  "navigationBarTextStyle": "white",
   "usingComponents": {
     "my-slider": "../../components/slider/slider"
   }

@@ -1,20 +1,21 @@
 .history-container {
   width: 100%;
   height: 100%;
+  background: #f4f4f4;
+  padding: 0 30rpx;
 }
 
 .title {
-  padding: 20rpx;
+  padding: 20rpx 0 0;
   width: 100%;
-  height: 78rpx;
-  background: #f8f8f8;
+  height: 60rpx;
 }
 
 
 .title .text {
   line-height: 38rpx;
   font-size: 34rpx;
-  color: #333;
+  color: #9e9e9e;
 }
 
 .history-wrapper {
