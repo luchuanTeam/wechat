@@ -27,6 +27,13 @@ Component({
     deleteUrl: {
       type: String,
       value: ''
+    },
+    editState: {
+      type: Number,
+      value: 0,
+      observer(newVal, oldVal) {
+        this.toggleSliderStyle(newVal);
+      }
     }
   },
 
@@ -44,32 +51,38 @@ Component({
    */
   methods: {
     touchStart(e) {
-      start = {   // 记录当前按下的位置
-        x: e.touches[0].pageX,
-        y: e.touches[0].pageY
+      if (this.properties.editState === 0) {
+        start = {   // 记录当前按下的位置
+          x: e.touches[0].pageX,
+          y: e.touches[0].pageY
+        }
+        this.triggerEvent('pressStart', { sliderId: this.properties.sliderId })
       }
-      this.triggerEvent('pressStart', { sliderId: this.properties.sliderId})
     },
 
     touchMove(e) {
-      slide = {
-        x: e.touches[0].pageX - start.x,
-        y: e.touches[0].pageY - start.y
+      if(this.properties.editState === 0) {
+        slide = {
+          x: e.touches[0].pageX - start.x,
+          y: e.touches[0].pageY - start.y
+        }
       }
     },
 
     touchEnd(e) {
-      this.triggerEvent('pressEnd');
-      if (slide.x < -50) {
-        this.setData({
-          hideContentClass: `left: -150rpx`,
-          showDeleteClass: `right: 0`
-        });
-        this.triggerEvent('slideLeft', { sliderId: this.properties.sliderId });
-      } else {
-        this.init();  
+      if(this.properties.editState === 0) {
+        this.triggerEvent('pressEnd');
+        if (slide.x < -50) {
+          this.setData({
+            hideContentClass: `left: -150rpx`,
+            showDeleteClass: `right: 0`
+          });
+          this.triggerEvent('slideLeft', { sliderId: this.properties.sliderId });
+        } else {
+          this.init();
+        }
+        slide = {};
       }
-      slide = {};
     },
 
     deleteSlider() {
@@ -80,7 +93,8 @@ Component({
             id: this.properties.videoInfo.id
           }  
         }).then((res) => {
-          if(res.data.status === 200) {          
+          if(res.data.status === 200) {
+            this.triggerEvent('deleteById', { id: this.properties.sliderId });         
             this.setData({
               deleted: true
             })
@@ -108,7 +122,13 @@ Component({
           url: `../../video/video?id=${episodeInfo.mvId}&episodeId=${episodeInfo.episodeId}`,
         });
       }
-      
+    },
+
+    toggleSliderStyle(data) {
+      this.setData({
+        hideContentClass: data === 1 ? 'left: 60rpx' : '',
+        showDeleteClass: ''
+      })
     }
   }
 })

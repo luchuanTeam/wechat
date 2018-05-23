@@ -312,7 +312,6 @@ Page({
           episodeId: episodeId,
           episodeNum: episodeInfo.episodeInfo
         };
-        console.log(JSON.stringify(episodeInfo));
         let mvType = episodeInfo.type;
         this.setData({
           [_video]: episodeInfo,
@@ -570,8 +569,7 @@ Page({
   onUnload: function () {
     //this.pause();     // 避免退出页面 音频还在播放
     if(this.data.userInfo && this.data.userInfo.userId) {
-      let progress = parseInt(this.data.currentPlayTime) * 1000,
-          duration = parseInt(this.data.duration);
+      let progress = parseInt(this.data.currentPlayTime) * 1000;
       $.post({
         url: api.HistoryUpsert,
         data: {

@@ -1,4 +1,5 @@
 .history-container {
+  position: relative;
   width: 100%;
   height: 100%;
   background: #f4f4f4;
@@ -11,6 +12,13 @@
   height: 60rpx;
 }
 
+.list-container {
+  position: absolute;
+  top: 0;
+  bottom: 100rpx;
+  width: 100%;
+  overflow: auto;
+}
 
 .title .text {
   line-height: 38rpx;
@@ -18,7 +26,58 @@
   color: #9e9e9e;
 }
 
+.slider-container {
+  position: relative;
+}
+
+.icon-wrapper {
+  position: absolute;
+  left: 0;
+  height: 136rpx;
+  padding-top: 40rpx;
+  width: 80rpx;
+  text-align: center;
+}
+
+.icon-wrapper.show {
+  z-index: 20;
+}
+
 .history-wrapper {
   margin-top: 10rpx;
   width: 100%;
+}
+
+.edit-wrapper {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  background: #f8f8f8;
+}
+
+.edit-wrapper .edit {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.edit-wrapper .select-wrapper {
+  display: flex;
+  position: absolute;
+  top: 100rpx;
+  width: 100%;
+  transition: all 0.2s linear;
+  z-index: 10;
+}
+
+.edit-wrapper .select-wrapper.show {
+  top: 0;
+  
+}
+
+.edit-wrapper .select-wrapper view {
+  flex: 1;
+  text-align: center;
 }
