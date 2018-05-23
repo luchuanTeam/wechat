@@ -98,9 +98,12 @@ Page({
     for (let i = 0, length = list.length; i < length; i++) {
       // 增加 id 属性，传入slider组件，以便删除，因为 slider 组件也会被历史记录复用
       list[i].id = list[i].historyId;
-      list[i].episodeInfo.imgSrc = 'https://www.yanda123.com/yanda/attach/readFile?size=200&id=' + list[i].episodeInfo.imgAppendixId;
+      if (list[i].episodeInfo) {
+        list[i].episodeInfo.imgSrc = 'https://www.yanda123.com/yanda/attach/readFile?size=200&id=' + list[i].episodeInfo.imgAppendixId;
+        list[i].duration = util.secondsToTime(parseInt(list[i].episodeInfo.duration / 1000));
+      }
       list[i].progress = util.secondsToTime(parseInt(list[i].progress/1000));
-      list[i].duration = util.secondsToTime(parseInt(list[i].episodeInfo.duration/1000));
+      
       if(util.isToday( list[i].watchTime) ) {
         list[i].watchTime = `今天 ${list[i].watchTime.slice(11, 16)}`;
         historyList.today.push(list[i]);

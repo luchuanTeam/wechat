@@ -101,12 +101,15 @@ Page({
     for(let i = 0, length = list.length; i < length; i++) {
        // 增加 id 属性，传入slider组件，以便删除，因为 slider 组件也会被历史记录复用
       list[i].id = list[i].collectId;  
-      list[i].episodeInfo.imgSrc = 'https://www.yanda123.com/yanda/attach/readFile?size=800&id=' + list[i].episodeInfo.imgAppendixId;
-      if(list[i].episodeInfo.type === 1) {
-        collectList.videoList.push(list[i]);
-      } else if (list[i].episodeInfo.type === 2) {
-        collectList.musicList.push(list[i]);
+      if (list[i].episodeInfo) {
+        list[i].episodeInfo.imgSrc = 'https://www.yanda123.com/yanda/attach/readFile?size=800&id=' + list[i].episodeInfo.imgAppendixId;
+        if (list[i].episodeInfo.type === 1) {
+          collectList.videoList.push(list[i]);
+        } else if (list[i].episodeInfo.type === 2) {
+          collectList.musicList.push(list[i]);
+        }
       }
+      
     }
     (collectList.videoList.length + collectList.musicList.length) < total ? (pageNum++) : (hasMore = false);
     this.setData({
