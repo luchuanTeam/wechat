@@ -1,10 +1,16 @@
 <view class='history-container'>
+  <scroll-view class='list-container' scroll-y>
   <view class='today' wx:if='{{historyList.today.length > 0}}'>
     <view class='title'>
       <view class='text'>今天</view>
     </view>
     <view class='history-wrapper'>
-      <my-slider wx:for='{{historyList.today}}' wx:key='{{index}}' videoInfo='{{item}}' sliderId = '{{item.historyId}}' bind:pressStart='pressStart' bind:pressEnd='pressEnd' initSliderId='{{initSliderId}}' bind:slideLeft='slideLeft' deleteUrl='{{deleteUrl}}'></my-slider>
+      <view class='slider-container' wx:for='{{historyList.today}}' wx:key='{{index}}' wx:if='{{selectedMap[historyList.today[index].historyId]}}'>
+        <view class="icon-wrapper {{editState === 1 ? 'show':''}}" bindtap='toggleSingleSelect' data-id='{{historyList.today[index].historyId}}'>
+          <block><icon type='success' size='20' color='{{selectedMap[historyList.today[index].historyId]}}'></icon></block>
+        </view>
+        <my-slider videoInfo='{{item}}' sliderId = '{{item.historyId}}' bind:pressStart='pressStart' bind:pressEnd='pressEnd' initSliderId='{{initSliderId}}' bind:slideLeft='slideLeft' deleteUrl='{{deleteUrl}}' editState='{{editState}}' bind:deleteById='deleteById' ></my-slider>
+      </view>
     </view>
   </view>
   
@@ -13,7 +19,12 @@
       <view class='text'>昨天</view>
     </view>
     <view class='history-wrapper'>
-      <my-slider wx:for='{{historyList.yesterday}}' wx:key='{{index}}' videoInfo='{{item}}' sliderId = '{{item.historyId}}' bind:pressStart='pressStart' bind:pressEnd='pressEnd' initSliderId='{{initSliderId}}' bind:slideLeft='slideLeft' deleteUrl='{{deleteUrl}}'></my-slider>
+      <view class='slider-container' wx:for='{{historyList.yesterday}}' wx:key='{{index}}' wx:if='{{selectedMap[historyList.yesterday[index].historyId]}}'>
+        <view class="icon-wrapper {{editState === 1 ? 'show':''}}" bindtap='toggleSingleSelect' data-id='{{historyList.yesterday[index].historyId}}'>
+          <block><icon type='success' size='20' color='{{selectedMap[historyList.yesterday[index].historyId]}}'></icon></block>
+        </view>
+        <my-slider videoInfo='{{item}}' sliderId = '{{item.historyId}}' bind:pressStart='pressStart' bind:pressEnd='pressEnd' initSliderId='{{initSliderId}}' bind:slideLeft='slideLeft' deleteUrl='{{deleteUrl}}' editState='{{editState}}' bind:deleteById='deleteById' ></my-slider>
+      </view>
     </view>
   </view>
 
@@ -22,7 +33,22 @@
       <view class='text'>更早</view>
     </view>
     <view class='history-wrapper'>
-      <my-slider wx:for='{{historyList.past}}' wx:key='{{index}}' videoInfo='{{item}}' sliderId = '{{item.historyId}}' bind:pressStart='pressStart' bind:pressEnd='pressEnd' initSliderId='{{initSliderId}}' bind:slideLeft='slideLeft' deleteUrl='{{deleteUrl}}'></my-slider>
+      <view class='slider-container' wx:for='{{historyList.past}}' wx:key='{{index}}' wx:if='{{selectedMap[historyList.past[index].historyId]}}'>
+        <view class="icon-wrapper {{editState === 1 ? 'show':''}}" bindtap='toggleSingleSelect' data-id='{{historyList.past[index].historyId}}'>
+          <block><icon type='success' size='20' color='{{selectedMap[historyList.past[index].historyId]}}'></icon></block>
+        </view>
+        <my-slider videoInfo='{{item}}' sliderId = '{{item.historyId}}' bind:pressStart='pressStart' bind:pressEnd='pressEnd' bind:deleteById='deleteById' initSliderId='{{initSliderId}}' bind:slideLeft='slideLeft' deleteUrl='{{deleteUrl}}' editState='{{editState}}'></my-slider>
+      </view>
+    </view>
+  </view>
+  </scroll-view>
+
+  <view class='edit-wrapper'>
+    <view class="edit {{editState === 1 ? 'hide':''}}" bindtap='toggleEdit'>编辑</view>
+    <view class="select-wrapper {{editState === 1? 'show':''}}">
+      <view class='cancel' bindtap='toggleEdit'>取消</view>
+      <view class='select-all' bindtap='toggleSelectAll'>{{selectAllText}}</view>
+      <view class='delete' bindtap='deleteHistories'>删除</view>
     </view>
   </view>
 </view>

@@ -83,7 +83,6 @@ Page({
         let result = res.data.data,
           list = result.list,
           total = result.total;
-        console.log(JSON.stringify(result));
         this.groupCollectList(list, total);
       } else {
         util.quickTip('获取我的收藏失败, 请稍后再试');
@@ -99,13 +98,15 @@ Page({
         pageNum = this.data.pageNum,
         hasMore = true;
     for(let i = 0, length = list.length; i < length; i++) {
-       // 增加 id 属性，传入slider组件，以便删除，因为 slider 组件也会被历史记录复用
-      list[i].id = list[i].collectId;  
-      list[i].episodeInfo.imgSrc = 'https://www.yanda123.com/yanda/attach/readFile?size=800&id=' + list[i].episodeInfo.imgAppendixId;
-      if(list[i].episodeInfo.type === 1) {
-        collectList.videoList.push(list[i]);
-      } else if (list[i].episodeInfo.type === 2) {
-        collectList.musicList.push(list[i]);
+      if(list[i].episodeInfo) {
+        // 增加 id 属性，传入slider组件，以便删除，因为 slider 组件也会被历史记录复用
+        list[i].id = list[i].collectId;
+        list[i].episodeInfo.imgSrc = 'https://www.yanda123.com/yanda/attach/readFile?size=800&id=' + list[i].episodeInfo.imgAppendixId;
+        if (list[i].episodeInfo.type === 1) {
+          collectList.videoList.push(list[i]);
+        } else if (list[i].episodeInfo.type === 2) {
+          collectList.musicList.push(list[i]);
+        }
       }
     }
     (collectList.videoList.length + collectList.musicList.length) < total ? (pageNum++) : (hasMore = false);
