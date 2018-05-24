@@ -8,9 +8,11 @@ Page({
    */
   data: {
     userId: '',
-    currentPressId: null,
-    lastPressId: null,
-    initSliderId: null,
+    currentPressId: null,     // 记录当前要滑动的 slider
+    lastPressId: null,        // 记录上一次要滑动的 slider
+    // 记录要置为初始状态的 slider，比如上一次滑动的 slider 为 2，当前要滑动的 slider 为 1
+    // 则 initSliderId 为 2，表示上一次滑动的 slider 必须恢复初始位置
+    initSliderId: null,       
     pageNum: 1,
     pageSize: 10,
     historyList: {
@@ -21,10 +23,9 @@ Page({
     selectedMap: {},
     hasMore: true,
     deleteUrl: '',
-    editState: 0,
-    iconColor: 'gray',
-    selectAll: 0,
-    selectAllText: '全选'
+    editState: 0,         // 编辑状态，值为 1 时表示客户要对历史记录进行批量操作，此时 slider不能滑动
+    selectAll: 0,         // 全选状态，值为 1 时表示选择了全部的历史记录，0 表示没有全选
+    selectAllText: '全选' // 全选 的文字，当 selectAll 为 1时，值为 '取消全选'， selectAll 为 0，值为 '全选'
   },
 
   /**
@@ -41,8 +42,8 @@ Page({
    * 如果不一样，则要将上次左滑的滑块恢复起始状态
    */
   pressEnd(e) {
-    let _lastPressId = this.data.lastPressId,
-      _currentPressId = this.data.currentPressId;
+    let _lastPressId = this.data.lastPressId,     
+        _currentPressId = this.data.currentPressId;
     if (_lastPressId && _currentPressId !== _lastPressId) {
       this.setData({
         initSliderId: _lastPressId,
@@ -75,6 +76,9 @@ Page({
     }  
   },
 
+  /**
+   * 获取我的历史记录
+   */
   getMyHistories(userId) {
     $.get({
       url: api.HistoryIndex,
@@ -98,6 +102,9 @@ Page({
     });
   },
 
+  /**
+   * 将获取到的历史记录分类，根据 watchTime 分为 今天，昨天，更早 三类
+   */
   groupHistoryList(list, total) {
     let historyList = this.data.historyList,
         selectedMap = this.data.selectedMap,
@@ -110,7 +117,9 @@ Page({
         list[i].episodeInfo.imgSrc = 'https://www.yanda123.com/yanda/attach/readFile?size=200&id=' + list[i].episodeInfo.imgAppendixId;
         list[i].progress = util.secondsToTime(parseInt(list[i].progress / 1000));
         list[i].duration = util.secondsToTime(parseInt(list[i].episodeInfo.duration / 1000));
-        selectedMap[list[i].historyId] = 'gray';
+        // 每获取一条历史记录，将其记录在 selectedMap 中， key 为对应的历史记录id， value 为 'gray'
+        // vale 为 'gray' 表示该历史记录没有被选中
+        selectedMap[list[i].historyId] = 'gray';      
         if (util.isToday(list[i].watchTime)) {
           list[i].watchTime = `今天 ${list[i].watchTime.slice(11, 16)}`;
           historyList.today.push(list[i]);
@@ -132,15 +141,23 @@ Page({
     })
   },
 
+  /**
+   * 用户要对历史记录进行批量操作或取消批量操作的方法
+   */
   toggleEdit() {
     this.setData({
       editState: this.data.editState === 0 ? 1 : 0   
     })
   },
 
+  /**
+   * 用户点击 全选 或 取消全选
+   */
   toggleSelectAll() {
     let selectAll = this.data.selectAll,
         selectedMap = this.data.selectedMap;
+    // 如果是全选，则要将selectedMap 所有的历史记录的值改为 'red'，表示全部选中
+    // 'red' 为对应的 icon 图标颜色
     for(let key in selectedMap) {
       selectAll === 1 ? selectedMap[key] = 'gray' : selectedMap[key] = 'red'
     }
@@ -151,11 +168,17 @@ Page({
     })
   },
 
+  /**
+   * 选择单条历史记录操作
+   */
   toggleSingleSelect(e) {
-    let id = e.currentTarget.dataset.id;
+    let id = e.currentTarget.dataset.id;    // 获取当前选中的历史记录的 id
     let selectedMap = this.data.selectedMap;
     selectedMap[id] = selectedMap[id] === 'gray' ? 'red' : 'gray';
-    let selectAll = 1, selectAllText = '取消全选'
+    let selectAll = 1, selectAllText = '取消全选';
+
+    // 更改一条历史记录的选中状态后，要对 selectedMap 遍历，只要有发现一条没有被选中，即可退出遍历
+    // 并将全选状态 selectAll 置为 0，selectAllText 置为 '全选'
     for(let key in selectedMap) {
       if(selectedMap[key] === 'gray') {
         selectAll = 0;
@@ -171,7 +194,7 @@ Page({
   },
 
   /**
-  * 子组件slider触发，根据 id 删除页面的内容
+  * 子组件slider触发，ajax操作为 slider 子组件发送，父组件则要更改页面显示
   */
   deleteById(e) {
     let id = e.detail.id;

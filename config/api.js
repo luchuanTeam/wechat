@@ -29,6 +29,7 @@ module.exports = {
   HistoryDelete: WxApiRoot + 'history/delete',
   HistoryUpsert: WxApiRoot + 'history/upsert',
   HistoryRecord: WxApiRoot + 'history/record',
+  HistoryDeleteByIds: WxApiRoot + 'history/deleteByIds',
 
   UserSendCode: WxApiRoot + 'user/sendCode',
   UserBindMobile: WxApiRoot + 'user/bindMobile'
