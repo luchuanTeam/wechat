@@ -32,8 +32,8 @@
 
 .text-wrapper {
   position: relative;
-  flex: 1;
-  margin-left: 30rpx;
+  padding: 0 30rpx;
+  width: 65%;
   height: 100%;
   font-size: 26rpx;
 }
@@ -47,15 +47,15 @@
 
 .text-wrapper .episode-intro {
   color: #666;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .text-wrapper .watch-time {
   position: absolute;
   bottom: -6rpx;
-  left: 0;
+  left: 30rpx;
   color: #9d9d9d;
 }
 
