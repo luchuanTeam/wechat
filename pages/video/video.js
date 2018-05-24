@@ -567,7 +567,7 @@ Page({
    * 客户离开页面时先判断客户有没有点赞，若有点赞再统一请求点赞接口
    */
   onUnload: function () {
-    //this.pause();     // 避免退出页面 音频还在播放
+    this.pause();     // 避免退出页面 音频还在播放
     if(this.data.userInfo && this.data.userInfo.userId) {
       let progress = parseInt(this.data.currentPlayTime) * 1000;
       $.post({
