@@ -32,7 +32,7 @@
 
 .icon-wrapper {
   position: absolute;
-  left: 0;
+  left: -10px;
   height: 136rpx;
   padding-top: 40rpx;
   width: 80rpx;
@@ -55,6 +55,7 @@
   height: 100rpx;
   line-height: 100rpx;
   background: #f8f8f8;
+  z-index: 99;
 }
 
 .edit-wrapper .edit {

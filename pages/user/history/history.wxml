@@ -6,7 +6,7 @@
     </view>
     <view class='history-wrapper'>
       <view class='slider-container' wx:for='{{historyList.today}}' wx:key='{{index}}' wx:if='{{selectedMap[historyList.today[index].historyId]}}'>
-        <view class="icon-wrapper {{editState === 1 ? 'show':''}}" bindtap='toggleSingleSelect' data-id='{{historyList.today[index].historyId}}'>
+        <view wx:if="{{editState === 1}}" class="icon-wrapper {{editState === 1 ? 'show':''}}" bindtap='toggleSingleSelect' data-id='{{historyList.today[index].historyId}}'>
           <block><icon type='success' size='20' color='{{selectedMap[historyList.today[index].historyId]}}'></icon></block>
         </view>
         <my-slider videoInfo='{{item}}' sliderId = '{{item.historyId}}' bind:pressStart='pressStart' bind:pressEnd='pressEnd' initSliderId='{{initSliderId}}' bind:slideLeft='slideLeft' deleteUrl='{{deleteUrl}}' editState='{{editState}}' bind:deleteById='deleteById' ></my-slider>
@@ -42,13 +42,12 @@
     </view>
   </view>
   </scroll-view>
-
-  <view class='edit-wrapper'>
-    <view class="edit {{editState === 1 ? 'hide':''}}" bindtap='toggleEdit'>编辑</view>
-    <view class="select-wrapper {{editState === 1? 'show':''}}">
-      <view class='cancel' bindtap='toggleEdit'>取消</view>
-      <view class='select-all' bindtap='toggleSelectAll'>{{selectAllText}}</view>
-      <view class='delete' bindtap='deleteHistories'>删除</view>
-    </view>
+</view>
+<view class='edit-wrapper'>
+  <view class="edit {{editState === 1 ? 'hide':''}}" bindtap='toggleEdit'>编辑</view>
+  <view class="select-wrapper {{editState === 1? 'show':''}}">
+    <view class='cancel' bindtap='toggleEdit'>取消</view>
+    <view class='select-all' bindtap='toggleSelectAll'>{{selectAllText}}</view>
+    <view class='delete' bindtap='deleteHistories'>删除</view>
   </view>
 </view>
