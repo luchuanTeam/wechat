@@ -119,7 +119,7 @@ Component({
       let episodeInfo = this.properties.videoInfo.episodeInfo;
       if(episodeInfo && episodeInfo.mvId && episodeInfo.episodeId) {
         wx.navigateTo({
-          url: `../../video/video?id=${episodeInfo.mvId}&episodeId=${episodeInfo.episodeId}`,
+          url: `../../video/video?id=${episodeInfo.mvId}&episodeId=${episodeInfo.episodeId}&progress=${this.properties.videoInfo.progress}`,
         });
       }
     },

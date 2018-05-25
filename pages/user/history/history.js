@@ -115,7 +115,7 @@ Page({
         // 增加 id 属性，传入slider组件，以便删除，因为 slider 组件也会被历史记录复用
         list[i].id = list[i].historyId;
         list[i].episodeInfo.imgSrc = 'https://www.yanda123.com/yanda/attach/readFile?size=200&id=' + list[i].episodeInfo.imgAppendixId;
-        list[i].progress = util.secondsToTime(parseInt(list[i].progress / 1000));
+        list[i].episodeInfo.progress = util.secondsToTime(parseInt(list[i].progress / 1000));
         list[i].duration = util.secondsToTime(parseInt(list[i].episodeInfo.duration / 1000));
         // 每获取一条历史记录，将其记录在 selectedMap 中， key 为对应的历史记录id， value 为 'gray'
         // vale 为 'gray' 表示该历史记录没有被选中

@@ -201,15 +201,16 @@ Page({
   onLoad: function (options) {
     let userInfo = wx.getStorageSync('userInfo');
     commentStore.init(userInfo);
-
+    let progress = options.progress ? parseInt(options.progress/1000) : 0;
     // 初始化从页面传递过来的视频id
     this.setData({
       mvId: options.id || 1,
-      userInfo: userInfo
+      userInfo: userInfo,
+      initialTime: progress
     });
     this.getEpisodeList(this.data.mvId, options.episodeId);
     // 音频事件监听
-    this.audioListener();
+    this.audioListener(progress);
   },
 
   /**
@@ -352,7 +353,6 @@ Page({
           }); 
         };
         if (this.data.userInfo && this.data.userInfo.userId) {
-          this.loadHistoryRecord();
           let self = this;
           commentStore.dispatch('loadUserAgrees', self.data.videoData.video.episodeId).then((res) => {
             self.loadFatherComments(REFRESH);
@@ -453,9 +453,11 @@ Page({
   /**
    * 音乐播放器事件监听
    */
-  audioListener: function () {
+  audioListener: function (progress) {
     var that = this;
     //背景音频播放进度更新事件
+    app.backgroundAudioManager.startTime = progress;
+    app.backgroundAudioManager.currentTime = progress;
     app.backgroundAudioManager.onTimeUpdate(function (callback) {
       let currentTime = app.backgroundAudioManager.currentTime;
       let duration = app.backgroundAudioManager.duration;
