@@ -19,6 +19,7 @@
   position: relative;
   flex: 0 0 32%;
   height: 136rpx;
+  margin-left: 30rpx;
 }
 
 .img-wrapper .progress-duration {
