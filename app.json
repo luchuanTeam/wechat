@@ -12,7 +12,8 @@
     "pages/setting/mobile/mobile",
     "pages/hotSearch/hotSearch",
     "pages/user/collect/collect",
-    "pages/user/history/history"
+    "pages/user/history/history",
+    "pages/user/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",

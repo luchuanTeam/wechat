@@ -18,7 +18,8 @@
       </view>
       <view class='info-wrapper' wx:if="{{!hasUserInfo}}">
         <!-- 登录按钮 -->
-        <button class="login" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
+        <button class="login" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 微信登录 </button>
+        <button class="login" bindtap="vipLogin"> 会员登录 </button>
       </view>
     </view>
     <!-- 账号管理 -->

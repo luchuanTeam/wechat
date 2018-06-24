@@ -218,5 +218,10 @@ Page({
     } else {
       utils.quickTip('无法获取用户信息');
     }
+  },
+  vipLogin: function() {
+    wx.navigateTo({
+      url: '/pages/user/login/login'
+    });
   }
 })

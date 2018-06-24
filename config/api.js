@@ -32,5 +32,6 @@ module.exports = {
   HistoryDeleteByIds: WxApiRoot + 'history/deleteByIds',
 
   UserSendCode: WxApiRoot + 'user/sendCode',
-  UserBindMobile: WxApiRoot + 'user/bindMobile'
+  UserBindMobile: WxApiRoot + 'user/bindMobile',
+  UserLogin: 'http://localhost:8080/yanda' + '/user/login'
 };

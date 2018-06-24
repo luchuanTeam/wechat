@@ -62,7 +62,7 @@
   right: 10rpx;
   background: #fc3f4c;
   border-radius: 4rpx; 
-  padding: 4rpx;
+  padding: 0 4rpx;
   box-shadow: 0 2px 12px 0 rgba(255,255,255,.1);
 }
 

@@ -32,6 +32,9 @@ Page({
       episodeId: 1,
       episodeNum: 1
     },
+    tip: '',
+    playType: 1,
+    playTypeText: '顺序播放',
     showCenterPlayBtn: false,
     textAreaFocus: false,
     selected: '1',        // 决定显示视频组件或者评论组件, '1'代表视频组件, '2'代表评论组件
@@ -307,7 +310,6 @@ Page({
     }).then((res) => {
       let episodeInfo = res.data;
       if (episodeInfo) {
-        episodeInfo.mvSrc = utils.getAttachSrc(episodeInfo.mvAttach);
         episodeInfo.imgSrc = 'https://www.yanda123.com/yanda/attach/readFile?size=800&id=' + episodeInfo.imgAppendixId;
         let currentEpisode = {
           episodeId: episodeId,
@@ -322,31 +324,41 @@ Page({
         if (episodeInfo.vipType == 1) {
           let vipCard = this.data.userInfo.vipCard;
           if (!vipCard) {
-            wx.showToast({
-              title: '该视频需要vip方可观看',
-              icon: 'none',
-              duration: 10000
+            this.setData({
+              tip: '该视频需要vip方可观看'
             });
             return;
           } else {
             let expTime = new Date(vipCard.expTime).getTime();
             let nowTime = new Date().getTime();
             if (expTime <= nowTime) {
-              wx.showToast({
-                title: '您的会员已到期，无法观看vip视频',
-                icon: 'none',
-                duration: 10000
+              this.setData({
+                tip: '您的会员已到期，无法观看vip视频'
               });
               return;
             }
           }
         }
 
+        //对于VIP视频，先验证当前用户会员权限再初始化视频地址
+        this.setData({
+          tip: ''
+        });
+        episodeInfo.mvSrc = utils.getAttachSrc(episodeInfo.mvAttach);
+        this.setData({
+          [_video]: episodeInfo
+        });
+
         if (mvType == 2) {
           // 音频播放
           app.backgroundAudioManager.title = episodeInfo.episodeName;
           app.backgroundAudioManager.coverImgUrl = episodeInfo.imgSrc;
           app.backgroundAudioManager.src = episodeInfo.mvSrc;
+          let duration = Math.floor(episodeInfo.duration / 1000);
+          console.log('音频时长：' + duration);
+          this.setData({
+            duration: Math.floor(episodeInfo.duration/1000)
+          })
         } else {
           this.setData({
             videoContext: wx.createVideoContext('myVideo')   // 获取控制视频的对象，操作组件内 <video/> 组件
@@ -424,6 +436,22 @@ Page({
     }
   },
 
+  // 播放模式
+  playTypeChange(e) {
+    let type = this.data.playType;
+    if (type == 1) {
+      this.setData({
+        playType: 2,
+        playTypeText: '单曲循环'
+      });
+    } else {
+      this.setData({
+        playType: 1,
+        playTypeText: '顺序播放'
+      });
+    }
+  },
+
   videoTimeUpdate(e) {
     this.setData({
       currentPlayTime: e.detail.currentTime
@@ -453,11 +481,9 @@ Page({
   /**
    * 音乐播放器事件监听
    */
-  audioListener: function (progress) {
+  audioListener: function (lastProcess) {
     var that = this;
     //背景音频播放进度更新事件
-    app.backgroundAudioManager.startTime = progress;
-    app.backgroundAudioManager.currentTime = progress;
     app.backgroundAudioManager.onTimeUpdate(function (callback) {
       let currentTime = app.backgroundAudioManager.currentTime;
       let duration = app.backgroundAudioManager.duration;
@@ -466,8 +492,8 @@ Page({
         progress: progress,
         currentProcess: utils.secondsToTime(currentTime),
         totalProcess: utils.secondsToTime(duration),
-        duration: Math.floor(duration),
-        currentPlayTime: currentTime
+        currentPlayTime: currentTime,
+        initialTime: currentTime
       });
       
     });
@@ -477,12 +503,21 @@ Page({
         progress: 0
       });
       console.log('监听到音乐结束，播放下一首');
-      that.playNext();
+      let type = that.data.playType;
+      if (type == 2) {
+        let episodeId = that.data.currentEpisode.episodeId;
+        that.loadEpisode(episodeId);
+      } else {
+        that.playNext();
+      }
     });
 
     //背景音频播放事件
     app.backgroundAudioManager.onPlay(function (callback) {
        console.log('music play');
+       if (lastProcess) {
+         that.seekCurrentAudio(lastProcess);
+       }
     });
 
     //背景音频即将开始播放事件
@@ -492,6 +527,16 @@ Page({
 
     app.backgroundAudioManager.onPause(()=> {
       
+    });
+
+    //IOS在系统面板播放上一首
+    app.backgroundAudioManager.onPrev(function (callback) {
+      that.playPre();
+    });
+
+    //IOS在系统面板播放下一首
+    app.backgroundAudioManager.onNext(function (callback) {
+      that.playNext();
     });
 
   },
