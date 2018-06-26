@@ -1,20 +1,52 @@
-// pages/user/vip/buy/buy.js
+var utils = require('../../../../utils/util.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    userInfo: {},
+    isVip: false,
+    chooseOptions: [
+      { time: 12, currentPrice: 178, oldPrice: 198, sale: 20 },
+      { time: 3, currentPrice: 45, oldPrice: 58, sale: 13 }, 
+      { time: 1, currentPrice: 15, oldPrice: 19.8, sale: 4.8}
+    ],
+    hasChoosed: 0,
+    payOptions: [
+      { avatar: '', text: '支付宝支付' },
+      { avatar: '', text: '微信支付' },
+      { avatar: '', text: '银行卡支付' },
+    ],
+    payWay: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let userInfo = wx.getStorageSync('userInfo'); 
+    console.log(JSON.stringify(userInfo));
+    let isVip = utils.isVip(userInfo);
+    this.setData({
+      userInfo: userInfo || {},
+      isVip: isVip
+    });
   },
 
+  changeChoose(e) {
+    let choosed = e.currentTarget.dataset.choosed;
+    this.setData({
+      hasChoosed: choosed  
+    });
+  },
+
+  changePayWay(e) {
+    let payWay = e.currentTarget.dataset.pay;
+    this.setData({
+      payWay: payWay
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
