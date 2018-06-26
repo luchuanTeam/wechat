@@ -118,6 +118,10 @@
   font-size: 36rpx;
 }
 
+.vip-active {
+  background-color: #edd244!important;
+}
+
 .video-intro-wrapper {
   padding: 20rpx;
   word-wrap: break-word;

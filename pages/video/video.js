@@ -84,6 +84,23 @@ Page({
   },
 
   /**
+   * 点击开通VIP
+   */
+  toVipPage() {
+    let that = this;
+    if (that.data.userInfo) {
+      wx.navigateTo({
+        url: '/pages/user/vip/vip',
+        success: function() {
+          that.pause();
+        }
+      });
+    } else {
+      utils.quickTip('请先登录');
+    }
+  },
+
+  /**
    * 点击改变隐藏简介显示的状态
    */
   toggleHideIntro() {
