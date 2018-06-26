@@ -1,0 +1,11 @@
+<view class="form-container">
+  <view class='row'>
+    <input class='username' type='number' placeholder='会员卡号' confirm-type='确认' bindinput='usernameChange'></input>
+  </view>
+  <view class='row'>
+    <input  class='password' type='password' placeholder='密码' confirm-type='确认' bindinput='passwordChange'></input>
+  </view>
+  <view class='row'>
+    <button class='submit' bindtap="submit" type='primary'>绑定</button>
+  </view>
+</view>

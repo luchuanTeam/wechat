@@ -327,6 +327,7 @@ Page({
             this.setData({
               tip: '该视频需要vip方可观看'
             });
+            this.pause();
             return;
           } else {
             let expTime = new Date(vipCard.expTime).getTime();
@@ -335,6 +336,7 @@ Page({
               this.setData({
                 tip: '您的会员已到期，无法观看vip视频'
               });
+              this.pause();
               return;
             }
           }

@@ -29,6 +29,16 @@
   justify-content: center;
 }
 
+.login-wrapper {
+  display: flex; 
+  height: 100%;
+  width: 100%;
+}
+
+.login-wrapper .login {
+  margin-right: 20px;
+}
+
 .info-wrapper .text {
   height: 36rpx;
   margin-top: 8rpx;
@@ -72,6 +82,8 @@
   height: 128rpx;
   margin:auto 20rpx;
   border-radius: 50%;
+  border:2px solid #f2f2f2;
+  box-shadow:0 0 4px #fff;
 }
 
 .userinfo .right {

@@ -13,7 +13,11 @@
     "pages/hotSearch/hotSearch",
     "pages/user/collect/collect",
     "pages/user/history/history",
-    "pages/user/login/login"
+    "pages/user/login/login",
+    "pages/user/vip/vip",
+    "pages/user/vip/register/register",
+    "pages/user/vip/bind/bind",
+    "pages/user/vip/buy/buy"
   ],
   "window": {
     "backgroundTextStyle": "light",

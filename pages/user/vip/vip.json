@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "会员管理",
+  "usingComponents": {
+    "user-line-block": "../../components/userLineBlock/userLineBlock"
+  }
+}

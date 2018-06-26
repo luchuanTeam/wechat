@@ -154,9 +154,17 @@ Page({
           wx.setStorageSync('userInfo', ydUser);
           wx.setStorageSync('sessionId', result.data.sessionId);
           wx.setStorageSync('token', result.data.token);
+
+          let isVip = utils.isVip(ydUser);
+          let expireDay = 0;
+          if (isVip) {
+            expireDay = utils.expireToDay(ydUser.vipCard.expTime);
+          }
           this.setData({
             userInfo: ydUser,
-            hasUserInfo: true
+            hasUserInfo: true,
+            isVip: isVip,
+            expireDay: expireDay
           });
         }
 

@@ -33,5 +33,7 @@ module.exports = {
 
   UserSendCode: WxApiRoot + 'user/sendCode',
   UserBindMobile: WxApiRoot + 'user/bindMobile',
-  UserLogin: 'http://localhost:8080/yanda' + '/user/login'
+  UserLogin: WxApiRoot + 'user/login',
+
+  VipBind: WxApiRoot + 'vip/bindByCardNum'
 };

@@ -1,0 +1,10 @@
+.vip-container {
+  width: 100%;
+}
+
+.yanda-intro {
+  margin-top: 24rpx;
+  text-align: center;
+  color: #999;
+  font-size: 22rpx;
+}
