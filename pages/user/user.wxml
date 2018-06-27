@@ -4,7 +4,7 @@
   <view class="userinfo">
     <view class="left">
       <!-- 头像 -->
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatar ?  userInfo.avatar: '/resources/images/my.png'}}" background-size="cover"></image>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatar ?  userInfo.avatar: 'https://www.yanda123.com/app/people.png'}}" background-size="cover"></image>
       <view class='info-wrapper' wx:if="{{hasUserInfo}}">
         <!-- 用户名 -->
         <view class="text">用户名: {{userInfo.nickName}}</view>
@@ -51,7 +51,7 @@
   </view>
 
   <!-- 底部信息模块 -->
-  <view class="footer">
-    版权所有者：燕达教育
+  <view class="weui-footer">
+      <view class="weui-footer__text">Copyright © 2017-2018 燕达教育</view>
   </view>
 </view>
