@@ -14,9 +14,9 @@ Page({
     ],
     hasChoosed: 0,
     payOptions: [
-      { avatar: '', text: '支付宝支付' },
-      { avatar: '', text: '微信支付' },
-      { avatar: '', text: '银行卡支付' },
+      { avatar: 'https://www.yanda123.com/app/ali.png', text: '支付宝支付' },
+      { avatar: 'https://www.yanda123.com/app/wechat.png', text: '微信支付' },
+      { avatar: 'https://www.yanda123.com/app/bankcard.png', text: '银行卡支付' },
     ],
     payWay: 0
   },
