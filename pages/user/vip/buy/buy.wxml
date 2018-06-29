@@ -58,6 +58,6 @@
       <text class='price'>￥{{chooseOptions[hasChoosed].currentPrice}}</text>
       <text class='sale'>已优惠{{chooseOptions[hasChoosed].sale}}元</text>
     </view>
-    <view class='go'>确认支付</view>
+    <view class='go' bindtap='paySubmit'>确认支付</view>
   </view>
 </view>

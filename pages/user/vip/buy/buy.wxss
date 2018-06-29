@@ -35,6 +35,7 @@
 
 .user-msg-wrapper .nick-name {
   font-size: 28rpx;
+  color: #fff;
 }
 
 .user-msg-wrapper .vip-block {
@@ -155,10 +156,12 @@
 .confirm {
   display: flex;
   height: 120rpx;
+  position: fixed;
+  bottom: 0;
 }
 
 .confirm .intro {
-  flex: 1;
+  flex: 0  0 100%;
   margin: auto 0;
   padding: 20rpx;
 }

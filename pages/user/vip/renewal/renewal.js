@@ -1,4 +1,4 @@
-// pages/user/vip/register/register.js
+// pages/user/vip/renewal/renewal.js
 Page({
 
   /**

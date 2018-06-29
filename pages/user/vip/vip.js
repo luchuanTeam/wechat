@@ -8,9 +8,9 @@ Page({
   
   },
 
-  toRegister(e) {
+  toRenewal(e) {
     wx.navigateTo({
-      url: './register/register',
+      url: './renewal/renewal',
     });
   },
 
