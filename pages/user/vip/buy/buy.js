@@ -1,4 +1,6 @@
 var utils = require('../../../../utils/util.js');
+var $ = require('../../../../utils/ajax.js');
+var pay = require('../../../../utils/pay.js')
 Page({
 
   /**
@@ -51,7 +53,37 @@ Page({
    * 提交支付
    */
   paySubmit(e) {
-      
+    let openid = wx.getStorageSync('openid');
+    let data = {
+      appid: 'wx8c025f88b3f63c44',
+      mch_id: '1508748871',
+      nonce_str: utils.getRandomStr(32),
+      body: 'JSAPI',
+      out_trade_no: '20150806125346',
+      total_fee: 10,
+      spbill_create_ip: '123.12.12.123',
+      notify_url: 'https://www.baidu.com',
+      trade_type: 'JSAPI',
+      openid: openid
+    };
+    let sign = pay.getPaySign(data);
+    let body = `<xml><appid>${data.appid}</appid><mch_id>${data.mch_id}</mch_id>
+      <nonce_str>${data.nonce_str}</nonce_str><body>${data.body}</body><out_trade_no>
+      ${data.out_trade_no}</out_trade_no><total_fee>${data.total_fee}</total_fee>
+      <spbill_create_ip>${data.spbill_create_ip}</spbill_create_ip><notify_url>
+      ${data.notify_url}</notify_url><trade_type>${data.trade_type}</trade_type>
+      <openid>${data.openid}</openid><sign>${sign}</sign></xml>`;
+    console.log(body);
+    $.post({
+      url: 'https://api.mch.weixin.qq.com/pay/unifiedorder',
+      header: { "Content-Type": "text/plain" },
+      dataType: 'UTF-8',
+      data: body
+    }).then((res)=> {
+      console.log('success' + JSON.stringify(res));
+    }).catch((err)=> {
+      console.log('fail');
+    })
   },
 
   /**

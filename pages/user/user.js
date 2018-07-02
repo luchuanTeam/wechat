@@ -202,6 +202,7 @@ Page({
               session_key: data.session_key,
               openid: data.openid
             });
+            wx.setStorageSync('openid', data.openid);      // 存储openid
             // 通过openid查询微信用户和是否存在
             $.get({
               url: 'https://www.yanda123.com/yanda/user/findWechatIsExist',

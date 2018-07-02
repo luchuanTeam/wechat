@@ -1,4 +1,7 @@
 const domain = 'https://www.yanda123.com';
+const strArr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 
+'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 const formatTime = date => {
   const year = date.getFullYear()
@@ -178,6 +181,15 @@ const expireToDay = (time) => {
   return Math.floor((expTime - nowTime) / (1000 * 60 * 60 * 24));
 }
 
+const getRandomStr = (n) => {
+  let str = '';
+  let num = n || 10;    //确定字符串个数
+  for(let i=0; i<num; i++) {
+    str += strArr[Math.floor(Math.random() * 62 + 1)];
+  }
+  return str;
+}
+
 module.exports = {
   formatTime: formatTime,
   trim: trim,
@@ -188,5 +200,6 @@ module.exports = {
   isToday: isToday,
   isYesterday: isYesterday,
   isVip: isVip,
-  expireToDay: expireToDay
+  expireToDay: expireToDay,
+  getRandomStr: getRandomStr
 }
