@@ -109,7 +109,7 @@ Page({
       let data = res.data;
       if (data.status == 200) {
         let userInfo = data.data;
-        this.login(userInfo.userName, userInfo.passowrd);
+        this.login(userInfo.userName, userInfo.password);
       } else {
         console.log('注册微信用户失败:' + data.message);
       }
@@ -210,7 +210,7 @@ Page({
               let data = res.data;
               if (data.status == 200) {
                 let yandaUser = data.data;
-                if (yandaUser.userId) {
+                if (yandaUser) {
                   // 用户已存在，用该用户在后台登录
                   console.log('用户ID=' + yandaUser.userId);
                   that.login(yandaUser.userName, yandaUser.password);
