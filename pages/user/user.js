@@ -111,7 +111,7 @@ Page({
         let userInfo = data.data;
         this.login(userInfo.userName, userInfo.password);
       } else {
-        console.log('注册微信用户失败:' + data.message);
+        utils.quickTip('注册微信用户失败:' + data.message);
       }
     })
   },
@@ -216,7 +216,8 @@ Page({
                   that.login(yandaUser.userName, yandaUser.password);
                 } else {
                   // 该微信账号未在yanda注册账号，为其自动生成账号，并绑定openid,然后在yanda登录
-                  that.register(that.data.openid, userInfo.nickName, userInfo.avatarUrl, userInfo.gender);
+                  let nickName = utils.filteremoji(userInfo.nickName);
+                  that.register(that.data.openid, nickName, userInfo.avatarUrl, userInfo.gender);
                 }
               }
             });
