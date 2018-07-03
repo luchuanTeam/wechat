@@ -35,5 +35,7 @@ module.exports = {
   UserBindMobile: WxApiRoot + 'user/bindMobile',
   UserLogin: WxApiRoot + 'user/login',
 
-  VipBind: WxApiRoot + 'vip/bindByCardNum'
+  VipBind: WxApiRoot + 'vip/bindByCardNum',
+
+  GetPaySign: WxApiRoot + 'userPay/getPaySign'      //md5加密生成签名
 };
