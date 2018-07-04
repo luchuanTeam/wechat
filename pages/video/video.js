@@ -195,7 +195,7 @@ Page({
         episodeId: this.data.videoData.video.episodeId      // 视频id
       }
       $.post({
-        url: 'https://www.yanda123.com/yanda/comment/saveComment',
+        url: api.CommentSave,
         header: { "Content-Type": "application/json" },
         data: commentInfo
       }).then((res) => {
@@ -302,7 +302,7 @@ Page({
    */
   getEpisodeList(mvId, episodeId) {
     $.get({
-      url: 'https://www.yanda123.com/yanda/episode/episodes/' + mvId
+      url: api.EpisodeList + mvId
     }).then((res) => {
       this.setData({
         episodeList: res.data     
@@ -323,7 +323,7 @@ Page({
    */
   loadEpisode(episodeId) {
     $.get({
-      url: 'https://www.yanda123.com/yanda/episode/getDetailEpisode/' + episodeId
+      url: api.EpisodeDetail + episodeId
     }).then((res) => {
       let episodeInfo = res.data;
       if (episodeInfo) {

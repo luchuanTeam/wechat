@@ -73,7 +73,6 @@ Page({
         let userInfo = data.data.userInfo;
         app.globalData.userInfo = userInfo;
         wx.setStorageSync('userInfo', userInfo);
-        wx.setStorageSync('sessionId', data.data.sessionId);
         wx.setStorageSync('token', data.data.token);
         wx.showToast({
           title: '登录成功',

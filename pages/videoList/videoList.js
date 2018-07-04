@@ -1,4 +1,5 @@
 var $ = require('../../utils/ajax.js');
+var api = require('../../config/api.js');
 
 Page({
 
@@ -43,7 +44,7 @@ Page({
   loadMovies: function (pageNum, pageSize) {
     var that = this;
     $.get({
-      url: "https://www.yanda123.com/yanda/movie/getPubMovies",
+      url: api.IndexMovies,
       data: { pageNum: pageNum, pageSize: pageSize, classifyId: this.data.classifyId }
     }).then((res) => {
       if (res.data.status === 200) {

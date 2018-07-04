@@ -1,20 +1,28 @@
 // 以下是业务服务器API地址
 // 本机开发时使用
-// var WxApiRoot = 'http://localhost:8080/yanda/';
+ //var WxApiRoot = 'http://localhost:8080/yanda/';
 // 云平台部署时使用
  var WxApiRoot = 'https://www.yanda123.com/yanda/';
 
 
 
 module.exports = {
+  IndexMovies: WxApiRoot + 'movie/getPubMovies',
+  IndexClassifyList: WxApiRoot + 'movie/getClassify',
+  IndexBanners: WxApiRoot + 'banner/list',
+
   mvList: WxApiRoot + 'movie/search',  //获得商品列表
 
   CollectList: WxApiRoot + 'collect/list',  //收藏列表
   CollectAddOrDelete: WxApiRoot + 'collect/addordelete',  //添加或取消收藏
 
+  EpisodeList: WxApiRoot + 'episode/episodes/',
+  EpisodeDetail: WxApiRoot + 'episode/getDetailEpisode/',
+
   CommentList: WxApiRoot + 'comment/list',  //评论列表
   CommentCount: WxApiRoot + 'comment/count',  //评论总数
   CommentPost: WxApiRoot + 'comment/post',   //发表评论
+  CommentSave: WxApiRoot + 'comment/saveComment', //保存评论
 
   SearchIndex: WxApiRoot + 'search/index',  //搜索关键字
   SearchResult: WxApiRoot + 'search/result',  //搜索结果
@@ -34,6 +42,9 @@ module.exports = {
   UserSendCode: WxApiRoot + 'user/sendCode',
   UserBindMobile: WxApiRoot + 'user/bindMobile',
   UserLogin: WxApiRoot + 'user/login',
+  UserRegister: WxApiRoot + 'user/registerByWechat',
+  UserGetOpenId: WxApiRoot + 'user/getOpenIdFromWeiXin',
+  UserCheckExist: WxApiRoot + 'user/findWechatIsExist',
 
   VipBind: WxApiRoot + 'vip/bindByCardNum'
 };

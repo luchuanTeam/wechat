@@ -1,5 +1,6 @@
 var utils = require('../../utils/util.js');
 var $ = require('../../utils/ajax.js');
+var api = require('../../config/api.js');
 
 //获取应用实例
 const app = getApp();
@@ -98,7 +99,7 @@ Page({
    */
   register: function (openId, nickName, avatar, gender) {
     $.post({
-      url: 'https://www.yanda123.com/yanda/user/registerByWechat',
+      url: api.UserRegister,
       data: {
         openId: openId,
         nickName: nickName,
@@ -120,7 +121,7 @@ Page({
    */
   login: function (userName, password) {
     $.post({
-      url: 'https://www.yanda123.com/yanda/user/login',
+      url: api.UserLogin,
       data: {
         userName: userName,
         password: password
@@ -152,7 +153,6 @@ Page({
           return;
         } else {
           wx.setStorageSync('userInfo', ydUser);
-          wx.setStorageSync('sessionId', result.data.sessionId);
           wx.setStorageSync('token', result.data.token);
 
           let isVip = utils.isVip(ydUser);
@@ -194,7 +194,7 @@ Page({
       wx.login({
         success: function (res) {
           $.get({
-            url: 'https://www.yanda123.com/yanda/user/getOpenIdFromWeiXin',
+            url: api.UserGetOpenId,
             data: { js_code: res.code }
           }).then((res) => {
             let data = res.data.data;
@@ -204,7 +204,7 @@ Page({
             });
             // 通过openid查询微信用户和是否存在
             $.get({
-              url: 'https://www.yanda123.com/yanda/user/findWechatIsExist',
+              url: api.UserCheckExist,
               data: { openId: that.data.openid }
             }).then((res) => {
               let data = res.data;

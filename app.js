@@ -1,6 +1,6 @@
 //app.js
 App({
-  onLaunch: function () {
+  onShow: function () {
     let userInfo = wx.getStorageSync('userInfo');
     // 判断用户是否已绑定手机号，若无则强制跳转到绑定手机界面
     if (userInfo) {
@@ -21,6 +21,21 @@ App({
         });
         return;
       }
+    } else {
+      wx.showModal({
+        title: '友情提示',
+        content: '请先登录',
+        showCancel: false,
+        success: function () {
+          setTimeout(function () {
+            wx.clearStorageSync();
+            wx.switchTab({
+              url: '/pages/user/user',
+            });
+          }, 1000);
+        }
+      });
+      return;
     }
   },
   globalData: {
