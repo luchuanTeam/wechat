@@ -28,7 +28,7 @@
   <view class='choose-container'>
     <view class='choose-wrapper' wx:for='{{chooseOptions}}' wx:key='{{index}}' data-choosed='{{index}}' bindtap='changeChoose'>
       <view class="choose {{hasChoosed === index ? 'has-choosed' : ''}}">
-        <view class='time'>{{item.time}}个月</view>
+        <view class='time'>{{item.month}}个月</view>
         <view class='current-price'>
           <text class='symbol'>￥</text>
           <text class='number'>{{item.currentPrice}}</text>
