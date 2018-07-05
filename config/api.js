@@ -37,5 +37,9 @@ module.exports = {
 
   VipBind: WxApiRoot + 'vip/bindByCardNum',
 
-  GetPaySign: WxApiRoot + 'userPay/getPaySign'      //md5加密生成签名
+  Pay: 'https://api.mch.weixin.qq.com/pay/unifiedorder',      // 微信支付调用接口
+  Refund: 'https://api.mch.weixin.qq.com/secapi/pay/refund',  // 微信退款调用接口
+  GetPaySign: WxApiRoot + 'userPay/getPaySign',      //md5加密生成签名
+ 
+  Buy: WxApiRoot + 'vip/buy'          // 购买或续费会员后，为客户绑定会员调用接口
 };

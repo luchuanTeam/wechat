@@ -11,9 +11,9 @@ Page({
     userInfo: {},
     isVip: false,
     chooseOptions: [
-      { time: 12, currentPrice: 178, oldPrice: 198, sale: 20 },
-      { time: 3, currentPrice: 45, oldPrice: 58, sale: 13 }, 
-      { time: 1, currentPrice: 15, oldPrice: 19.8, sale: 4.8}
+      { month: 12, currentPrice: 178, oldPrice: 198, sale: 20 },
+      { month: 3, currentPrice: 45, oldPrice: 58, sale: 13 }, 
+      { month: 1, currentPrice: 15, oldPrice: 19.8, sale: 4.8}
     ],
     hasChoosed: 0,
     payOptions: [
@@ -23,6 +23,7 @@ Page({
     ],
     payWay: 0,
     nonceStr: '',       // 生成的随机字符串
+    outTradeNo: '',
     prepayId: '',       //调用统一下单接口返回的数值，调用支付api时需要传入
     paySign: '',       // 签名，由自己的后台经md5加密生成的签名
     signType: ''       // 签名，调用微信的统一下单接口后返回的签名
@@ -90,10 +91,10 @@ Page({
     let data = {
       appid: 'wx8c025f88b3f63c44',
       mch_id: '1508748871',
-      nonce_str: utils.getRandomStr(32),
+      nonce_str: utils.getRandomStr(32),    // 生成32位随机数
       body: 'JSAPI',
-      out_trade_no: outTradeNo,
-      total_fee: totalFee,
+      out_trade_no: outTradeNo,     // 商户订单号，18位随机数+14位当天日期分秒时组成
+      total_fee: 1,
       // spbill_create_ip: '123.12.12.123',
       notify_url: 'http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php',
       trade_type: 'JSAPI',
@@ -103,12 +104,13 @@ Page({
     // 先对 str 进行 md5 加密生成签名，然后拼接成xml格式的字符串
     this._getPaySign(str).then((res)=> {
       if(res.data.status === 200) {
-        let paySign = res.data.data;
+        let paySign = res.data.data;      // 获取后台加密后返回的签名
         this.setData({
-          paySign: paySign,
-          nonceStr: data.nonce_str
+          paySign: paySign,               // 保存签名
+          nonceStr: data.nonce_str,
+          outTradeNo: data.out_trade_no
         });
-        let body = `<xml><appid>${data.appid}</appid><mch_id>${data.mch_id}</mch_id><nonce_str>${data.nonce_str}</nonce_str><body>${data.body}</body><out_trade_no>${data.out_trade_no}</out_trade_no><total_fee>${data.total_fee}</total_fee><notify_url>${data.notify_url}</notify_url><trade_type>${data.trade_type}</trade_type><openid>${data.openid}</openid><sign>${paySign}</sign></xml>`;
+        let body = `<xml><appid>${data.appid}</appid><mch_id>${data.mch_id}</mch_id><nonce_str>${data.nonce_str}</nonce_str><body>${data.body}</body><out_trade_no>${data.out_trade_no}</out_trade_no><total_fee>${data.total_fee}</total_fee><notify_url>${data.notify_url}</notify_url><trade_type>${data.trade_type}</trade_type><openid>${data.openid}</openid><sign>${paySign}</sign></xml>`;                // 拼接调用统一下单接口的 xml 数据
         this._getOrder(body);
       }
     }).catch((err)=> {
@@ -121,7 +123,7 @@ Page({
    */
   _getOrder(data) {
     $.post({
-      url: 'https://api.mch.weixin.qq.com/pay/unifiedorder',
+      url: api.Pay,
       data: data
     }).then((res) => {
       console.log(JSON.stringify(res));
@@ -134,10 +136,10 @@ Page({
             signNum1 = result.indexOf('<sign>'),
             signNum2 = result.indexOf('</sign>');
         if( prepayNum1 !== -1 ) {
-          prepayId = result.substring(prepayNum1+20, prepayNum2-3);
+          prepayId = result.substring(prepayNum1+20, prepayNum2-3);   // 提取接口返回的 prepayId
         }
         if( signNum1 !== -1) {
-          signType = result.substring(signNum1+15, signNum2-3);
+          signType = result.substring(signNum1+15, signNum2-3);       // 提取接口返回的 签名
         }
         this.setData({
           prepayId: prepayId,
@@ -152,6 +154,9 @@ Page({
     })
   },
 
+  /**
+   * 调用微信支付接口
+   */
   _goPay() {
     let timeStamp = String(~~(new Date().getTime() / 1000));
     let data = {
@@ -162,6 +167,7 @@ Page({
       signType: 'MD5'
     };
     let str = utils.getPaySignStr(data);
+    // 先要对数据进行 md5 加密，获取签名后才能调用微信支付接口
     this._getPaySign(str).then((res)=> {
       let paySign = res.data.data;
       wx.requestPayment(
@@ -173,6 +179,7 @@ Page({
           'paySign': `${paySign}`,
           'success': (res) => {
             console.log('success: ' + JSON.stringify(res));
+            this._bindVipCard();
           },
           'fail': (err) => {
             console.log('fail: ' + JSON.stringify(err))
@@ -181,6 +188,65 @@ Page({
         });
     }).catch((err)=> {
 
+    });
+  },
+
+  /**
+   * 支付成功后绑定会员卡
+   */
+  _bindVipCard() {
+    let userInfo = this.data.userInfo;
+    if(userInfo && userInfo.userId) {
+      let vipCardInfo = this.data.isVip ? userInfo.vipCard : {};
+      vipCardInfo.userId = userInfo.userId;
+      vipCardInfo.nickName = userInfo.nickName;
+      // vipCardInfo.purchaseMonths = this.data.chooseOptions[this.data.hasChoosed].month;
+      $.post({
+        url: api.Buy,
+        header: { "Content-Type": "application/json" },
+        data: vipCardInfo
+      }).then((res) => {
+        console.log('success: ' + JSON.stringify(res));
+        if(res.data.status !== 200) {   //绑定不成功
+          this._refundPrepare();
+        }
+      }).catch((err) => {
+        console.log('fail: ' + JSON.stringify(err));
+      });
+    }
+  },
+
+  /**
+   * 退款前的准备，获取加密签名
+   */
+  _refundPrepare() {
+    let data = {
+      appid: 'wx8c025f88b3f63c44',
+      mch_id: '1508748871',
+      nonce_str: utils.getRandomStr(32),
+      out_trade_no: this.data.outTradeNo,
+      out_refund_no	: this.data.outTradeNo,
+      total_fee: 1,
+      refund_fee: 1
+    };
+    let str = utils.getPaySignStr(data);
+    this._getPaySign(str).then((res)=> {
+      let refundPaySign = res.data.data;
+      let body = `<xml><appid>${data.appid}</appid><mch_id>${data.mch_id}</mch_id><nonce_str>${data.nonce_str}</nonce_str><out_refund_no>${data.out_refund_no}</out_refund_no><out_trade_no>${data.out_trade_no}</out_trade_no><refund_fee>${data.refund_fee}</refund_fee><total_fee>${data.total_fee}</total_fee><sign>${refundPaySign}</sign></xml>`;
+      this._refund(body);
+    }).catch((err)=> {
+
+    });
+  },
+
+  _refund(data) {
+    $.post({
+      url: api.Refund,
+      data: data
+    }).then((res)=> {
+      console.log(JSON.stringify(res));  
+    }).catch((err)=> {
+      console.log(JSON.stringify(err));
     });
   },
 
