@@ -1,4 +1,5 @@
 var $ = require('../../utils/ajax.js');
+var api = require('../../config/api.js');
 
 Page({
 
@@ -19,7 +20,7 @@ Page({
    */
   loadMovies: function (pageNum, pageSize) {
     $.get({
-      url: "https://www.yanda123.com/yanda/movie/getPubMovies",
+      url: api.IndexMovies,
       data: { pageNum: pageNum, pageSize: pageSize }
     }).then((res) => {
       if (res.data.status === 200) {
@@ -57,7 +58,7 @@ Page({
   */
   loadClassify: function () {
     var that = this;
-    $.get({ url: 'https://www.yanda123.com/yanda/movie/getClassify' })
+    $.get({ url: api.IndexClassifyList })
       .then((res) => {
         if (res.statusCode == 200) {
           let data = res.data;
@@ -77,7 +78,7 @@ Page({
   loadBanners: function () {
     var that = this;
     $.get({
-      url: 'https://www.yanda123.com/yanda/banner/list',
+      url: api.IndexBanners,
       data: { pageNum: 1, pageSize: 4 }
     }).then((res) => {
       if (res.data.status == 200) {
@@ -99,23 +100,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.loadBanners();
-    this.loadClassify();
-    this.loadMovies(this.data.pageNum, this.data.pageSize);
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.loadClassify();
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.loadBanners();
+    this.loadMovies(this.data.pageNum, this.data.pageSize);
   },
 
   /**

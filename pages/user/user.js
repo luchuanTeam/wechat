@@ -1,5 +1,6 @@
 var utils = require('../../utils/util.js');
 var $ = require('../../utils/ajax.js');
+var api = require('../../config/api.js');
 
 //获取应用实例
 const app = getApp();
@@ -98,7 +99,7 @@ Page({
    */
   register: function (openId, nickName, avatar, gender) {
     $.post({
-      url: 'https://www.yanda123.com/yanda/user/registerByWechat',
+      url: api.UserRegister,
       data: {
         openId: openId,
         nickName: nickName,
@@ -111,7 +112,7 @@ Page({
         let userInfo = data.data;
         this.login(userInfo.userName, userInfo.password);
       } else {
-        console.log('注册微信用户失败:' + data.message);
+        utils.quickTip('注册微信用户失败:' + data.message);
       }
     })
   },
@@ -120,7 +121,7 @@ Page({
    */
   login: function (userName, password) {
     $.post({
-      url: 'https://www.yanda123.com/yanda/user/login',
+      url: api.UserLogin,
       data: {
         userName: userName,
         password: password
@@ -152,7 +153,6 @@ Page({
           return;
         } else {
           wx.setStorageSync('userInfo', ydUser);
-          wx.setStorageSync('sessionId', result.data.sessionId);
           wx.setStorageSync('token', result.data.token);
 
           let isVip = utils.isVip(ydUser);
@@ -194,7 +194,7 @@ Page({
       wx.login({
         success: function (res) {
           $.get({
-            url: 'https://www.yanda123.com/yanda/user/getOpenIdFromWeiXin',
+            url: api.UserGetOpenId,
             data: { js_code: res.code }
           }).then((res) => {
             let data = res.data.data;
@@ -205,7 +205,7 @@ Page({
             wx.setStorageSync('openid', data.openid);      // 存储openid
             // 通过openid查询微信用户和是否存在
             $.get({
-              url: 'https://www.yanda123.com/yanda/user/findWechatIsExist',
+              url: api.UserCheckExist,
               data: { openId: that.data.openid }
             }).then((res) => {
               let data = res.data;
@@ -217,7 +217,8 @@ Page({
                   that.login(yandaUser.userName, yandaUser.password);
                 } else {
                   // 该微信账号未在yanda注册账号，为其自动生成账号，并绑定openid,然后在yanda登录
-                  that.register(that.data.openid, userInfo.nickName, userInfo.avatarUrl, userInfo.gender);
+                  let nickName = utils.filteremoji(userInfo.nickName);
+                  that.register(that.data.openid, nickName, userInfo.avatarUrl, userInfo.gender);
                 }
               }
             });

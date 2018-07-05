@@ -195,7 +195,7 @@ Page({
         episodeId: this.data.videoData.video.episodeId      // 视频id
       }
       $.post({
-        url: 'https://www.yanda123.com/yanda/comment/saveComment',
+        url: api.CommentSave,
         header: { "Content-Type": "application/json" },
         data: commentInfo
       }).then((res) => {
@@ -226,7 +226,8 @@ Page({
     this.setData({
       mvId: options.id || 1,
       userInfo: userInfo,
-      initialTime: progress
+      initialTime: progress,
+      videoContext: wx.createVideoContext('myVideo')   // 获取控制视频的对象，操作组件内 <video/> 组件
     });
     this.getEpisodeList(this.data.mvId, options.episodeId);
     // 音频事件监听
@@ -302,7 +303,7 @@ Page({
    */
   getEpisodeList(mvId, episodeId) {
     $.get({
-      url: 'https://www.yanda123.com/yanda/episode/episodes/' + mvId
+      url: api.EpisodeList + mvId
     }).then((res) => {
       this.setData({
         episodeList: res.data     
@@ -323,7 +324,7 @@ Page({
    */
   loadEpisode(episodeId) {
     $.get({
-      url: 'https://www.yanda123.com/yanda/episode/getDetailEpisode/' + episodeId
+      url: api.EpisodeDetail + episodeId
     }).then((res) => {
       let episodeInfo = res.data;
       if (episodeInfo) {
@@ -378,11 +379,7 @@ Page({
           this.setData({
             duration: Math.floor(episodeInfo.duration/1000)
           })
-        } else {
-          this.setData({
-            videoContext: wx.createVideoContext('myVideo')   // 获取控制视频的对象，操作组件内 <video/> 组件
-          }); 
-        };
+        } 
         if (this.data.userInfo && this.data.userInfo.userId) {
           let self = this;
           commentStore.dispatch('loadUserAgrees', self.data.videoData.video.episodeId).then((res) => {
@@ -618,7 +615,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**

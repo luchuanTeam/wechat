@@ -182,6 +182,19 @@ const isVip = (userInfo) => {
   return true;
 }
 
+/**
+ * 过滤掉表情等特殊字符
+ */
+const filteremoji = (str) => {
+  var ranges = [
+    '\ud83c[\udf00-\udfff]',
+    '\ud83d[\udc00-\ude4f]',
+    '\ud83d[\ude80-\udeff]'
+  ];
+  str = str.replace(new RegExp(ranges.join('|'), 'g'), '');
+  return str;
+}
+
 const expireToDay = (time) => {
   let expTime = new Date(time).getTime();
   let nowTime = new Date().getTime();
@@ -229,6 +242,7 @@ module.exports = {
   getTodayStr: getTodayStr,
   isVip: isVip,
   expireToDay: expireToDay,
+  filteremoji: filteremoji,
   getRandomStr: getRandomStr,
   getPaySignStr: getPaySignStr
 }
