@@ -226,7 +226,8 @@ Page({
     this.setData({
       mvId: options.id || 1,
       userInfo: userInfo,
-      initialTime: progress
+      initialTime: progress,
+      videoContext: wx.createVideoContext('myVideo')   // 获取控制视频的对象，操作组件内 <video/> 组件
     });
     this.getEpisodeList(this.data.mvId, options.episodeId);
     // 音频事件监听
@@ -378,11 +379,7 @@ Page({
           this.setData({
             duration: Math.floor(episodeInfo.duration/1000)
           })
-        } else {
-          this.setData({
-            videoContext: wx.createVideoContext('myVideo')   // 获取控制视频的对象，操作组件内 <video/> 组件
-          }); 
-        };
+        } 
         if (this.data.userInfo && this.data.userInfo.userId) {
           let self = this;
           commentStore.dispatch('loadUserAgrees', self.data.videoData.video.episodeId).then((res) => {
@@ -618,7 +615,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**
