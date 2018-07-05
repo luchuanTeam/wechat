@@ -1,3 +1,4 @@
+var util = require('./util.js');
 
 const request = (obj, method)=> {
   if (typeof obj === 'object') {
@@ -14,14 +15,18 @@ const request = (obj, method)=> {
           header = { "Content-Type": "application/json" };
         }
       }
+
       data.terminal = 'wechat';
       data.token = wx.getStorageSync('token');
+
+      let dataType = obj.dataType || 'json';
       let promise = new Promise((resolve, reject) => {
         wx.request({
           url: url,
           data: data,
           header: header,
           method: method,
+          dataType: dataType,
           success: (res) => {
             // 所有请求结果先判断状态码是否是401，若401说明用户未登录或无权限访问，清除缓存并跳转到登录页
             let status = res.data.status;
@@ -73,7 +78,6 @@ const _ajax = {
   ajax: function(obj) {   //使用其他请求需在 obj 里面定义 method 请求方式
     return request(obj, obj.method);
   }
-  
 }
 
 module.exports = _ajax;

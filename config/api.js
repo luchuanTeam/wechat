@@ -46,5 +46,7 @@ module.exports = {
   UserGetOpenId: WxApiRoot + 'user/getOpenIdFromWeiXin',
   UserCheckExist: WxApiRoot + 'user/findWechatIsExist',
 
-  VipBind: WxApiRoot + 'vip/bindByCardNum'
+  VipBind: WxApiRoot + 'vip/bindByCardNum',
+
+  GetPaySign: WxApiRoot + 'userPay/getPaySign'      //md5加密生成签名
 };

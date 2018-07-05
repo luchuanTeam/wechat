@@ -1,4 +1,7 @@
 const domain = 'https://www.yanda123.com';
+const strArr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 
+'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 const formatTime = date => {
   const year = date.getFullYear()
@@ -114,6 +117,13 @@ const getToday = () => {
   return t.getFullYear() + '-' + formatNumber((t.getMonth() + 1)) + '-' + formatNumber((t.getDate()));
 }
 
+const getTodayStr = () => {
+  let t = new Date();
+  let str = t.getFullYear() + '' + formatNumber((t.getMonth() + 1)) + formatNumber(t.getDate()) +
+    formatNumber(t.getHours()) + formatNumber(t.getMinutes()) +formatNumber(t.getSeconds()); 
+  return str;
+} 
+
 /**
  * 判断输入的日期 是否为今天的日期
  * 输入格式为 2018-05-15 2018-05-02
@@ -191,6 +201,35 @@ const expireToDay = (time) => {
   return Math.floor((expTime - nowTime) / (1000 * 60 * 60 * 24));
 }
 
+/**
+ * 生成 n 位数的随机字符串，随机字符串只为 大小写字母和数字组合
+ */
+const getRandomStr = (n) => {
+  let str = '';
+  let num = n || 10;    //确定字符串个数
+  for(let i=0; i<num; i++) {
+    str += strArr[Math.floor(Math.random() * 62)];
+  }
+  return str;
+}
+
+/**
+ * 凭借生成签名的字符串
+ * @param obj: 只允许传入对象
+ */
+
+const getPaySignStr = (obj) => {
+  let str = '';
+  let keys = Object.keys(obj);
+  keys = keys.sort();     // 按ASCII码排序
+  for (let i = 0; i < keys.length; i++) {
+    str += `&${keys[i]}=${obj[keys[i]]}`;
+  }
+  str = str.substr(1);
+  str = str + '&key=0CW3HwsvrclsF2HPGFB6VLY2YGBMhyJ9';
+  return str;
+} 
+
 module.exports = {
   formatTime: formatTime,
   trim: trim,
@@ -200,7 +239,10 @@ module.exports = {
   secondsToTime: secondsToTime,
   isToday: isToday,
   isYesterday: isYesterday,
+  getTodayStr: getTodayStr,
   isVip: isVip,
   expireToDay: expireToDay,
-  filteremoji: filteremoji
+  filteremoji: filteremoji,
+  getRandomStr: getRandomStr,
+  getPaySignStr: getPaySignStr
 }
