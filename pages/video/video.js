@@ -9,7 +9,9 @@ const REFRESH = 1,
 
 const app = getApp();
 
-Page({
+let filter = require('../../utils/filter.js');
+
+Page(filter.identityFilter({
   /**
    * 页面的初始数据
    */
@@ -667,4 +669,4 @@ Page({
   onShareAppMessage: function () {
 
   }
-})
+}))

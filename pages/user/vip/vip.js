@@ -8,12 +8,6 @@ Page({
   
   },
 
-  toRenewal(e) {
-    wx.navigateTo({
-      url: './renewal/renewal',
-    });
-  },
-
   toBind(e) {
     wx.navigateTo({
       url: './bind/bind',

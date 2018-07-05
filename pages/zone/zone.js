@@ -1,7 +1,8 @@
 const $ = require('../../utils/ajax.js');
 const STYLE_ARR = ['baby-blue', 'pink', 'olive-green', 'orange', 'light-cyan'];
+let filter = require('../../utils/filter.js');
 
-Page({
+Page(filter.identityFilter({
 
   /**
    * 页面的初始数据
@@ -142,4 +143,4 @@ Page({
   onShareAppMessage: function () {
   
   }
-})
+}))

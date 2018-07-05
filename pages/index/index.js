@@ -1,7 +1,8 @@
 var $ = require('../../utils/ajax.js');
 var api = require('../../config/api.js');
+let filter = require('../../utils/filter.js');
 
-Page({
+Page(filter.identityFilter({
 
   /**
    * 页面的初始数据
@@ -156,4 +157,4 @@ Page({
         scrollTop: e.scrollTop
       });
   }
-})
+}))

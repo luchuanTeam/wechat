@@ -4,7 +4,5 @@
   <view class='line-gray-border'></view>
   <user-line-block text='绑定会员' bindtap='toBind'></user-line-block>
   <view class='line-gray-border'></view>
-  <user-line-block text='续费会员' bindtap='toRenewal'></user-line-block>
-  <view class='line-gray-border'></view>
   <view class='yanda-intro'>燕达教育 小程序</view>
 </view>

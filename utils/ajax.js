@@ -14,10 +14,9 @@ const request = (obj, method)=> {
         } else {
           header = { "Content-Type": "application/json" };
         }
+        header.terminal = 'wechat';
+        header.token = wx.getStorageSync('token');
       }
-
-      data.terminal = 'wechat';
-      data.token = wx.getStorageSync('token');
 
       let dataType = obj.dataType || 'json';
       let promise = new Promise((resolve, reject) => {
@@ -28,24 +27,6 @@ const request = (obj, method)=> {
           method: method,
           dataType: dataType,
           success: (res) => {
-            // 所有请求结果先判断状态码是否是401，若401说明用户未登录或无权限访问，清除缓存并跳转到登录页
-            let status = res.data.status;
-            if (status && status == 401) {
-              wx.showModal({
-                title: '友情提示',
-                content: res.data.message,
-                showCancel: false,
-                success: function () {
-                  setTimeout(function () {
-                    wx.clearStorageSync();
-                    wx.switchTab({
-                      url: '/pages/user/user',
-                    });
-                  }, 1000);
-                }
-              });
-              return;
-            }
             resolve(res);
           },
           fail: (err) => {

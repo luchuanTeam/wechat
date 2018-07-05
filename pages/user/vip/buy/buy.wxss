@@ -158,10 +158,11 @@
   height: 120rpx;
   position: fixed;
   bottom: 0;
+  width: 100%;
 }
 
 .confirm .intro {
-  flex: 0  0 100%;
+  width: 70%;
   margin: auto 0;
   padding: 20rpx;
 }
@@ -181,7 +182,7 @@
 }
 
 .confirm .go {
-  flex: 0 0 250rpx;
+  width: 30%;
   height: 120rpx;
   line-height: 120rpx;
   background: orangered;

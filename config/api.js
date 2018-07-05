@@ -1,8 +1,8 @@
 // 以下是业务服务器API地址
 // 本机开发时使用
- //var WxApiRoot = 'http://localhost:8080/yanda/';
+ var WxApiRoot = 'http://localhost:8080/yanda/';
 // 云平台部署时使用
- var WxApiRoot = 'https://www.yanda123.com/yanda/';
+ //var WxApiRoot = 'https://www.yanda123.com/yanda/';
 
 
 
@@ -45,6 +45,7 @@ module.exports = {
   UserRegister: WxApiRoot + 'user/registerByWechat',
   UserGetOpenId: WxApiRoot + 'user/getOpenIdFromWeiXin',
   UserCheckExist: WxApiRoot + 'user/findWechatIsExist',
+  UserCheckToken: WxApiRoot + 'user/checkToken',
 
   VipBind: WxApiRoot + 'vip/bindByCardNum',
 

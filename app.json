@@ -15,7 +15,6 @@
     "pages/user/history/history",
     "pages/user/login/login",
     "pages/user/vip/vip",
-    "pages/user/vip/renewal/renewal",
     "pages/user/vip/bind/bind",
     "pages/user/vip/buy/buy"
   ],

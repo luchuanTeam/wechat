@@ -21,21 +21,6 @@ App({
         });
         return;
       }
-    } else {
-      wx.showModal({
-        title: '友情提示',
-        content: '请先登录',
-        showCancel: false,
-        success: function () {
-          setTimeout(function () {
-            wx.clearStorageSync();
-            wx.switchTab({
-              url: '/pages/user/user',
-            });
-          }, 1000);
-        }
-      });
-      return;
     }
   },
   globalData: {

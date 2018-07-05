@@ -11,9 +11,12 @@ Page({
     userInfo: {},
     isVip: false,
     chooseOptions: [
-      { time: 12, currentPrice: 178, oldPrice: 198, sale: 20 },
-      { time: 3, currentPrice: 45, oldPrice: 58, sale: 13 }, 
-      { time: 1, currentPrice: 15, oldPrice: 19.8, sale: 4.8}
+      // { time: 12, currentPrice: 178, oldPrice: 198, sale: 20 },
+      // { time: 3, currentPrice: 45, oldPrice: 58, sale: 13 }, 
+      // { time: 1, currentPrice: 15, oldPrice: 19.8, sale: 4.8}
+      { time: 12, currentPrice: 0.3, oldPrice: 198.3, sale: 198 },
+      { time: 3, currentPrice: 0.2, oldPrice: 58.2, sale: 58 },
+      { time: 1, currentPrice: 0.1, oldPrice: 19.1, sale: 19 }
     ],
     hasChoosed: 0,
     payOptions: [
@@ -33,7 +36,6 @@ Page({
    */
   onLoad: function (options) {
     let userInfo = wx.getStorageSync('userInfo'); 
-    console.log(JSON.stringify(userInfo));
     let isVip = utils.isVip(userInfo);
     this.setData({
       userInfo: userInfo || {},
@@ -91,7 +93,7 @@ Page({
       appid: 'wx8c025f88b3f63c44',
       mch_id: '1508748871',
       nonce_str: utils.getRandomStr(32),
-      body: 'JSAPI',
+      body: '燕达教育会员中心-会员充值',
       out_trade_no: outTradeNo,
       total_fee: totalFee,
       // spbill_create_ip: '123.12.12.123',
@@ -124,7 +126,6 @@ Page({
       url: 'https://api.mch.weixin.qq.com/pay/unifiedorder',
       data: data
     }).then((res) => {
-      console.log(JSON.stringify(res));
       if(res.statusCode === 200) {
         let result = res.data;
         let prepayId = '',
