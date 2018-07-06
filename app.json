@@ -16,7 +16,9 @@
     "pages/user/login/login",
     "pages/user/vip/vip",
     "pages/user/vip/bind/bind",
-    "pages/user/vip/buy/buy"
+    "pages/user/vip/buy/buy",
+    "pages/msg/msg_fail",
+    "pages/msg/msg_success"
   ],
   "window": {
     "backgroundTextStyle": "light",

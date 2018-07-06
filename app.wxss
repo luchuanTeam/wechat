@@ -148,8 +148,3 @@ view, image, text, navigator {
   -moz-background-size:cover;
   background-size:cover;
 }
-
-.weui-footer {
-  position: fixed;
-  bottom: 28rpx;
-}
