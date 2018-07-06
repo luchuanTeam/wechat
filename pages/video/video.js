@@ -92,7 +92,7 @@ Page(filter.identityFilter({
     let that = this;
     if (that.data.userInfo) {
       wx.navigateTo({
-        url: '/pages/user/vip/vip',
+        url: '/pages/user/vip/buy/buy',
         success: function() {
           that.pause();
         }
