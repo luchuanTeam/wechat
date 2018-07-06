@@ -93,7 +93,7 @@ Page({
       nonce_str: utils.getRandomStr(32),    // 生成32位随机数
       body: '燕达教育会员中心-会员充值',
       out_trade_no: outTradeNo,     // 商户订单号，18位随机数+14位当天日期分秒时组成
-      total_fee: 1,
+      total_fee: totalFee,
       // spbill_create_ip: '123.12.12.123',
       notify_url: 'http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php',
       trade_type: 'JSAPI',
@@ -195,18 +195,32 @@ Page({
   _bindVipCard() {
     let userInfo = this.data.userInfo;
     if(userInfo && userInfo.userId) {
-      let vipCardInfo = this.data.isVip ? userInfo.vipCard : {};
-      vipCardInfo.userId = userInfo.userId;
-      vipCardInfo.nickName = userInfo.nickName;
-      // vipCardInfo.purchaseMonths = this.data.chooseOptions[this.data.hasChoosed].month;
+      let userId = userInfo.userId,
+          nickName = userInfo.nickName,
+          month = this.data.chooseOptions[this.data.hasChoosed].month;
       $.post({
         url: api.Buy,
-        header: { "Content-Type": "application/json" },
-        data: vipCardInfo
+        data: {
+          userId: userId,
+          nickName: nickName,
+          month: '',
+        }
       }).then((res) => {
-        console.log('success: ' + JSON.stringify(res));
-        if(res.data.status !== 200) {   //绑定不成功
-          this._refundPrepare();
+        console.log('complete: ' + JSON.stringify(res));
+        if(res.data.status === 200) {   
+          let account = res.data.data.account,  //账号
+              password = res.data.data.password,
+              expTime = res.data.data.expTime,
+              userInfo = res.data.data.user;
+          wx.setStorageSync('userInfo', userInfo);
+          wx.reLaunch({
+            url: `../../../msg/msg_success?account=${account}&password=${password}&expTime=${expTime}`
+          });
+        } else {
+          this._refundPrepare();  //绑定不成功
+          wx.reLaunch({
+            url: '../../../msg/msg_fail'
+          });
         }
       }).catch((err) => {
         console.log('fail: ' + JSON.stringify(err));
@@ -224,8 +238,8 @@ Page({
       nonce_str: utils.getRandomStr(32),
       out_trade_no: this.data.outTradeNo,
       out_refund_no	: this.data.outTradeNo,
-      total_fee: 1,
-      refund_fee: 1
+      total_fee: this.data.chooseOptions[this.data.hasChoosed].currentPrice * 100,
+      refund_fee: this.data.chooseOptions[this.data.hasChoosed].currentPrice * 100
     };
     let str = utils.getPaySignStr(data);
     this._getPaySign(str).then((res)=> {
