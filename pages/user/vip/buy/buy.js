@@ -93,7 +93,7 @@ Page({
       nonce_str: utils.getRandomStr(32),    // 生成32位随机数
       body: '燕达教育会员中心-会员充值',
       out_trade_no: outTradeNo,     // 商户订单号，18位随机数+14位当天日期分秒时组成
-      total_fee: totalFee,
+      total_fee: 1,   //测试阶段先统一只收一分钱 totalFee
       // spbill_create_ip: '123.12.12.123',
       notify_url: 'http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php',
       trade_type: 'JSAPI',
