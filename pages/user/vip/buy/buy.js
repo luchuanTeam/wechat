@@ -26,7 +26,8 @@ Page({
     outTradeNo: '',
     prepayId: '',       //调用统一下单接口返回的数值，调用支付api时需要传入
     paySign: '',       // 签名，由自己的后台经md5加密生成的签名
-    signType: ''       // 签名，调用微信的统一下单接口后返回的签名
+    signType: '',       // 签名，调用微信的统一下单接口后返回的签名
+    payLoading: false   // 确认支付按钮状态
   },
 
   /**
@@ -84,37 +85,43 @@ Page({
    * 提交支付
    */
   paySubmit(e) {
-    let openid = wx.getStorageSync('openid');
-    let outTradeNo = utils.getRandomStr(18) + utils.getTodayStr();
-    let totalFee = this.data.chooseOptions[this.data.hasChoosed].currentPrice * 100;
-    let data = {
-      appid: 'wx8c025f88b3f63c44',
-      mch_id: '1508748871',
-      nonce_str: utils.getRandomStr(32),    // 生成32位随机数
-      body: '燕达教育会员中心-会员充值',
-      out_trade_no: outTradeNo,     // 商户订单号，18位随机数+14位当天日期分秒时组成
-      total_fee: 1,   //测试阶段先统一只收一分钱 totalFee
-      // spbill_create_ip: '123.12.12.123',
-      notify_url: 'http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php',
-      trade_type: 'JSAPI',
-      openid: openid
-    };
-    let str = utils.getPaySignStr(data);
-    // 先对 str 进行 md5 加密生成签名，然后拼接成xml格式的字符串
-    this._getPaySign(str).then((res)=> {
-      if(res.data.status === 200) {
-        let paySign = res.data.data;      // 获取后台加密后返回的签名
-        this.setData({
-          paySign: paySign,               // 保存签名
-          nonceStr: data.nonce_str,
-          outTradeNo: data.out_trade_no
-        });
-        let body = `<xml><appid>${data.appid}</appid><mch_id>${data.mch_id}</mch_id><nonce_str>${data.nonce_str}</nonce_str><body>${data.body}</body><out_trade_no>${data.out_trade_no}</out_trade_no><total_fee>${data.total_fee}</total_fee><notify_url>${data.notify_url}</notify_url><trade_type>${data.trade_type}</trade_type><openid>${data.openid}</openid><sign>${paySign}</sign></xml>`;                // 拼接调用统一下单接口的 xml 数据
-        this._getOrder(body);
-      }
-    }).catch((err)=> {
-      console.log('err: ' + err);
-    })
+    if (!this.data.payLoading) {
+      this.setData({
+        payLoading: true
+      });
+
+      let openid = wx.getStorageSync('openid');
+      let outTradeNo = utils.getRandomStr(18) + utils.getTodayStr();
+      let totalFee = this.data.chooseOptions[this.data.hasChoosed].currentPrice * 100;
+      let data = {
+        appid: 'wx8c025f88b3f63c44',
+        mch_id: '1508748871',
+        nonce_str: utils.getRandomStr(32),    // 生成32位随机数
+        body: '燕达教育会员中心-会员充值',
+        out_trade_no: outTradeNo,     // 商户订单号，18位随机数+14位当天日期分秒时组成
+        total_fee: 1,   //测试阶段先统一只收一分钱 totalFee
+        // spbill_create_ip: '123.12.12.123',
+        notify_url: api.NotifyUrl,  //http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php
+        trade_type: 'JSAPI',
+        openid: openid
+      };
+      let str = utils.getPaySignStr(data);
+      // 先对 str 进行 md5 加密生成签名，然后拼接成xml格式的字符串
+      this._getPaySign(str).then((res) => {
+        if (res.data.status === 200) {
+          let paySign = res.data.data;      // 获取后台加密后返回的签名
+          this.setData({
+            paySign: paySign,               // 保存签名
+            nonceStr: data.nonce_str,
+            outTradeNo: data.out_trade_no
+          });
+          let body = `<xml><appid>${data.appid}</appid><mch_id>${data.mch_id}</mch_id><nonce_str>${data.nonce_str}</nonce_str><body>${data.body}</body><out_trade_no>${data.out_trade_no}</out_trade_no><total_fee>${data.total_fee}</total_fee><notify_url>${data.notify_url}</notify_url><trade_type>${data.trade_type}</trade_type><openid>${data.openid}</openid><sign>${paySign}</sign></xml>`;                // 拼接调用统一下单接口的 xml 数据
+          this._getOrder(body);
+        }
+      }).catch((err) => {
+        console.log('err: ' + err);
+      })
+    }
   },
 
   /**
@@ -182,7 +189,11 @@ Page({
           'fail': (err) => {
             console.log('fail: ' + JSON.stringify(err))
           },
-          'complete': (res) => { }
+          'complete': (res) => { 
+            this.setData({
+              payLoading: false
+            });
+          }
         });
     }).catch((err)=> {
 
@@ -293,7 +304,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.setData({
+      payLoading: false
+    })
   },
 
   /**

@@ -8,7 +8,7 @@ const works = [
   { id: 1, label: '历史记录', icon: 'https://www.yanda123.com/app/time.png', url: '/pages/user/history/history' },
   { id: 2, label: '我的收藏', icon: 'https://www.yanda123.com/app/collection_fill.png', url: '/pages/user/collect/collect' },
   { id: 3, label: '消费记录', icon: 'https://www.yanda123.com/app/redpacket.png', url: '/pages/user/payrecord/payrecord' },
-  { id: 4, label: '帮助反馈', icon: 'https://www.yanda123.com/app/feedback.png', url: '/pages/msg/msg_success' },
+  // { id: 4, label: '帮助反馈', icon: 'https://www.yanda123.com/app/feedback.png', url: '/pages/msg/msg_success' },
   { id: 5, label: '会员管理', icon: 'https://www.yanda123.com/app/vip.png', url: '/pages/user/vip/vip' },
   { id: 6, label: '更多设置', icon: 'https://www.yanda123.com/app/setting.png', url: '/pages/setting/mySetting/mySetting' }
 ]

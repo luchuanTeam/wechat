@@ -7,7 +7,7 @@
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatar ?  userInfo.avatar: 'https://www.yanda123.com/app/people.png'}}" background-size="cover"></image>
       <view class='info-wrapper' wx:if="{{hasUserInfo}}">
         <!-- 用户名 -->
-        <view class="text">用户名: {{userInfo.nickName}}</view>
+        <view class="text username">用户名: {{userInfo.nickName}}</view>
         <view wx:if="{{isVip}}" class='text'>
           <view class='vip'>VIP</view>
           <view class='expire'>剩{{expireDay}}天到期</view>
