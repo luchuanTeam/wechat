@@ -6,9 +6,9 @@ Page({
   },
   onLoad: function(options) {
     this.setData({
-      account: options.account,
-      password: options.password,
-      expTime: options.expTime
+      account: options.account || '',
+      password: options.password || '',
+      expTime: options.expTime || ''
     })
   },
   comfirm() {

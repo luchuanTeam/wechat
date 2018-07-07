@@ -1,0 +1,41 @@
+.record-wrapper {
+  display: flex;
+  height: 150rpx;
+  border-bottom: 2rpx solid #aaa;
+}
+
+.avatar-wrapper {
+  display: flex;
+  width: 200rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-wrapper image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.msg-wrapper {
+  flex: 1;
+  padding-top: 30rpx; 
+}
+
+.msg-wrapper .text, .msg-wrapper .time {
+  font-size: 28rpx;
+}
+
+.money-wrapper {
+  width:200rpx;
+  text-align:center;
+  padding-top: 40rpx;
+}
+
+.money {
+  color: #000;
+}
+
+.tip {
+  color: #f00;
+  font-size: 24rpx;
+}

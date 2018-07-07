@@ -1,0 +1,15 @@
+<view class='pay-record-container'>
+  <view class='record-wrapper' wx:for='{{records}}' wx:key='{{index}}'>
+    <view class='avatar-wrapper'>
+      <image src='https://www.yanda123.com/app/redpacket.png'></image>
+    </view>
+    <view class='msg-wrapper'>
+      <view class='text'>{{item.payMsg}}</view>
+      <view class='time'>{{item.payTime}}</view>
+    </view>
+    <view class='money-wrapper'>
+      <view class='money'>-{{item.payAmount}}</view>
+      <view class='tip' wx:if='{{item.payStatus !== 1}}'>已全额退款</view>
+    </view>
+  </view>
+</view>

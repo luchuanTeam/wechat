@@ -18,7 +18,8 @@
     "pages/user/vip/bind/bind",
     "pages/user/vip/buy/buy",
     "pages/msg/msg_fail",
-    "pages/msg/msg_success"
+    "pages/msg/msg_success",
+    "pages/user/payrecord/payrecord"
   ],
   "window": {
     "backgroundTextStyle": "light",

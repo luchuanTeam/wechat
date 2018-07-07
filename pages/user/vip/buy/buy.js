@@ -203,11 +203,12 @@ Page({
         data: {
           userId: userId,
           nickName: nickName,
-          month: '',
+          month: month,
         }
       }).then((res) => {
         console.log('complete: ' + JSON.stringify(res));
-        if(res.data.status === 200) {   
+        if(res.data.status === 200) {  
+          this._addPayRecord(1); 
           let account = res.data.data.account,  //账号
               password = res.data.data.password,
               expTime = res.data.data.expTime,
@@ -216,8 +217,9 @@ Page({
           wx.reLaunch({
             url: `../../../msg/msg_success?account=${account}&password=${password}&expTime=${expTime}`
           });
-        } else {
-          this._refundPrepare();  //绑定不成功
+        } else {       //绑定不成功
+          this._addPayRecord(0);
+          this._refundPrepare(); 
           wx.reLaunch({
             url: '../../../msg/msg_fail'
           });
@@ -226,6 +228,24 @@ Page({
         console.log('fail: ' + JSON.stringify(err));
       });
     }
+  },
+
+  _addPayRecord(status) {
+    if(!status) return;
+    $.post({
+      url: api.AddPayRecord,
+      data: {
+        userId: this.data.userInfo.userId,
+        payStatus: status,
+        payMsg: `购买会员${this.data.chooseOptions[this.data.hasChoosed].month}个月`,
+        payAmount: this.data.chooseOptions[this.data.hasChoosed].currentPrice,
+        tradeNo: this.data.outTradeNo
+      }
+    }).then((res)=> {
+      console.log(JSON.stringify(res));
+    }).catch((err)=> {
+      console.log(JSON.stringify(err));
+    });
   },
 
   /**
