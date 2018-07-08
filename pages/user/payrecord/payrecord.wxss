@@ -1,7 +1,7 @@
 .record-wrapper {
   display: flex;
   height: 150rpx;
-  border-bottom: 2rpx solid #aaa;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .avatar-wrapper {

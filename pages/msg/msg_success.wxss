@@ -1,3 +1,8 @@
 page{
     background-color: #FFFFFF;
 }
+
+.weui-msg__desc {
+  text-align: left;
+  margin-left: 150rpx;
+}

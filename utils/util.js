@@ -214,21 +214,19 @@ const getRandomStr = (n) => {
 }
 
 /**
- * 凭借生成签名的字符串
- * @param obj: 只允许传入对象
+ * 根据时间计量方式获取对应的值
  */
-
-const getPaySignStr = (obj) => {
-  let str = '';
-  let keys = Object.keys(obj);
-  keys = keys.sort();     // 按ASCII码排序
-  for (let i = 0; i < keys.length; i++) {
-    str += `&${keys[i]}=${obj[keys[i]]}`;
+const getTimeUnitLabel = (timeUnit) => {
+  if (timeUnit == 1) {
+    return '年';
+  } else if (timeUnit == 2) {
+    return '个月';
+  } else if (timeUnit == 3) {
+    return '天';
+  } else {
+    return '个月';
   }
-  str = str.substr(1);
-  str = str + '&key=0CW3HwsvrclsF2HPGFB6VLY2YGBMhyJ9';
-  return str;
-} 
+}
 
 module.exports = {
   formatTime: formatTime,
@@ -244,5 +242,5 @@ module.exports = {
   expireToDay: expireToDay,
   filteremoji: filteremoji,
   getRandomStr: getRandomStr,
-  getPaySignStr: getPaySignStr
+  getTimeUnitLabel: getTimeUnitLabel
 }

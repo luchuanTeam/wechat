@@ -1,8 +1,8 @@
 // 以下是业务服务器API地址
 // 本机开发时使用
-var WxApiRoot = 'http://localhost:8080/yanda/';
+//var WxApiRoot = 'http://localhost:8080/yanda/';
 // 云平台部署时使用
- //var WxApiRoot = 'https://www.yanda123.com/yanda/';
+var WxApiRoot = 'https://www.yanda123.com/yanda/';
 
 
 
@@ -48,9 +48,10 @@ module.exports = {
   UserCheckToken: WxApiRoot + 'user/checkToken',
 
   VipBind: WxApiRoot + 'vip/bindByCardNum',
+  VipProductList: WxApiRoot + 'product/list',
 
-  Pay: 'https://api.mch.weixin.qq.com/pay/unifiedorder',      // 微信支付调用接口
-  Refund: 'https://api.mch.weixin.qq.com/secapi/pay/refund',  // 微信退款调用接口
+  Pay: WxApiRoot + 'pay/getOrder',      // 微信支付调用接口
+  Refund: WxApiRoot + 'pay/refund',  // 微信退款调用接口
   GetPaySign: WxApiRoot + 'pay/getPaySign',      //md5加密生成签名
   NotifyUrl: WxApiRoot + 'pay/notifyUrl',         // 支付所要传送的 url 
   

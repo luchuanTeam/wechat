@@ -26,9 +26,9 @@
   </view>
 
   <view class='choose-container'>
-    <view class='choose-wrapper' wx:for='{{chooseOptions}}' wx:key='{{index}}' data-choosed='{{index}}' bindtap='changeChoose'>
-      <view class="choose {{hasChoosed === index ? 'has-choosed' : ''}}">
-        <view class='time'>{{item.month}}个月</view>
+    <view class='choose-wrapper' wx:for='{{chooseOptions}}' wx:key='{{index}}' data-choosed='{{item.id}}' bindtap='changeChoose'>
+      <view class="choose {{hasChoosed === item.id ? 'has-choosed' : ''}}">
+        <view class='time'>{{item.label}}</view>
         <view class='current-price'>
           <text class='symbol'>￥</text>
           <text class='number'>{{item.currentPrice}}</text>
@@ -55,9 +55,9 @@
   <view class='confirm'>
     <view class='intro'>
       <text class='weight-text'>总计:</text>
-      <text class='price'>￥{{chooseOptions[hasChoosed].currentPrice}}</text>
-      <text class='sale'>已优惠{{chooseOptions[hasChoosed].sale}}元</text>
+      <text class='price'>￥{{chooseProduct.currentPrice}}</text>
+      <text class='sale'>已优惠{{chooseProduct.sale}}元</text>
     </view>
-    <view class='go' bindtap='paySubmit'>确认支付</view>
+    <view class='go' bindtap='paySubmit' hover-class='pay-active'>确认支付</view>
   </view>
 </view>
