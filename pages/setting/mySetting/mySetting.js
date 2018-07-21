@@ -53,6 +53,22 @@ Page({
   clearCache() {
     let userInfo = wx.getStorageSync('userInfo');
     try {
+      // 清楚本地下载文件
+      wx.getSavedFileList({
+        success: function (res) {
+          if (res.fileList.length > 0) {
+            for (let i = 0; i < res.fileList.length; i++) {
+              wx.removeSavedFile({
+                filePath: res.fileList[i].filePath,
+                complete: function (res) {
+                  console.log(res)
+                }
+              })
+            }
+          }
+        }
+      })
+
       wx.clearStorageSync();
       wx.setStorageSync('userInfo', userInfo);
       let cache = this.getCache();

@@ -4,13 +4,43 @@ var api = require('../../config/api.js');
 
 //获取应用实例
 const app = getApp();
-const works = [
-  { id: 1, label: '历史记录', icon: 'https://www.yanda123.com/app/time.png', url: '/pages/user/history/history' },
-  { id: 2, label: '我的收藏', icon: 'https://www.yanda123.com/app/collection_fill.png', url: '/pages/user/collect/collect' },
-  { id: 3, label: '消费记录', icon: 'https://www.yanda123.com/app/redpacket.png', url: '/pages/user/payrecord/payrecord' },
+const works = [{
+    id: 1,
+    label: '历史记录',
+    icon: 'https://www.yanda123.com/app/time.png',
+    url: '/pages/user/history/history'
+  },
+  {
+    id: 2,
+    label: '我的收藏',
+    icon: 'https://www.yanda123.com/app/collection_fill.png',
+    url: '/pages/user/collect/collect'
+  },
+  {
+    id: 3,
+    label: '消费记录',
+    icon: 'https://www.yanda123.com/app/redpacket.png',
+    url: '/pages/user/payrecord/payrecord'
+  },
+  {
+    id: 4,
+    label: '试题下载',
+    icon: 'https://www.yanda123.com/app/paper.png',
+    url: '/pages/paper/paper'
+  },
   // { id: 4, label: '帮助反馈', icon: 'https://www.yanda123.com/app/feedback.png', url: '/pages/msg/msg_success' },
-  { id: 5, label: '会员管理', icon: 'https://www.yanda123.com/app/vip.png', url: '/pages/user/vip/vip' },
-  { id: 6, label: '更多设置', icon: 'https://www.yanda123.com/app/setting.png', url: '/pages/setting/mySetting/mySetting' }
+  {
+    id: 5,
+    label: '会员管理',
+    icon: 'https://www.yanda123.com/app/vip.png',
+    url: '/pages/user/vip/vip'
+  },
+  {
+    id: 6,
+    label: '更多设置',
+    icon: 'https://www.yanda123.com/app/setting.png',
+    url: '/pages/setting/mySetting/mySetting'
+  }
 ]
 
 Page({
@@ -19,6 +49,7 @@ Page({
     userInfo: {},
     isVip: false,
     expireDay: 0,
+    isForever: false,
     openid: '',
     session_key: '',
     hasUserInfo: false,
@@ -26,7 +57,7 @@ Page({
     canUserLoad: wx.canIUse('showLoading')
   },
   //事件处理函数
-  handleWorkClick: function (e) {
+  handleWorkClick: function(e) {
     if (this.data.userInfo && this.data.userInfo.userId) {
       wx.navigateTo({
         url: e.currentTarget.dataset.url
@@ -38,14 +69,14 @@ Page({
   /**
    * 跳转到账号设置页面
    */
-  toAccountSetting: function (e) {
+  toAccountSetting: function(e) {
     wx.navigateTo({
       url: '/pages/setting/account/account',
     });
   },
 
   //每次进入页面
-  onShow: function () {
+  onShow: function() {
     let userInfo = wx.getStorageSync('userInfo');
     if (!userInfo) {
       this.setData({
@@ -55,18 +86,21 @@ Page({
     } else {
       let isVip = utils.isVip(userInfo);
       let expireDay = 0;
+      let isForever = false;
       if (isVip) {
         expireDay = utils.expireToDay(userInfo.vipCard.expTime);
+        isForever = userInfo.vipCard.isForever;
       }
       this.setData({
         userInfo: userInfo,
         hasUserInfo: true,
         isVip: isVip,
-        expireDay: expireDay
+        expireDay: expireDay,
+        isForever: isForever
       })
     }
   },
-  onLoad: function () {
+  onLoad: function() {
     let userInfo = wx.getStorageSync('userInfo');
     if (userInfo) {
       this.setData({
@@ -90,14 +124,14 @@ Page({
       })
     }
   },
-  getUserInfo: function (e) {
+  getUserInfo: function(e) {
     let userInfo = e.detail.userInfo;
     this.initUserInfo(userInfo);
   },
   /**
    * 通过微信用户信息在后台注册随机账号，并与微信做绑定
    */
-  register: function (openId, nickName, avatar, gender) {
+  register: function(openId, nickName, avatar, gender) {
     $.post({
       url: api.UserRegister,
       data: {
@@ -119,7 +153,7 @@ Page({
   /**
    * 在后台进行登录
    */
-  login: function (userName, password) {
+  login: function(userName, password) {
     $.post({
       url: api.UserLogin,
       data: {
@@ -142,8 +176,8 @@ Page({
             title: '您还未绑定手机号',
             icon: 'none',
             mask: true,
-            success: function () {
-              setTimeout(function () {
+            success: function() {
+              setTimeout(function() {
                 wx.navigateTo({
                   url: '/pages/setting/mobile/mobile'
                 });
@@ -157,14 +191,17 @@ Page({
 
           let isVip = utils.isVip(ydUser);
           let expireDay = 0;
+          let isForever = false;
           if (isVip) {
             expireDay = utils.expireToDay(ydUser.vipCard.expTime);
+            isForever = ydUser.vipCard.isForever;
           }
           this.setData({
             userInfo: ydUser,
             hasUserInfo: true,
             isVip: isVip,
-            expireDay: expireDay
+            expireDay: expireDay,
+            isForever: isForever
           });
         }
 
@@ -181,7 +218,7 @@ Page({
   /**
    * 在微信获取用户信息后进行用户信息初始化
    */
-  initUserInfo: function (userInfo) {
+  initUserInfo: function(userInfo) {
     if (this.data.canUserLoad) {
       wx.showLoading({
         title: '正在登录',
@@ -192,21 +229,25 @@ Page({
       var that = this;
       // 调用login获取code，通过code获取openid，通过openid和当前用户做绑定
       wx.login({
-        success: function (res) {
+        success: function(res) {
           $.get({
             url: api.UserGetOpenId,
-            data: { js_code: res.code }
+            data: {
+              js_code: res.code
+            }
           }).then((res) => {
             let data = res.data.data;
             that.setData({
               session_key: data.session_key,
               openid: data.openid
             });
-            wx.setStorageSync('openid', data.openid);      // 存储openid
+            wx.setStorageSync('openid', data.openid); // 存储openid
             // 通过openid查询微信用户和是否存在
             $.get({
               url: api.UserCheckExist,
-              data: { openId: that.data.openid }
+              data: {
+                openId: that.data.openid
+              }
             }).then((res) => {
               let data = res.data;
               if (data.status == 200) {

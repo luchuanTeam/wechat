@@ -1,0 +1,20 @@
+.page__hd  {
+  padding: 20px;
+}
+
+.loading {
+  position: fixed;
+  bottom: 16px;
+  text-align: center;
+  width: 100%;
+}
+
+.loading-item {
+  display: inline-block;
+}
+
+.loading-icon {
+  position: relative;
+  top: 10rpx;
+  right: 10rpx;
+}

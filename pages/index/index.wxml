@@ -1,7 +1,7 @@
 <!--pages/content/content.wxml-->
 <view class='content-container'>
   
-  <view class='search-wrapper'>
+  <view wx:if="{{showSearch}}" class='search-wrapper'>
     <search class="search" scrollTop='{{scrollTop}}'></search>
   </view>
   <swiper class="banner" autoplay="autoplay" interval="5000" duration="500">

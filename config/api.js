@@ -10,6 +10,7 @@ module.exports = {
   IndexMovies: WxApiRoot + 'movie/getPubMovies',
   IndexClassifyList: WxApiRoot + 'movie/getClassify',
   IndexBanners: WxApiRoot + 'banner/list',
+  IndexRecentMovies: WxApiRoot + 'movie/recent',
 
   mvList: WxApiRoot + 'movie/search',  //获得商品列表
 
@@ -57,5 +58,10 @@ module.exports = {
   
   AddPayRecord: WxApiRoot + 'pay/addRecord',
   GetPayRecords: WxApiRoot + 'pay/recordList',
-  Buy: WxApiRoot + 'vip/buy'          // 购买或续费会员后，为客户绑定会员调用接口
+  Buy: WxApiRoot + 'vip/buy',          // 购买或续费会员后，为客户绑定会员调用接口
+
+  PaperList: WxApiRoot + 'paper/list',
+
+  AttachDownload: WxApiRoot + 'attach/readFile?id=',
+  AttachGetUrl: WxApiRoot + 'attach/getUrl'
 };

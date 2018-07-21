@@ -12,6 +12,8 @@
     <view class='user-msg-wrapper'>
       <view class='nick-name'>{{userInfo.nickName}}</view> 
       <view class="vip-block {{isVip ? 'vip' : 'no-vip'}}">VIP</view>
+      <view wx:if='{{!isForever}}' class='expire'>剩{{expireDay}}天到期</view>
+      <view wx:if='{{isForever}}' class='expire'>永久会员</view>
     </view>
   </view>
 

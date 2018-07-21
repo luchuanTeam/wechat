@@ -14,7 +14,8 @@ Page(filter.identityFilter({
     pageNum: 1,
     pageSize: 4,
     canLoadMore: '1',          // 是否可以加载更多视频数据
-    scrollTop: 0               // 搜索组件根据页面滚动高度设置透明度
+    scrollTop: 0,               // 搜索组件根据页面滚动高度设置透明度
+    showSearch: true
   },
   /**
    * 加载视频数据
@@ -140,6 +141,46 @@ Page(filter.identityFilter({
     if (this.data.canLoadMore === '1') {
       this.loadMovies(this.data.pageNum, this.data.pageSize);
     }
+  },
+
+  /**
+   * 页面下拉刷新
+   */
+  onPullDownRefresh: function () {
+    let that = this;
+    // 下拉刷新暂时隐藏搜索框
+    that.setData({
+      showSearch: false
+    });
+    let videoIntros = that.data.videoIntros;
+    let recentMovie = videoIntros[0];
+    $.get({
+      url: api.IndexRecentMovies,
+      data: { time: recentMovie.createTime }
+    }).then((res) => {
+      if (res.data.status == 200) {
+        let list = res.data.data;
+        for (let i = 0; i < list.length; i++) {
+          let url = 'https://www.yanda123.com/yanda/attach/readFile?size=800&id=' + list[i].imgAppendixId;
+          list[i].imgUrl = url;
+          videoIntros.unshift(list[i]);
+        }
+        // 为更好展示交互效果，2s后再呈现数据
+        setTimeout(function() {
+          that.setData({
+            videoIntros: videoIntros,
+            showSearch: true
+          });
+          wx.stopPullDownRefresh();
+        }, 2000);
+        
+      } else {
+        that.setData({
+          showSearch: true
+        });
+        wx.stopPullDownRefresh();
+      }
+    })
   },
 
   /**

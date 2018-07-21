@@ -64,6 +64,10 @@ Page({
     }).then((res) => {
       let data = res.data;
       if (data.status == 200) {
+
+        let userInfo = res.data.data;
+        wx.setStorageSync('userInfo', userInfo);
+
         wx.showToast({
           title: '绑定会员卡成功',
           icon: 'success',
@@ -76,7 +80,11 @@ Page({
           }
         });
       } else {
-        utils.quickTip(data.message);
+        wx.showToast({
+          title: data.message,
+          icon: 'none',
+          duration: 3000
+        })
       }
     })
   },
@@ -85,7 +93,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let userInfo = wx.getStorageSync('userInfo');
+    this.setData({
+      userInfo: userInfo
+    })
   },
 
   /**

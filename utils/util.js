@@ -1,7 +1,8 @@
 const domain = 'https://www.yanda123.com';
-const strArr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 
-'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const strArr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+  'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+  'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+];
 
 const formatTime = date => {
   const year = date.getFullYear()
@@ -23,9 +24,9 @@ const formatNumber = n => {
  * 去除参数的前后空格
  * @param str: 要求传入的参数为字符串，否则直接返回
  */
-const trim = (str)=> {
-  if(str !== null && str !== undefined) {
-    if(typeof str === 'string') {   //接收的参数必须是字符格式
+const trim = (str) => {
+  if (str !== null && str !== undefined) {
+    if (typeof str === 'string') { //接收的参数必须是字符格式
       str = str.replace(/(^\s*)|(\s*$)/g, '');
       return str;
     } else {
@@ -40,9 +41,9 @@ const trim = (str)=> {
  * 将换行符替换为逗号
  * @param str: 要求传入的参数为字符串，否则直接返回
  */
-const formatLine = (str)=> {
+const formatLine = (str) => {
   if (str !== null && str !== undefined) {
-    if (typeof str === 'string') {   //接收的参数必须是字符格式
+    if (typeof str === 'string') { //接收的参数必须是字符格式
       str = str.replace(/[\n\r]/g, ',');
       return str;
     } else {
@@ -57,7 +58,7 @@ const getAttachSrc = (attchment) => {
   let filePath = attchment.filePath;
   let fileName = attchment.newFilename;
   let ext = attchment.fileExt;
-  filePath = filePath.substring(filePath.indexOf('/video')); 
+  filePath = filePath.substring(filePath.indexOf('/video'));
   return domain + filePath + '/' + fileName + '.' + ext;
 }
 
@@ -68,22 +69,21 @@ const getAttachSrc = (attchment) => {
  * @param time: 快捷提示框显示时间 默认值设为 1000 毫秒
  * @param fun: 回调函数, 提示框消失后执行
  */
-const quickTip = (str, icon, time, fun)=> {
-  if(!str) {
+const quickTip = (str, icon, time, fun) => {
+  if (!str) {
     return;
   }
-  if(icon !== 'success' || icon !== 'loading') {
+  if (icon !== 'success' || icon !== 'loading') {
     icon = 'none'
-  }
-  !time && (time = 1000);
+  }!time && (time = 1000);
   wx.showToast({
     title: str,
     icon: icon,
     mask: true,
     complete: () => {
-      setTimeout(function () {
+      setTimeout(function() {
         wx.hideToast();
-        if(fun && typeof fun === 'function') {
+        if (fun && typeof fun === 'function') {
           fun();
         }
       }, time)
@@ -106,7 +106,7 @@ const secondsToTime = (duration) => {
     time += "0";
   }
   time += seconds;
-  return time; 
+  return time;
 }
 
 /**
@@ -120,35 +120,15 @@ const getToday = () => {
 const getTodayStr = () => {
   let t = new Date();
   let str = t.getFullYear() + '' + formatNumber((t.getMonth() + 1)) + formatNumber(t.getDate()) +
-    formatNumber(t.getHours()) + formatNumber(t.getMinutes()) +formatNumber(t.getSeconds()); 
+    formatNumber(t.getHours()) + formatNumber(t.getMinutes()) + formatNumber(t.getSeconds());
   return str;
-} 
+}
 
 /**
  * 判断输入的日期 是否为今天的日期
  * 输入格式为 2018-05-15 2018-05-02
  */
-const isToday = (str)=>{
-  if(typeof str !== 'string') {
-    return false;
-  }
-  str = trim(str);
-  if(!str || str.length < 10) {
-    return false;
-  }
-  str = str.slice(0,10);
-  let reg = /^\d{4}-\d{2}-\d{2}$/;  
-  if(!reg.test(str)) {   // 只接受 '2018-06-14' 这种格式
-    return false;
-  }
-  return new Date(getToday()).getTime() - new Date(str).getTime() === 0;
-}
-
-/**
- * 判断输入日期是否为昨天
- * 输入格式为 2018-05-15 2018-05-02
- */
-const isYesterday = (str)=> {
+const isToday = (str) => {
   if (typeof str !== 'string') {
     return false;
   }
@@ -158,12 +138,32 @@ const isYesterday = (str)=> {
   }
   str = str.slice(0, 10);
   let reg = /^\d{4}-\d{2}-\d{2}$/;
-  if (!reg.test(str)) {   // 只接受 '2018-06-14' 这种格式
+  if (!reg.test(str)) { // 只接受 '2018-06-14' 这种格式
+    return false;
+  }
+  return new Date(getToday()).getTime() - new Date(str).getTime() === 0;
+}
+
+/**
+ * 判断输入日期是否为昨天
+ * 输入格式为 2018-05-15 2018-05-02
+ */
+const isYesterday = (str) => {
+  if (typeof str !== 'string') {
+    return false;
+  }
+  str = trim(str);
+  if (!str || str.length < 10) {
+    return false;
+  }
+  str = str.slice(0, 10);
+  let reg = /^\d{4}-\d{2}-\d{2}$/;
+  if (!reg.test(str)) { // 只接受 '2018-06-14' 这种格式
     return false;
   }
   let t1 = new Date(getToday()).getTime();
   let t2 = new Date(str).getTime();
-  if (t1 - t2 > 0 && t1 - t2 <= 86400000 ) {
+  if (t1 - t2 > 0 && t1 - t2 <= 86400000) {
     return true;
   } else {
     return false;
@@ -177,7 +177,7 @@ const isVip = (userInfo) => {
     return false;
   let expTime = new Date(userInfo.vipCard.expTime).getTime();
   let nowTime = new Date().getTime();
-  if (expTime <= nowTime)
+  if (expTime <= nowTime && !userInfo.vipCard.isForever)
     return false;
   return true;
 }
@@ -198,7 +198,7 @@ const filteremoji = (str) => {
 const expireToDay = (time) => {
   let expTime = new Date(time).getTime();
   let nowTime = new Date().getTime();
-  return Math.floor((expTime - nowTime) / (1000 * 60 * 60 * 24));
+  return Math.ceil((expTime - nowTime) / (1000 * 60 * 60 * 24));
 }
 
 /**
@@ -206,8 +206,8 @@ const expireToDay = (time) => {
  */
 const getRandomStr = (n) => {
   let str = '';
-  let num = n || 10;    //确定字符串个数
-  for(let i=0; i<num; i++) {
+  let num = n || 10; //确定字符串个数
+  for (let i = 0; i < num; i++) {
     str += strArr[Math.floor(Math.random() * 62)];
   }
   return str;
@@ -228,6 +228,34 @@ const getTimeUnitLabel = (timeUnit) => {
   }
 }
 
+const Subtr = (arg1, arg2) => {
+   return (arg1*100 - arg2*100)/100;
+}
+
+const downFile = (url) => {
+return  wx.downloadFile({
+    url: url,
+    success: function (res) {
+      // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
+      if (res.statusCode === 200) {
+
+        setTimeout(function() {
+          wx.openDocument({
+            filePath: res.tempFilePath,
+            success: function (res) {
+              console.log('打开文档成功')
+            },
+            fail: function (e) {
+              console.log(e)
+            }
+          })
+        }, 1000);
+
+      }
+    }
+  })
+}
+
 module.exports = {
   formatTime: formatTime,
   trim: trim,
@@ -242,5 +270,7 @@ module.exports = {
   expireToDay: expireToDay,
   filteremoji: filteremoji,
   getRandomStr: getRandomStr,
-  getTimeUnitLabel: getTimeUnitLabel
+  getTimeUnitLabel: getTimeUnitLabel,
+  Subtr: Subtr,
+  downFile: downFile
 }

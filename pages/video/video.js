@@ -352,7 +352,8 @@ Page(filter.identityFilter({
           } else {
             let expTime = new Date(vipCard.expTime).getTime();
             let nowTime = new Date().getTime();
-            if (expTime <= nowTime) {
+            let isForever = vipCard.isForever;
+            if (expTime <= nowTime && !isForever) {
               this.setData({
                 tip: '您的会员已到期，无法观看vip视频'
               });

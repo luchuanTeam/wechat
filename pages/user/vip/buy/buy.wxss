@@ -204,3 +204,10 @@
 .pay-active {
   background-color: #FF6339!important;
 }
+
+.expire {
+  font-size: 24rpx;
+  display: inline-block;
+  margin-left: 10rpx;
+  color: #F94C3E;
+}

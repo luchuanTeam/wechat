@@ -10,7 +10,8 @@
         <view class="text username">用户名: {{userInfo.nickName}}</view>
         <view wx:if="{{isVip}}" class='text'>
           <view class='vip'>VIP</view>
-          <view class='expire'>剩{{expireDay}}天到期</view>
+          <view wx:if='{{!isForever}}' class='expire'>剩{{expireDay}}天到期</view>
+          <view wx:if='{{isForever}}' class='expire'>永久会员</view>
         </view>
         <view wx:if="{{!isVip}}" class='text'>
           <view class='open-vip'>开通VIP</view>

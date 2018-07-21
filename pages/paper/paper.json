@@ -1,0 +1,8 @@
+{ 
+  "component": true,
+  "usingComponents": {
+    "loading": "/pages/components/loading/loading"
+  },
+  "enablePullDownRefresh": false,
+  "onReachBottomDistance": 50
+}

@@ -10,6 +10,8 @@ Page({
   data: {
     userInfo: {},
     isVip: false,
+    expireDay: 0,
+    isForever: false,
     chooseOptions: [],
     hasChoosed: 1,
     chooseProduct: {},
@@ -34,9 +36,17 @@ Page({
   onLoad: function(options) {
     let userInfo = wx.getStorageSync('userInfo');
     let isVip = utils.isVip(userInfo);
+    let expireDay = 0;
+    let isForever = false;
+    if (isVip) {
+      expireDay = utils.expireToDay(userInfo.vipCard.expTime);
+      isForever = userInfo.vipCard.isForever;
+    }
     this.setData({
       userInfo: userInfo || {},
-      isVip: isVip
+      isVip: isVip,
+      expireDay: expireDay,
+      isForever: isForever
     });
     this.getVipProductList();
   },
@@ -51,8 +61,12 @@ Page({
       if (res.data.status == 200) {
         let data = res.data.data;
         for (let i = 0; i < data.length; i++) {
-          data[i].sale = data[i].oldPrice - data[i].currentPrice;
-          data[i].label = data[i].timeNum + utils.getTimeUnitLabel(data[i].timeUnit);
+          data[i].sale = utils.Subtr(data[i].oldPrice, data[i].currentPrice);
+          if (data[i].timeUnit == 4) {
+            data[i].label = '永久会员';
+          } else {
+            data[i].label = data[i].timeNum + utils.getTimeUnitLabel(data[i].timeUnit);
+          }
         }
         this.setData({
           hasChoosed: data[0].id,

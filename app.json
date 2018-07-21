@@ -19,7 +19,8 @@
     "pages/user/vip/buy/buy",
     "pages/msg/msg_fail",
     "pages/msg/msg_success",
-    "pages/user/payrecord/payrecord"
+    "pages/user/payrecord/payrecord",
+    "pages/paper/paper"
   ],
   "window": {
     "backgroundTextStyle": "light",

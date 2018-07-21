@@ -5,6 +5,7 @@
     "loadingTip": "../components/loadingTip/loadingTip",
     "videoIntro": "../components/videoIntro/videoIntro"
   },
-  "enablePullDownRefresh": false,
-  "onReachBottomDistance": 50
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50,
+  "backgroundTextStyle": "dark"
 }
