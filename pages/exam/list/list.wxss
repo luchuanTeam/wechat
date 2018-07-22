@@ -1,0 +1,18 @@
+.exam-container {
+  padding: 40rpx 20rpx;
+}
+
+.exam-container .exam-wrapper {
+  display: inline-block;
+  padding: 10rpx;
+  width: 50%;
+  color: #fff;
+}
+
+.exam-container .exam-wrapper .exam {
+  padding: 20rpx 10rpx;
+  background: #5ebe1c;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+}

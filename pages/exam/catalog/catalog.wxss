@@ -1,0 +1,9 @@
+.weui-grids .custom-style {
+  width: 50%;
+}
+
+.weui-footer {
+  position: fixed;
+  bottom: 28rpx; 
+  transform: translate(50%, 0);
+}

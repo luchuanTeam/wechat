@@ -40,6 +40,12 @@ const works = [{
     label: '更多设置',
     icon: 'https://www.yanda123.com/app/setting.png',
     url: '/pages/setting/mySetting/mySetting'
+  },
+  {
+    id: 7,
+    label: '在线考试',
+    icon: 'https://www.yanda123.com/app/paper.png',
+    url: '/pages/exam/list/list'
   }
 ]
 

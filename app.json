@@ -20,7 +20,9 @@
     "pages/msg/msg_fail",
     "pages/msg/msg_success",
     "pages/user/payrecord/payrecord",
-    "pages/paper/paper"
+    "pages/paper/paper",
+    "pages/exam/list/list",
+    "pages/exam/catalog/catalog"
   ],
   "window": {
     "backgroundTextStyle": "light",

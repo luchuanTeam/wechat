@@ -1,0 +1,16 @@
+<view class='catalog-container'>
+  <!-- 目录模块 -->
+  <view class='weui-grids'>
+    <block wx:for="{{catalogs}}" wx:key="{{item}}">
+      <view data-url="{{item.url}}" class="weui-grid custom-style" hover-class="weui-grid_active" bindtap='handleWorkClick'>
+        <image class="weui-grid__icon" src="{{ item.icon }}" />
+        <view class="weui-grid__label">{{ item.label }}</view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 底部信息模块 -->
+  <view class="weui-footer">
+    <view class="weui-footer__text">Copyright © 2017-2018 燕达教育</view>
+  </view>
+</view>
