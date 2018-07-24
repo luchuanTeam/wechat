@@ -1,0 +1,33 @@
+<view class='chapter-exam-container'>
+  <!-- 头部介绍 -->
+  <view class='header'>
+    <view class='text'>（从题库随机挑选10题）</view>
+    <view class='counter'>{{num+1}}/10</view>
+  </view>
+  <!-- 题目 -->
+  <view class='exam-des'>
+    <view class='type'>{{currentEx.type}}</view>
+    <view class='text'>{{currentEx.text}}</view>
+    <view class='choices'>
+      <view class='choice' wx:for='{{currentEx.answers}}' wx:key='{{index}}' bindtap='toggleChoose' data-option='{{item.option}}'>
+        <view class='text-wrapper'>
+          <text class='option'>{{item.option}}</text>
+          <text>{{item.text}}</text>
+        </view>
+        <view class='cell'>
+          <view class="{{currentEx.choose === item.option ? 'icon_checked': ''}}"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 图片区域 -->
+  <view class='img-wrapper'></view>
+
+  <!-- 参考答案区域 -->
+  <view class='answer-wrapper' wx:if='{{currentEx.choose}}'>
+    <view><view class='text'>参考答案</view></view>
+    <view class='my-answer'>我的答案：<text>{{currentEx.choose}}</text></view>
+    <view class='correct-answer'>参考答案：<text>{{currentEx.correctAnswer}}</text> </view>
+  </view>
+</view>

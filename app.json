@@ -22,7 +22,9 @@
     "pages/user/payrecord/payrecord",
     "pages/paper/paper",
     "pages/exam/list/list",
-    "pages/exam/catalog/catalog"
+    "pages/exam/catalog/catalog",
+    "pages/exam/chapter/chapter",
+    "pages/exam/chapterexam/chapterexam"
   ],
   "window": {
     "backgroundTextStyle": "light",

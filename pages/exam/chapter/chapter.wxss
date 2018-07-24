@@ -1,0 +1,60 @@
+.header {
+  padding: 20rpx 0;
+  text-align: center;
+  border-bottom: 2rpx solid #ccc;
+}
+
+.panel-container {
+  padding: 20rpx 20rpx 0 30rpx;
+}
+
+.bg-title-wrapper, .title-wrapper {
+  position: relative;
+  padding: 30rpx;
+  border-top: 2rpx solid #ccc;
+  border-left: 2rpx solid #ccc;
+}
+
+.bg-title {
+  color: #000;
+}
+
+.title {
+  color: #666;
+}
+
+.bg-title-wrapper .text {
+  position: absolute;
+  right: 20rpx;
+  top: 26rpx;
+  padding: 10rpx 20rpx;
+  color: #fff;
+  background: #f65527;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+}
+
+.bg-circle {
+  position: absolute;
+  top: 40rpx;
+  left: -20rpx;
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  border: 2rpx solid #ccc;
+  border-radius: 50%;
+  background: green;
+  color: #fff;
+}
+
+.circle {
+  position: absolute;
+  top: 50rpx;
+  left: -10rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border: 2rpx solid #ccc;
+  border-radius: 50%;
+  background: #fff;
+}

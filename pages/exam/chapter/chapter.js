@@ -1,18 +1,11 @@
-const CATALOGS = [
-  { id: 1, label: '章节练习', icon: 'https://www.yanda123.com/app/time.png', url: '../chapter/chapter' },
-  { id: 2, label: '单元测试', icon: 'https://www.yanda123.com/app/time.png', url: '' },
-  { id: 3, label: '期中期末', icon: 'https://www.yanda123.com/app/time.png', url: '' },
-  { id: 4, label: '专业知识练习', icon: 'https://www.yanda123.com/app/time.png', url: '' },
-  { id: 5, label: '错题集', icon: 'https://www.yanda123.com/app/time.png', url: '' },
-];
+// pages/exam/chapter/chapter.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    title: '',
-    catalogs: CATALOGS
+    title: ''
   },
 
   /**
@@ -23,15 +16,11 @@ Page({
     this.setData({
       title: title
     });
-    wx.setNavigationBarTitle({
-      title: title
-    });
   },
 
-  toNextPage(e) {
-    let url = e.currentTarget.dataset.url;
+  toChapterExam(e) {
     wx.navigateTo({
-      url: `${url}?title=${this.data.title}`
+      url: '../chapterexam/chapterexam?title=亿以内数的认识'
     });
   },
 

@@ -2,7 +2,7 @@
   <!-- 目录模块 -->
   <view class='weui-grids'>
     <block wx:for="{{catalogs}}" wx:key="{{item}}">
-      <view data-url="{{item.url}}" class="weui-grid custom-style" hover-class="weui-grid_active" bindtap='handleWorkClick'>
+      <view data-url="{{item.url}}" class="weui-grid custom-style" hover-class="weui-grid_active" bindtap='handleWorkClick' bindtap='toNextPage' data-url="{{item.url}}">
         <image class="weui-grid__icon" src="{{ item.icon }}" />
         <view class="weui-grid__label">{{ item.label }}</view>
       </view>

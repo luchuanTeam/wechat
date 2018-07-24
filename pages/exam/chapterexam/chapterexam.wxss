@@ -1,0 +1,71 @@
+.header {
+  position: relative;
+  padding: 20rpx 0;
+  text-align: center;
+  border-bottom: 2rpx solid #ccc;
+}
+
+.header .counter {
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+
+}
+
+.exam-des .type, .exam-des .text {
+  padding: 20rpx 20rpx 0 20rpx;
+}
+
+.choice {
+  display: flex;
+  border-bottom: 2rpx solid #ccc;
+}
+
+.choice .text-wrapper {
+  flex: 1;
+  padding: 20rpx;
+}
+
+.choice .text-wrapper .option {
+  display: inline-block;
+  margin-right: 20rpx;
+}
+.choice .cell {
+  margin-right: 20rpx;
+  padding-top: 20rpx;
+}
+.choice .cell .icon_checked {
+  display: inline-block;
+  vertical-align: middle;
+  font: normal normal normal 14px/1 "weui";
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.choice .cell .icon_checked:before {
+  display: block;
+  content: '\EA08';
+  color: #09BB07;
+  font-size: 16px;
+}
+
+.answer-wrapper {
+  margin: 30rpx;
+  background: #f0f5f8; 
+}
+
+.answer-wrapper .text {
+  display: inline-block;
+  padding: 10rpx;
+  background: #60bb1e;
+  color: #fff;
+}
+
+.answer-wrapper view {
+  padding: 20rpx;
+}
+
+.correct-answer text {
+  color: #60bb1e;
+}

@@ -1,0 +1,25 @@
+<view class='chapter-container'>
+  <view class='header'>{{title}}</view>
+  <view class='panel-container'>
+    <view class='bg-title-wrapper'>
+      <view class='bg-title'>大数的认识</view>
+      <view class='text'>单元测试</view>
+      <view class='bg-circle'>1</view>
+    </view>
+    <view class='title-wrapper' bindtap='toChapterExam'>
+      <view class='title'>亿以内数的认识</view>
+      <view class='circle'></view>
+    </view> 
+  </view>
+  <view class='panel-container'>
+    <view class='bg-title-wrapper'>
+      <view class='bg-title'>大数的认识</view>
+      <view class='text'>单元测试</view>
+      <view class='bg-circle'>2</view>
+    </view>
+    <view class='title-wrapper'>
+      <view class='title'>亿以内数的认识</view>
+      <view class='circle'></view>
+    </view> 
+  </view>
+</view>
