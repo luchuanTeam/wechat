@@ -1,5 +1,4 @@
 { 
-  "component": true,
   "usingComponents": {
     "loading": "/pages/components/loading/loading"
   },

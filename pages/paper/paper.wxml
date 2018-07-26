@@ -1,7 +1,7 @@
 <view class="page">
     <view class="page__hd">
-        <view class="page__title">试题下载</view>
-        <view class="page__desc">点击下列试题可直接下载</view>
+        <view class="page__title">{{ title }}下载</view>
+        <view class="page__desc">点击下列{{ title }}可直接下载</view>
     </view>
     <view class="page__bd">
         <!-- <view class="weui-cells__title">带说明的列表项</view> -->
@@ -18,4 +18,5 @@
       <loading class="loading-item loading-icon"></loading>
       <view class="loading-item">正在下载中{{downProccess}}%</view>
     </view>
+    <loadingTip canLoadMore='{{canLoadMore}}'></loadingTip>
 </view>

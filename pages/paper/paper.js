@@ -12,19 +12,22 @@ Page(filter.identityFilter({
     papers: [],
     loadMore: 0,
     pageNum: 1,
-    pageSize: 4,
+    pageSize: 15,
     canLoadMore: '1',          // 是否可以加载更多视频数据
     downLoading: false,
-    downProccess: 0
+    downProccess: 0,
+    paperType: 1,
+    title: ''
   },
 
   /**
    * 加载视频数据
    */
-  loadPapers: function (pageNum, pageSize) {
+  loadPapers: function () {
+    let pageNum = this.data.pageNum, pageSize = this.data.pageSize, paperType = this.data.paperType;
     $.get({
       url: api.PaperList,
-      data: { pageNum: pageNum, pageSize: pageSize }
+      data: { pageNum: pageNum, pageSize: pageSize, paperType: paperType }
     }).then((res) => {
       if (res.data.status === 200) {
         let list = res.data.data.list, pageNum = this.data.pageNum;
@@ -75,7 +78,7 @@ Page(filter.identityFilter({
   */
   onReachBottom() {
     if (this.data.canLoadMore === '1') {
-      this.loadPapers(this.data.pageNum, this.data.pageSize);
+      this.loadPapers();
     }
   },
 
@@ -83,7 +86,13 @@ Page(filter.identityFilter({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.loadPapers(this.data.pageNum, this.data.pageSize);
+    let paperType = options.paperType;
+    let title = paperType == 1 ? '试题' : '课件';
+    this.setData({
+      paperType: paperType,
+      title: title
+    })
+    this.loadPapers();
   },
 
   /**
@@ -118,13 +127,6 @@ Page(filter.identityFilter({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
   
   },
 

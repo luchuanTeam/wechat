@@ -22,18 +22,24 @@ const works = [{
     icon: 'https://www.yanda123.com/app/redpacket.png',
     url: '/pages/user/payrecord/payrecord'
   },
-  {
-    id: 4,
-    label: '试题下载',
-    icon: 'https://www.yanda123.com/app/paper.png',
-    url: '/pages/paper/paper'
-  },
   // { id: 4, label: '帮助反馈', icon: 'https://www.yanda123.com/app/feedback.png', url: '/pages/msg/msg_success' },
   {
-    id: 5,
+    id: 4,
     label: '会员管理',
     icon: 'https://www.yanda123.com/app/vip.png',
     url: '/pages/user/vip/vip'
+  },
+  {
+    id: 5,
+    label: '试题下载',
+    icon: 'https://www.yanda123.com/app/paper.png',
+    url: '/pages/paper/paper?paperType=1'
+  },
+  {
+    id: 6,
+    label: '课件下载',
+    icon: 'https://www.yanda123.com/app/ppt.png',
+    url: '/pages/paper/paper?paperType=2'
   },
   {
     id: 6,
@@ -41,12 +47,12 @@ const works = [{
     icon: 'https://www.yanda123.com/app/setting.png',
     url: '/pages/setting/mySetting/mySetting'
   },
-  {
-    id: 7,
-    label: '在线考试',
-    icon: 'https://www.yanda123.com/app/paper.png',
-    url: '/pages/exam/list/list'
-  }
+  // {
+  //   id: 7,
+  //   label: '在线考试',
+  //   icon: 'https://www.yanda123.com/app/paper.png',
+  //   url: '/pages/exam/list/list'
+  // }
 ]
 
 Page({
