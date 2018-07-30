@@ -24,7 +24,8 @@
     "pages/exam/list/list",
     "pages/exam/catalog/catalog",
     "pages/exam/chapter/chapter",
-    "pages/exam/chapterexam/chapterexam"
+    "pages/exam/chapterexam/chapterexam",
+    "pages/exam/unit/unit"
   ],
   "window": {
     "backgroundTextStyle": "light",

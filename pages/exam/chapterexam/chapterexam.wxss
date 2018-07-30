@@ -1,9 +1,19 @@
 .header {
   position: relative;
   padding: 20rpx 0;
+  height: 100rpx;
+  line-height: 60rpx;
   text-align: center;
   border-bottom: 2rpx solid #ccc;
 }
+
+.exam-answer-wrapper {
+  position: absolute;
+  top: 100rpx;
+  bottom: 100rpx;
+  width: 100%;
+}
+
 
 .header .counter {
   position: absolute;
@@ -52,6 +62,7 @@
 
 .answer-wrapper {
   margin: 30rpx;
+  padding: 30rpx 0;
   background: #f0f5f8; 
 }
 
@@ -63,9 +74,32 @@
 }
 
 .answer-wrapper view {
-  padding: 20rpx;
+  padding: 10rpx 20rpx;
 }
 
 .correct-answer text {
   color: #60bb1e;
+}
+
+.footer {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  padding: 20rpx;
+  height: 100rpx;
+  line-height: 60rpx;
+  width: 100%;
+}
+
+.zero-area {
+  flex: 1;
+}
+
+.left-area, .right-area {
+  width: 200rpx;
+  text-align: center;
+}
+
+.gray {
+  color: #999;
 }
