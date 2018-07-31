@@ -25,7 +25,8 @@
     "pages/exam/catalog/catalog",
     "pages/exam/chapter/chapter",
     "pages/exam/chapterexam/chapterexam",
-    "pages/exam/unit/unit"
+    "pages/exam/unit/unit",
+    "pages/exam/test/test"
   ],
   "window": {
     "backgroundTextStyle": "light",

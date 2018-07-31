@@ -4,7 +4,7 @@
   </view>
           
   <view class="weui-panel__bd">
-    <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+    <navigator url="../test/test?title={{title}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
       <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
         <image class="weui-media-box__thumb" src="https://www.yanda123.com/app/time.png" />
       </view>

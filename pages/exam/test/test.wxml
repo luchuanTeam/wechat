@@ -1,0 +1,36 @@
+<view class='test-container'>
+
+  <view class='header'>
+    <view class='timer-wrapper'>
+      <view class='time'>{{hour}} : {{minute}} : {{second}}</view>
+      <view class='pause' bindtap='toggleCounter'>{{start ? '| |' : '▷'}}</view>
+    </view>
+    <view class='text'>{{title}} 单元测试/期中测试/期末测试</view>
+  </view>
+  <view class='question-wrapper'>
+    <view class='text'>{{currentEx.text}}</view>
+    <view class='question'>{{currentEx.question}}</view>
+    <view class="weui-cells weui-cells_after-title">
+      <radio-group bindchange="radioChange">
+          <label class="weui-cell weui-check__label" wx:for="{{currentEx.answers}}" wx:key="key">
+              <radio class="weui-check" value="{{item.option}}" checked="{{item.checked}}"/>
+              <view class="weui-cell__bd">{{item.option}}  {{item.text}}</view>
+              <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                  <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+              </view>
+          </label>
+      </radio-group>
+    </view>
+  </view>
+  <view class='image-wrapper'></view>
+
+  <view class='footer'>
+    <view class="left-area {{num <= 0 ? 'gray': ''}}" bindtap='toPrevExam'>
+      ◀ 上一题
+    </view>
+    <view class='zero-area'>交卷</view>
+    <view class="right-area {{num >= 9? 'gray': ''}}" bindtap='toNextExam'>
+      下一题 ▶
+    </view>
+  </view>
+</view>

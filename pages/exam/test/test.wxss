@@ -1,0 +1,50 @@
+/* pages/exam/test/test.wxss */
+.timer-wrapper {
+  position: relative;
+  padding: 20rpx 0;
+  background: #60bb1e;
+  color: #fff;
+  text-align: center;
+}
+
+.timer-wrapper .pause {
+  position: absolute;
+  top: 20rpx;
+  right: 30rpx;
+  padding: 0 20rpx;
+}
+
+.header .text {
+  padding: 20rpx;
+  text-align: center;
+  font-size: 24rpx;
+}
+
+.question-wrapper .text, .question-wrapper .question {
+  padding: 20rpx 30rpx;
+}
+
+.footer {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  padding: 20rpx;
+  height: 100rpx;
+  line-height: 60rpx;
+  width: 100%;
+}
+
+.zero-area {
+  flex: 1;
+  text-align: center;
+  color: #7dc946;
+}
+
+.left-area, .right-area {
+  width: 200rpx;
+  text-align: center;
+}
+
+.gray {
+  color: #999;
+}
