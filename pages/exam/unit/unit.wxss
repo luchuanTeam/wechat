@@ -1,0 +1,18 @@
+.header {
+  padding: 20rpx 0;
+  height: 100rpx;
+  line-height: 60rpx;
+  text-align: center;
+  border-bottom: 2rpx solid #ccc;
+}
+
+.custom-button {
+  margin-left: 20rpx;
+  padding: 0 20rpx;
+  width: 120rpx;
+  font-size: 28rpx;
+  color: #fff;
+  background: #f65527;
+  border-radius: 40rpx;
+  text-align: center;
+}

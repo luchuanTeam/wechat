@@ -257,6 +257,7 @@ return  wx.downloadFile({
 }
 
 module.exports = {
+  formatNumber: formatNumber,
   formatTime: formatTime,
   trim: trim,
   formatLine: formatLine,

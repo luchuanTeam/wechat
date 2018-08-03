@@ -35,12 +35,39 @@ Page({
 
   toggleChoose(e) {
     if(!this.data.currentEx.choose) {   // 如果没有选择过，才能答题
-      let option = e.currentTarget.dataset.option;
-      let choose = 'currentEx.choose';
+      let option = e.currentTarget.dataset.option, 
+          n = this.data.num,
+         _currentEx = this.data.currentEx,
+         _exercises = this.data.exercises;
+      _currentEx.choose = option;
+      _exercises[n] = _currentEx;
       this.setData({
-        [choose]: option
+        currentEx: _currentEx,
+        exercises: _exercises
       });
     }
+  },
+
+  toPrevExam() {
+    let n = this.data.num;
+    if(n > 0) {
+      n--;
+    }
+    this.setData({
+      num: n,
+      currentEx: this.data.exercises[n]
+    })
+  },
+
+  toNextExam() {
+    let n = this.data.num;
+    if (n < 9 ) {
+      n++;
+    }
+    this.setData({
+      num: n,
+      currentEx: this.data.exercises[n]
+    }) 
   },
 
   /**

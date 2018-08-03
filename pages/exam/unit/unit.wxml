@@ -1,0 +1,17 @@
+<view class='unit-container'>
+  <view class='header'>
+    {{title}}
+  </view>
+          
+  <view class="weui-panel__bd">
+    <navigator url="../test/test?title={{title}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+      <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+        <image class="weui-media-box__thumb" src="https://www.yanda123.com/app/time.png" />
+      </view>
+      <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+        <view class="weui-media-box__desc">人教版语文六年级上册第一单元达标测试卷。</view>
+      </view>
+      <view class='custom-button'>开始测试</view>
+    </navigator>
+  </view>
+</view>
