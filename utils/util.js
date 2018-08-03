@@ -196,7 +196,7 @@ const filteremoji = (str) => {
 }
 
 const expireToDay = (time) => {
-  let expTime = new Date(time).getTime();
+  let expTime = new Date(time.replace(/-/g, '/')).getTime();
   let nowTime = new Date().getTime();
   return Math.ceil((expTime - nowTime) / (1000 * 60 * 60 * 24));
 }

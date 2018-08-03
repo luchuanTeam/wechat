@@ -20,8 +20,8 @@
     </view>
     <!-- 登录按钮 -->
     <view class='login-wrapper' wx:if="{{!hasUserInfo}}">
-      <button class="login" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 微信登录 </button>
-      <button class="login" bindtap="vipLogin"> 会员登录 </button>
+      <button class="login" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
+      <button class="login" bindtap="vipLogin"> 共享登录 </button>
     </view>
 
     <!-- 账号管理 -->

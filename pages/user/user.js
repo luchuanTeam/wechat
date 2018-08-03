@@ -25,7 +25,7 @@ const works = [{
   // { id: 4, label: '帮助反馈', icon: 'https://www.yanda123.com/app/feedback.png', url: '/pages/msg/msg_success' },
   {
     id: 4,
-    label: '会员管理',
+    label: '成为会员',
     icon: 'https://www.yanda123.com/app/vip.png',
     url: '/pages/user/vip/vip'
   },
@@ -41,17 +41,17 @@ const works = [{
     icon: 'https://www.yanda123.com/app/ppt.png',
     url: '/pages/paper/paper?paperType=2'
   },
+  // {
+  //   id: 7,
+  //   label: '在线考试',
+  //   icon: 'https://www.yanda123.com/app/paper.png',
+  //   url: '/pages/exam/list/list'
+  // },
   {
-    id: 6,
+    id: 8,
     label: '更多设置',
     icon: 'https://www.yanda123.com/app/setting.png',
     url: '/pages/setting/mySetting/mySetting'
-  },
-  {
-    id: 7,
-    label: '在线考试',
-    icon: 'https://www.yanda123.com/app/paper.png',
-    url: '/pages/exam/list/list'
   }
 ]
 
