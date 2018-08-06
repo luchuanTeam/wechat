@@ -29,7 +29,7 @@ Page({
     let userId = this.data.userInfo.userId; 
     if(userId) {
       $.get({
-        url: api.GetPayRecords,
+        url: api.PayRecords,
         data: {
           userId: userId,
           pageNum: this.data.pageNum,

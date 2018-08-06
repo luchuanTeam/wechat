@@ -7,3 +7,13 @@
   bottom: 28rpx; 
   transform: translate(50%, 0);
 }
+
+.weui-grid__icon {
+  width: 96px;
+  height: 96px;
+}
+
+.weui-grid__label {
+  margin-top: 20px;
+  font-size: 32rpx;
+}

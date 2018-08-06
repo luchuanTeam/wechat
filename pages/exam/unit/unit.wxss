@@ -8,8 +8,8 @@
 
 .custom-button {
   margin-left: 20rpx;
-  padding: 0 20rpx;
-  width: 120rpx;
+  padding:0 28rpx;
+  width:134rpx;
   font-size: 28rpx;
   color: #fff;
   background: #f65527;

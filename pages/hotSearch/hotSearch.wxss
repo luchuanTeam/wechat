@@ -321,7 +321,7 @@ page{
 .cate-item .item .name{
   display: block;
   width: 365.625rpx;
-  height: 35rpx;
+  height: 40rpx;
   margin: 11.5rpx 0 22rpx 0;
   overflow: hidden;
   font-size: 30rpx;

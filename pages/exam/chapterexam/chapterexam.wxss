@@ -19,16 +19,31 @@
   position: absolute;
   top: 20rpx;
   right: 20rpx;
+}
 
+.curCount {
+  font-size: 64rpx;
+  display: inline-block;
+  color: #2c3c4b;
+}
+
+.totalCount {
+  display: inline-block;
+  color: #7d8a93;
 }
 
 .exam-des .type, .exam-des .text {
   padding: 20rpx 20rpx 0 20rpx;
 }
 
-.choice {
+.choice:nth-child(odd) {
   display: flex;
-  border-bottom: 2rpx solid #ccc;
+  background: #f5f5f5;
+}
+
+.choice:nth-child(even) {
+  display: flex;
+  background: #fff;
 }
 
 .choice .text-wrapper {
@@ -38,7 +53,13 @@
 
 .choice .text-wrapper .option {
   display: inline-block;
-  margin-right: 20rpx;
+  margin-right: 20px;
+  border-radius: 50%;
+  background: #d1cfd0;
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  text-align: center;
 }
 .choice .cell {
   margin-right: 20rpx;

@@ -82,6 +82,7 @@
   text-align: center;
   font-size: 28rpx;
   color: #fff;
+  width: 180rpx;
   background: rgba(135,194,66, 1);
 }
 

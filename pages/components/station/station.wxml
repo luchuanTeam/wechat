@@ -3,6 +3,6 @@
     <image src='{{station.imgUrl}}'></image>
   </view>
   <view class='text'>
-    {{station.desc}}
+    {{station.label}}
   </view>
 </view>

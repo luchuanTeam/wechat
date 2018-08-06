@@ -1,8 +1,8 @@
 <view class='vip-container gray-container'>
   <view class='line-gray-border'></view>
-  <user-line-block text='购买会员' bindtap='toBuy'></user-line-block>
+  <user-line-block text='在线充值' bindtap='toBuy'></user-line-block>
   <view class='line-gray-border'></view>
-  <user-line-block text='绑定会员' bindtap='toBind'></user-line-block>
+  <user-line-block text='卡密充值' bindtap='toBind'></user-line-block>
   <view class='line-gray-border'></view>
   <view class='yanda-intro'>燕达教育 小程序</view>
 </view>

@@ -1,9 +1,9 @@
 const CATALOGS = [
-  { id: 1, label: '章节练习', icon: 'https://www.yanda123.com/app/time.png', url: '../chapter/chapter' },
-  { id: 2, label: '单元测试', icon: 'https://www.yanda123.com/app/time.png', url: '../unit/unit' },
-  { id: 3, label: '期中期末', icon: 'https://www.yanda123.com/app/time.png', url: '../unit/unit' },
-  { id: 4, label: '专业知识练习', icon: 'https://www.yanda123.com/app/time.png', url: '../chapter/chapter' },
-  { id: 5, label: '错题集', icon: 'https://www.yanda123.com/app/time.png', url: '' },
+  { id: 1, label: '章节练习', icon: 'https://www.yanda123.com/app/zjlx.png', url: '../chapter/chapter' },
+  { id: 2, label: '单元测试', icon: 'https://www.yanda123.com/app/dycs.png', url: '../unit/unit' },
+  { id: 3, label: '期中期末', icon: 'https://www.yanda123.com/app/qzqm.png', url: '../unit/unit' },
+  { id: 4, label: '专业知识练习', icon: 'https://www.yanda123.com/app/zyzslx.png', url: '../chapter/chapter' }
+  // { id: 5, label: '错题集', icon: 'https://www.yanda123.com/app/time.png', url: '' },
 ];
 Page({
 

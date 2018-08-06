@@ -121,7 +121,7 @@ Page({
       data.userId = that.data.userId;
     };
     $.get({
-      url: api.mvList,
+      url: api.MovieSearch,
       data: data
     }).then(function (res) {
       let data = res.data;

@@ -3,6 +3,8 @@
  */
 
 const $ =require('../utils/ajax.js');
+var api = require('../config/api.js');
+
 /**
  * 返回结果
  */
@@ -51,7 +53,7 @@ const privateActions = {
   loadComments(obj) {
     return new Promise((resolve, reject) => {
       $.get({
-        url: 'https://www.yanda123.com/yanda/comment/list',
+        url: api.CommentList,
         data: {
           pageNum: obj.pageNum,
           pageSize: obj.pageSize,
@@ -122,7 +124,7 @@ const privateActions = {
   toggleAgreeCount(obj) {
     return new Promise((resolve, reject)=> {
       $.post({
-        url: 'https://www.yanda123.com/yanda/comment/toggleAgreeCount',
+        url: api.CommentAgree,
         data: {
           userId: obj.userId,
           commentId: obj.commentId,
@@ -144,7 +146,7 @@ const privateActions = {
   listUserAgrees(userId, episodeId) {
     return new Promise((resolve, reject)=> {
       $.get({
-        url: 'https://www.yanda123.com/yanda/userAgree/list',
+        url: api.AgreeList,
         data: {
           userId: userId,
           episodeId: episodeId

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "会员管理",
+  "navigationBarTitleText": "成为会员",
   "usingComponents": {
     "user-line-block": "../../components/userLineBlock/userLineBlock"
   }

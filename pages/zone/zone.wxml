@@ -11,7 +11,7 @@
     </view>
     <view class='secondary-category'>
       <view wx:for='{{secondCategory}}' wx:key='{{index}}' class='{{styleArr[index % styleArr.length]}} tag-common' bindtap='toVideoList' data-id='{{ item.id }}' data-name='{{item.label}}'>
-        {{item.desc}}
+        {{item.label}}
       </view>
     </view>
   </view>

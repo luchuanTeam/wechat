@@ -44,7 +44,7 @@ Page({
   loadMovies: function (pageNum, pageSize) {
     var that = this;
     $.get({
-      url: api.IndexMovies,
+      url: api.MoviePubList,
       data: { pageNum: pageNum, pageSize: pageSize, classifyId: this.data.classifyId }
     }).then((res) => {
       if (res.data.status === 200) {
@@ -80,7 +80,7 @@ Page({
   },
 
   getPinyin: function (content) {
-    return $.get({ url: 'https://www.yanda123.com/yanda/classify/getPinyin', data: {content: content} });
+    return $.get({ url: api.ClassifyPinYin, data: {content: content} });
   },
 
   /**

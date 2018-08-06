@@ -5,7 +5,7 @@
 .exam-container .exam-wrapper {
   display: inline-block;
   padding: 10rpx;
-  width: 50%;
+  width: 33.33%;
   color: #fff;
 }
 

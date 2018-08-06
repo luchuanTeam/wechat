@@ -6,6 +6,6 @@
     <input  class='password' type='password' placeholder='密码' confirm-type='确认' bindinput='passwordChange'></input>
   </view>
   <view class='row'>
-    <button class='submit' bindtap="submit" type='primary'>绑定</button>
+    <button class='submit' bindtap="submit" type='primary'>充值</button>
   </view>
 </view>

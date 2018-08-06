@@ -22,7 +22,7 @@ Page(filter.identityFilter({
    */
   loadMovies: function (pageNum, pageSize) {
     $.get({
-      url: api.IndexMovies,
+      url: api.MoviePubList,
       data: { pageNum: pageNum, pageSize: pageSize }
     }).then((res) => {
       if (res.data.status === 200) {
@@ -60,7 +60,7 @@ Page(filter.identityFilter({
   */
   loadClassify: function () {
     var that = this;
-    $.get({ url: api.IndexClassifyList })
+    $.get({ url: api.ClassifyList, data: {type: 1} })
       .then((res) => {
         if (res.statusCode == 200) {
           let data = res.data;
@@ -80,7 +80,7 @@ Page(filter.identityFilter({
   loadBanners: function () {
     var that = this;
     $.get({
-      url: api.IndexBanners,
+      url: api.BannerList,
       data: { pageNum: 1, pageSize: 4 }
     }).then((res) => {
       if (res.data.status == 200) {
@@ -155,7 +155,7 @@ Page(filter.identityFilter({
     let videoIntros = that.data.videoIntros;
     let recentMovie = videoIntros[0];
     $.get({
-      url: api.IndexRecentMovies,
+      url: api.MovieRecent,
       data: { time: recentMovie.createTime }
     }).then((res) => {
       if (res.data.status == 200) {

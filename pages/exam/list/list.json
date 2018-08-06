@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "在线考题"
+  "navigationBarTitleText": "在线考题",
+  "navigationBarBackgroundColor": "#87C242",
+  "navigationBarTextStyle": "white"
 }

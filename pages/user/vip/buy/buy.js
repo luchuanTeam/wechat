@@ -56,7 +56,7 @@ Page({
    */
   getVipProductList() {
     $.get({
-      url: api.VipProductList
+      url: api.ProductList
     }).then((res) => {
       if (res.data.status == 200) {
         let data = res.data.data;
@@ -112,7 +112,7 @@ Page({
   _getPaySign(str) {
     var promise = new Promise((resolve, reject) => {
       $.post({
-        url: api.GetPaySign,
+        url: api.PaySign,
         data: {
           prepayId: str
         }
@@ -154,7 +154,7 @@ Page({
    */
   _getOrder(data) {
     $.post({
-      url: api.Pay,
+      url: api.PayOrder,
       data: data
     }).then((res) => {
       if (res.data.status === 200) {
@@ -243,7 +243,7 @@ Page({
         nickName = userInfo.nickName,
         productId = this.data.chooseProduct.id;
       $.post({
-        url: api.Buy,
+        url: api.VipBuy,
         data: {
           userId: userId,
           nickName: nickName,
@@ -278,7 +278,7 @@ Page({
     if (!status) return;
     let action = this.data.isVip ? '续费' : '购买';
     $.post({
-      url: api.AddPayRecord,
+      url: api.PayAddRecord,
       data: {
         userId: this.data.userInfo.userId,
         payStatus: status,
@@ -308,7 +308,7 @@ Page({
 
   _refund(data) {
     $.post({
-      url: api.Refund,
+      url: api.PayRefund,
       data: data
     }).then((res) => {
       console.log(JSON.stringify(res));

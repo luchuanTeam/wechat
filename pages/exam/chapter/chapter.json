@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "章节练习/专业知识练习"
+  "navigationBarTitleText": "章节练习/专业知识练习",
+  "navigationBarBackgroundColor": "#87C242",
+  "navigationBarTextStyle": "white"
 }

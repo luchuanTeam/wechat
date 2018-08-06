@@ -7,12 +7,16 @@ var WxApiRoot = 'https://www.yanda123.com/yanda/';
 
 
 module.exports = {
-  IndexMovies: WxApiRoot + 'movie/getPubMovies',
-  IndexClassifyList: WxApiRoot + 'movie/getClassify',
-  IndexBanners: WxApiRoot + 'banner/list',
-  IndexRecentMovies: WxApiRoot + 'movie/recent',
+  BannerList: WxApiRoot + 'banner/list',
 
-  mvList: WxApiRoot + 'movie/search',  //获得商品列表
+  MoviePubList: WxApiRoot + 'movie/getPubMovies',
+  MovieRecent: WxApiRoot + 'movie/recent',
+  MovieSearch: WxApiRoot + 'movie/search',  //获得商品列表
+  MovieClassify: WxApiRoot + 'movie/getClassify',  //获取视频一级分类
+  
+  ClassifyPinYin: WxApiRoot + 'classify/getPinyin', //获取中文拼音
+  ClassifyList: WxApiRoot + 'classify/getListByType', //获取分类列表
+  ClassifyChildList: WxApiRoot + 'classify/getChildListByParentId', //获取子分类列表
 
   CollectList: WxApiRoot + 'collect/list',  //收藏列表
   CollectAddOrDelete: WxApiRoot + 'collect/addordelete',  //添加或取消收藏
@@ -24,6 +28,9 @@ module.exports = {
   CommentCount: WxApiRoot + 'comment/count',  //评论总数
   CommentPost: WxApiRoot + 'comment/post',   //发表评论
   CommentSave: WxApiRoot + 'comment/saveComment', //保存评论
+  CommentAgree: WxApiRoot + 'comment/toggleAgreeCount', //评论点赞
+
+  AgreeList: WxApiRoot + 'userAgree/list',   //获取用户点赞过的评论记录
 
   SearchIndex: WxApiRoot + 'search/index',  //搜索关键字
   SearchResult: WxApiRoot + 'search/result',  //搜索结果
@@ -49,16 +56,15 @@ module.exports = {
   UserCheckToken: WxApiRoot + 'user/checkToken',
 
   VipBind: WxApiRoot + 'vip/bindByCardNum',
-  VipProductList: WxApiRoot + 'product/list',
+  VipBuy: WxApiRoot + 'vip/buy',          // 购买或续费会员后，为客户绑定会员调用接口
 
-  Pay: WxApiRoot + 'pay/getOrder',      // 微信支付调用接口
-  Refund: WxApiRoot + 'pay/refund',  // 微信退款调用接口
-  GetPaySign: WxApiRoot + 'pay/getPaySign',      //md5加密生成签名
-  NotifyUrl: WxApiRoot + 'pay/notifyUrl',         // 支付所要传送的 url 
-  
-  AddPayRecord: WxApiRoot + 'pay/addRecord',
-  GetPayRecords: WxApiRoot + 'pay/recordList',
-  Buy: WxApiRoot + 'vip/buy',          // 购买或续费会员后，为客户绑定会员调用接口
+  ProductList: WxApiRoot + 'product/list',
+
+  PayOrder: WxApiRoot + 'pay/getOrder',      // 微信支付调用接口
+  PayRefund: WxApiRoot + 'pay/refund',  // 微信退款调用接口
+  PaySign: WxApiRoot + 'pay/getPaySign',      //md5加密生成签名
+  PayAddRecord: WxApiRoot + 'pay/addRecord',
+  PayRecords: WxApiRoot + 'pay/recordList',
 
   PaperList: WxApiRoot + 'paper/list',
 

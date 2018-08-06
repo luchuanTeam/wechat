@@ -41,14 +41,8 @@ const works = [{
     icon: 'https://www.yanda123.com/app/ppt.png',
     url: '/pages/paper/paper?paperType=2'
   },
-  // {
-  //   id: 7,
-  //   label: '在线考试',
-  //   icon: 'https://www.yanda123.com/app/paper.png',
-  //   url: '/pages/exam/list/list'
-  // },
   {
-    id: 8,
+    id: 7,
     label: '更多设置',
     icon: 'https://www.yanda123.com/app/setting.png',
     url: '/pages/setting/mySetting/mySetting'

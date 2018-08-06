@@ -2,7 +2,10 @@
   <!-- 头部介绍 -->
   <view class='header'>
     <view class='text'>（从题库随机挑选10题）</view>
-    <view class='counter'>{{num+1}}/10</view>
+    <view class='counter'>
+      <view class='curCount'>{{num+1}}</view>/
+      <view class='totalCount'>10</view>
+    </view>
   </view>
   <scroll-view class='exam-answer-wrapper' scroll-y>
     <!-- 题目 -->

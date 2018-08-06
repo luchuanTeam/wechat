@@ -69,7 +69,7 @@ Page({
         wx.setStorageSync('userInfo', userInfo);
 
         wx.showToast({
-          title: '绑定会员卡成功',
+          title: '充值会员成功',
           icon: 'success',
           success: function () {
             setTimeout(function () {

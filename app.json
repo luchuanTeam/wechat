@@ -53,6 +53,12 @@
         "selectedIconPath": "resources/images/fenlei_select.png"
       },
       {
+        "pagePath": "pages/exam/list/list",
+        "text": "在线考试",
+        "iconPath": "resources/images/kaoshi.png",
+        "selectedIconPath": "resources/images/kaoshi_select.png"
+      },
+      {
         "pagePath": "pages/user/user",
         "text": "我的",
         "iconPath": "resources/images/my.png",

@@ -1,6 +1,7 @@
 const $ = require('../../utils/ajax.js');
 const STYLE_ARR = ['baby-blue', 'pink', 'olive-green', 'orange', 'light-cyan'];
 let filter = require('../../utils/filter.js');
+var api = require('../../config/api.js');
 
 Page(filter.identityFilter({
 
@@ -19,7 +20,7 @@ Page(filter.identityFilter({
    * 二级分类数据加载
    */
   loadSecondCategory: function(id) {
-    $.get({ url: "https://www.yanda123.com/yanda/movie/getClassify/" + id})
+    $.get({ url: api.ClassifyChildList, data: {parentId: id}})
      .then((res)=> {
        if (res.statusCode == 200) {
          let data = res.data;
@@ -87,7 +88,7 @@ Page(filter.identityFilter({
       selected: id
     });
 
-    $.get({ url: 'https://www.yanda123.com/yanda/movie/getClassify' })
+    $.get({ url: api.ClassifyList, data: {type: 1} })
       .then((res) => {
         if (res.statusCode == 200) {
           let data = res.data;
