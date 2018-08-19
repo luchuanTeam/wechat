@@ -1,37 +1,6 @@
-const EXAMLIST = [
-  { desc: '小学一年级语文（上）' }, 
-  { desc: '小学一年级语文（下）' }, 
-  { desc: '小学一年级数学（上）' },
-  { desc: '小学一年级数学（下）' },
-  { desc: '小学二年级语文（上）' },
-  { desc: '小学二年级语文（下）' }, 
-  { desc: '小学二年级数学（上）' }, 
-  { desc: '小学二年级数学（下）' },
-  { desc: '小学三年级语文（上）' }, 
-  { desc: '小学三年级语文（下）' }, 
-  { desc: '小学三年级数学（上）' },
-  { desc: '小学三年级数学（下）' },
-  { desc: '小学三年级英语（上）' },
-  { desc: '小学三年级英语（下）' },
-  { desc: '小学四年级语文（上）' },
-  { desc: '小学四年级语文（下）' },
-  { desc: '小学四年级数学（上）' },
-  { desc: '小学四年级数学（下）' },
-  { desc: '小学四年级英语（上）' },
-  { desc: '小学四年级英语（下）' },
-  { desc: '小学五年级语文（上）' },
-  { desc: '小学五年级语文（下）' },
-  { desc: '小学五年级数学（上）' },
-  { desc: '小学五年级数学（下）' },
-  { desc: '小学五年级英语（上）' },
-  { desc: '小学五年级英语（下）' },
-  { desc: '小学六年级语文（上）' },
-  { desc: '小学六年级语文（下）' },
-  { desc: '小学六年级数学（上）' },
-  { desc: '小学六年级数学（下）' },
-  { desc: '小学六年级英语（上）' },
-  { desc: '小学六年级英语（下）' },
-]
+var $ = require('../../../utils/ajax.js');
+var api = require('../../../config/api.js');
+let filter = require('../../../utils/filter.js');
 
 Page({
 
@@ -39,20 +8,31 @@ Page({
    * 页面的初始数据
    */
   data: {
-    examList: EXAMLIST
+    examList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    $.get({ url: api.ClassifyList, data: { type: api.ClsTypeEnum.KAOTI } })
+      .then((res) => {
+        if (res.statusCode == 200) {
+          let data = res.data;
+          this.setData({
+            examList: data
+          });
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
   },
 
   toCatalog(e) {
     let title = e.currentTarget.dataset.desc;
+    let id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: `../catalog/catalog?title=${title}`
+      url: `../catalog/catalog?title=${title}&id=${id}`
     });
   },
 

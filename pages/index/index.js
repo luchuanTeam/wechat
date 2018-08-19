@@ -60,7 +60,7 @@ Page(filter.identityFilter({
   */
   loadClassify: function () {
     var that = this;
-    $.get({ url: api.ClassifyList, data: {type: 1} })
+    $.get({ url: api.ClassifyList, data: { type: api.ClsTypeEnum.MOVIE } })
       .then((res) => {
         if (res.statusCode == 200) {
           let data = res.data;

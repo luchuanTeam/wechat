@@ -1,11 +1,24 @@
-// pages/exam/unit/unit.js
+var $ = require('../../../utils/ajax.js');
+var api = require('../../../config/api.js');
+let filter = require('../../../utils/filter.js');
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    title: ''
+    title: '',
+    module: '',
+    classifies: []
+  },
+
+  toTest(e) {
+    let id = e.currentTarget.dataset.id;
+    let module = this.data.module;
+    wx.navigateTo({
+      url: `../test/test?id=${id}&module=${module}`
+    });
   },
 
   /**
@@ -13,9 +26,29 @@ Page({
    */
   onLoad: function (options) {
     let title = options.title;
+    let id = options.id;
+    let type = options.type;
+    let module = options.module;
     this.setData({
+      title: title,
+      module: module
+    });
+
+    wx.setNavigationBarTitle({
       title: title
     });
+
+    $.get({ url: api.ClassifyTreeList, data: { type: type, parentId: id } })
+      .then((res) => {
+        if (res.statusCode == 200) {
+          let data = res.data;
+          this.setData({
+            classifies: data
+          });
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
   },
 
   /**

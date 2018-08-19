@@ -1,5 +1,5 @@
 .exam-container {
-  padding: 40rpx 20rpx;
+  padding: 0;
 }
 
 .exam-container .exam-wrapper {
@@ -15,4 +15,13 @@
   text-align: center;
   font-size: 28rpx;
   border-radius: 8rpx;
+}
+
+.weui-grid__icon {
+  width: 128px;
+  height: 128px;
+}
+
+.weui-grids .custom-style {
+  width: 50%;
 }

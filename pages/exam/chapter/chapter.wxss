@@ -10,9 +10,14 @@
 
 .bg-title-wrapper, .title-wrapper {
   position: relative;
+  margin-left: 16px;
   padding: 16px 8px 32px 32px;
   border-top: 2rpx solid #ccc;
   border-left: 2rpx solid #ccc;
+}
+
+.title-wrapper {
+  padding-left: 46px;
 }
 
 .bg-title-wrapper {

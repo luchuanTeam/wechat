@@ -124,3 +124,8 @@
 .gray {
   color: #999;
 }
+
+.empty-content {
+  margin: auto;
+  text-align: center;
+}

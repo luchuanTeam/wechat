@@ -17,6 +17,17 @@ module.exports = {
   ClassifyPinYin: WxApiRoot + 'classify/getPinyin', //获取中文拼音
   ClassifyList: WxApiRoot + 'classify/getListByType', //获取分类列表
   ClassifyChildList: WxApiRoot + 'classify/getChildListByParentId', //获取子分类列表
+  ClassifyTreeList: WxApiRoot + 'classify/getTreeByParentId',    //获取子分类树
+  ClsTypeEnum: {
+    MOVIE: 10,  		//视频分类
+    KAOTI: 20, 		//年级分类
+    ZTLXZ: 21, 			//章节练习-章分类
+    ZTLXJ: 211,   		//章节练习-节分类
+    ZSGGZ: 22,  		//单元练习-单元分类
+    ZSGGJ: 221, 			//期中期末-单元分类
+    LNZT: 23, 		//专业知识练习-章分类
+    FZLX: 24			//专业知识练习-节分类
+  },
 
   CollectList: WxApiRoot + 'collect/list',  //收藏列表
   CollectAddOrDelete: WxApiRoot + 'collect/addordelete',  //添加或取消收藏
@@ -69,5 +80,8 @@ module.exports = {
   PaperList: WxApiRoot + 'paper/list',
 
   AttachDownload: WxApiRoot + 'attach/readFile?id=',
-  AttachGetUrl: WxApiRoot + 'attach/getUrl'
+  AttachGetUrl: WxApiRoot + 'attach/getUrl',
+
+  QuestionList: WxApiRoot + 'question/list',
+  QuestionTotal: WxApiRoot + 'question/total'
 };

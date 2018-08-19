@@ -1,32 +1,18 @@
 <view class='chapter-container'>
-  <view class='header'>{{title}}</view>
-  <view class='panel-container'>
-    <view class='bg-title-wrapper'>
-      <view class='bg-title'>大数的认识</view>
-      <view class='text'>单元测试</view>
-      <view class='bg-circle'>1</view>
+  <!-- <view class='header'>{{title}}</view> -->
+  <block wx:for="{{classifies}}" wx:key='{{index}}'>
+    <view class='panel-container'>
+      <view class='bg-title-wrapper'>
+        <view class='bg-title'>{{item.label}}</view>
+        <view class='bg-circle'>{{index + 1}}</view>
+      </view>
+      <block wx:for="{{item.classify}}" wx:key='{{item}}'>
+        <view class='title-wrapper' bindtap='toChapterExam' data-id="{{item.id}}" data-title="{{item.label}}">
+          <view class='title'>{{item.label}}</view>
+          <image class='icon' src='https://www.yanda123.com/app/pencil.png'></image>
+          <view class='circle'></view>
+        </view>
+      </block>
     </view>
-    <view class='title-wrapper' bindtap='toChapterExam'>
-      <view class='title'>亿以内数的认识</view>
-      <image class='icon' src='https://www.yanda123.com/app/pencil.png'></image>
-      <view class='circle'></view>
-    </view> 
-  </view>
-  <view class='panel-container'>
-    <view class='bg-title-wrapper'>
-      <view class='bg-title'>大数的认识</view>
-      <view class='text'>单元测试</view>
-      <view class='bg-circle'>2</view>
-    </view>
-    <view class='title-wrapper'>
-      <view class='title'>亿以内数的认识</view>
-      <image class='icon' src='https://www.yanda123.com/app/pencil.png'></image>
-      <view class='circle'></view>
-    </view>
-    <view class='title-wrapper'>
-      <view class='title'>100认识</view>
-      <image class='icon' src='https://www.yanda123.com/app/pencil.png'></image>
-      <view class='circle'></view>
-    </view>
-  </view>
+  </block>
 </view>
