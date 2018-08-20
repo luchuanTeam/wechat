@@ -7,10 +7,9 @@
       <view class='totalCount'>{{total}}</view>
     </view>
   </view>
-  <scroll-view class='exam-answer-wrapper' scroll-y>
+  <scroll-view wx:for='{{scrollArr}}' wx:if='{{item}}' wx:key='{{index}}' class='exam-answer-wrapper exam-des scroll-{{index}} {{next}} {{prev}}' scroll-y>
     <!-- 题目 -->
-    <view class='exam-des-wrapper'>
-      <view wx:for='{{scrollArr}}' wx:if='{{item}}' wx:key='{{index}}' class='exam-des scroll-{{index}} {{next}} {{prev}}'>
+
         <view class='type'>{{item.questionType == 1 ? '选择题' : '判断题'}}</view>
         <view class='text'>{{item.questionContent}}</view>
         
@@ -56,8 +55,7 @@
             </view>
           </view>
         </view>
-      </view>
-    </view>
+
 
     <!-- 图片区域 -->
     <view class='img-wrapper'></view>

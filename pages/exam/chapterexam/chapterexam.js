@@ -90,15 +90,18 @@ Page({
   },
 
   toggleChoose(e) {
-    if (!this.data.currentEx.choose) { // 如果没有选择过，才能答题
+
+    if (!this.data.scrollArr[1].choose) { // 如果没有选择过，才能答题
       let option = e.currentTarget.dataset.option,
         n = this.data.num,
-        _currentEx = this.data.currentEx,
+        _scrollArr = this.data.scrollArr,
+        _currentEx = this.data.scrollArr[1],
         _exercises = this.data.exercises;
       _currentEx.choose = option;
+      _scrollArr[1] = _currentEx;
       _exercises[n] = _currentEx;
       this.setData({
-        currentEx: _currentEx,
+        scrollArr: _scrollArr,
         exercises: _exercises
       });
     }
