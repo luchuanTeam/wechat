@@ -10,6 +10,9 @@ Page({
     exercises: [],
     currentEx: {},
     quIdArr: [],
+    scrollArr: [],
+    next: '',
+    prev: '',
     num: 0,
     total: 0,
     id: '',
@@ -47,10 +50,11 @@ Page({
           exercises: data.data,
           currentEx: ex,
           quIdArr: quIdArr
-        });
+        });  
+        this.getTotal();  
       }
     })
-    this.getTotal();
+    
   },
 
   getList() {
@@ -80,6 +84,7 @@ Page({
         this.setData({
           total: data.data
         });
+        this.resetSrollArr();       // 重置翻页数组
       }
     })
   },
@@ -99,10 +104,43 @@ Page({
     }
   },
 
+  resetSrollArr() {
+    let arr = [],
+        n = this.data.num, 
+        total = this.data.total;
+    n > 0 ? arr[0] = this.data.exercises[n-1] : arr[0] = '' ;
+    arr[1] = this.data.exercises[n];
+    (n < total-1) ? arr[2] = this.data.exercises[n+1] : arr[2] = '' ;
+
+    this.setData({
+      scrollArr: arr,
+      next: '',
+      prev: ''
+    });
+  },
+
+  turnPage(n) {
+    if(n === 1) {     // 下一题
+      this.setData({
+        next: 'next',
+        prev: ''
+      });
+    } else {
+      this.setData({
+        next: '',
+        prev: 'prev'
+      });
+    }   
+    setTimeout(()=> {     // 为了体现翻页动画效果，需设置延迟后再重置scrollArr
+      this.resetSrollArr();
+    }, 500);
+  },
+
   toPrevExam() {
     let n = this.data.num;
     if (n > 0) {
       n--;
+      this.turnPage(0);
       this.setData({
         num: n,
         currentEx: this.data.exercises[n]
@@ -137,6 +175,7 @@ Page({
               // 将新题追加到现有题库中
               let newExercises = this.data.exercises.concat(addExercises);
               n++;
+              this.turnPage(1);
               this.setData({
                 exercises: newExercises,
                 quIdArr: quIdArr,
@@ -148,6 +187,7 @@ Page({
         })
       } else {
         n++;
+        this.turnPage(1);
         this.setData({
           num: n,
           currentEx: this.data.exercises[n]

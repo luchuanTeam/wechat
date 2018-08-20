@@ -9,49 +9,51 @@
   </view>
   <scroll-view class='exam-answer-wrapper' scroll-y>
     <!-- 题目 -->
-    <view class='exam-des'>
-      <view class='type'>{{currentEx.questionType == 1 ? '选择题' : '判断题'}}</view>
-      <view class='text'>{{currentEx.questionContent}}</view>
-      
-      <view class='choices'>
-        <!-- 选项A -->
-        <view class='choice' bindtap='toggleChoose' data-option='A'>
-          <view class='text-wrapper'>
-            <text class='option'>A</text>
-            <text>{{currentEx.answerA}}</text>
+    <view class='exam-des-wrapper'>
+      <view wx:for='{{scrollArr}}' wx:if='{{item}}' wx:key='{{index}}' class='exam-des scroll-{{index}} {{next}} {{prev}}'>
+        <view class='type'>{{item.questionType == 1 ? '选择题' : '判断题'}}</view>
+        <view class='text'>{{item.questionContent}}</view>
+        
+        <view class='choices'>
+          <!-- 选项A -->
+          <view class='choice' bindtap='toggleChoose' data-option='A'>
+            <view class='text-wrapper'>
+              <text class='option'>A</text>
+              <text>{{item.answerA}}</text>
+            </view>
+            <view class='cell'>
+              <view class="{{item.choose === 'A' ? 'icon_checked': ''}}"></view>
+            </view>
           </view>
-          <view class='cell'>
-            <view class="{{currentEx.choose === 'A' ? 'icon_checked': ''}}"></view>
+          <!-- 选项B -->
+          <view class='choice' bindtap='toggleChoose' data-option='B'>
+            <view class='text-wrapper'>
+              <text class='option'>B</text>
+              <text>{{item.answerB}}</text>
+            </view>
+            <view class='cell'>
+              <view class="{{item.choose === 'B' ? 'icon_checked': ''}}"></view>
+            </view>
           </view>
-        </view>
-        <!-- 选项B -->
-        <view class='choice' bindtap='toggleChoose' data-option='B'>
-          <view class='text-wrapper'>
-            <text class='option'>B</text>
-            <text>{{currentEx.answerB}}</text>
+          <!-- 选项C -->
+          <view wx:if="{{item.answerC}}" class='choice' bindtap='toggleChoose' data-option='C'>
+            <view class='text-wrapper'>
+              <text class='option'>C</text>
+              <text>{{item.answerC}}</text>
+            </view>
+            <view class='cell'>
+              <view class="{{item.choose === 'C' ? 'icon_checked': ''}}"></view>
+            </view>
           </view>
-          <view class='cell'>
-            <view class="{{currentEx.choose === 'B' ? 'icon_checked': ''}}"></view>
-          </view>
-        </view>
-        <!-- 选项C -->
-        <view wx:if="{{currentEx.answerC}}" class='choice' bindtap='toggleChoose' data-option='C'>
-          <view class='text-wrapper'>
-            <text class='option'>C</text>
-            <text>{{currentEx.answerC}}</text>
-          </view>
-          <view class='cell'>
-            <view class="{{currentEx.choose === 'C' ? 'icon_checked': ''}}"></view>
-          </view>
-        </view>
-        <!-- 选项D -->
-        <view wx:if="{{currentEx.answerD}}" class='choice' bindtap='toggleChoose' data-option='D'>
-          <view class='text-wrapper'>
-            <text class='option'>D</text>
-            <text>{{currentEx.answerD}}</text>
-          </view>
-          <view class='cell'>
-            <view class="{{currentEx.choose === 'D' ? 'icon_checked': ''}}"></view>
+          <!-- 选项D -->
+          <view wx:if="{{item.answerD}}" class='choice' bindtap='toggleChoose' data-option='D'>
+            <view class='text-wrapper'>
+              <text class='option'>D</text>
+              <text>{{item.answerD}}</text>
+            </view>
+            <view class='cell'>
+              <view class="{{item.choose === 'D' ? 'icon_checked': ''}}"></view>
+            </view>
           </view>
         </view>
       </view>
@@ -61,10 +63,10 @@
     <view class='img-wrapper'></view>
 
     <!-- 参考答案区域 -->
-    <view class='answer-wrapper' wx:if='{{currentEx.choose}}'>
+    <view class='answer-wrapper' wx:if='{{item.choose}}'>
       <view><view class='text'>参考答案</view></view>
-      <view class='my-answer'>我的答案：<text>{{currentEx.choose}}</text></view>
-      <view class='correct-answer'>参考答案：<text>{{currentEx.answer}}</text> </view>
+      <view class='my-answer'>我的答案：<text>{{item.choose}}</text></view>
+      <view class='correct-answer'>参考答案：<text>{{item.answer}}</text> </view>
     </view>
   </scroll-view>  
 

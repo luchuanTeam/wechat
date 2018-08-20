@@ -32,6 +32,61 @@
   color: #7d8a93;
 }
 
+.exam-des-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.exam-des {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  
+}
+
+.scroll-0 {
+  left: -100%;
+}
+
+.scroll-0.next {
+  transition: all 0.2s linear;
+  left: -200%;
+}
+
+.scroll-0.prev {
+  transition: all 0.2s linear;
+  left: 0; 
+}
+
+.scroll-1 {
+  left: 0;
+}
+
+.scroll-1.next {
+  transition: all 0.2s linear;
+  left: -100%;
+}
+
+.scroll-1.prev {
+  transition: all 0.2s linear;
+  left: 100%;
+}
+
+.scroll-2 {
+  left: 100%;
+}
+
+.scroll-2.next {
+  transition: all 0.2s linear;
+  left: 0;
+}
+
+.scroll-2.prev {
+  transition: all 0.2s linear;
+  left: 200%;
+}
+
+
 .exam-des .type, .exam-des .text {
   padding: 20rpx 20rpx 0 20rpx;
 }
